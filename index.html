@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title> Kathmandu Public Transport </title>
+</head>
+<body>
+<div id="test1"> <div id="test2">
+<div id="public-transport-map">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
+<script type="text/javascript" language="javascript" src="xml2json.js"></script>
+<script type="text/javascript" language="javascript">
+    // QUICK OSM LIBRARY
+    var osm = (function() {
+        var osm = {};
+
+        var api_url = 'http://www.overpass-api.de/api/xapi?';
+        osm.querystring = function (osmObjectType, filterObj) {
+            var filters = _.map(filterObj, function(val, key) { return '[' + key + '=' + val + ']';})
+            return api_url + osmObjectType + _.reduce(filters, function(a, b) { return a+b;}, ""); 
+        };
+        osm.quickparse = function(osmXAPIReturnText) {
+            var osmObj = xml2json.parser(osmXAPIReturnText).osm;
+            osmObj.relation = [].concat(osmObj.relation); //perf issues possible
+            _.map(osmObj.relation, function(relation) {
+                relation.member = [].concat(relation.member);  // in case member is solo
+                relation.ways = _.filter(relation.member, function(m) {return m.type == 'way';});
+                relation.nodes = _.filter(relation.member, function(m) {return m.type == 'node';});
+            });
+            return osmObj;
+        };
+        return osm;
+    })();
+    
+
+    var osmdata;
+    var ktmBB = "85.2885,27.6839,85.3368,27.7299";
+
+    $.ajax({ url: osm.querystring('relation', {bbox: ktmBB, type: 'route'}),
+             dataType: 'text',
+             success:
+    function(data) {
+        osmdata = osm.quickparse(data);
+    }});
+    
+</script>
+</body>
+</html>
