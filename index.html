@@ -1,16 +1,21 @@
 <html>
 <head>
     <title> Kathmandu Public Transport </title>
+<link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+<!--[if lte IE 8]>
+    <link rel="stylesheet" href="[path-to-dist]/leaflet.ie.css" />
+<![endif]-->
 </head>
 <body>
-<div id="test1"> <div id="test2">
-<div id="public-transport-map">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
+<div id="publicTransportMap" style="width: 600px; height: 400px">
+<script src="lib/jquery-1.7.2.min.js"></script>
+<script src="lib/underscore-min.js"></script>
+<script src="lib/leaflet/leaflet.js"></script>
 <script type="text/javascript" language="javascript" src="xml2json.js"></script>
 <script type="text/javascript" language="javascript">
     //var ktmBB = "85.2885,27.6839,85.3368,27.7299";
-    var api_url = 'http://www.overpass-api.de/api/interpreter';
+    //var api_url = 'http://www.overpass-api.de/api/interpreter';
+    var api_url = 'sample/routes.xml';
     var query_string = '<osm-script> <union> <query type="relation"> <has-kv k="type" v="route"/> <bbox-query s="27.6839" n="27.7299" w="85.2885" e="85.3368,"/> </query> <recurse type="relation-way"/> <recurse type="way-node"/> </union> <print/> </osm-script>';
     $.ajax({ type: 'POST', url: api_url, 
              data: query_string,
@@ -19,6 +24,27 @@
     function(data) {
         console.log(data);
     }});
+
+    // initialize the map
+    var map = new L.Map('publicTransportMap');
+
+    // Alternative layerings:
+    // http://{s}.tile.cloudmade.com/[API-key]/997/256/
+    // http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
+    var cloudmade = new L.TileLayer('http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
+    attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">',
+    maxZoom: 18
+    });
+
+    // add the layer to the map, set the view to a given place and zoom
+    map.addLayer(cloudmade).setView(new L.LatLng(27.7, 85.3), 13);
+
+    // create a marker in the given location and add it to the map
+    var marker = new L.Marker(new L.LatLng(27.7,85.3));
+    map.addLayer(marker);
+
+    // attach a given HTML content to the marker and immediately open it
+    marker.bindPopup("<blink>YATAYAT</blink>").openPopup();
     
 </script>
 </body>
