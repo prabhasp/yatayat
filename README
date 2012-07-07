@@ -1,0 +1,16 @@
+Route:
+  -  name
+  -  stops: []
+  -  segments: []
+  -  tag: {}
+
+Stop:
+  - name
+  - lat
+  - lng
+  - tag: {}
+
+Segment:
+  - listOfLatLng: [(lat,lng), ...]
+  - tag: {}
+
