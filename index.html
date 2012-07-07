@@ -11,18 +11,22 @@
 <script src="lib/jquery-1.7.2.min.js"></script>
 <script src="lib/underscore-min.js"></script>
 <script src="lib/leaflet/leaflet.js"></script>
-<script type="text/javascript" language="javascript" src="xml2json.js"></script>
+<script src="yatayat.js"></script>
 <script type="text/javascript" language="javascript">
     //var ktmBB = "85.2885,27.6839,85.3368,27.7299";
     //var api_url = 'http://www.overpass-api.de/api/interpreter';
     var api_url = 'sample/routes.xml';
+    var osmdata;
+    var api_url = 'http://www.overpass-api.de/api/interpreter';
     var query_string = '<osm-script> <union> <query type="relation"> <has-kv k="type" v="route"/> <bbox-query s="27.6839" n="27.7299" w="85.2885" e="85.3368,"/> </query> <recurse type="relation-way"/> <recurse type="way-node"/> </union> <print/> </osm-script>';
     $.ajax({ type: 'POST', url: api_url, 
              data: query_string,
              dataType: 'text',
              success:
     function(data) {
-        console.log(data);
+        
+        osmdata = data;
+        console.log(osmToYY(data));
     }});
 
     // initialize the map
@@ -45,6 +49,51 @@
 
     // attach a given HTML content to the marker and immediately open it
     marker.bindPopup("<blink>YATAYAT</blink>").openPopup();
+    
+    function osmToYY(overpassXML) {
+        var nodes = {};
+        var segments = {};
+        var tagToObj = function(tag) {
+            tags = {};
+            _.each(tag, function (t) { 
+                $t = $(t);
+                tags[$t.attr('k')] = $t.attr('v'); });
+            return tags; 
+        };
+        _.each($(overpassXML).find('node'), function(n) {
+            $n = $(n);
+            nodes[$n.attr('id')] = {lat: $n.attr('lat'),
+                                    lng: $n.attr('lon'), 
+                                    tag: tagToObj(n.tag)};
+        });
+        _.each($(overpassXML).find('way'), function(w) {
+            $w = $(w);
+            segments[$w.attr('id')] = new YY.Segment(
+                _.map($w.find('nd'),function(n) { 
+                    $n = $(n);
+                    return [nodes[$n.attr('ref')].lat,
+                            nodes[$n.attr('ref')].lng]; 
+                }), tagToObj($w.find('tag')));
+        });
+        routes = _.map($(overpassXML).find('relation'), function(r) {
+            $r = $(r);
+            myStops = [];
+            mySegments = [];
+            _.each($r.find('member'), function(m) {
+                $m = $(m); 
+                if($m.attr('type') === 'way') {
+                    mySegments.push(segments[$m.attr('ref')]);
+                } else if ($m.attr('type') === 'node') {
+                    $n = $(nodes[$m.attr('ref')]);
+                    //if($n.find('tag')public_transportation === 'stop_position') 
+                    myStops.push([$n.attr('lat'), $n.attr('lng')]);
+                } 
+            });
+            return new YY.Route(myStops, mySegments, tagToObj($r.find('tag')));
+        });
+        return routes;
+    }
+     
     
 </script>
 </body>
