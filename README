@@ -1,3 +1,6 @@
+== Data Model
+OSM Data is transformed into Routes, Stops, and Segments:
+
 Route:
   -  name
   -  stops: []
@@ -14,3 +17,10 @@ Segment:
   - listOfLatLng: [(lat,lng), ...]
   - tag: {}
 
+
+== HACKING
+
+You need to create a config.js file, for example by symlinking
+config.local.js or config.deploy.js to config.js:
+
+% ln -s config.local.js config.js

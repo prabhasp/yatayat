@@ -12,37 +12,34 @@
 <script src="lib/underscore-min.js"></script>
 <script src="lib/leaflet/leaflet.js"></script>
 <script src="yatayat.js"></script>
+<script src="config.js"></script>
 <script type="text/javascript" language="javascript">
     // initialize the map
     var map = new L.Map('publicTransportMap');
 
     //var ktmBB = "85.2885,27.6839,85.3368,27.7299";
-    //var api_url = 'http://www.overpass-api.de/api/interpreter';
-    var api_url = 'sample/routes.xml';
     var osmdata;
-    var query_string = '<osm-script> <union> <query type="relation"> <has-kv k="type" v="route"/> <bbox-query s="27.6839" n="27.7299" w="85.2885" e="85.3368,"/> </query> <recurse type="relation-way"/> <recurse type="way-node"/> </union> <print/> </osm-script>';
-    $.ajax({ type: 'POST', url: api_url, 
-             data: query_string,
+    $.ajax({ type: 'POST', url: YY.API_URL,
+             data: YY.QUERY_STRING,
              dataType: 'text',
-             success:
-    function(data) {
-        osmdata = data;
-        osmToYY(data).forEach(function(route) {
-            YY.render(route, map);
+             success: function(data) {
+                 osmdata = data;
+                 osmToYY(data).forEach(function(route) {
+                     YY.render(route, map);
+                 });
+             }});
+
+    if(YY.TILE_SOURCE) {
+        var tiles = new L.TileLayer(YY.TILE_SOURCE, {
+            attribution: YY.ATTRIBUTION,
+            maxZoom: 18
         });
-        //console.log(osmToYY(data));
-    }});
 
-    // Alternative layerings:
-    // http://{s}.tile.cloudmade.com/[API-key]/997/256/
-    // http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
-    var tiles = new L.TileLayer('http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
-    attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">',
-    maxZoom: 18
-    });
+        // add the layer to the map, set the view to a given place and zoom
+        map.addLayer(tiles);
+    }
 
-    // add the layer to the map, set the view to a given place and zoom
-    map.addLayer(tiles).setView(new L.LatLng(27.7, 85.3), 13);
+    map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 
         // // testing
         // YY.test_map = map;
