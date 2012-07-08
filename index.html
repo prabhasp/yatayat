@@ -66,7 +66,7 @@ body {
             $n = $(n);
             nodes[$n.attr('id')] = {lat: $n.attr('lat'),
                                     lng: $n.attr('lon'), 
-                                    tag: tagToObj(n.tag)};
+                                    tag: tagToObj($n.find('tag'))};
         });
         _.each($(overpassXML).find('way'), function(w) {
             $w = $(w);
@@ -86,9 +86,10 @@ body {
                 if($m.attr('type') === 'way') {
                     mySegments.push(segments[$m.attr('ref')]);
                 } else if ($m.attr('type') === 'node') {
-                    $n = $(nodes[$m.attr('ref')]);
+                    n = nodes[$m.attr('ref')];
                     //if($n.find('tag')public_transportation === 'stop_position') 
-                    myStops.push([$n.attr('lat'), $n.attr('lng')]);
+                    if(n && n.lat && n.lng)
+                        myStops.push(new YY.Stop(n.lat, n.lng, n.tag));
                 } 
             });
             return new YY.Route(myStops, mySegments, tagToObj($r.find('tag')));
