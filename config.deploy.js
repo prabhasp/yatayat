@@ -1,7 +1,7 @@
 var YY = YY || {};
 
 YY.API_URL = 'http://www.overpass-api.de/api/interpreter';
-YY.QUERY_STRING = '<osm-script> <union> <query type="relation"> <has-kv k="type" v="route"/> <bbox-query s="27.6839" n="27.7299" w="85.2885" e="85.3368,"/> </query> <recurse type="relation-way"/> <recurse type="relation-node"/> <recurse type="way-node"/> </union> <print/> </osm-script>';
+YY.QUERY_STRING = '<osm-script> <union> <query type="relation"> <has-kv k="type" v="route"/> <bbox-query s="27.6839" n="27.7299" w="85.2885" e="85.3368,"/> </query> <recurse type="relation-way"/><recurse type="way-node"/> <recurse type="relation-node"/>  </union> <print/> </osm-script>';
 
 // Alternative layerings:
 // http://{s}.tile.cloudmade.com/[API-key]/997/256/
