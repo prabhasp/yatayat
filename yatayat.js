@@ -22,17 +22,19 @@ YY.Segment = function(listOfLatLng, tag) {
 
 
 YY.render = function(route, map) {
+
     // draw a route on a map!
 
-    // render segments as polylines
-    route.segments.forEach(function(seg) {
-        var latlngs = seg.listOfLatLng.map(function(LL) {
-            return new L.LatLng(LL[0], LL[1]);
-        });
-        var poly = new L.Polyline(latlngs, {color: 'red'});
-        poly.bindPopup(route.name);
-        map.addLayer(poly);
-    });
+    // render the route as a multi-polyline
+    var routeMPL = new L.MultiPolyline(
+        _(route.segments).map(function(seg) {
+            return _(seg.listOfLatLng).map(function(LL) {
+                return new L.LatLng(LL[0], LL[1]);
+            });
+        }),
+        {color: 'red'});
+    routeMPL.bindPopup(route.name);
+    map.addLayer(routeMPL);
 
     // and stops as markers
     route.stops.forEach(function(stop) {
