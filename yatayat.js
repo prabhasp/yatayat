@@ -5,7 +5,43 @@ YY.Route = function(stops, segments, tag) {
     this.segments = segments;
     this.tag = tag;
     this.name = tag.name;
+    this.order();
 };
+
+YY.Route.prototype.order = function() {
+    // order segments
+
+    // order step 1: collect together ends of segments (assume ends match) 
+    var segmentEnds = {};
+    var neighborlist = {};
+    console.log(this.name);
+    _.each(this.segments, function(seg, idx) {
+        function makeNeighbor(a, b) {
+            var idx = Math.min(a,b);
+            var idx2 = Math.max(a,b);
+            if (b === undefined) return;
+            if(neighborlist[idx] === undefined) {
+                neighborlist[idx] = idx2;
+            } else {
+                if(neighborlist[idx2]) throw "bad algorithm!";
+                neighborlist[idx2] = idx;
+            }
+        }
+        var l1 = seg.listOfLatLng[0];
+        var l2 = seg.listOfLatLng[seg.listOfLatLng.length - 1];
+        var idx1_2 = segmentEnds[l1];
+        var idx2_2 = segmentEnds[l2];
+        makeNeighbor(idx, idx1_2);
+        makeNeighbor(idx, idx2_2);
+
+        segmentEnds[l1] = idx;
+        segmentEnds[l2] = idx;
+    });
+    // order stops based on segments
+    //console.log(neighborsmall);
+    //console.log(neighborbig);
+    console.log(neighborlist);
+}
 
 YY.Stop = function(lat, lng, tag) {
     this.lat = lat;
@@ -72,8 +108,8 @@ YY.render = function(route, map) {
 
     // render the route as a multi-polyline
     var routeMPL = new L.MultiPolyline(
-        _(route.segments).map(function(seg) {
-            return _(seg.listOfLatLng).map(function(LL) {
+        _.map(route.segments, function(seg) {
+            return _.map(seg.listOfLatLng, function(LL) {
                 return new L.LatLng(LL[0], LL[1]);
             });
         }),
