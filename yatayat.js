@@ -16,41 +16,40 @@ YY.Route.prototype.order = function() {
     var neighborlist = {};
     console.log(this.name);
     _.each(this.segments, function(seg, idx) {
-        function makeNeighbor(a, b, stopsNeedReversal) {
-            var idx = Math.min(a,b);
-            var idx2 = Math.max(a,b);
-            if(neighborlist[idx] === undefined) {
-                neighborlist[idx] = [idx2, stopsNeedReversal];
+        function makeNeighbor(a, b) {
+            var id, id2;
+            if(a[0] < b[0]) { id = a; id2 = b; }
+            else { id = b; id2 = a; }
+            if(neighborlist[id[0]] === undefined) {
+                neighborlist[id[0]] = [id2, id[1]];
             } else {
-                if(neighborlist[idx2]) throw "bad algorithm!";
-                neighborlist[idx2] = [idx, stopsNeedReversal];
+                if(neighborlist[id2[0]]) throw "bad algorithm!";
+                neighborlist[id2[0]] = [id, id2[1]];
             }
         }
         var l1 = seg.listOfLatLng[0];
         var l2 = seg.listOfLatLng[seg.listOfLatLng.length - 1];
         var idx1_2 = segmentEnds[l1];
         var idx2_2 = segmentEnds[l2];
-        if (idx1_2 !== undefined) makeNeighbor(idx, idx1_2[0], idx1_2[1]==0);
-        if (idx2_2 !== undefined) makeNeighbor(idx, idx2_2[0], idx2_2[1]==1);
+        if (idx1_2 !== undefined) makeNeighbor([idx, 'l'], idx1_2);
+        if (idx2_2 !== undefined) makeNeighbor([idx, 'r'], idx2_2);
 
-        segmentEnds[l1] = [idx, 0];
-        segmentEnds[l2] = [idx, 1];
+        segmentEnds[l1] = [idx, 'l'];
+        segmentEnds[l2] = [idx, 'r'];
     });
-    //console.log(neighborlist);
+    console.log(neighborlist);
     // order stops based on segments
     var seed = _.keys(neighborlist)[0]; 
     function f(route, key) {
         if (key == seed) return;
         var neighborArr = neighborlist[key];
-        console.log([key, neighborArr[1]]);
+        console.log([key, neighborArr]);
         var stops = route.segments[key].orderedListofStops;
-        if (neighborArr[1])
-            _.each(stops.reverse(), function(x) { console.log(x.tag.name); });
-        else
-            _.each(stops, function(x) {console.log(x.tag.name); });
-        f(route, neighborArr[0]);
+        //if (neighborArr[1]==='l') { stops = stops.reverse(); }
+        _.each(stops, function(x) {console.log(x.tag.name); });
+        f(route, neighborArr[0][0]);
     }
-    f(this, neighborlist[seed][0]);
+    f(this, neighborlist[seed][0][0]);
 }
 
 YY.Stop = function(lat, lng, tag) {
