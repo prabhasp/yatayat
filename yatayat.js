@@ -16,31 +16,41 @@ YY.Route.prototype.order = function() {
     var neighborlist = {};
     console.log(this.name);
     _.each(this.segments, function(seg, idx) {
-        function makeNeighbor(a, b) {
+        function makeNeighbor(a, b, stopsNeedReversal) {
             var idx = Math.min(a,b);
             var idx2 = Math.max(a,b);
-            if (b === undefined) return;
             if(neighborlist[idx] === undefined) {
-                neighborlist[idx] = idx2;
+                neighborlist[idx] = [idx2, stopsNeedReversal];
             } else {
                 if(neighborlist[idx2]) throw "bad algorithm!";
-                neighborlist[idx2] = idx;
+                neighborlist[idx2] = [idx, stopsNeedReversal];
             }
         }
         var l1 = seg.listOfLatLng[0];
         var l2 = seg.listOfLatLng[seg.listOfLatLng.length - 1];
         var idx1_2 = segmentEnds[l1];
         var idx2_2 = segmentEnds[l2];
-        makeNeighbor(idx, idx1_2);
-        makeNeighbor(idx, idx2_2);
+        if (idx1_2 !== undefined) makeNeighbor(idx, idx1_2[0], idx1_2[1]==0);
+        if (idx2_2 !== undefined) makeNeighbor(idx, idx2_2[0], idx2_2[1]==1);
 
-        segmentEnds[l1] = idx;
-        segmentEnds[l2] = idx;
+        segmentEnds[l1] = [idx, 0];
+        segmentEnds[l2] = [idx, 1];
     });
+    //console.log(neighborlist);
     // order stops based on segments
-    //console.log(neighborsmall);
-    //console.log(neighborbig);
-    console.log(neighborlist);
+    var seed = _.keys(neighborlist)[0]; 
+    function f(route, key) {
+        if (key == seed) return;
+        var neighborArr = neighborlist[key];
+        console.log([key, neighborArr[1]]);
+        var stops = route.segments[key].orderedListofStops;
+        if (neighborArr[1])
+            _.each(stops.reverse(), function(x) { console.log(x.tag.name); });
+        else
+            _.each(stops, function(x) {console.log(x.tag.name); });
+        f(route, neighborArr[0]);
+    }
+    f(this, neighborlist[seed][0]);
 }
 
 YY.Stop = function(lat, lng, tag) {
