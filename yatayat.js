@@ -19,7 +19,52 @@ YY.Segment = function(listOfLatLng, tag) {
     this.tag = tag;
 };
 
-
+YY.fromOSM = function (overpassXML) {
+    var nodes = {};
+    var segments = {};
+    var tagToObj = function(tag) {
+        tags = {};
+        _.each(tag, function (t) { 
+            var $t = $(t);
+            tags[$t.attr('k')] = $t.attr('v'); });
+        return tags; 
+    };
+    _.each($(overpassXML).find('node'), function(n) {
+        var $n = $(n);
+        nodes[$n.attr('id')] = {lat: $n.attr('lat'),
+                                lng: $n.attr('lon'), 
+                                tag: tagToObj($n.find('tag'))};
+    });
+    _.each($(overpassXML).find('way'), function(w) {
+        $w = $(w);
+        segments[$w.attr('id')] = new YY.Segment(
+            _.compact(_.map($w.find('nd'),function(n) { 
+                var node = nodes[$(n).attr('ref')];
+                // NOTE: crashing here indicates that nodes are missing
+                // Check query_string
+                return [node.lat, node.lng];
+            })), 
+            tagToObj($w.find('tag')));
+    });
+    routes = _.map($(overpassXML).find('relation'), function(r) {
+        var $r = $(r);
+        var myStops = [];
+        var mySegments = [];
+        _.each($r.find('member'), function(m) {
+            var $m = $(m); 
+            if($m.attr('type') === 'way') {
+                mySegments.push(segments[$m.attr('ref')]);
+            } else if ($m.attr('type') === 'node') {
+                var n = nodes[$m.attr('ref')];
+                //if($n.find('tag')public_transportation === 'stop_position') 
+                if(n && n.lat && n.lng)
+                    myStops.push(new YY.Stop(n.lat, n.lng, n.tag));
+            } 
+        });
+        return new YY.Route(myStops, mySegments, tagToObj($r.find('tag')));
+    });
+    return routes;
+}
 
 YY.render = function(route, map) {
 
