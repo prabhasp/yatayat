@@ -229,6 +229,6 @@ var colors = (function() {
 }());
 
 // selectively export as a node module
-if(module) {
-    module.exports = YY.fromOSM;
-}
+var module = module || {}
+module.exports = YY.fromOSM;
+

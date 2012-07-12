@@ -14,6 +14,5 @@ YY.LNG = 85.3;
 YY.LAT = 27.7;
 
 // export as a node module
-if(module) {
-    module.exports = YY;
-}
+var module = module || {}
+module.exports = YY;
