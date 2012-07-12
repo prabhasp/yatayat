@@ -18,9 +18,12 @@ YY.Route.prototype.order = function() {
     
     // find orienting way
     var stops = [];
-    var startSegment = _.find(route.segments, function(seg) { return seg.id === route.orientingSegmentID; });
     var n = 0;
-    console.log(route.name);
+    var startSegment = _.find(route.segments, function(seg) { return seg.id === route.orientingSegmentID; });
+    if (!startSegment) {
+        console.log('Ordering not possible for route: ', route.name, '; no orienting_way found.');
+        return;
+    }
 
     // go through it, putting all public stops in
     function recurse(thisSegment, flipped) {
