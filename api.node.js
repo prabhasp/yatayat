@@ -20,7 +20,7 @@ var req = http.request(options, function(res) {
     });
     res.on('end', function() {
         routes = yy(res.content);
-        console.log('got routes from overpass', routes);
+        console.log('got', routes.length, 'routes from overpass');
     });
 });
 
@@ -42,6 +42,7 @@ function serializeRoute(route) {
 
 http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'application/json'});
-    res.end(JSON.stringify(routes.map(function(r) { return serializeRoute(r); })));
+    res.end(JSON.stringify(routes.map(function(r) { return serializeRoute(r); }),
+                           null, 4));
 }).listen(8020, "127.0.0.1");
 console.log('yatayat api running at http://127.0.0.1:8020/');
