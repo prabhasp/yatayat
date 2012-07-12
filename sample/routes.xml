@@ -949,7 +949,7 @@
     <member type="way" ref="171020947" role=""/>
     <member type="node" ref="317532028" role=""/>
     <member type="way" ref="170533895" role=""/>
-    <member type="way" ref="136524570" role=""/>
+    <member type="way" ref="136524570" role="orienting_way"/>
     <member type="way" ref="136524580" role=""/>
     <member type="way" ref="137312035" role=""/>
     <member type="node" ref="425307054" role=""/>
@@ -986,7 +986,7 @@
     <member type="way" ref="164827914" role=""/>
     <member type="way" ref="170558234" role=""/>
     <member type="way" ref="136524582" role=""/>
-    <member type="way" ref="137312035" role=""/>
+    <member type="way" ref="137312035" role="orienting_way"/>
     <member type="way" ref="136448418" role=""/>
     <member type="way" ref="136448419" role=""/>
     <member type="way" ref="136448417" role=""/>
