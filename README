@@ -24,3 +24,14 @@ Segment:
   - listOfLatLng: [(lat,lng), ...]
   - tag: {}
 
+== API
+
+We define a node.js-based API for external applications to make
+high-level queries of public transit data.
+
+% node api.node.js
+
++ http://localhost:8020/route
+
+  Returns all routes and stops as a JSON object.
+

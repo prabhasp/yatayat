@@ -12,3 +12,8 @@ YY.ATTRIBUTION = 'Tiles Courtesy of <a href="http://www.mapquest.com/" target="_
 
 YY.LNG = 85.3;
 YY.LAT = 27.7;
+
+// export as a node module
+if(module) {
+    module.exports = YY;
+}
