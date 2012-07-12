@@ -49,6 +49,7 @@ YY.Route.prototype.order = function() {
         if (nextFwdCnxn && nextBwdCnxn) throw 'bad algorithm!';
     }
     recurse(startSegment, false);
+    this.stops = _.map(stops, function(s) { return new YY.Stop(s.id, s.lat, s.lng, s.tag); });
     //DEBUG: _.each(stops, function(s) {console.log(s.tag.name)});
 };
 
