@@ -17,80 +17,37 @@ YY.Route.prototype.order = function() {
     var route = this;
     
     // find orienting way
+    var stops = [];
+    var startSegment = _.find(route.segments, function(seg) { return seg.id === route.orientingSegmentID; });
+    var n = 0;
+    console.log(route.name);
 
     // go through it, putting all public stops in
+    function recurse(thisSegment, flipped) {
+        if (n === route.segments.length) return;
+        n = n + 1;
 
-    // find the end in another way, and continue
-    
-
-};
-
-
-YY.Route.prototype.order2 = function() {
-    // order segments
-
-    // order step 1: collect together ends of segments (assume ends match) 
-    var segmentEnds = {};
-    var neighborDict = {};
-    var route = this;
-    
-
-    console.log(this.name);
-    _.each(this.segments, function(seg, idx) {
-        function makeNeighbor(a, b) {
-            var id, id2;
-            if(a[0] < b[0]) { id = a; id2 = b; }
-            else { id = b; id2 = a; }
-            if(neighborDict[id[0]] === undefined) {
-                neighborDict[id[0]] = [id2, id[1], seg.id];
-            } else {
-                if(neighborDict[id2[0]]) throw "bad algorithm!";
-                neighborDict[id2[0]] = [id, id2[1], seg.id];
-            }
+        if (flipped) {
+            thisSegment.listOfLatLng.reverse();
+            thisSegment.orderedListofStops.reverse();
         }
-        var l1 = seg.listOfLatLng[0];
-        var l2 = seg.listOfLatLng[seg.listOfLatLng.length - 1];
-        var idx1_2 = segmentEnds[l1];
-        var idx2_2 = segmentEnds[l2];
-        if (idx1_2 !== undefined) makeNeighbor([idx, 'l'], idx1_2);
-        if (idx2_2 !== undefined) makeNeighbor([idx, 'r'], idx2_2);
+        stops = stops.concat(thisSegment.orderedListofStops);
+        var segmentEnd = thisSegment.listOfLatLng[ thisSegment.listOfLatLng.length - 1 ];
 
-        segmentEnds[l1] = [idx, 'l'];
-        segmentEnds[l2] = [idx, 'r'];
-    });
-    console.log(neighborDict);
-    // order stops based on segments
-    var orientingSegmentKey, newNeighborDict;
-    _.each(neighborDict, function(v, k) {
-        if(v[2] === route.orientingSegmentID) {
-            //flipp neighborDict
-            if (v[1] == 'l' && !newNeighborDict) {    
-                console.log('flipping');
-                newNeighborDict = {}
-                _.each(neighborDict, function(v2, k2) {
-                    console.log(k2, v2);
-                    //newNeighborDict[v2[0][0]] = [k2, v2[1]], v2[0][1]];
-                });
-                neighborDict = newNeighborDict;
-            }
-            orientingSegmentKey = k;
-        }
-    });
-    console.log('orienting with ', orientingSegmentKey);
-    var started = false;
-    function f(key, flipped) {
-        if (key == orientingSegmentKey && started) return;
-        started = true;
-        var neighborArr = neighborDict[key];
-        var stops = route.segments[key].orderedListofStops;
-        if (flipped) { stops = stops.reverse(); }
-        console.log(key, flipped);
-        _.each(stops, function(x) {console.log(x.tag.name); });
-        var flippedNext = (neighborArr[1] === neighborArr[0][1]) ? !flipped : flipped;
-        f(neighborArr[0][0], flippedNext);
+        var nextFwdCnxn = _.find(route.segments, function(seg) { return _.isEqual(seg.listOfLatLng[0], segmentEnd) });
+        if (nextFwdCnxn) recurse(nextFwdCnxn, false);
+
+        var nextBwdCnxn = _.find(route.segments, function(seg) { 
+            return _.isEqual(seg.listOfLatLng[seg.listOfLatLng.length - 1], segmentEnd) && (seg.id !== thisSegment.id);
+        });
+        if (nextBwdCnxn) recurse(nextBwdCnxn, true);
+
+        if (!nextFwdCnxn && !nextBwdCnxn) console.log('no connection found; ending');
+        if (nextFwdCnxn && nextBwdCnxn) throw 'bad algorithm!';
     }
-    f(orientingSegmentKey, false);
-}
+    recurse(startSegment, false);
+    //DEBUG: _.each(stops, function(s) {console.log(s.tag.name)});
+};
 
 YY.Stop = function(id, lat, lng, tag) {
     this.id = id;
