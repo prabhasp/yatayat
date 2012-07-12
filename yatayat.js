@@ -9,7 +9,7 @@ YY.Route = function(stops, segments, tag, orientingSegmentID) {
     this.order();
 };
 
-YY.Route.prototyp.order = function() {
+YY.Route.prototype.order = function() {
     var route = this;
     
     // find orienting way
