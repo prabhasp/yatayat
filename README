@@ -35,3 +35,7 @@ high-level queries of public transit data.
 
   Returns all routes and stops as a JSON object.
 
+The API requires that jquery and underscore be installed for node:
+
+% npm install underscore
+% npm install jquery

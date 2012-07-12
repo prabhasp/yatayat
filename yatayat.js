@@ -1,3 +1,7 @@
+// For node API
+var _ = _ || require("underscore");
+var $ = $ || require("jquery");
+
 var YY = YY || {}
 
 YY.Route = function(stops, segments, tag, orientingSegmentID) {
