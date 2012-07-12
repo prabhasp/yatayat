@@ -40,16 +40,17 @@ YY.Route.prototype.order = function() {
     console.log(neighborlist);
     // order stops based on segments
     var seed = _.keys(neighborlist)[0]; 
-    function f(route, key) {
-        if (key == seed) return;
+    function f(route, key, flipped) {
         var neighborArr = neighborlist[key];
-        console.log([key, neighborArr]);
         var stops = route.segments[key].orderedListofStops;
         //if (neighborArr[1]==='l') { stops = stops.reverse(); }
+        console.log(key, flipped);
         _.each(stops, function(x) {console.log(x.tag.name); });
-        f(route, neighborArr[0][0]);
+        var flippedNext = (neighborArr[1] === neighborArr[0][1]) ? !flipped : flipped;
+        if (key == seed) return;
+        f(route, neighborArr[0][0], flippedNext);
     }
-    f(this, neighborlist[seed][0][0]);
+    f(this, neighborlist[seed][0][0], false);
 }
 
 YY.Stop = function(lat, lng, tag) {
@@ -116,6 +117,20 @@ YY.fromOSM = function (overpassXML) {
     return routes;
 }
 
+YY.viz = function(route, map) {
+route.segments.forEach(function(seg, idx) {
+        var latlngs = seg.listOfLatLng.map(function(LL) {
+            return new L.LatLng(LL[0], LL[1]);
+        });
+        //var color = 0xffffff * (idx / route.segments.length * 1.0);  
+        var poly = new L.Polyline(latlngs, {color: colors.getProportional(idx / route.segments.length * 1.0)});
+        map.addLayer(new L.Circle(latlngs[0], 2, {color: 'blue', opacity: 0.5}));
+        map.addLayer(new L.Circle(latlngs[latlngs.length-1], 2, {color: 'green', opacity: 0.5}));
+        poly.bindPopup(route.name);
+        map.addLayer(poly);
+    });
+}
+
 YY.render = function(route, map) {
 
     // draw a route on a map!
@@ -139,3 +154,32 @@ YY.render = function(route, map) {
         map.addLayer(marker);
     });
 };
+
+
+// COLORS MODULE
+var colors = (function() {
+    var colors = {};
+    var colorschemes = {proportional: {
+    // http://colorbrewer2.org/index.php?type=sequential
+        "Set1": ["#EFEDF5", "#DADAEB", "#BCBDDC", "#9E9AC8", "#807DBA", "#6A51A3", "#54278F", "#3F007D"],
+        "Set2": ["#DEEBF7", "#C6DBEF", "#9ECAE1", "#6BAED6", "#4292C6", "#2171B5", "#08519C", "#08306B"]
+    }};
+    var defaultColorScheme = "Set1";
+    function select_from_colors(type, colorscheme, zero_to_one_inclusive) {
+        var epsilon = 0.00001;
+        colorscheme = colorscheme || defaultColorScheme;
+        var colorsArr = colorschemes[type][colorscheme];
+        return colorsArr[Math.floor(zero_to_one_inclusive * (colorsArr.length - epsilon))];
+    }
+  
+    // METHODS FOR EXPORT
+    colors.getNumProportional = function(colorscheme) {
+        colorscheme = colorscheme || defaultColorScheme;
+        return colorschemes.proportional[colorscheme].length;
+    };
+    colors.getProportional = function(zero_to_one, colorscheme) {
+        return select_from_colors('proportional', colorscheme, zero_to_one);
+    };
+   
+    return colors;
+}());
