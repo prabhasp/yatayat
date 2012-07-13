@@ -45,7 +45,9 @@ YY.Route.prototype.order = function() {
         });
         if (nextBwdCnxn) recurse(nextBwdCnxn, true);
 
-        if (!nextFwdCnxn && !nextBwdCnxn) console.log('no connection found; ending');
+        if (!nextFwdCnxn && !nextBwdCnxn) 
+            console.log('Broken route found in route: ', route.name, '; only ',
+                stops.length, ' stops upto', stops[stops.length-1].tag.name, ' found.');
         if (nextFwdCnxn && nextBwdCnxn) throw 'bad algorithm!';
     }
     recurse(startSegment, false);
