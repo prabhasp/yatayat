@@ -100,8 +100,10 @@ YY.fromOSM = function (overpassXML) {
         var myStops = [];
         _.each($w.find('nd'), function(n) {
             var node = nodes[$(n).attr('ref')];
-            if(node.is_stop)
+            if(node.is_stop) {
+                node.id = $(n).attr('ref');
                 myStops.push(node);
+            }
             myNodes.push([node.lat, node.lng]);
         });
         segments[$w.attr('id')] = new YY.Segment($w.attr('id'), myNodes, tagToObj($w.find('tag')), myStops);
