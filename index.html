@@ -29,7 +29,7 @@ body {
              dataType: 'text',
              success: function(data) {
                  osmdata = data;
-                 YY.fromOSM(data).forEach(function(route) {
+                 YY.fromOSM(data).routes.forEach(function(route) {
                      YY.render(route, map);
                  });
              }});

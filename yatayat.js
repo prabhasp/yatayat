@@ -4,7 +4,12 @@ var $ = $ || require("jquery");
 
 var YY = YY || {}
 
-YY.Route = function(stops, segments, tag, orientingSegmentID) {
+YY.System = function(routes) {
+    this.routes = routes;
+};
+
+YY.Route = function(id, stops, segments, tag, orientingSegmentID) {
+    this.id = id;
     this.stops = stops;
     this.segments = segments;
     this.tag = tag;
@@ -119,9 +124,9 @@ YY.fromOSM = function (overpassXML) {
                     myStops.push(new YY.Stop($m.attr('ref'), n.lat, n.lng, n.tag));
             } 
         });
-        return new YY.Route(myStops, mySegments, tagToObj($r.find('tag')), orientingSegmentID);
+        return new YY.Route($r.attr('id'), myStops, mySegments, tagToObj($r.find('tag')), orientingSegmentID);
     });
-    return routes;
+    return new YY.System(routes);
 }
 
 YY.viz = function(route, map) {

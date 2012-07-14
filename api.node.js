@@ -4,10 +4,9 @@ var yy = require('./yatayat.js')
 var conf = require('./config.js')
 
 // fetch overpass API data
-var routes = [];
+var system = {};
 
 // split API url into host and path
-var split_idx = conf.API_URL.indexOf('/', 'http://'.length)
 var options = url.parse(conf.API_URL);
 options.method='POST';
     
@@ -19,8 +18,8 @@ var req = http.request(options, function(res) {
         res.content += chunk;
     });
     res.on('end', function() {
-        routes = yy(res.content);
-        console.log('got', routes.length, 'routes from overpass');
+        system = yy(res.content);
+        console.log('got', system.routes.length, 'routes from overpass');
     });
 });
 
@@ -36,13 +35,17 @@ function serializeStop(stop) {
 
 function serializeRoute(route) {
     // returns a JSON object for a route
-    return {id: 'TODO',
+    return {id: route.id,
             stops: route.stops.map(function(s) { return serializeStop(s); })};
+}
+
+function serializeSystem(system) {
+    return {routes: system.routes.map(function(r) { return serializeRoute(r); })};
 }
 
 http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'application/json'});
-    res.end(JSON.stringify(routes.map(function(r) { return serializeRoute(r); }),
+    res.end(JSON.stringify(serializeSystem(system),
                            null, 4));
 }).listen(8020, "127.0.0.1");
 console.log('yatayat api running at http://127.0.0.1:8020/');
