@@ -8,6 +8,41 @@ YY.System = function(routes) {
     this.routes = routes;
 };
 
+YY.System.prototype.takeMeThere = function(startStopID, goalStopID) {
+
+}
+// BIG TODO: Change everything to be dicts indexed by ids rather than lists
+YY.System.prototype.neighborNodes = function(stopID, routeID) {
+    var thisRoute = _.find(this.routes, function(r) { return r.id === routeID; });
+    var sameRouteDistance = 1;
+    var transferDistance = 5;
+    var neighbors = []; 
+    _.each(thisRoute.stops, function(s, idx) {
+        var templateObj = {routeID: thisRoute.id, distToNeighbor: sameRouteDistance};
+        if (s.id === stopID) {
+            if (idx < thisRoute.stops.length - 1) // not the end of list
+                neighbors.push(_.extend(templateObj, 
+                    {stopID: thisRoute.stops[idx + 1].id}));
+            else if (thisRoute.isCyclical) // end of list on cyclical route
+                neighbors.push(_.extend(templateObj,
+                    {stopID: thisRoute.stops[0].id}));
+            if (thisRoute.isBiDirectional) {
+                if (idx > 0)
+                    neighbors.push(_.extend(templateObj,
+                    {stopID: thisRoute.stops[idx - 1].id}));
+                else if (thisRoute.isCyclical)
+                    neighbors.push(_.extend(templateObj,
+                    {stopID: thisRoute.stops[thisRoute.stops.length - 1].id}));
+            }
+        } 
+    });
+    _.each(this.routes, function(r) {
+        if(_.find(r.stops, function(s) { console.log(s); return s.id === stopID; }))
+            neighbors.push( { routeID: r.id, stopID: stopID, distToNeighbor: transferDistance} );
+    });
+    return neighbors;
+}
+
 YY.Route = function(id, stops, segments, tag, orientingSegmentID) {
     this.id = id;
     this.stops = stops;
