@@ -36,6 +36,7 @@ function serializeStop(stop) {
 function serializeRoute(route) {
     // returns a JSON object for a route
     return {id: route.id,
+            name: route.name,
             stops: route.stops.map(function(s) { return serializeStop(s); })};
 }
 
