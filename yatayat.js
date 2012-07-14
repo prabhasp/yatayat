@@ -14,6 +14,8 @@ YY.Route = function(id, stops, segments, tag, orientingSegmentID) {
     this.segments = segments;
     this.tag = tag;
     this.name = tag.name;
+    this.ref = tag.ref;
+    this.transport = tag.route;
     this.orientingSegmentID = orientingSegmentID;
     this.order();
 };
@@ -89,7 +91,8 @@ YY.fromOSM = function (overpassXML) {
     _.each($(overpassXML).find('node'), function(n) {
         var $n = $(n);
         var tagObj = tagToObj($n.find('tag'));
-        nodes[$n.attr('id')] = {lat: $n.attr('lat'),
+        nodes[$n.attr('id')] = {id: $n.attr('id'),
+                                lat: $n.attr('lat'),
                                 lng: $n.attr('lon'), 
                                 tag: tagObj,
                                 is_stop: tagObj.public_transport === 'stop_position'};
@@ -101,7 +104,6 @@ YY.fromOSM = function (overpassXML) {
         _.each($w.find('nd'), function(n) {
             var node = nodes[$(n).attr('ref')];
             if(node.is_stop) {
-                node.id = $(n).attr('ref');
                 myStops.push(node);
             }
             myNodes.push([node.lat, node.lng]);
