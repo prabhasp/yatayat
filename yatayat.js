@@ -6,18 +6,18 @@ var YY = YY || {};
 
 YY.System = function(routes) {
     this.routes = routes;
+    var routeDict = {};
+    _.each(this.routes, function(r) {
+        routeDict[r.id] = r;
+    });
+    this.routeDict = routeDict;
 };
 
 YY.System.prototype.allStopsWithID = function(stopID) {
-    var retObj = [];
-    _(this.routes).each(function(r) {
-        _(r.stops).each(function(s) {
-            if (s.id === stopID) {
-                retObj.push( { stopID: s.id, routeID: r.id } );
-            }
-        });
-    });
-    return retObj;    
+    return _(this.routes).chain()
+            .map(function(r) { if (r.stopDict[stopID]) return {stopID: stopID, routeID: r.id }; })
+            .compact()
+            .value();
 }
 
 // Return [route] where route contains [stops], and just the stops we use
@@ -69,6 +69,15 @@ YY.Route = function(id, stops, segments, tag, orientingSegmentID) {
     this.transport = tag.route;
     this.orientingSegmentID = orientingSegmentID;
     this.order();
+    this.deriveStopDict();
+};
+
+YY.Route.prototype.deriveStopDict = function () {
+    var stopDict = {};
+    _(this.stops).each(function(s) {
+        stopDict[s.id] = s;
+    });
+    this.stopDict = stopDict;
 };
 
 YY.Route.prototype.order = function() {
