@@ -2,7 +2,7 @@
 var _ = _ || require("underscore");
 var $ = $ || require("jquery");
 
-var YY = YY || {}
+var YY = YY || {};
 
 YY.System = function(routes) {
     this.routes = routes;
@@ -20,7 +20,7 @@ YY.System.prototype.takeMeThere = function(startStopID, goalStopID) {
     //console.log(startNodes);
     var openset = _.clone(startNodes);
 
-}
+};
 // BIG TODO: Change everything to be dicts indexed by ids rather than lists
 YY.System.prototype.neighborNodes = function(stopID, routeID) {
     var thisRoute = _.find(this.routes, function(r) { return r.id === routeID; });
@@ -39,10 +39,10 @@ YY.System.prototype.neighborNodes = function(stopID, routeID) {
             if (thisRoute.isBiDirectional) {
                 if (idx > 0)
                     neighbors.push(_.extend(templateObj,
-                    {stopID: thisRoute.stops[idx - 1].id}));
+                        {stopID: thisRoute.stops[idx - 1].id}));
                 else if (thisRoute.isCyclical)
                     neighbors.push(_.extend(templateObj,
-                    {stopID: thisRoute.stops[thisRoute.stops.length - 1].id}));
+                        {stopID: thisRoute.stops[thisRoute.stops.length - 1].id}));
             }
         } 
     });
@@ -89,7 +89,9 @@ YY.Route.prototype.order = function() {
         stops = stops.concat(thisSegment.orderedListofStops);
         var segmentEnd = thisSegment.listOfLatLng[ thisSegment.listOfLatLng.length - 1 ];
 
-        var nextFwdCnxn = _.find(route.segments, function(seg) { return _.isEqual(seg.listOfLatLng[0], segmentEnd) });
+        var nextFwdCnxn = _.find(route.segments, function(seg) { 
+            return _.isEqual(seg.listOfLatLng[0], segmentEnd); 
+        });
         if (nextFwdCnxn) recurse(nextFwdCnxn, false);
 
         var nextBwdCnxn = _.find(route.segments, function(seg) { 
@@ -143,7 +145,7 @@ YY.fromOSM = function (overpassXML) {
                                 is_stop: tagObj.public_transport === 'stop_position'};
     });
     _.each($(overpassXML).find('way'), function(w) {
-        $w = $(w);
+        var $w = $(w);
         var myNodes = [];
         var myStops = [];
         _.each($w.find('nd'), function(n) {
@@ -155,7 +157,7 @@ YY.fromOSM = function (overpassXML) {
         });
         segments[$w.attr('id')] = new YY.Segment($w.attr('id'), myNodes, tagToObj($w.find('tag')), myStops);
     });
-    routes = _.map($(overpassXML).find('relation'), function(r) {
+    var routes = _.map($(overpassXML).find('relation'), function(r) {
         var $r = $(r);
         var myStops = [];
         var mySegments = [];
