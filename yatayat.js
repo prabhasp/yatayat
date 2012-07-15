@@ -8,6 +8,8 @@ YY.System = function(routes) {
     this.routes = routes;
 };
 
+// Return [route] where route contains [stops], and just the stops we use
+// Else return undefined
 YY.System.prototype.takeMeThere = function(startStopID, goalStopID) {
 
 }
