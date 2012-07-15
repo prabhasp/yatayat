@@ -13,19 +13,98 @@ YY.System = function(routes) {
     this.routeDict = routeDict;
 };
 
-YY.System.prototype.allStopsWithID = function(stopID) {
+YY.System.prototype.stopRoutesFromStopID = function(stopID) {
     return _(this.routes).chain()
             .map(function(r) { if (r.stopDict[stopID]) return {stopID: stopID, routeID: r.id }; })
             .compact()
             .value();
-}
+};
 
 // Return [route] where route contains [stops], and just the stops we use
 // Else return undefined
 YY.System.prototype.takeMeThere = function(startStopID, goalStopID) {
-    var closedset = []; 
-    var startNodes = this.allStopsWithID(startStopID);
-    var openset = _.clone(startNodes);
+    var system = this;
+    var startNodes = system.stopRoutesFromStopID(startStopID);
+    var goalNode = system.stopRoutesFromStopID(goalStopID)[0];
+    var openset = {};
+    var closedset = {}; 
+    var gScores = {};
+    var fScores = {};
+    var cameFrom = {};
+    var heuristic = function(stopRouteObj) {
+        var stop = system.routeDict[stopRouteObj.routeID].stopDict[stopRouteObj.stopID];
+        var goalStop = system.routeDict[goalNode.routeID].stopDict[goalNode.stopID];
+        var retval =  (goalStop.lat - stop.lat) * (goalStop.lat - stop.lat) +
+            (goalStop.lng - stop.lng) * (goalStop.lng - stop.lng);
+        return retval;
+    };
+    var set = function(dict, stopRouteObj, val) {
+        dict[stopRouteObj.stopID + "," + stopRouteObj.routeID] = val;
+    };
+    var get = function(dict, stopRouteObj) {
+        return dict[stopRouteObj.stopID + "," + stopRouteObj.routeID];
+    };
+    var reconstructPath = function(currentNode) {
+        var cameFromNode = get(cameFrom, currentNode);
+        if(cameFromNode) {
+            var p = reconstructPath(cameFromNode);
+            return _.union(p,[currentNode]);
+        } else {
+            return [currentNode];
+        }
+    };
+    var stopNameFromObj = function(sro) {
+        return system.routeDict[sro.routeID].name + " : " + system.routeDict[sro.routeID].stopDict[sro.stopID].name;
+    };
+    function aStar() {
+        _(startNodes).each(function(n) { 
+            set(openset, n, n);
+            set(gScores, n, 0);
+            set(fScores, n, heuristic(n));
+        });
+        var f = function (k) { return fScores[k]; };
+        while(_.keys(openset).length) {
+            var current = openset[_.min(_(openset).keys(), f)];
+            //console.log('open-begin', _.map(_(openset).values(), stopNameFromObj));
+            //console.log('closed-begin', _.map(_(closedset).values(), stopNameFromObj));
+
+            if (current.stopID === goalStopID) {
+                return reconstructPath(current);
+            }
+            delete(openset[current.stopID + "," + current.routeID]);
+            set(closedset, current, current);
+            var neighbors = system.neighborNodes(current.stopID, current.routeID);
+            _(neighbors).each( function(neighbor) {
+                if (get(closedset, neighbor)) {
+                    return; // equivalent to a loop continue
+                } else {
+                    var tentativeGScore = get(gScores, current) + neighbor.distToNeighbor; // latter = dist(current, neighbor)
+                    if(! get(openset, neighbor) || tentativeGScore < get(gScores, neighbor)) {
+                        set(openset, neighbor, neighbor);
+                        set(cameFrom, neighbor, current);
+                        set(gScores, neighbor, tentativeGScore);
+                        set(fScores, neighbor, tentativeGScore + heuristic(neighbor));
+                    }
+                }
+            });
+        }
+    }
+    var res = aStar(); 
+    // NOW CONVERT A-STAR OUTPUT FORMAT TO ROUTE / STOPS OUTPUT FORMAT
+    //console.log(res);
+    if (!res || res.length === 0) return 'FAIL';
+    var ret = [];
+    var curRoute;
+    _(res).each( function(sro) {
+        if (!curRoute || sro.routeID !== curRoute.id) {
+            curRoute = system.routeDict[sro.routeID];
+            curRoute.stops = [];
+            ret.push(curRoute);
+        }
+        curRoute.stops.push(curRoute.stopDict[sro.stopID]);
+    });
+    //console.log(ret);
+    return ret;
 };
 // BIG TODO: Change everything to be dicts indexed by ids rather than lists
 YY.System.prototype.neighborNodes = function(stopID, routeID) {
@@ -57,7 +136,7 @@ YY.System.prototype.neighborNodes = function(stopID, routeID) {
             neighbors.push( { routeID: r.id, stopID: stopID, distToNeighbor: transferDistance} );
     });
     return neighbors;
-}
+};
 
 YY.Route = function(id, stops, segments, tag, orientingSegmentID) {
     this.id = id;
@@ -193,7 +272,7 @@ YY.fromOSM = function (overpassXML) {
         return new YY.Route($r.attr('id'), myStops, mySegments, tagToObj($r.find('tag')), orientingSegmentID);
     });
     return new YY.System(routes);
-}
+};
 
 YY.viz = function(route, map) {
 route.segments.forEach(function(seg, idx) {
@@ -207,7 +286,7 @@ route.segments.forEach(function(seg, idx) {
         poly.bindPopup(route.name);
         map.addLayer(poly);
     });
-}
+};
 
 YY.render = function(route, map) {
 
@@ -263,6 +342,6 @@ var colors = (function() {
 }());
 
 // selectively export as a node module
-var module = module || {}
+var module = module || {};
 module.exports = YY.fromOSM;
 

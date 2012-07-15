@@ -1,13 +1,13 @@
 describe("Yatayat Library", function () {
     describe( "finding stops in multiple routes", function () {
         it("should return damkal in testSystem1 once.", function() {
-            expect(testSystem1.allStopsWithID("1278980875").length).toEqual(1);
-            expect(testSystem1.allStopsWithID("1278980875")).toEqual(
+            expect(testSystem1.stopRoutesFromStopID("1278980875").length).toEqual(1);
+            expect(testSystem1.stopRoutesFromStopID("1278980875")).toEqual(
                 [{ stopID: "1278980875", routeID: "2269119"}]);
         });
         it("should return koteshwore in testSystem1 twice", function() {
-            expect(testSystem1.allStopsWithID("31228768").length).toEqual(2);
-            expect(testSystem1.allStopsWithID("31228768")).toEqual(
+            expect(testSystem1.stopRoutesFromStopID("31228768").length).toEqual(2);
+            expect(testSystem1.stopRoutesFromStopID("31228768")).toEqual(
                 [{ stopID: "31228768", routeID: "2269119"},
                  { stopID :'31228768', routeID :'2276999'}]);
         });
@@ -28,22 +28,25 @@ describe("Yatayat Library", function () {
 
     describe( "yatayat's takeMeThere algorithm", function () {
         it("should fail when asking route from pulchowk to damkal in testSystem1", function () {
-            expect(testSystem1.takeMeThere("317532042", "1278980875")).toBeUndefined();
-        });
-        it("should take me from damkal to harihar bhawan in two steps", function () {
-            expect(testSystem1.takeMeThere("1273375058", "31150613").length).toEqual(1); // go through one route
-            expect(testSystem1.takeMeThere("1278980875", "317532037")[0].stops.length).toEqual(3); // and three stops
-            expect(testSystem1.takeMeThere("1278980875", "317532037")[0].stops[0].id).toEqual("317532042");
-            expect(testSystem1.takeMeThere("1278980875", "317532037")[0].stops[1].id).toEqual("317532042");
-            expect(testSystem1.takeMeThere("1278980875", "317532037")[0].stops[2].id).toEqual("1278980875");
+            expect(testSystem1.takeMeThere("317532042", "1278980875")).toBe('FAIL');
         });
         it("should take me to sinamangal to babarmahal through two routes", function () {
-            expect(testSystem1.takeMeThere("1273375058", "31150613")).toBeDefined();
-            expect(testSystem1.takeMeThere("1273375058", "31150613").length).toEqual(2); // go through two routes
-            expect(testSystem1.takeMeThere("1273375058", "31150613")[0].stops.length).toEqual(2); // go through two routes
-            expect(testSystem1.takeMeThere("1273375058", "31150613")[1].stops.length).toEqual(2); // go through two routes
-            expect(testSystem1.takeMeThere("1278980875", "317532037")[0].stops[1].id).toEqual("31228768");
-            expect(testSystem1.takeMeThere("1278980875", "317532037")[1].stops[0].id).toEqual("31228768");
+            console.log("S2B\n\nS2B");
+            var s2b = testSystem1.takeMeThere("1273375058", "31150613");
+            expect(s2b.length).toEqual(2); // go through two routes
+            expect(s2b[0].stops.length).toEqual(2); // go through two routes
+            expect(s2b[1].stops.length).toEqual(2); // go through two routes
+            expect(s2b[0].stops[1].id).toEqual("31228768");
+            expect(s2b[1].stops[0].id).toEqual("31228768");
+        });
+        it("should take me from damkal to harihar bhawan in two steps", function () {
+            console.log("D2H\n\nD2H");
+            var d2h = testSystem1.takeMeThere("1278980875", "317532037");
+            expect(d2h.length).toEqual(1); // go through one route
+            expect(d2h[0].stops.length).toEqual(3); // and three stops
+            expect(d2h[0].stops[0].id).toEqual("1278980875");
+            expect(d2h[0].stops[1].id).toEqual("317532042");
+            expect(d2h[0].stops[2].id).toEqual("317532037");
         });
     });
 });
