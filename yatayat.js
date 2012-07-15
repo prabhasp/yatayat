@@ -17,7 +17,7 @@ YY.System.prototype.takeMeThere = function(startStopID, goalStopID) {
             .filter(function(s) { return s.id === startStopID; })
             .map(function(s) { return { stop: s, route: r }; });
     });
-    console.log(startNodes);
+    //console.log(startNodes);
     var openset = _.clone(startNodes);
 
 }
@@ -47,7 +47,7 @@ YY.System.prototype.neighborNodes = function(stopID, routeID) {
         } 
     });
     _.each(this.routes, function(r) {
-        if(_.find(r.stops, function(s) { console.log(s); return s.id === stopID; }))
+        if(r.id !== routeID && _.find(r.stops, function(s) { return s.id === stopID; }))
             neighbors.push( { routeID: r.id, stopID: stopID, distToNeighbor: transferDistance} );
     });
     return neighbors;
