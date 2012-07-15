@@ -11,6 +11,14 @@ YY.System = function(routes) {
 // Return [route] where route contains [stops], and just the stops we use
 // Else return undefined
 YY.System.prototype.takeMeThere = function(startStopID, goalStopID) {
+    var closedset = []; 
+    var startNodes = _.map(this.routes, function(r) {
+        _(r.stops)
+            .filter(function(s) { return s.id === startStopID; })
+            .map(function(s) { return { stop: s, route: r }; });
+    });
+    console.log(startNodes);
+    var openset = _.clone(startNodes);
 
 }
 // BIG TODO: Change everything to be dicts indexed by ids rather than lists

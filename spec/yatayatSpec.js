@@ -1,12 +1,13 @@
 describe("Yatayat Library", function () {
-    /*describe( "yatayat fromOSM converter", function () {
-        it("converts two routes properly", function () {
+    describe( "yatayat's neighborNodes function", function () {
+        it("returns the right neighbor in testSystem1", function () {
+            expect(testSystem1.neighborNodes("31228768", "2269119")).toEqual(
             expect("need to write test").toEqual(true);
         });
         
-    });*/
+    });
 
-    describe( "yatayat routing algorithms", function () {
+    describe( "yatayat's takeMeThere algorithm", function () {
         it("should fail when asking route from pulchowk to damkal in testSystem1", function () {
             expect(testSystem1.takeMeThere("317532042", "1278980875")).toBeUndefined();
         });
