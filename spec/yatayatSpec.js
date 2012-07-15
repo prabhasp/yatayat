@@ -1,4 +1,17 @@
 describe("Yatayat Library", function () {
+    describe( "finding stops in multiple routes", function () {
+        it("should return damkal in testSystem1 once.", function() {
+            expect(testSystem1.allStopsWithID("1278980875").length).toEqual(1);
+            expect(testSystem1.allStopsWithID("1278980875")).toEqual(
+                [{ stopID: "1278980875", routeID: "2269119"}]);
+        });
+        it("should return koteshwore in testSystem1 twice", function() {
+            expect(testSystem1.allStopsWithID("31228768").length).toEqual(2);
+            expect(testSystem1.allStopsWithID("31228768")).toEqual(
+                [{ stopID: "31228768", routeID: "2269119"},
+                 { stopID :'31228768', routeID :'2276999'}]);
+        });
+    });
     describe( "yatayat's neighborNodes function", function () {
         it("returns the right neighbor for damkal in testSystem1", function () {
             expect(testSystem1.neighborNodes("1278980875", "2269119").length).toEqual(1);

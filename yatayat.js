@@ -8,18 +8,24 @@ YY.System = function(routes) {
     this.routes = routes;
 };
 
+YY.System.prototype.allStopsWithID = function(stopID) {
+    var retObj = [];
+    _(this.routes).each(function(r) {
+        _(r.stops).each(function(s) {
+            if (s.id === stopID) {
+                retObj.push( { stopID: s.id, routeID: r.id } );
+            }
+        });
+    });
+    return retObj;    
+}
+
 // Return [route] where route contains [stops], and just the stops we use
 // Else return undefined
 YY.System.prototype.takeMeThere = function(startStopID, goalStopID) {
     var closedset = []; 
-    var startNodes = _.map(this.routes, function(r) {
-        _(r.stops)
-            .filter(function(s) { return s.id === startStopID; })
-            .map(function(s) { return { stop: s, route: r }; });
-    });
-    //console.log(startNodes);
+    var startNodes = this.allStopsWithID(startStopID);
     var openset = _.clone(startNodes);
-
 };
 // BIG TODO: Change everything to be dicts indexed by ids rather than lists
 YY.System.prototype.neighborNodes = function(stopID, routeID) {
