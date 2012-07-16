@@ -33,12 +33,14 @@ function serializeStop(stop) {
             name: stop.name};
 }
 
-function serializeRoute(route) {
+function serializeRoute(route, isPartialRoute) {
     // returns a JSON object for a route
+    var fullRouteBool = !isPartialRoute; // ie. isPartialRoute is falsy
     return {id: route.id,
             name: route.name,
             ref: route.ref,
             transport: route.transport,
+            fullroute: fullRouteBool,
             stops: route.stops.map(function(s) { return serializeStop(s); })};
 }
 
