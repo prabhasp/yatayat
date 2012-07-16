@@ -20,6 +20,18 @@ YY.System.prototype.stopRoutesFromStopID = function(stopID) {
             .value();
 };
 
+YY.System.prototype.nearestStops = function(llArr, N) {
+    // TODO: Return all stops where dist < 2 * dist(nearestStop)
+    var allStops, distFn, answer, kdt;
+    var thresh = 1; // really far for lat/lng
+    allStops = _(this.routes).chain()
+                    .pluck('stops').flatten().value();
+    N = N || 1; 
+    distFn = function(s1, s2) { return Math.pow(s1.lat - s2.lat, 2) + Math.pow(s1.lng - s2.lng, 2); };
+    kdt = new kdTree(allStops, distFn, ["lat", "lng"]); 
+    answer = kdt.nearest({lat: llArr[0], lng: llArr[1]}, N, thresh);
+    return _.map(answer, function(a) { return a[0]; });
+};
 // Return [route] where route contains [stops], and just the stops we use
 // Else return undefined
 YY.System.prototype.takeMeThere = function(startStopID, goalStopID) {

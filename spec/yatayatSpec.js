@@ -12,6 +12,21 @@ describe("Yatayat Library", function () {
                  { stopID :'31228768', routeID :'2276999'}]);
         });
     });
+    describe( "finding nearest stop", function () {
+        it("should find an exactly matched stop", function() {
+            expect(testSystem1.nearestStops(["27.6925789","85.3239053"])[0].id).toEqual("1273375058");
+        });
+        it("should find a nearby stop", function() {
+            expect(testSystem1.nearestStops(["27.6925788","85.3239052"])[0]).toBeDefined();
+            expect(testSystem1.nearestStops(["27.6925788","85.3239052"])[0].id).toEqual("1273375058");
+        });
+        it("should find nothing for a far away co-ord", function() {
+            expect(testSystem1.nearestStops(["20","80"])).toEqual([]);
+        });
+        it("should find multiple stops when asked to", function() {
+            expect('test').toEqual('to be implemented');
+        });
+    });
     describe( "yatayat's neighborNodes function", function () {
         it("returns the right neighbor for damkal in testSystem1", function () {
             expect(testSystem1.neighborNodes("1278980875", "2269119").length).toEqual(1);
