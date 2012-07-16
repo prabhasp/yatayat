@@ -163,13 +163,22 @@ YY.Route.prototype.order = function() {
     var route = this;
     
     // find orienting way
-    var stops = [];
+    var startSegment; //= _.find(route.segments, function(seg) { return seg.id === route.orientingSegmentID; });
     var n = 0;
-    var startSegment = _.find(route.segments, function(seg) { return seg.id === route.orientingSegmentID; });
+    var stops = [], startPoints = [], endPoints = [];
+    _(route.segments).each(function(seg) {
+        if (seg.id === route.orientingSegmentID) startSegment = seg;
+        startPoints.push(_.union(seg.listOfLatLng[0], [seg.id]));
+        endPoints.push(_.union(seg.listOfLatLng[seg.listOfLatLng.length - 1], [seg.id]));
+    });
+    var metric = function(ll1, ll2) { return (ll1[0] - ll2[0]) * (ll1[0] - ll2[0]) + (ll1[1] - ll2[1]) * (ll1[1] - ll2[1]); };
+    var startTree = new kdTree(startPoints, metric, 2); 
+    var endTree = new kdTree(endPoints, metric, 2);
     if (!startSegment) {
         console.log('Ordering not possible for route: ', route.name, '; no orienting_way found.');
         return;
     }
+        debugger;
 
     // go through it, putting all public stops in
     function recurse(thisSegment, flipped) {
