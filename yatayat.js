@@ -97,7 +97,7 @@ YY.System.prototype.takeMeThere = function(startStopID, goalStopID) {
     var curRoute;
     _(res).each( function(sro) {
         if (!curRoute || sro.routeID !== curRoute.id) {
-            curRoute = system.routeDict[sro.routeID];
+            curRoute = _.clone(system.routeDict[sro.routeID]);
             curRoute.stops = [];
             ret.push(curRoute);
         }
