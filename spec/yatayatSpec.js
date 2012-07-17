@@ -12,6 +12,28 @@ describe("Yatayat Library", function () {
                  { stopID :'31228768', routeID :'2276999'}]);
         });
     });
+    describe( "finding nearest stop", function () {
+        it("should find an exactly matched stop", function() {
+            expect(testSystem1.nearestStops(["27.6925789","85.3239053"])[0].id).toEqual("1273375058");
+        });
+        it("should find a nearby stop", function() {
+            expect(testSystem1.nearestStops(["27.6925788","85.3239052"])[0]).toBeDefined();
+            expect(testSystem1.nearestStops(["27.6925788","85.3239052"])[0].id).toEqual("1273375058");
+        });
+        it("should find nothing for a far away co-ord", function() {
+            expect(testSystem1.nearestStops(["20","80"])).toEqual([]);
+        });
+        it("should find multiple stops when asked to", function() {
+            expect(testSystem1.nearestStops(["27","85"],2).length).toEqual(2);
+        });
+        it("un house should be near pulchowk and harihar bhawan", function() {
+            var twostops = testSystem1.nearestStops(["27.6801275", "85.3171663"],2);
+            expect(twostops.length).toBe(2);
+            expect(twostops[0].name).toContain("Pulchowk");
+            expect(twostops[1].name).toContain("Harihar");
+        
+        });
+    });
     describe( "yatayat's neighborNodes function", function () {
         it("returns the right neighbor for damkal in testSystem1", function () {
             expect(testSystem1.neighborNodes("1278980875", "2269119").length).toEqual(1);
