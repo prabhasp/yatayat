@@ -1,26 +1,43 @@
 == HACKING / DEPLOYING
 
-You need to create a config.js file, for example by symlinking
-config.local.js or config.deploy.js to config.js:
+==== submodules
+yatayat uses a kdtree implementation from @ubilabs on github; to
+use it you will need to run
+
+% git submodule init
+% git submodule update
+
+inside your cloned repository
+
+==== config
+config.js pulls from a overpass-api directly; to develop locally, 
+you can symlink config.local.js to config.js, but please be
+careful not to commit your symlinked file
 
 % ln -s config.local.js config.js
-OSM Data is transformed into Routes, Stops, and Segments:
+
 
 == Data Model
+OSM Data is transformed into Routes, Stops, and Segments:
 
 Route:
+  -  id
   -  name
-  -  stops: []
+  -  ref           // route number
+  -  transport     // type of transport; pulled from tag.type
+  -  stops: []     // are ordered
+  -  stopDict: {}  // indexed by id
   -  segments: []
   -  tag: {}
 
 Stop:
+  - id
   - name
   - lat
   - lng
   - tag: {}
 
-Segment:
+Segment:            // mostly useful to rendering and internal fns.
   - listOfLatLng: [(lat,lng), ...]
   - tag: {}
 
