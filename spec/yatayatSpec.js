@@ -24,7 +24,14 @@ describe("Yatayat Library", function () {
             expect(testSystem1.nearestStops(["20","80"])).toEqual([]);
         });
         it("should find multiple stops when asked to", function() {
-            expect('test').toEqual('to be implemented');
+            expect(testSystem1.nearestStops(["27","85"],2).length).toEqual(2);
+        });
+        it("un house should be near pulchowk and harihar bhawan", function() {
+            var twostops = testSystem1.nearestStops(["27.6801275", "85.3171663"],2);
+            expect(twostops.length).toBe(2);
+            expect(twostops[0].name).toContain("Pulchowk");
+            expect(twostops[1].name).toContain("Harihar");
+        
         });
     });
     describe( "yatayat's neighborNodes function", function () {
