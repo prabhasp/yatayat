@@ -14,7 +14,7 @@ var req = http.request(options, function(res) {
     res.content = '';
     res.setEncoding('utf8');
     res.on('data', function(chunk) {
-        console.log('CHUNK', chunk);
+        //console.log('CHUNK', chunk);
         res.content += chunk;
     });
     res.on('end', function() {
@@ -49,8 +49,25 @@ function serializeSystem(system) {
 }
 
 http.createServer(function (req, res) {
+    
+    // ALWAYS A JSON RESPONSE
     res.writeHead(200, {'Content-Type': 'application/json'});
-    res.end(JSON.stringify(serializeSystem(system),
-                           null, 4));
+
+    var reqObj = url.parse(req.url, true); 
+    var path = reqObj.path;
+    if (path.indexOf('routes') === 1) {
+        res.end(JSON.stringify(serializeSystem(system), null, 4));
+    } else if (path.indexOf('nearestStops') === 1) {
+        var ll = [reqObj.query.lat, reqObj.query.lng];
+        var stopArray = system.nearestStops(ll, 2);
+        res.end(JSON.stringify(stopArray.map(serializeStop),
+                                null, 4));
+    } else if (path.indexOf('takeMeThere') === 1) {
+        var routeArray = system.takeMeThere(reqObj.query.startStopID,
+                                            reqObj.query.goalStopID); 
+        var ret = routeArray.map(function(r) { return serializeRoute(r,true); });
+        res.end(JSON.stringify(ret, null, 4));
+    }
+
 }).listen(8020, "127.0.0.1");
 console.log('yatayat api running at http://127.0.0.1:8020/');

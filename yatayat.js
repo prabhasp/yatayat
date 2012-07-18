@@ -1,6 +1,7 @@
 // For node API
 var _ = _ || require("underscore");
 var $ = $ || require("jquery");
+var kdTree = kdTree || require('./lib/kdtree/src/node/kdTree.js').kdTree;
 
 var YY = YY || {};
 
@@ -32,6 +33,7 @@ YY.System.prototype.nearestStops = function(llArr, N) {
     answer = kdt.nearest({lat: llArr[0], lng: llArr[1]}, N, thresh);
     return _.map(answer, function(a) { return a[0]; });
 };
+
 // Return [route] where route contains [stops], and just the stops we use
 // Else return undefined
 YY.System.prototype.takeMeThere = function(startStopID, goalStopID) {
