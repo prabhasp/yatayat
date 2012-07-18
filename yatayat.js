@@ -304,6 +304,8 @@ YY.render = function(route, map) {
 
     // draw a route on a map!
 
+    var color = 'red';
+
     // render the route as a multi-polyline
     var routeMPL = new L.MultiPolyline(
         _.map(route.segments, function(seg) {
@@ -311,14 +313,14 @@ YY.render = function(route, map) {
                 return new L.LatLng(LL[0], LL[1]);
             });
         }),
-        {color: 'red'});
+        {color: color, opacity: 1});
     routeMPL.bindPopup(route.name);
     map.addLayer(routeMPL);
 
     // and stops as markers
     route.stops.forEach(function(stop) {
         var latlng = new L.LatLng(stop.lat, stop.lng);
-        var marker = new L.Marker(latlng);
+        var marker = new L.CircleMarker(latlng, {color: color, fillOpacity: 1, radius: 5});
         marker.bindPopup(stop.name);
         map.addLayer(marker);
     });
