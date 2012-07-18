@@ -49,7 +49,8 @@ function serializeSystem(system) {
 }
 
 http.createServer(function (req, res) {
-    
+    console.log('REQUEST',req.url)
+
     // ALWAYS A JSON RESPONSE
     res.writeHead(200, {'Content-Type': 'application/json'});
 
@@ -65,9 +66,17 @@ http.createServer(function (req, res) {
     } else if (path.indexOf('takeMeThere') === 1) {
         var routeArray = system.takeMeThere(reqObj.query.startStopID,
                                             reqObj.query.goalStopID); 
+        if (!routeArray.map) res.end("No route found");
         var ret = routeArray.map(function(r) { return serializeRoute(r,true); });
         res.end(JSON.stringify(ret, null, 4));
+    } else {
+        var jsonmessage = {"Access points" : [
+            { path: "/routes", description: "returns all routes"},
+            { path: "/nearestStops", params: ["lat", "lng"], 
+                description: "nearest stops to lat/lng position"},
+            { path: "/takeMeThere", params: ["startStopID", "goalStopID"],
+                description: "return a list of partial routes to take when going from start to goal"}]};
+        res.end(JSON.stringify(jsonmessage, null, 4)); 
     }
-
 }).listen(8020, "127.0.0.1");
 console.log('yatayat api running at http://127.0.0.1:8020/');
