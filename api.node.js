@@ -14,7 +14,7 @@ var req = http.request(options, function(res) {
     res.content = '';
     res.setEncoding('utf8');
     res.on('data', function(chunk) {
-        console.log('CHUNK', chunk);
+        //console.log('CHUNK', chunk);
         res.content += chunk;
     });
     res.on('end', function() {
@@ -63,7 +63,10 @@ http.createServer(function (req, res) {
         res.end(JSON.stringify(stopArray.map(serializeStop),
                                 null, 4));
     } else if (path.indexOf('takeMeThere') === 1) {
-
+        var routeArray = system.takeMeThere(reqObj.query.startStopID,
+                                            reqObj.query.goalStopID); 
+        var ret = routeArray.map(function(r) { return serializeRoute(r,true); });
+        res.end(JSON.stringify(ret, null, 4));
     }
 
 }).listen(8020, "127.0.0.1");
