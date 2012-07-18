@@ -12,9 +12,23 @@ YY.System = function(routes) {
         routeDict[r.id] = r;
     });
     this.routeDict = routeDict;
+
+    // insert a routeDict within each stop
+
+    (function(self) {
+
+    _.each(self.routes, function(route) {
+        _.each(route.stops, function(stop) {
+            stop.routeDict = self.stopRoutesFromStopID(stop.id);
+        });
+    });
+
+    })(this)
+
 };
 
 YY.System.prototype.stopRoutesFromStopID = function(stopID) {
+    // XXX: use the values cached in each stop's routeDict (?)
     return _(this.routes).chain()
             .map(function(r) { if (r.stopDict[stopID]) return {stopID: stopID, routeID: r.id }; })
             .compact()
@@ -322,7 +336,13 @@ YY.render = function(route, map) {
     // and stops as markers
     route.stops.forEach(function(stop) {
         var latlng = new L.LatLng(stop.lat, stop.lng);
-        var marker = new L.CircleMarker(latlng, {color: color, fillOpacity: 1, radius: 5});
+
+        var opts = {color: 'black', fillColor: color, fillOpacity: 1, radius: 8}
+        if(_.keys(stop.routeDict).length > 1) {
+            opts = {color: 'white', fillColor: color, fillOpacity: 1, radius: 8}
+        }
+
+        var marker = new L.CircleMarker(latlng, opts);
         marker.bindPopup(stop.name);
         map.addLayer(marker);
     });
