@@ -35,6 +35,19 @@ YY.System.prototype.stopRoutesFromStopID = function(stopID) {
             .value();
 };
 
+// returns a new system with only passed in items included; if includeIDList is falsy, return a copy
+YY.System.prototype.prune = function(includeIDList) {
+    if (!includeIDList) return this;
+    return new YY.System(this.routes.map(function(route) {
+        return new YY.Route(route.id,
+            route.stops.filter(function(s) { return s in includeIDList; }),
+            route.segments.filter(function(s) { return s in includeIDList; }),
+            route.tag,
+            "Please don't order this route; can't find this ID");
+         })
+    );
+};
+
 YY.System.prototype.nearestStops = function(llArr, N) {
     // TODO: Return all stops where dist < 2 * dist(nearestStop)
     var allStops, distFn, answer, kdt;
