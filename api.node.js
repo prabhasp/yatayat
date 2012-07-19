@@ -2,6 +2,7 @@ var http = require('http');
 var url = require('url');
 var yy = require('./yatayat.js')
 var conf = require('./config.js')
+var _ = require('underscore');
 
 // fetch overpass API data
 var system = {};
@@ -69,6 +70,12 @@ http.createServer(function (req, res) {
         if (!routeArray.map) res.end("No route found");
         var ret = routeArray.map(function(r) { return serializeRoute(r,true); });
         res.end(JSON.stringify(ret, null, 4));
+    } else if (path.indexOf('getAllStops') === 1) {
+        var idToStop = {};
+        system.routes.forEach(function(r) {
+            r.stops.forEach(function(s) { idToStop[s.id] = s; })
+        });
+        res.end(JSON.stringify(_.map(_.values(idToStop), serializeStop), null, 4));
     } else {
         var jsonmessage = {"Access points" : [
             { path: "/routes", description: "returns all routes"},
