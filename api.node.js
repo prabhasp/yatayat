@@ -75,7 +75,8 @@ http.createServer(function (req, res) {
             { path: "/nearestStops", params: ["lat", "lng"], 
                 description: "nearest stops to lat/lng position"},
             { path: "/takeMeThere", params: ["startStopID", "goalStopID"],
-                description: "return a list of partial routes to take when going from start to goal"}]};
+                description: "return a list of partial routes to take when going from start to goal"},
+            { path: "/getAllStops", description: "returns all stops"}]};
         res.end(JSON.stringify(jsonmessage, null, 4)); 
     }
 }).listen(8020, "127.0.0.1");
