@@ -57,7 +57,9 @@ http.createServer(function (req, res) {
 
     var reqObj = url.parse(req.url, true); 
     var path = reqObj.path;
-    if (path.indexOf('routes') === 1) {
+    if(! _.keys(system).length) {
+        res.end("Nothing loaded yet");
+    } else if (path.indexOf('routes') === 1) {
         res.end(JSON.stringify(serializeSystem(system), null, 4));
     } else if (path.indexOf('nearestStops') === 1) {
         var ll = [reqObj.query.lat, reqObj.query.lng];
