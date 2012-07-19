@@ -73,11 +73,7 @@ http.createServer(function (req, res) {
         var ret = routeArray.map(function(r) { return serializeRoute(r,true); });
         res.end(JSON.stringify(ret, null, 4));
     } else if (path.indexOf('getAllStops') === 1) {
-        var idToStop = {};
-        system.routes.forEach(function(r) {
-            r.stops.forEach(function(s) { idToStop[s.id] = s; })
-        });
-        res.end(JSON.stringify(_.map(_.values(idToStop), serializeStop), null, 4));
+        res.end(JSON.stringify(_.map(system.allStops(), serializeStop), null, 4));
     } else {
         var jsonmessage = {"Access points" : [
             { path: "/routes", description: "returns all routes"},
