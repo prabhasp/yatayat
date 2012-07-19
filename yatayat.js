@@ -27,6 +27,14 @@ YY.System = function(routes) {
 
 };
 
+YY.System.prototype.allStops = function() {
+    var idToStop = {};
+    this.routes.forEach(function(r) {
+        r.stops.forEach(function(s) { idToStop[s.id] = s; })
+    });
+    return _.values(idToStop);
+};
+
 YY.System.prototype.stopRoutesFromStopID = function(stopID) {
     // XXX: use the values cached in each stop's routeDict (?)
     return _(this.routes).chain()
@@ -50,10 +58,9 @@ YY.System.prototype.prune = function(includeIDList) {
 
 YY.System.prototype.nearestStops = function(llArr, N) {
     // TODO: Return all stops where dist < 2 * dist(nearestStop)
-    var allStops, distFn, answer, kdt;
+    var distFn, answer, kdt;
     var thresh = 1; // really far for lat/lng
-    allStops = _(this.routes).chain()
-                    .pluck('stops').flatten().value();
+    var allStops = this.allStops();
     N = N || 1; 
     distFn = function(s1, s2) { return Math.pow(s1.lat - s2.lat, 2) + Math.pow(s1.lng - s2.lng, 2); };
     kdt = new kdTree(allStops, distFn, ["lat", "lng"]); 

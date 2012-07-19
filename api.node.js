@@ -2,6 +2,7 @@ var http = require('http');
 var url = require('url');
 var yy = require('./yatayat.js')
 var conf = require('./config.js')
+var _ = require('underscore');
 
 // fetch overpass API data
 var system = {};
@@ -56,7 +57,9 @@ http.createServer(function (req, res) {
 
     var reqObj = url.parse(req.url, true); 
     var path = reqObj.path;
-    if (path.indexOf('routes') === 1) {
+    if(! _.keys(system).length) {
+        res.end("Nothing loaded yet");
+    } else if (path.indexOf('routes') === 1) {
         res.end(JSON.stringify(serializeSystem(system), null, 4));
     } else if (path.indexOf('nearestStops') === 1) {
         var ll = [reqObj.query.lat, reqObj.query.lng];
@@ -69,13 +72,16 @@ http.createServer(function (req, res) {
         if (!routeArray.map) res.end("No route found");
         var ret = routeArray.map(function(r) { return serializeRoute(r,true); });
         res.end(JSON.stringify(ret, null, 4));
+    } else if (path.indexOf('getAllStops') === 1) {
+        res.end(JSON.stringify(_.map(system.allStops(), serializeStop), null, 4));
     } else {
         var jsonmessage = {"Access points" : [
             { path: "/routes", description: "returns all routes"},
             { path: "/nearestStops", params: ["lat", "lng"], 
                 description: "nearest stops to lat/lng position"},
             { path: "/takeMeThere", params: ["startStopID", "goalStopID"],
-                description: "return a list of partial routes to take when going from start to goal"}]};
+                description: "return a list of partial routes to take when going from start to goal"},
+            { path: "/getAllStops", description: "returns all stops"}]};
         res.end(JSON.stringify(jsonmessage, null, 4)); 
     }
 }).listen(8020, "127.0.0.1");
