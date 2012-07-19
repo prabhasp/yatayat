@@ -303,53 +303,6 @@ YY.fromOSM = function (overpassXML) {
     return new YY.System(routes);
 };
 
-YY.viz = function(route, map) {
-route.segments.forEach(function(seg, idx) {
-        var latlngs = seg.listOfLatLng.map(function(LL) {
-            return new L.LatLng(LL[0], LL[1]);
-        });
-        //var color = 0xffffff * (idx / route.segments.length * 1.0);  
-        var poly = new L.Polyline(latlngs, {color: colors.getProportional(idx / route.segments.length * 1.0)});
-        map.addLayer(new L.Circle(latlngs[0], 2, {color: 'blue', opacity: 0.5}));
-        map.addLayer(new L.Circle(latlngs[latlngs.length-1], 2, {color: 'green', opacity: 0.5}));
-        poly.bindPopup(route.name);
-        map.addLayer(poly);
-    });
-};
-
-YY.render = function(route, map) {
-
-    // draw a route on a map!
-
-    var color = 'red';
-
-    // render the route as a multi-polyline
-    var routeMPL = new L.MultiPolyline(
-        _.map(route.segments, function(seg) {
-            return _.map(seg.listOfLatLng, function(LL) {
-                return new L.LatLng(LL[0], LL[1]);
-            });
-        }),
-        {color: color, opacity: 1});
-    routeMPL.bindPopup(route.name);
-    map.addLayer(routeMPL);
-
-    // and stops as markers
-    route.stops.forEach(function(stop) {
-        var latlng = new L.LatLng(stop.lat, stop.lng);
-
-        var opts = {color: 'black', fillColor: color, fillOpacity: 1, radius: 8}
-        if(_.keys(stop.routeDict).length > 1) {
-            opts = {color: 'white', fillColor: color, fillOpacity: 1, radius: 8}
-        }
-
-        var marker = new L.CircleMarker(latlng, opts);
-        marker.bindPopup(stop.name);
-        map.addLayer(marker);
-    });
-};
-
-
 // COLORS MODULE
 var colors = (function() {
     var colors = {};
