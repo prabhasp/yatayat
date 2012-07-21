@@ -23,14 +23,14 @@ YY.System = function(routes) {
         });
     });
 
-    })(this)
+    })(this);
 
 };
 
 YY.System.prototype.allStops = function() {
     var idToStop = {};
     this.routes.forEach(function(r) {
-        r.stops.forEach(function(s) { idToStop[s.id] = s; })
+        r.stops.forEach(function(s) { idToStop[s.id] = s; });
     });
     return _.values(idToStop);
 };
@@ -47,7 +47,8 @@ YY.System.prototype.stopRoutesFromStopID = function(stopID) {
 YY.System.prototype.prune = function(includeIDList) {
     if (!includeIDList) return this;
     return new YY.System(this.routes.map(function(route) {
-        return new YY.Route(route.id,
+        if (route.id in includeIDList) return route;
+        else return new YY.Route(route.id,
             route.stops.filter(function(s) { return s in includeIDList; }),
             route.segments.filter(function(s) { return s in includeIDList; }),
             route.tag,
@@ -195,6 +196,8 @@ YY.Route = function(id, stops, segments, tag, startStop, startSegID) {
     this.ref = tag.ref;
     this.transport = tag.route;
     //this.orientingSegmentID = orientingSegmentID;
+    this.startStop = startStop; // TODO: delete this line 
+    this.startSegID = startSegID; // TODO: delete this line
     if (startStop && startSegID) this.order(startStop, startSegID);
     this.deriveStopDict();
 };
@@ -206,29 +209,41 @@ YY.Route.prototype.deriveStopDict = function () {
     });
     this.stopDict = stopDict;
 };
+    
+var distanceForObjLL = function(ll1, ll2) { return Math.pow(ll1.lat - ll2.lat, 2) + Math.pow(ll1.lng - ll2.lng, 2); };
+var distanceForArrLL = function(ll1, ll2) { return Math.pow(ll1[0] - ll2[1], 2) + Math.pow(ll1[0] - ll2[1], 2); };
 
 YY.Route.prototype.order = function(startStop, startSegID) {
-    var startSegment = _.find(route.segments, function(seg) { return seg.id === startSegID; })
     var stops = [];
     var n = 0;
-    if (! startSegment) { 
-        console.log("Start segment not found for route : " + this.name); return; 
-    }
-    var dFn = function(ll1, ll2) { return Math.pow(ll1.lat - ll2.lat, 2) + Math.pow(ll1.lng - ll2.lng, 2); }
-    var lFn = function(ll1, ll2) { return Math.pow(ll1[0] - ll2[1], 2) + Math.pow(ll1[0] - ll2[1], 2); }
-    var startKDTree = new kdtree(_.map(route.segments, function(seg) { return seg.listOfLatLng[0].concat([seg.id]); }), lFn, 2);
-    var endKDTree = new kdtree(_.map(route.segments, function(seg) { return seg.listOfLatLng[seg.listOfLatLng.length - 1].concat([seg.id]); }), lFn, 2);
+    var route = this;
+    return this.order_(startSegID);
+    /*var startKDTree = new kdTree(_.map(route.segments, function(seg) { return seg.listOfLatLng[0].concat([seg.id]); }), distanceForArrLL, 2);
+    var endKDTree = new kdTree(_.map(route.segments, function(seg) { return seg.listOfLatLng[seg.listOfLatLng.length - 1].concat([seg.id]); }), distanceForArrLL, 2);
 
     // make start kd tree, end kdtree
-    function recurse(thisSegment, flipped) {
+    function recurse(thisSegmentID, flipped) {
         if (n === route.segments.length) return;
         n = n + 1;
+        
+        // find our segment
+        var thisSegment = _.find(route.segments, function(seg) { return seg.id === thisSegmentID; })
+        if (! thisSegment) { 
+            console.log("Segment not found for route : " + route.id + "; segment id: " + thisSegmentID); return; 
+        } else {
+            console.log("Segment found in route: " + route.id + "; segment id: " + thisSegmentID);
+        }
+
         // if (flipped), reverse everything
         if (flipped) {
             thisSegment.listOfLatLng.reverse();
             thisSegment.orderedListofStops.reverse();
         }
+
+        // fill in return value
         stops = stops.concat(thisSegment.orderedListofStops);
+
+        // once flipped, segmentEnd is always the last in the list
         var segmentEnd = thisSegment.listOfLatLng[ thisSegment.listOfLatLng.length - 1 ];
 
         // find the closest start point (fwd), and the closest end point (bkd)
@@ -236,18 +251,27 @@ YY.Route.prototype.order = function(startStop, startSegID) {
         var nextFwdCnxn = startKDTree.nearest(segmentEnd, 1);
         var nextBkdCnxn = endKDTree.nearest(segmentEnd, 1);
 
-        //  
+        var nextSegId, nextFlipped; 
+        if (nextFwdCnxn[1] < nextBkdCnxn[1]) {
+            recurse(nextSegId, true);
+        } else {
+            recurse(nextSegId, false);
+        }
     }
-
+    recurse(startSegID, false); // TODO: WRONG for non-cyclical routes
+    this.stops = _.map(stops, function(s) { return new YY.Stop(s.id, s.lat, s.lng, s.tag); });
+    // FOR THE FIRST Segment, we need to figure out whether things are flipped or not;
+    // determination requires finding which end has a closer second node
+    */
 }
 
-YY.Route.prototype.order_ = function() {
+YY.Route.prototype.order_ = function(orientingSegmentID) {
     var route = this;
     
     // find orienting way
     var stops = [];
     var n = 0;
-    var startSegment = _.find(route.segments, function(seg) { return seg.id === route.orientingSegmentID; });
+    var startSegment = _.find(route.segments, function(seg) { return seg.id === orientingSegmentID; });
     if (!startSegment) {
         console.log('Ordering not possible for route: ', route.name, '; no orienting_way found.');
         return;
@@ -277,12 +301,12 @@ YY.Route.prototype.order_ = function() {
 
         if (!nextFwdCnxn && !nextBwdCnxn) 
             console.log('Broken route found in route: ', route.name);
-            // console.log('Broken route found in route: ', route.name, '; only ',
-            //     stops.length, ' stops upto', stops[stops.length-1].tag.name, ' found.');
         if (nextFwdCnxn && nextBwdCnxn) throw 'bad algorithm!';
     }
     recurse(startSegment, false);
     this.stops = _.map(stops, function(s) { return new YY.Stop(s.id, s.lat, s.lng, s.tag); });
+    console.log('ordering successful for route ', route.name);
+    console.log(_.pluck(route.stops, 'name'));
     //DEBUG: _.each(stops, function(s) {console.log(s.tag.name)});
 };
 
@@ -347,15 +371,17 @@ YY.fromOSM = function (overpassXML) {
                 mySegments.push(segments[$m.attr('ref')]);
             } else if ($m.attr('type') === 'node') {
                 var n = nodes[$m.attr('ref')];
-                if ($m.attr('role') === 'terminus' || $m.attr('role') === 'start')
-                    startStop = $m;
-                //if($n.find('tag')public_transportation === 'stop_position') 
-                if(n && n.lat && n.lng)
-                    myStops.push(new YY.Stop($m.attr('ref'), n.lat, n.lng, n.tag));
+                if (n && n.lat && n.lng) {
+                    var stop = new YY.Stop($m.attr('ref'), n.lat, n.lng, n.tag);
+                    if ($m.attr('role') === 'terminus' || $m.attr('role') === 'start')
+                        startStop = stop;
+                    //if($n.find('tag')public_transportation === 'stop_position') 
+                    myStops.push(stop);
+                }
             } 
         });
         return new YY.Route($r.attr('id'), myStops, mySegments, tagToObj($r.find('tag')),
-                            startStop, stopToSegDict[startStop.id]);
+                            startStop, startStop && stopToSegDict[startStop.id]);
     });
     return new YY.System(routes);
 };
