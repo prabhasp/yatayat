@@ -69,7 +69,7 @@ http.createServer(function (req, res) {
     } else if (path.indexOf('takeMeThere') === 1) {
         var routeArray = system.takeMeThere(reqObj.query.startStopID,
                                             reqObj.query.goalStopID); 
-        if (!routeArray.map) res.end("No route found");
+        if (!routeArray.map) { res.end("No route found"); return; }
         var ret = routeArray.map(function(r) { return serializeRoute(r,true); });
         res.end(JSON.stringify(ret, null, 4));
     } else if (path.indexOf('getAllStops') === 1) {
