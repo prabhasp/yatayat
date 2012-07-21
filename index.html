@@ -30,11 +30,10 @@ body {
              dataType: 'text',
              success: function(data) {
                  system = YY.fromOSM(data);
-				 var renderLayer = 	YY.render_(system,
-				 		undefined, // includeIDList
+				 var renderLayer = 	YY.render_(system, map,
+				 		undefined, // includeIDObject
 				 		undefined // leafletBaseOptions
 				 );
-                 map.addLayer(renderLayer);
              }});
 
     if(YY.TILE_SOURCE) {
@@ -64,7 +63,7 @@ body {
     });
     };
 
-    YY.render_ = function(system, includeIDDict, leafletBaseOptions, leafletOverrideOptions) {
+    YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOverrideOptions) {
         //TODO: Handle overrideOptions
 
         if (!YY._layerGroup) { YY._layerGroup = new L.LayerGroup(); }
@@ -75,7 +74,7 @@ body {
             {"route" : {color: 'red', opacity: 1},
              "stop"  : {color: 'red', fillOpacity: 1, radius: 8}};
         // render the route as a multi-polyline
-        _(system.routes).each(function(route) {
+        _(filteredSystem.routes).each(function(route) {
             var routeMPL = new L.MultiPolyline(
                 _.map(route.segments, function(seg) {
                     return _.map(seg.listOfLatLng, function(LL) {
@@ -88,7 +87,7 @@ body {
             YY._layerGroup.addLayer(routeMPL);
         });
         // render the stops as circle markers 
-        _(system.routes).each(function(route) { 
+        _(filteredSystem.routes).each(function(route) { 
             route.stops.forEach(function(stop) {
                 var Lll = new L.LatLng(stop.lat, stop.lng);
                 var marker = new L.CircleMarker(Lll,
@@ -98,7 +97,8 @@ body {
                 YY._layerGroup.addLayer(marker);
             });
         });
-        return YY._layerGroup;
+		map.removeLayer(YY._layerGroup);
+        map.addLayer(YY._layerGroup);
     };
                                 
     YY.render = function(route, map) {
