@@ -47,7 +47,8 @@ YY.System.prototype.stopRoutesFromStopID = function(stopID) {
 YY.System.prototype.prune = function(includeIDList) {
     if (!includeIDList) return this;
     return new YY.System(this.routes.map(function(route) {
-        return new YY.Route(route.id,
+        if (route.id in includeIDList) return route;
+        else return new YY.Route(route.id,
             route.stops.filter(function(s) { return s in includeIDList; }),
             route.segments.filter(function(s) { return s in includeIDList; }),
             route.tag,
