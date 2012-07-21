@@ -209,16 +209,32 @@ YY.Route.prototype.deriveStopDict = function () {
 
 YY.Route.prototype.order = function(startStop, startSegID) {
     var startSegment = _.find(route.segments, function(seg) { return seg.id === startSegID; })
+    var stops = [];
+    var n = 0;
     if (! startSegment) { 
         console.log("Start segment not found for route : " + this.name); return; 
     }
+    var dFn = function(ll1, ll2) { return Math.pow(ll1.lat - ll2.lat, 2) + Math.pow(ll1.lng - ll2.lng, 2); }
+    var lFn = function(ll1, ll2) { return Math.pow(ll1[0] - ll2[1], 2) + Math.pow(ll1[0] - ll2[1], 2); }
+    var startKDTree = new kdtree(_.map(route.segments, function(seg) { return seg.listOfLatLng[0].concat([seg.id]); }), lFn, 2);
+    var endKDTree = new kdtree(_.map(route.segments, function(seg) { return seg.listOfLatLng[seg.listOfLatLng.length - 1].concat([seg.id]); }), lFn, 2);
 
     // make start kd tree, end kdtree
     function recurse(thisSegment, flipped) {
+        if (n === route.segments.length) return;
+        n = n + 1;
         // if (flipped), reverse everything
+        if (flipped) {
+            thisSegment.listOfLatLng.reverse();
+            thisSegment.orderedListofStops.reverse();
+        }
+        stops = stops.concat(thisSegment.orderedListofStops);
+        var segmentEnd = thisSegment.listOfLatLng[ thisSegment.listOfLatLng.length - 1 ];
 
         // find the closest start point (fwd), and the closest end point (bkd)
         // whichever is nearer, pick that, and go there
+        var nextFwdCnxn = startKDTree.nearest(segmentEnd, 1);
+        var nextBkdCnxn = endKDTree.nearest(segmentEnd, 1);
 
         //  
     }
