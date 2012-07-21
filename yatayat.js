@@ -56,8 +56,7 @@ YY.System.prototype.prune = function(includeIDList) {
          })
     );
 };
-
-YY.System.prototype.nearestStops = function(llArr, N) {
+YY.System.prototype.nearestStops = function(llArr, N, maxDist) {
     // TODO: Return all stops where dist < 2 * dist(nearestStop)
     if(YY._kdt === undefined) {
         var allStops = this.allStops();
@@ -65,7 +64,7 @@ YY.System.prototype.nearestStops = function(llArr, N) {
         YY._kdt = new kdTree(allStops, distFn, ["lat", "lng"]);
     }
     var kdt = YY._kdt;
-    var thresh = 1; // really far for lat/lng
+    var thresh = maxDist || 1; // really far for lat/lng
     var N = N || 1; 
     var answer = kdt.nearest({lat: llArr[0], lng: llArr[1]}, N, thresh);
     return _.map(answer, function(a) { return a[0]; });
