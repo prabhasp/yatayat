@@ -12,7 +12,13 @@ body {
 </style>
 </head>
 <body>
-<div id="publicTransportMap" style="width: 100%; height: 100%">
+	<div id="publicTransportMap" style="width: 100%; height: 100%"></div>
+	<div id="buttons" style="position:absolute;top:10;left:60;z-index:999">
+		<input type="checkbox" name="vehicle1" value="bus" checked ="yes"/>Bus
+		<input type="checkbox" name="vehicle2" value="microbus"checked ="yes"/>Micro-Bus
+		<input type="checkbox" name="vehicle3" value="tempo"checked ="yes"/>Tempo (3 - wheeler)
+	</div>
+
 <script src="lib/jquery-1.7.2.min.js"></script>
 <script src="lib/underscore-min.js"></script>
 <script src="lib/leaflet/leaflet.js"></script>
@@ -20,6 +26,29 @@ body {
 <script src="yatayat.js"></script>
 <script src="config.js"></script>
 <script type="text/javascript" language="javascript">
+
+
+function TransportMedium(Medium){ // function shows what is entered as transportation medium
+	alert("Transportation Medium selected "+Medium);
+	console.log("Transportation Medium selected "+Medium);
+	SendRouteInfotoMap(Medium);
+} 
+
+function SendRouteInfotoMap(Medium, Medium2, Medium3){  
+	var Obj={} 
+	var NumberOfRoute=system.routes.length;
+	for(var i=0;i<NumberOfRoute;i++)
+	{
+ 	 //   obj[i*5] = true;
+	if(system.routes[i].transport===Medium|| Medium2||Medium3)
+//	Obj[i]=system.routes[i].id;
+	Obj[system.routes[i].id]=true;
+	}
+		 var renderLayer = 	YY.render_(system, map,
+		 		Obj, //includeIDObject; try*/{"2269045": true}, //for an example
+		 		undefined // leafletBaseOptions
+		 );	
+}
     // initialize the map
     var map = new L.Map('publicTransportMap');
 
@@ -31,7 +60,7 @@ body {
              success: function(data) {
                  system = YY.fromOSM(data);
 				 var renderLayer = 	YY.render_(system, map,
-				 		undefined, //includeIDObject; try {"2269045": true} for an example
+				 		SendRouteInfotoMap('bus'), //includeIDObject; try*/{"2269045": true}, //for an example
 				 		undefined // leafletBaseOptions
 				 );
              }});
@@ -71,8 +100,8 @@ body {
         
         var filteredSystem = system.prune(includeIDDict);
         var defaultOptions = 
-            {"route" : {color: 'red', opacity: 1},
-             "stop"  : {color: 'red', fillOpacity: 1, radius: 8}};
+            {"route" : {color: 'red', opacity: .9},
+             "stop"  : {color: 'red', fillOpacity: 1, radius: 6}};
         // render the route as a multi-polyline
         _(filteredSystem.routes).each(function(route) {
             var routeMPL = new L.MultiPolyline(
@@ -137,8 +166,21 @@ body {
         // var script = document.createElement('script');
         // script.setAttribute('src', 'sample/test.js');
         // document.body.appendChild(script);
+$('#buttons')
+.find('input')
+//.children(function(idx, $child){
+	.change(function(){
+	var buff = {};
+	console.log("CheckBox changed "+ this.value + "now its status is: " + this.checked);
 
+	
+	buff[0]=this.checked;
+	buff[1]=buff[0];
+	buff[2]=buff[1];	
+	SendRouteInfotoMap(buf[0],buff[1],buff[2]);
+	});
      
 </script>
+
 </body>
 </html>
