@@ -24,16 +24,17 @@ body {
     var map = new L.Map('publicTransportMap');
 
     //var ktmBB = "85.2885,27.6839,85.3368,27.7299";
-    var osmdata;
+    var system;
     $.ajax({ type: YY.GET_OR_POST, url: YY.API_URL,
              data: YY.QUERY_STRING,
              dataType: 'text',
              success: function(data) {
-                 osmdata = data;
-                 //YY.fromOSM(data).routes.forEach(function(route) {
-                 //    YY.render(route, map);
-                 //});
-                 map.addLayer(YY.render_(YY.fromOSM(data)));
+                 system = YY.fromOSM(data);
+				 var renderLayer = 	YY.render_(system,
+				 		undefined, // includeIDList
+				 		undefined // leafletBaseOptions
+				 );
+                 map.addLayer(renderLayer);
              }});
 
     if(YY.TILE_SOURCE) {
