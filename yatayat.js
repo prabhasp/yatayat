@@ -276,6 +276,15 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
         console.log('Ordering not possible for route: ', route.name, '; no orienting_way found.');
         return;
     }
+    var llToObj = function(ll, seg) { return {lat: ll[0], lng: ll[1], seg: seg}; } 
+    var startKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(seg.listOfLatLng[0], seg); }), 
+                        distanceForObjLL, ["lat","lng"]);
+    var endKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(seg.listOfLatLng[seg.listOfLatLng.length - 1], seg); }), 
+                        distanceForObjLL, ["lat","lng"]);
+
+    function returnCloseSegment(thisSegment) {
+        
+    }
 
     // go through it, putting all public stops in
     function recurse(thisSegment, flipped) {
@@ -289,19 +298,20 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
         stops = stops.concat(thisSegment.orderedListofStops);
         var segmentEnd = thisSegment.listOfLatLng[ thisSegment.listOfLatLng.length - 1 ];
 
-        var nextFwdCnxn = _.find(route.segments, function(seg) { 
-            return _.isEqual(seg.listOfLatLng[0], segmentEnd); 
-        });
-        if (nextFwdCnxn) recurse(nextFwdCnxn, false);
+            var ret = startKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
+            var nextFwdTreeCnxn = _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
 
-        var nextBwdCnxn = _.find(route.segments, function(seg) { 
-            return _.isEqual(seg.listOfLatLng[seg.listOfLatLng.length - 1], segmentEnd) && (seg.id !== thisSegment.id);
-        });
-        if (nextBwdCnxn) recurse(nextBwdCnxn, true);
+            var ret = endKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
+            var nextBwdTreeCnxn =  _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
 
-        if (!nextFwdCnxn && !nextBwdCnxn) 
-            console.log('Broken route found in route: ', route.name);
-        if (nextFwdCnxn && nextBwdCnxn) throw 'bad algorithm!';
+        var nextSeg;
+        if (nextFwdTreeCnxn[1] < nextBwdTreeCnxn[1]) { 
+            nextSeg = nextFwdTreeCnxn[0].seg;
+            recurse(nextSeg, false);
+        } else {
+            nextSeg = nextBwdTreeCnxn[0].seg;
+            recurse(nextSeg, true);
+        }
     }
     recurse(startSegment, false);
     this.stops = _.map(stops, function(s) { return new YY.Stop(s.id, s.lat, s.lng, s.tag); });
