@@ -177,7 +177,7 @@ YY.System.prototype.neighborNodes = function(stopID, routeID) {
                         {stopID: thisRoute.stops[idx - 1].id}));
                 else if (thisRoute.isCyclical)
                     neighbors.push(_.extend(templateObj,
-                        {stopID: thisRoute.stops[thisRoute.stops.length - 1].id}));
+                        {stopID: _.last(thisRoute.stops).id}));
             }
         } 
     });
@@ -188,7 +188,7 @@ YY.System.prototype.neighborNodes = function(stopID, routeID) {
     return neighbors;
 };
 
-YY.Route = function(id, stops, segments, tag, startStop, startSegID) {
+YY.Route = function(id, stops, segments, tag, startSegID) {
     this.id = id;
     this.stops = stops;
     this.segments = segments;
@@ -197,9 +197,7 @@ YY.Route = function(id, stops, segments, tag, startStop, startSegID) {
     this.ref = tag.ref;
     this.transport = tag.route;
     //this.orientingSegmentID = orientingSegmentID;
-    this.startStop = startStop; // TODO: delete this line 
-    this.startSegID = startSegID; // TODO: delete this line
-    if (startStop && startSegID) this.order(startStop, startSegID);
+    if (startSegID) _.defer(this.order(startSegID));
     this.deriveStopDict();
 };
 
@@ -214,7 +212,7 @@ YY.Route.prototype.deriveStopDict = function () {
 var distanceForObjLL = function(ll1, ll2) { return Math.pow(ll1.lat - ll2.lat, 2) + Math.pow(ll1.lng - ll2.lng, 2); };
 var distanceForArrLL = function(ll1, ll2) { return Math.pow(ll1[0] - ll2[1], 2) + Math.pow(ll1[0] - ll2[1], 2); };
 
-YY.Route.prototype.order = function(startStop, startSegID) {
+YY.Route.prototype.order = function(startSegID) {
     return this.order_(startSegID);
 }
 
@@ -232,7 +230,7 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
     var llToObj = function(ll, seg) { return {lat: ll[0], lng: ll[1], seg: seg}; } 
     var startKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(seg.listOfLatLng[0], seg); }), 
                         distanceForObjLL, ["lat","lng"]);
-    var endKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(seg.listOfLatLng[seg.listOfLatLng.length - 1], seg); }), 
+    var endKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(_.last(seg.listOfLatLng), seg); }), 
                         distanceForObjLL, ["lat","lng"]);
 
     function closestSegment(thisSegment, end) {
@@ -240,7 +238,7 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
         if (end === 'first') {
             segmentEnd = thisSegment.listOfLatLng[ 0 ];
         } else { // also the default
-            segmentEnd = thisSegment.listOfLatLng[ thisSegment.listOfLatLng.length - 1 ];
+            segmentEnd = _.last(thisSegment.listOfLatLng);
         }
 
         ret = startKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
@@ -263,6 +261,9 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
         if (flipped) {
             thisSegment.listOfLatLng.reverse();
             thisSegment.orderedListofStops.reverse();
+        }
+        if (_.last(stops) === thisSegment.orderedListofStops[0]) {
+            thisSegment.orderedListofStops = _.rest(thisSegment.orderedListofStops);
         }
         stops = stops.concat(thisSegment.orderedListofStops);
 
@@ -341,7 +342,6 @@ YY.fromOSM = function (overpassXML) {
     });
     var routes = _.map($(overpassXML).find('relation'), function(r) {
         var $r = $(r);
-        var myStops = [];
         var mySegments = [];
         var startStop, startSegID;
         _.each($r.find('member'), function(m) {
@@ -354,16 +354,12 @@ YY.fromOSM = function (overpassXML) {
                     var stop = new YY.Stop($m.attr('ref'), n.lat, n.lng, n.tag);
                     if ($m.attr('role') === 'terminus' || $m.attr('role') === 'start')
                         startStop = stop;
-                    //if($n.find('tag')public_transportation === 'stop_position') 
-                    myStops.push(stop);
                 }
             } 
         });
-        var startSegID = startStop && 
-            _.find(stopToSegDict[startStop.id], function(segID) { 
-                return _.contains(_.pluck(mySegments, 'id'), segID); })
-        return new YY.Route($r.attr('id'), myStops, mySegments, tagToObj($r.find('tag')),
-                            startStop, startSegID);
+        var startSegID = startStop && _.find(stopToSegDict[startStop.id], function(segID) { return _.contains(_.pluck(mySegments, 'id'), segID); })
+        return new YY.Route($r.attr('id'), [], mySegments, tagToObj($r.find('tag')), startSegID);
+        /* TODO: now adding stops through the order() step; refactor accordingly */
     });
     return new YY.System(routes);
 };
