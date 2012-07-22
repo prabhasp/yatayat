@@ -285,7 +285,11 @@ var unconnectedSegments = function(route) {
         if(stop.id in nearby) {
             marker = new L.CircleMarker(ll,
                                         {color: nearbycol});
-            var msg = stop.name + " is rather close to " + nearby[stop.id].name + " but they have different names";
+            var routename = "";
+            for(var rid in nearby[stop.id].routeDict) {
+                routename = nearby[stop.id].routeDict[rid].name;
+            }
+            var msg = stop.name + " is rather close to " + nearby[stop.id].name + " (in route: "+ routename + ") but they have different names";
             addLog(msg, ll, marker);
         }
         else if(stop.id in unnamed) {
@@ -301,7 +305,7 @@ var unconnectedSegments = function(route) {
             for(var rid in simnames[stop.id].routeDict) {
                 routename = simnames[stop.id].routeDict[rid].name;
             }
-            var msg = stop.name + " has a similar name to far-off stop " + simnames[stop.id].name + ' (in route' + routename + ")";
+            var msg = stop.name + " has a similar name to far-off stop " + simnames[stop.id].name + ' (in route: ' + routename + ")";
             addLog(msg, ll, marker);
         }
         else {
