@@ -19,7 +19,7 @@ body {
   height: 100%;
   overflow: auto;
 }
-#errorLog div:hover {
+#errorLog li:hover {
   background-color: #333;
   color: red;
   cursor: pointer;
@@ -34,7 +34,7 @@ body {
 </head>
 <body>
 <div id="publicTransportMap" style="width: 100%; height: 100%">Loading ...</div>
-<pre id="errorLog"><b>ERROR LOG</b></pre>
+<pre id="error"><b>ERROR LOG</b><ol id="errorLog"> </ol></pre>
 <script type="text/javascript" language="javascript">
 // initialize the map
 var map = new L.Map('publicTransportMap');
@@ -217,18 +217,23 @@ YY.error_render = function(system, map, log) {
     var unconnected = unconnectedSegments(system);
     var unconnectedcol = 'red';
 
-    var addLog = function(marker, msg) {
-        var $msg = document.createElement('div');
+    var addLog = function(msg, latlng, marker) {
+        var $msg = document.createElement('li');
         $msg.innerHTML = msg;
-        $msg.onclick = function() { 
-            marker.openPopup(); 
-            // marker.fireEvent('click'); 
+
+        var pop = function() { 
+            var popup = new L.Popup();
+            popup.setLatLng(latlng);
+            popup.setContent(msg);
+            map.openPopup(popup);
         };
+        $msg.onclick = pop;
+        marker.on('click', pop);
         log.appendChild($msg);
     }
 
-    system.routes.forEach(function(route) {
-        route.segments.forEach(function(seg) {
+    system.routes.forEach(function(route, r_idx) {
+        route.segments.forEach(function(seg, s_idx) {
             var latlngs = seg.listOfLatLng.map(function(LL) {
                 return new L.LatLng(LL[0], LL[1]);
             });
@@ -236,9 +241,7 @@ YY.error_render = function(system, map, log) {
             if(seg.id in unconnected) {
                 poly = new L.Polyline(latlngs, {color: unconnectedcol});
                 var msg = "unconnected segment";
-                console.log("unconnected", seg.listOfLatLng, 'TO', unconnected[seg.id].listOfLatLng);
-                poly.bindPopup(msg);
-                addLog(poly, msg);
+                addLog(msg, latlngs[Math.floor(latlngs.length / 2)], poly);
             }
             else {
                 poly = new L.Polyline(latlngs, {color: 'green', opacity:0.3});
@@ -250,31 +253,26 @@ YY.error_render = function(system, map, log) {
             var marker;
             var ll = new L.LatLng(stop.lat, stop.lng);
             if(stop.id in nearby) {
-                // XXX: CircleMarker does not have an openPopup method !?
-                //marker = new L.CircleMarker(ll,
-                marker = new L.Marker(ll,
+                marker = new L.CircleMarker(ll,
                                             {color: nearbycol});
                 var msg = stop.name + " is rather close to " + nearby[stop.id].name + " but they have different names";
-                marker.bindPopup(msg);
-                addLog(marker, msg);
+                addLog(msg, ll, marker);
             }
             else if(stop.id in unnamed) {
-                marker = new L.Marker(ll,
+                marker = new L.CircleMarker(ll,
                                             {color: unnamedcol});
                 var msg = "unnamed stop";
-                marker.bindPopup(msg);
-                addLog(marker, msg);
+                addLog(msg, ll, marker);
             }
             else if(stop.id in simnames) {
-                marker = new L.Marker(ll,
+                marker = new L.CircleMarker(ll,
                                             {color: simnamescol});
                 var msg = stop.name + " has a similar name to far-off stop " + simnames[stop.id].name;
-                marker.bindPopup(msg);
-                addLog(marker, msg);
+                addLog(msg, ll, marker);
             }
             else {
-                // marker = new L.CircleMarker(ll,
-                //                             {color: 'green'});
+                marker = new L.CircleMarker(ll,
+                                            {color: 'green', opacity:0.2});
             }
             if(marker)
                 map.addLayer(marker);
