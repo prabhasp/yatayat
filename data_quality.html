@@ -174,6 +174,30 @@ function similarNames(system) {
     return similarNames;
 }
 
+var unconnectedSegments = function(system) {
+    unconnected = {};
+    system.routes.forEach(function(route) {
+        var last_seg = null;
+        route.segments.forEach(function(segment) {
+            if(last_seg) {
+                var s1f = segment.listOfLatLng[0];
+                var s1r = segment.listOfLatLng[segment.listOfLatLng.length-1];
+                var s2f = last_seg.listOfLatLng[0];
+                var s2r = last_seg.listOfLatLng[last_seg.listOfLatLng.length-1];
+
+                // Something is wrong in the order() call.
+                // Let's just check all pairs of starts and ends.
+                if(!(_.isEqual(s1f, s2f) || _.isEqual(s1f, s2r) || 
+                     _.isEqual(s1r, s2f) || _.isEqual(s1r, s2r))) {
+                    unconnected[last_seg.id] = segment;
+                }
+            }
+            last_seg = segment;
+        });
+    });
+    return unconnected;
+};
+
 YY.error_render = function(system, map, log) {
     // Check for four classes of errors
 
@@ -190,6 +214,8 @@ YY.error_render = function(system, map, log) {
     var simnamescol = 'magenta';
 
     // 4. Unconnected segments
+    var unconnected = unconnectedSegments(system);
+    var unconnectedcol = 'red';
 
     var addLog = function(marker, msg) {
         var $msg = document.createElement('div');
@@ -202,6 +228,24 @@ YY.error_render = function(system, map, log) {
     }
 
     system.routes.forEach(function(route) {
+        route.segments.forEach(function(seg) {
+            var latlngs = seg.listOfLatLng.map(function(LL) {
+                return new L.LatLng(LL[0], LL[1]);
+            });
+            var poly;
+            if(seg.id in unconnected) {
+                poly = new L.Polyline(latlngs, {color: unconnectedcol});
+                var msg = "unconnected segment";
+                console.log("unconnected", seg.listOfLatLng, 'TO', unconnected[seg.id].listOfLatLng);
+                poly.bindPopup(msg);
+                addLog(poly, msg);
+            }
+            else {
+                poly = new L.Polyline(latlngs, {color: 'green', opacity:0.3});
+            }
+            map.addLayer(poly);
+        });
+
         route.stops.forEach(function(stop) {
             var marker;
             var ll = new L.LatLng(stop.lat, stop.lng);
