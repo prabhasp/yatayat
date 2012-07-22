@@ -199,7 +199,11 @@ YY.Route = function(id, stops, segments, tag, startSegID) {
     this.ref = tag.ref;
     this.transport = tag.route;
     //this.orientingSegmentID = orientingSegmentID;
-    if (startSegID) _.defer(this.order(startSegID));
+    if (startSegID) this.order(startSegID);
+    else {
+        this._unconnectedSegments = this.segments;
+        this._noTerminus = true;
+    }
     this.deriveStopDict();
 };
 
@@ -220,6 +224,7 @@ YY.Route.prototype.order = function(startSegID) {
 
 YY.Route.prototype.order_ = function(orientingSegmentID) {
     var route = this;
+    var segmentOrderDict = {};
     
     // find orienting way
     var stops = [];
@@ -249,8 +254,10 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
         var nextBwdTreeCnxn =  _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
         var cnxnChanger = (end === 'first') ? {'fwd': 'bwd', 'bwd': 'fwd'} : {'fwd': 'fwd', 'bwd': 'bwd'};
         if (nextFwdTreeCnxn[1] < nextBwdTreeCnxn[1]) {
+            segmentOrderDict[thisSegment.id] = nextFwdTreeCnxn[0].seg;
             return { nextSeg: nextFwdTreeCnxn[0].seg, sqDist: nextFwdTreeCnxn[1], cnxn: cnxnChanger['fwd'] };
         } else {
+            segmentOrderDict[thisSegment.id] = nextBwdTreeCnxn[0].seg;
             return { nextSeg: nextBwdTreeCnxn[0].seg, sqDist: nextBwdTreeCnxn[1], cnxn: cnxnChanger['bwd'] };
         }
     }
@@ -285,8 +292,26 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
     }
 
     this.stops = _.map(stops, function(s) { return new YY.Stop(s.id, s.lat, s.lng, s.tag); });
-    console.log('ordering successful for route ', route.name);
-    console.log(_.pluck(route.stops, 'name'));
+    //console.log(_.pluck(route.stops, 'name'));
+   
+    if (_.keys(segmentOrderDict).length === 0) {
+        console.log('ordering not quite successful for route ', route.name);
+        this._unconnectedSegments = this.segments;
+    } else if (_.keys(segmentOrderDict).length !== route.segments.length) {  // TODO: do this only in debug mode
+        console.log('ordering not quite successful for route ', route.name);
+        var n = 0;
+        var connectedSegments = (function buildSegmentsInOrder(seg, accumulator) {
+            if (n === _.keys(segmentOrderDict).length) return accumulator;
+            n = n + 1;
+            accumulator.push(seg);
+            return buildSegmentsInOrder(segmentOrderDict[seg.id], accumulator); 
+        })(startSegment, []);
+        this._unconnectedSegments = _.difference(this.segments, connectedSegments);
+    } else {
+        console.log('ordering successful for route ', route.name);
+        this._unconnectedSegments = [];
+    }
+    //console.log(_.chain(this._unconnectedSegments).pluck('orderedListofStops').flatten().pluck('tag').value());
     //DEBUG: _.each(stops, function(s) {console.log(s.tag.name)});
 };
 
