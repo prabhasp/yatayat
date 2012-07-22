@@ -282,8 +282,21 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
     var endKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(seg.listOfLatLng[seg.listOfLatLng.length - 1], seg); }), 
                         distanceForObjLL, ["lat","lng"]);
 
-    function returnCloseSegment(thisSegment) {
+    function closestSegment(thisSegment) {
+        var ret;
+        var segmentEnd = thisSegment.listOfLatLng[ thisSegment.listOfLatLng.length - 1 ];
+
+        ret = startKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
+        var nextFwdTreeCnxn = _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
+
+        ret = endKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
+        var nextBwdTreeCnxn =  _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
         
+        if (nextFwdTreeCnxn[1] < nextBwdTreeCnxn[1]) {
+            return { nextSeg: nextFwdTreeCnxn[0].seg, sqDist: nextFwdTreeCnxn[1], cnxn: 'fwd'};
+        } else {
+            return { nextSeg: nextBwdTreeCnxn[0].seg, sqDist: nextBwdTreeCnxn[1], cnxn: 'bwd' };
+        }
     }
 
     // go through it, putting all public stops in
@@ -296,21 +309,12 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
             thisSegment.orderedListofStops.reverse();
         }
         stops = stops.concat(thisSegment.orderedListofStops);
-        var segmentEnd = thisSegment.listOfLatLng[ thisSegment.listOfLatLng.length - 1 ];
 
-            var ret = startKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
-            var nextFwdTreeCnxn = _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
-
-            var ret = endKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
-            var nextBwdTreeCnxn =  _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
-
-        var nextSeg;
-        if (nextFwdTreeCnxn[1] < nextBwdTreeCnxn[1]) { 
-            nextSeg = nextFwdTreeCnxn[0].seg;
-            recurse(nextSeg, false);
+        var next = closestSegment(thisSegment);
+        if (next.cnxn === 'fwd') {
+            recurse(next.nextSeg, false);
         } else {
-            nextSeg = nextBwdTreeCnxn[0].seg;
-            recurse(nextSeg, true);
+            recurse(next.nextSeg, true);
         }
     }
     recurse(startSegment, false);
