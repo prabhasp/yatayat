@@ -11,12 +11,12 @@ body {
 }
 #error {
   position: absolute;
-  top: 0;
+  bottom: 0;
   right: 0;
-  width: 300px;
+  height: 300px;
   background-color: black;
   color: #00ff00;
-  height: 100%;
+  width: 100%;
   overflow: auto;
 }
 #errorLog li:hover {
@@ -61,7 +61,7 @@ if(YY.TILE_SOURCE) {
 
 map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 
-var SAME_STOP_DIST = Math.pow(0.001,2);
+var SAME_STOP_DIST = Math.pow(0.0005,2);
 
 function nearbyDifferentStops(system) {
     stopClosest = {};
@@ -237,7 +237,7 @@ YY.error_render = function(system, map, log) {
             if(seg.id in unconnected) {
                 var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
                 var poly = new L.Polyline(latlngs, {color: unconnectedcol});
-                var msg = "unconnected segment";
+                var msg = "unconnected segment" + ' (' + route.name + ")";
                 addLog(msg, latlngs[Math.floor(latlngs.length / 2)], poly);
                 
                 var seg2 = unconnected[seg.id];
@@ -256,19 +256,19 @@ YY.error_render = function(system, map, log) {
             if(stop.id in nearby) {
                 marker = new L.CircleMarker(ll,
                                             {color: nearbycol});
-                var msg = stop.name + " is rather close to " + nearby[stop.id].name + " but they have different names";
+                var msg = stop.name + " is rather close to " + nearby[stop.id].name + " but they have different names" + ' (' + route.name + ")";
                 addLog(msg, ll, marker);
             }
             else if(stop.id in unnamed) {
                 marker = new L.CircleMarker(ll,
                                             {color: unnamedcol});
-                var msg = "unnamed stop";
+                var msg = "unnamed stop" + ' (' + route.name + ")";
                 addLog(msg, ll, marker);
             }
             else if(stop.id in simnames) {
                 marker = new L.CircleMarker(ll,
                                             {color: simnamescol});
-                var msg = stop.name + " has a similar name to far-off stop " + simnames[stop.id].name;
+                var msg = stop.name + " has a similar name to far-off stop " + simnames[stop.id].name + ' (' + route.name + ")";
                 addLog(msg, ll, marker);
             }
             else {
