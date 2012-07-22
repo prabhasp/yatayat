@@ -282,20 +282,24 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
     var endKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(seg.listOfLatLng[seg.listOfLatLng.length - 1], seg); }), 
                         distanceForObjLL, ["lat","lng"]);
 
-    function closestSegment(thisSegment) {
-        var ret;
-        var segmentEnd = thisSegment.listOfLatLng[ thisSegment.listOfLatLng.length - 1 ];
+    function closestSegment(thisSegment, end) {
+        var ret, segmentEnd;
+        if (end === 'first') {
+            segmentEnd = thisSegment.listOfLatLng[ 0 ];
+        } else { // also the default
+            segmentEnd = thisSegment.listOfLatLng[ thisSegment.listOfLatLng.length - 1 ];
+        }
 
         ret = startKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
         var nextFwdTreeCnxn = _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
 
         ret = endKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
         var nextBwdTreeCnxn =  _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
-        
+        var cnxnChanger = (end === 'first') ? {'fwd': 'bwd', 'bwd': 'fwd'} : {'fwd': 'fwd', 'bwd': 'bwd'};
         if (nextFwdTreeCnxn[1] < nextBwdTreeCnxn[1]) {
-            return { nextSeg: nextFwdTreeCnxn[0].seg, sqDist: nextFwdTreeCnxn[1], cnxn: 'fwd'};
+            return { nextSeg: nextFwdTreeCnxn[0].seg, sqDist: nextFwdTreeCnxn[1], cnxn: cnxnChanger['fwd'] };
         } else {
-            return { nextSeg: nextBwdTreeCnxn[0].seg, sqDist: nextBwdTreeCnxn[1], cnxn: 'bwd' };
+            return { nextSeg: nextBwdTreeCnxn[0].seg, sqDist: nextBwdTreeCnxn[1], cnxn: cnxnChanger['bwd'] };
         }
     }
 
@@ -317,7 +321,14 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
             recurse(next.nextSeg, true);
         }
     }
-    recurse(startSegment, false);
+    var fwdFacing = closestSegment(startSegment);
+    var bwdFacing = closestSegment(startSegment, 'first'); // nearest to first node = bwd facing
+    if (fwdFacing.sqDist < bwdFacing.sqDist) {
+        recurse(startSegment, false);
+    } else {
+        recurse(startSegment, true);
+    }
+
     this.stops = _.map(stops, function(s) { return new YY.Stop(s.id, s.lat, s.lng, s.tag); });
     console.log('ordering successful for route ', route.name);
     console.log(_.pluck(route.stops, 'name'));
