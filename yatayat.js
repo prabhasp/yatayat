@@ -173,7 +173,7 @@ YY.System.prototype.neighborNodes = function(stopID, routeID) {
             else if (thisRoute.isCyclical) // end of list on cyclical route
                 neighbors.push(_.extend(templateObj,
                     {stopID: thisRoute.stops[0].id}));
-            if (thisRoute.isBiDirectional) {
+            if (!thisRoute.isDirectional) {
                 if (idx > 0)
                     neighbors.push(_.extend(templateObj,
                         {stopID: thisRoute.stops[idx - 1].id}));
@@ -197,14 +197,18 @@ YY.Route = function(id, stops, segments, tag, startSegID) {
     this.tag = tag;
     this.name = tag.name;
     this.ref = tag.ref;
+    this.deriveStopDict();
     this.transport = tag.route;
     //this.orientingSegmentID = orientingSegmentID;
-    if (startSegID) this.order(startSegID);
+    if (startSegID) _.defer(this.order(startSegID));
     else {
         this._unconnectedSegments = this.segments;
         this._noTerminus = true;
     }
-    this.deriveStopDict();
+    if (tag.direction === 'one_way' || tag.direction === 'clockwise' || tag.direction === 'counterclockwise') 
+        this.isDirectional = true;
+    if (tag.direction === 'clockwise' || tag.direction === 'counterclockwise' || tag.direction === 'cyclical')
+        this.isCyclical = true;
 };
 
 YY.Route.prototype.deriveStopDict = function () {
@@ -333,7 +337,6 @@ YY.Segment = function(id, listOfLatLng, tag, orderedStops) {
 YY.fromOSM = function (overpassXML) {
     var nodes = {};
     var segments = {};
-    var routeStops = {};
     var stopToSegDict = {};
     var tagToObj = function(tag) {
         tags = {};
@@ -359,8 +362,7 @@ YY.fromOSM = function (overpassXML) {
             var node = nodes[$(n).attr('ref')];
             if(node.is_stop) {
                 myStops.push(node);
-                if (!stopToSegDict[node.id])  
-                    stopToSegDict[node.id] = [];
+                if (!stopToSegDict[node.id]) stopToSegDict[node.id] = [];
                 stopToSegDict[node.id].push($w.attr('id'));
             }
             myNodes.push([node.lat, node.lng]);

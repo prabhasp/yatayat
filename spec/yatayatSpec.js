@@ -36,15 +36,15 @@ describe("Yatayat Library", function () {
     });
     describe( "yatayat's neighborNodes function", function () {
         it("returns the right neighbor for damkal in testSystem1", function () {
-            expect(testSystem1.neighborNodes("1278980875", "2269119").length).toEqual(1);
             expect(testSystem1.neighborNodes("1278980875", "2269119")).toEqual(
                 [{routeID: "2269119", stopID: "317532042", distToNeighbor: 1}]);
+            expect(testSystem1.neighborNodes("1278980875", "2269119").length).toEqual(1);
         });
         it("returns the right neighbor for koteshwore in testSystem1", function () {
-            expect(testSystem1.neighborNodes("31228768", "2269119").length).toEqual(2);
             expect(testSystem1.neighborNodes("31228768", "2269119")).toEqual(
                 [{ routeID : '2269119', distToNeighbor : 1, stopID : '360455521' }, 
                  { routeID : '2276999', stopID : '31228768', distToNeighbor : 5 }]);
+            expect(testSystem1.neighborNodes("31228768", "2269119").length).toEqual(2);
         });
     });
 

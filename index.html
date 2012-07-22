@@ -30,6 +30,7 @@ body {
              data: YY.QUERY_STRING,
              dataType: 'text',
              success: function(data) {
+                 console.log('data received');
                  //osmdata = data;
                  system = YY.fromOSM(data);
 				 var renderLayer = 	YY.render_(system, map,
