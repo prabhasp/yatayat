@@ -13,7 +13,7 @@ body {
   position: absolute;
   bottom: 0;
   right: 0;
-  height: 300px;
+  height: 200px;
   background-color: black;
   color: #00ff00;
   width: 100%;
@@ -23,6 +23,11 @@ body {
   background-color: #111;
   color: red;
   cursor: pointer;
+}
+#routepicker {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 </style>
 <script src="lib/jquery-1.7.2.min.js"></script>
@@ -35,18 +40,38 @@ body {
 <body>
 <div id="publicTransportMap" style="width: 100%; height: 100%">Loading ...</div>
 <pre id="error"><b>WARNINGS</b><ol id="errorLog"> </ol></pre>
+<select id="routepicker"></select>
 <script type="text/javascript" language="javascript">
 // initialize the map
-var map = new L.Map('publicTransportMap');
+var map = new L.Map('publicTransportMap'),
+renderLayer,
+sys;
 
-//var ktmBB = "85.2885,27.6839,85.3368,27.7299";
-var system;
+function routeToggler(system) {
+    var $rp = $('#routepicker')
+        .change(function() {
+            if(renderLayer) {
+                map.removeLayer(renderLayer);
+            }
+            console.log('YY.error_render(',sys, sys.routes[$rp[0].selectedIndex], document.getElementById('errorLog'));
+            renderLayer = YY.error_render(sys, sys.routes[$rp[0].selectedIndex], document.getElementById('errorLog'));
+            map.addLayer(renderLayer);
+        });
+    system.routes.forEach(function(route) {
+        var $opt = $('<option>')
+            .html(route.name)
+            .appendTo($rp);
+    });
+}
+
 $.ajax({ type: YY.GET_OR_POST, url: YY.API_URL,
          data: YY.QUERY_STRING,
          dataType: 'text',
          success: function(data) {
-             system = YY.fromOSM(data);
-	     var renderLayer = YY.error_render(system, map, document.getElementById('errorLog'));
+             sys = YY.fromOSM(data);
+             routeToggler(sys);
+	     renderLayer = YY.error_render(sys, sys.routes[0], document.getElementById('errorLog'));
+             map.addLayer(renderLayer);
          }});
 
 if(YY.TILE_SOURCE) {
@@ -63,37 +88,35 @@ map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 
 var SAME_STOP_DIST = Math.pow(0.0005,2);
 
-function nearbyDifferentStops(system) {
+YY.error_render = function(system, route, log) {
+
+function nearbyDifferentStops(system, route) {
     stopClosest = {};
 
-    system.routes.forEach(function(route) {
-        route.stops.forEach(function(stop) {
-            var stops = system.nearestStops([stop.lat, stop.lng], 2, SAME_STOP_DIST)
-                .filter(function(s) { return s.id !== stop.id; });
-            if(stops.length > 0 && stop.name && stops[0].name !== stop.name) {
-                stopClosest[stop.id] = stops[0];
-            }
-        });
-    })
+    route.stops.forEach(function(stop) {
+        var stops = system.nearestStops([stop.lat, stop.lng], 2, SAME_STOP_DIST)
+            .filter(function(s) { return s.id !== stop.id; });
+        if(stops.length > 0 && stop.name && stops[0].name && stops[0].name !== stop.name) {
+            stopClosest[stop.id] = stops[0];
+        }
+    });
 
     return stopClosest;
 }
 
-function unnamedStops(system) {
+function unnamedStops(route) {
     unnamedStops = {};
 
-    system.routes.forEach(function(route) {
-        route.stops.forEach(function(stop) {
-            if(!stop.name) {
-                unnamedStops[stop.id] = true;
+    route.stops.forEach(function(stop) {
+        if(!stop.name) {
+            unnamedStops[stop.id] = true;
             }
-        });
     });
 
     return unnamedStops;
 }
 
-function similarNames(system) {
+function similarNames(system, route) {
     // thanks! http://thinkphp.ro/apps/js-hacks/String.levenshtein/String.levenshtein.html
     var levenshtein = function(stringa, stringb) {
         var cost = new Array(),
@@ -150,72 +173,74 @@ function similarNames(system) {
     similarNames = {};
 
     // n^2 algorithm that compares string-distance between every two pairs of stop
-    system.routes.forEach(function(route) {
-        route.stops.forEach(function(stop) {
+    route.stops.forEach(function(stop) {
             
-            system.routes.forEach(function(route2) {
-                route.stops.forEach(function(stop2) {
+        system.routes.forEach(function(route2) {
+            route.stops.forEach(function(stop2) {
 
-                    if(stop.name && stop2.name && levenshtein(stop.name, stop2.name) < 3) {
-                        var physicalDistance = Math.pow(stop.lat-stop2.lat,2) + Math.pow(stop.lng-stop2.lng,2);
-                        if(physicalDistance > SAME_STOP_DIST) {
-                            // console.log(stop.name, stop2.name, physicalDistance);
-                            similarNames[stop.id] = stop2;
-                        }
-                        else if(stop.id != stop2.id) {
-                            //console.log(stop.name, stop2.name, 'nearby');
-                        }
+                if(stop.name && stop2.name && levenshtein(stop.name, stop2.name) < 3) {
+                    var physicalDistance = Math.pow(stop.lat-stop2.lat,2) + Math.pow(stop.lng-stop2.lng,2);
+                    if(physicalDistance > SAME_STOP_DIST) {
+                        // console.log(stop.name, stop2.name, physicalDistance);
+                        similarNames[stop.id] = stop2;
                     }
-                    
-                });
+                    else if(stop.id != stop2.id) {
+                        //console.log(stop.name, stop2.name, 'nearby');
+                    }
+                }
+                
             });
         });
     });
     return similarNames;
 }
 
-var unconnectedSegments = function(system) {
+var unconnectedSegments = function(route) {
     unconnected = {};
-    system.routes.forEach(function(route) {
-        var last_seg = null;
-        route.segments.forEach(function(segment) {
-            if(last_seg) {
-                var s1f = segment.listOfLatLng[0];
-                var s1r = segment.listOfLatLng[segment.listOfLatLng.length-1];
-                var s2f = last_seg.listOfLatLng[0];
-                var s2r = last_seg.listOfLatLng[last_seg.listOfLatLng.length-1];
-
-                // Something is wrong in the order() call.
-                // Let's just check all pairs of starts and ends.
-                if(!(_.isEqual(s1f, s2f) || _.isEqual(s1f, s2r) || 
-                     _.isEqual(s1r, s2f) || _.isEqual(s1r, s2r))) {
-                    unconnected[last_seg.id] = segment;
-                }
+    var last_seg = null;
+    route.segments.forEach(function(segment) {
+        if(last_seg) {
+            var s1f = segment.listOfLatLng[0];
+            var s1r = segment.listOfLatLng[segment.listOfLatLng.length-1];
+            var s2f = last_seg.listOfLatLng[0];
+            var s2r = last_seg.listOfLatLng[last_seg.listOfLatLng.length-1];
+            
+            // Something is wrong in the order() call.
+            // Let's just check all pairs of starts and ends.
+            if(!(_.isEqual(s1f, s2f) || _.isEqual(s1f, s2r) || 
+                 _.isEqual(s1r, s2f) || _.isEqual(s1r, s2r))) {
+                unconnected[last_seg.id] = segment;
             }
-            last_seg = segment;
-        });
+        }
+        last_seg = segment;
     });
     return unconnected;
 };
 
-YY.error_render = function(system, map, log) {
+    var layer = new L.LayerGroup();
+    log.innerHTML = "";
+
     // Check for four classes of errors
 
     // 1. Nearby stops (are they the same?)
-    var nearby = nearbyDifferentStops(system);
+    var nearby = nearbyDifferentStops(system, route);
     var nearbycol = 'yellow';
 
     // 2. Unnamed stop
-    var unnamed = unnamedStops(system);
+    var unnamed = unnamedStops(route);
     var unnamedcol = 'black';
 
     // 3. Similarly-named stop (that are far away)
-    var simnames = similarNames(system);
+    var simnames = similarNames(system, route);
     var simnamescol = 'magenta';
 
     // 4. Unconnected segments
-    var unconnected = unconnectedSegments(system);
+    var unconnected = unconnectedSegments(route);
     var unconnectedcol = 'red';
+
+    // 5. Stops with the same name one after another
+    // XXX: TODO
+
 
     var addLog = function(msg, latlng, marker) {
         var $msg = document.createElement('li');
@@ -232,54 +257,62 @@ YY.error_render = function(system, map, log) {
         log.appendChild($msg);
     }
 
-    system.routes.forEach(function(route, r_idx) {
-        route.segments.forEach(function(seg, s_idx) {
-            if(seg.id in unconnected) {
-                var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
-                var poly = new L.Polyline(latlngs, {color: unconnectedcol});
-                var msg = "unconnected segment" + ' (' + route.name + ")";
-                addLog(msg, latlngs[Math.floor(latlngs.length / 2)], poly);
-                
-                var seg2 = unconnected[seg.id];
-                var ll2 = seg2.listOfLatLng.map(function(LL) {return new L.LatLng(LL[0], LL[1]);});
-                var poly2 = new L.Polyline(ll2, {color: 'black'});
-                map.addLayer(poly);
-                map.addLayer(poly2);
+    route.segments.forEach(function(seg) {
+        if(seg.id in unconnected) {
+            var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
+            var poly = new L.Polyline(latlngs, {color: unconnectedcol});
+            var msg = "unconnected segment";
+            addLog(msg, latlngs[Math.floor(latlngs.length / 2)], poly);
+            
+            layer.addLayer(poly);
 
-                delete unconnectedcol[seg.id]; // don't draw twice;
-            }
-        });
-
-        route.stops.forEach(function(stop) {
-            var marker;
-            var ll = new L.LatLng(stop.lat, stop.lng);
-            if(stop.id in nearby) {
-                marker = new L.CircleMarker(ll,
-                                            {color: nearbycol});
-                var msg = stop.name + " is rather close to " + nearby[stop.id].name + " but they have different names" + ' (' + route.name + ")";
-                addLog(msg, ll, marker);
-            }
-            else if(stop.id in unnamed) {
-                marker = new L.CircleMarker(ll,
-                                            {color: unnamedcol});
-                var msg = "unnamed stop" + ' (' + route.name + ")";
-                addLog(msg, ll, marker);
-            }
-            else if(stop.id in simnames) {
-                marker = new L.CircleMarker(ll,
-                                            {color: simnamescol});
-                var msg = stop.name + " has a similar name to far-off stop " + simnames[stop.id].name + ' (' + route.name + ")";
-                addLog(msg, ll, marker);
-            }
-            else {
-                // marker = new L.CircleMarker(ll,
-                //                             {color: 'green', opacity:0.2});
-            }
-            if(marker)
-                map.addLayer(marker);
-        });
+            // var seg2 = unconnected[seg.id];
+            // var ll2 = seg2.listOfLatLng.map(function(LL) {return new L.LatLng(LL[0], LL[1]);});
+            // var poly2 = new L.Polyline(ll2, {color: 'black'});
+            // layer.addLayer(poly2);
+            // delete unconnectedcol[seg.id]; // don't draw twice;
+        }
+        else {
+            var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
+            var poly = new L.Polyline(latlngs, {color: 'green'});
+            layer.addLayer(poly);
+        }
     });
 
+    route.stops.forEach(function(stop) {
+        var marker;
+        var ll = new L.LatLng(stop.lat, stop.lng);
+        if(stop.id in nearby) {
+            marker = new L.CircleMarker(ll,
+                                        {color: nearbycol});
+            var msg = stop.name + " is rather close to " + nearby[stop.id].name + " but they have different names";
+            addLog(msg, ll, marker);
+        }
+        else if(stop.id in unnamed) {
+            marker = new L.CircleMarker(ll,
+                                        {color: unnamedcol});
+            var msg = "unnamed stop";
+            addLog(msg, ll, marker);
+        }
+        else if(stop.id in simnames) {
+            marker = new L.CircleMarker(ll,
+                                        {color: simnamescol});
+            var routename = "";
+            for(var rid in simnames[stop.id].routeDict) {
+                routename = simnames[stop.id].routeDict[rid].name;
+            }
+            var msg = stop.name + " has a similar name to far-off stop " + simnames[stop.id].name + ' (in route' + routename + ")";
+            addLog(msg, ll, marker);
+        }
+        else {
+            marker = new L.CircleMarker(ll,
+                                        {color: 'green', opacity:0.2});
+        }
+        if(marker)
+            layer.addLayer(marker);
+    });
+
+    return layer;
 };
 
 </script>
