@@ -195,9 +195,13 @@ function similarNames(system, route) {
     return similarNames;
 }
 
+var noTerminus = function(route) {
+    return false ||  route._noTerminus;
+};
+
 var unconnectedSegments = function(route) {
     unconnected = {};
-    var last_seg = null;
+    /*var last_seg = null;
     route.segments.forEach(function(segment) {
         if(last_seg) {
             var s1f = segment.listOfLatLng[0];
@@ -213,6 +217,9 @@ var unconnectedSegments = function(route) {
             }
         }
         last_seg = segment;
+    });*/
+    route._unconnectedSegments.forEach(function(seg) {
+        unconnected[seg.id] = true;
     });
     return unconnected;
 };
@@ -234,7 +241,10 @@ var unconnectedSegments = function(route) {
     var simnames = similarNames(system, route);
     var simnamescol = 'magenta';
 
-    // 4. Unconnected segments
+    // 4.1 Routes without a start / terminus
+    var noTerminus = noTerminus(route);
+
+    // 4.2 Unconnected segments (show only if terminus found)
     var unconnected = unconnectedSegments(route);
     var unconnectedcol = 'red';
 
@@ -256,14 +266,17 @@ var unconnectedSegments = function(route) {
         marker.on('click', pop);
         log.appendChild($msg);
     }
-
-    route.segments.forEach(function(seg) {
+    _.each(route.segments,function(seg, idx) {
         if(seg.id in unconnected) {
             var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
             var poly = new L.Polyline(latlngs, {color: unconnectedcol});
-            var msg = "unconnected segment";
-            addLog(msg, latlngs[Math.floor(latlngs.length / 2)], poly);
-            
+            if (noTerminus && !idx) {
+                var msg = "no start-point (or terminus) defined";
+                addLog(msg, latlngs[Math.floor(latlngs.length / 2)], poly);
+            } else if (!noTerminus) {
+                var msg = "unconnected segment";
+                addLog(msg, latlngs[Math.floor(latlngs.length / 2)], poly);
+            }
             layer.addLayer(poly);
 
             // var seg2 = unconnected[seg.id];
