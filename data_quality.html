@@ -234,19 +234,20 @@ YY.error_render = function(system, map, log) {
 
     system.routes.forEach(function(route, r_idx) {
         route.segments.forEach(function(seg, s_idx) {
-            var latlngs = seg.listOfLatLng.map(function(LL) {
-                return new L.LatLng(LL[0], LL[1]);
-            });
-            var poly;
             if(seg.id in unconnected) {
-                poly = new L.Polyline(latlngs, {color: unconnectedcol});
+                var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
+                var poly = new L.Polyline(latlngs, {color: unconnectedcol});
                 var msg = "unconnected segment";
                 addLog(msg, latlngs[Math.floor(latlngs.length / 2)], poly);
+                
+                var seg2 = unconnected[seg.id];
+                var ll2 = seg2.listOfLatLng.map(function(LL) {return new L.LatLng(LL[0], LL[1]);});
+                var poly2 = new L.Polyline(ll2, {color: 'black'});
+                map.addLayer(poly);
+                map.addLayer(poly2);
+
+                delete unconnectedcol[seg.id]; // don't draw twice;
             }
-            else {
-                poly = new L.Polyline(latlngs, {color: 'green', opacity:0.3});
-            }
-            map.addLayer(poly);
         });
 
         route.stops.forEach(function(stop) {
@@ -271,8 +272,8 @@ YY.error_render = function(system, map, log) {
                 addLog(msg, ll, marker);
             }
             else {
-                marker = new L.CircleMarker(ll,
-                                            {color: 'green', opacity:0.2});
+                // marker = new L.CircleMarker(ll,
+                //                             {color: 'green', opacity:0.2});
             }
             if(marker)
                 map.addLayer(marker);
