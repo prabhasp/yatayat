@@ -23,14 +23,14 @@ YY.System = function(routes) {
         });
     });
 
-    })(this)
+    })(this);
 
 };
 
 YY.System.prototype.allStops = function() {
     var idToStop = {};
     this.routes.forEach(function(r) {
-        r.stops.forEach(function(s) { idToStop[s.id] = s; })
+        r.stops.forEach(function(s) { idToStop[s.id] = s; });
     });
     return _.values(idToStop);
 };
@@ -188,7 +188,7 @@ YY.System.prototype.neighborNodes = function(stopID, routeID) {
     return neighbors;
 };
 
-YY.Route = function(id, stops, segments, tag, orientingSegmentID) {
+YY.Route = function(id, stops, segments, tag, startStop, startSegID) {
     this.id = id;
     this.stops = stops;
     this.segments = segments;
@@ -196,8 +196,10 @@ YY.Route = function(id, stops, segments, tag, orientingSegmentID) {
     this.name = tag.name;
     this.ref = tag.ref;
     this.transport = tag.route;
-    this.orientingSegmentID = orientingSegmentID;
-    this.order();
+    //this.orientingSegmentID = orientingSegmentID;
+    this.startStop = startStop; // TODO: delete this line 
+    this.startSegID = startSegID; // TODO: delete this line
+    if (startStop && startSegID) this.order(startStop, startSegID);
     this.deriveStopDict();
 };
 
@@ -208,17 +210,49 @@ YY.Route.prototype.deriveStopDict = function () {
     });
     this.stopDict = stopDict;
 };
+    
+var distanceForObjLL = function(ll1, ll2) { return Math.pow(ll1.lat - ll2.lat, 2) + Math.pow(ll1.lng - ll2.lng, 2); };
+var distanceForArrLL = function(ll1, ll2) { return Math.pow(ll1[0] - ll2[1], 2) + Math.pow(ll1[0] - ll2[1], 2); };
 
-YY.Route.prototype.order = function() {
+YY.Route.prototype.order = function(startStop, startSegID) {
+    return this.order_(startSegID);
+}
+
+YY.Route.prototype.order_ = function(orientingSegmentID) {
     var route = this;
     
     // find orienting way
     var stops = [];
     var n = 0;
-    var startSegment = _.find(route.segments, function(seg) { return seg.id === route.orientingSegmentID; });
+    var startSegment = _.find(route.segments, function(seg) { return seg.id === orientingSegmentID; });
     if (!startSegment) {
-        console.log('Ordering not possible for route: ', route.name, '; no orienting_way found.');
+        console.log('Ordering not possible for route: ', route.name, '; start segmend likely not in route ... ?');
         return;
+    }
+    var llToObj = function(ll, seg) { return {lat: ll[0], lng: ll[1], seg: seg}; } 
+    var startKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(seg.listOfLatLng[0], seg); }), 
+                        distanceForObjLL, ["lat","lng"]);
+    var endKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(seg.listOfLatLng[seg.listOfLatLng.length - 1], seg); }), 
+                        distanceForObjLL, ["lat","lng"]);
+
+    function closestSegment(thisSegment, end) {
+        var ret, segmentEnd;
+        if (end === 'first') {
+            segmentEnd = thisSegment.listOfLatLng[ 0 ];
+        } else { // also the default
+            segmentEnd = thisSegment.listOfLatLng[ thisSegment.listOfLatLng.length - 1 ];
+        }
+
+        ret = startKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
+        var nextFwdTreeCnxn = _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
+        ret = endKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
+        var nextBwdTreeCnxn =  _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
+        var cnxnChanger = (end === 'first') ? {'fwd': 'bwd', 'bwd': 'fwd'} : {'fwd': 'fwd', 'bwd': 'bwd'};
+        if (nextFwdTreeCnxn[1] < nextBwdTreeCnxn[1]) {
+            return { nextSeg: nextFwdTreeCnxn[0].seg, sqDist: nextFwdTreeCnxn[1], cnxn: cnxnChanger['fwd'] };
+        } else {
+            return { nextSeg: nextBwdTreeCnxn[0].seg, sqDist: nextBwdTreeCnxn[1], cnxn: cnxnChanger['bwd'] };
+        }
     }
 
     // go through it, putting all public stops in
@@ -231,26 +265,25 @@ YY.Route.prototype.order = function() {
             thisSegment.orderedListofStops.reverse();
         }
         stops = stops.concat(thisSegment.orderedListofStops);
-        var segmentEnd = thisSegment.listOfLatLng[ thisSegment.listOfLatLng.length - 1 ];
 
-        var nextFwdCnxn = _.find(route.segments, function(seg) { 
-            return _.isEqual(seg.listOfLatLng[0], segmentEnd); 
-        });
-        if (nextFwdCnxn) recurse(nextFwdCnxn, false);
-
-        var nextBwdCnxn = _.find(route.segments, function(seg) { 
-            return _.isEqual(seg.listOfLatLng[seg.listOfLatLng.length - 1], segmentEnd) && (seg.id !== thisSegment.id);
-        });
-        if (nextBwdCnxn) recurse(nextBwdCnxn, true);
-
-        if (!nextFwdCnxn && !nextBwdCnxn) 
-            console.log('Broken route found in route: ', route.name);
-            // console.log('Broken route found in route: ', route.name, '; only ',
-            //     stops.length, ' stops upto', stops[stops.length-1].tag.name, ' found.');
-        if (nextFwdCnxn && nextBwdCnxn) throw 'bad algorithm!';
+        var next = closestSegment(thisSegment);
+        if (next.cnxn === 'fwd') {
+            recurse(next.nextSeg, false);
+        } else {
+            recurse(next.nextSeg, true);
+        }
     }
-    recurse(startSegment, false);
+    var fwdFacing = closestSegment(startSegment);
+    var bwdFacing = closestSegment(startSegment, 'first'); // nearest to first node = bwd facing
+    if (fwdFacing.sqDist < bwdFacing.sqDist) {
+        recurse(startSegment, false);
+    } else {
+        recurse(startSegment, true);
+    }
+
     this.stops = _.map(stops, function(s) { return new YY.Stop(s.id, s.lat, s.lng, s.tag); });
+    console.log('ordering successful for route ', route.name);
+    console.log(_.pluck(route.stops, 'name'));
     //DEBUG: _.each(stops, function(s) {console.log(s.tag.name)});
 };
 
@@ -273,6 +306,7 @@ YY.fromOSM = function (overpassXML) {
     var nodes = {};
     var segments = {};
     var routeStops = {};
+    var stopToSegDict = {};
     var tagToObj = function(tag) {
         tags = {};
         _.each(tag, function (t) { 
@@ -297,6 +331,9 @@ YY.fromOSM = function (overpassXML) {
             var node = nodes[$(n).attr('ref')];
             if(node.is_stop) {
                 myStops.push(node);
+                if (!stopToSegDict[node.id])  
+                    stopToSegDict[node.id] = [];
+                stopToSegDict[node.id].push($w.attr('id'));
             }
             myNodes.push([node.lat, node.lng]);
         });
@@ -306,21 +343,27 @@ YY.fromOSM = function (overpassXML) {
         var $r = $(r);
         var myStops = [];
         var mySegments = [];
-        var orientingSegmentID;
+        var startStop, startSegID;
         _.each($r.find('member'), function(m) {
             var $m = $(m); 
             if($m.attr('type') === 'way') {
-                if ($m.attr('role') === 'orienting_way')
-                    orientingSegmentID = $m.attr('ref');
                 mySegments.push(segments[$m.attr('ref')]);
             } else if ($m.attr('type') === 'node') {
                 var n = nodes[$m.attr('ref')];
-                //if($n.find('tag')public_transportation === 'stop_position') 
-                if(n && n.lat && n.lng)
-                    myStops.push(new YY.Stop($m.attr('ref'), n.lat, n.lng, n.tag));
+                if (n && n.lat && n.lng) {
+                    var stop = new YY.Stop($m.attr('ref'), n.lat, n.lng, n.tag);
+                    if ($m.attr('role') === 'terminus' || $m.attr('role') === 'start')
+                        startStop = stop;
+                    //if($n.find('tag')public_transportation === 'stop_position') 
+                    myStops.push(stop);
+                }
             } 
         });
-        return new YY.Route($r.attr('id'), myStops, mySegments, tagToObj($r.find('tag')), orientingSegmentID);
+        var startSegID = startStop && 
+            _.find(stopToSegDict[startStop.id], function(segID) { 
+                return _.contains(_.pluck(mySegments, 'id'), segID); })
+        return new YY.Route($r.attr('id'), myStops, mySegments, tagToObj($r.find('tag')),
+                            startStop, startSegID);
     });
     return new YY.System(routes);
 };

@@ -25,10 +25,12 @@ body {
 
     //var ktmBB = "85.2885,27.6839,85.3368,27.7299";
     var system;
+    var osmdata;
     $.ajax({ type: YY.GET_OR_POST, url: YY.API_URL,
              data: YY.QUERY_STRING,
              dataType: 'text',
              success: function(data) {
+                 //osmdata = data;
                  system = YY.fromOSM(data);
 				 var renderLayer = 	YY.render_(system, map,
 				 		undefined, //includeIDObject; try {"2269045": true} for an example
