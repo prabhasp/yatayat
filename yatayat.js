@@ -19,12 +19,14 @@ YY.System = function(routes) {
 
     _.each(self.routes, function(route) {
         _.each(route.stops, function(stop) {
-            stop.routeDict = self.stopRoutesFromStopID(stop.id);
+            stop.routeDict = {};
+            self.routes
+                .filter(function(r) { return (r.stopDict[stop.id]); })
+                .forEach(function(r) { stop.routeDict[r.id] = r; });
         });
     });
 
     })(this);
-
 };
 
 YY.System.prototype.allStops = function() {
