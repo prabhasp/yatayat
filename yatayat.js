@@ -243,19 +243,28 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
                         distanceForObjLL, ["lat","lng"]);
     var endKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(_.last(seg.listOfLatLng), seg); }), 
                         distanceForObjLL, ["lat","lng"]);
+    var deleteSelfAndGetMin = function(kdtree, thisSeg, end) {
+        if (end === 'first') {
+            segmentEnd = thisSeg.listOfLatLng[ 0 ];
+        } else { // also the default
+            segmentEnd = _.last(thisSeg.listOfLatLng);
+        }
+        var ret = kdtree.nearest(llToObj(segmentEnd, thisSeg), 2);
+        return _.min(ret, function(r) { 
+            if(r[0].seg.id == thisSeg.id) {
+                return 999999; 
+            } else {
+                return r[1]; 
+            }
+        });
+    }
 
     function closestSegment(thisSegment, end) {
         var ret, segmentEnd;
-        if (end === 'first') {
-            segmentEnd = thisSegment.listOfLatLng[ 0 ];
-        } else { // also the default
-            segmentEnd = _.last(thisSegment.listOfLatLng);
-        }
 
-        ret = startKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
-        var nextFwdTreeCnxn = _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
-        ret = endKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
-        var nextBwdTreeCnxn =  _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
+        var nextFwdTreeCnxn = deleteSelfAndGetMin(startKDTree, thisSegment, end);
+        var nextBwdTreeCnxn = deleteSelfAndGetMin(endKDTree, thisSegment,end);
+
         var cnxnChanger = (end === 'first') ? {'fwd': 'bwd', 'bwd': 'fwd'} : {'fwd': 'fwd', 'bwd': 'bwd'};
         if (nextFwdTreeCnxn[1] < nextBwdTreeCnxn[1]) {
             segmentOrderDict[thisSegment.id] = nextFwdTreeCnxn[0].seg;
