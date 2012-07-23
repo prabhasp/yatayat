@@ -243,7 +243,7 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
                         distanceForObjLL, ["lat","lng"]);
     var endKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(_.last(seg.listOfLatLng), seg); }), 
                         distanceForObjLL, ["lat","lng"]);
-    var deleteSelfAndGetMin = function(kdtree, thisSeg, end) {
+    var getMin = function(kdtree, thisSeg, end, deleteSelf) {
         if (end === 'first') {
             segmentEnd = thisSeg.listOfLatLng[ 0 ];
         } else { // also the default
@@ -252,24 +252,26 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
         var ret = kdtree.nearest(llToObj(segmentEnd, thisSeg), 2);
         return _.min(ret, function(r) { 
             if(r[0].seg.id == thisSeg.id) {
+                //if (deleteSelf) kdtree.remove(r[0]);
                 return 999999; 
             } else {
                 return r[1]; 
             }
         });
     }
-
-    function closestSegment(thisSegment, end) {
+    function closestSegment(thisSegment, end, alsoDeleteClosest) {
         var ret, segmentEnd;
 
-        var nextFwdTreeCnxn = deleteSelfAndGetMin(startKDTree, thisSegment, end);
-        var nextBwdTreeCnxn = deleteSelfAndGetMin(endKDTree, thisSegment,end);
+        var nextFwdTreeCnxn = getMin(startKDTree, thisSegment, end, alsoDeleteClosest);
+        var nextBwdTreeCnxn = getMin(endKDTree, thisSegment, end, alsoDeleteClosest);
 
         var cnxnChanger = (end === 'first') ? {'fwd': 'bwd', 'bwd': 'fwd'} : {'fwd': 'fwd', 'bwd': 'bwd'};
         if (nextFwdTreeCnxn[1] < nextBwdTreeCnxn[1]) {
+            //if (alsoDeleteClosest) startKDTree.remove(nextFwdTreeCnxn[0]);
             segmentOrderDict[thisSegment.id] = nextFwdTreeCnxn[0].seg;
             return { nextSeg: nextFwdTreeCnxn[0].seg, sqDist: nextFwdTreeCnxn[1], cnxn: cnxnChanger['fwd'] };
         } else {
+            //if (alsoDeleteClosest) endKDTree.remove(nextBwdTreeCnxn[0]);
             segmentOrderDict[thisSegment.id] = nextBwdTreeCnxn[0].seg;
             return { nextSeg: nextBwdTreeCnxn[0].seg, sqDist: nextBwdTreeCnxn[1], cnxn: cnxnChanger['bwd'] };
         }
@@ -289,7 +291,7 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
         }
         stops = stops.concat(thisSegment.orderedListofStops);
 
-        var next = closestSegment(thisSegment);
+        var next = closestSegment(thisSegment, 'last', true);
         if (next.cnxn === 'fwd') {
             recurse(next.nextSeg, false);
         } else {
@@ -317,6 +319,7 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
             if (n === _.keys(segmentOrderDict).length) return accumulator;
             n = n + 1;
             accumulator.push(seg);
+            if (!seg) return accumulator;
             return buildSegmentsInOrder(segmentOrderDict[seg.id], accumulator); 
         })(startSegment, []);
         this._unconnectedSegments = _.difference(this.segments, connectedSegments);
