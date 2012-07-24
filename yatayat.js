@@ -38,11 +38,22 @@ YY.System.prototype.allStops = function() {
 };
 
 YY.System.prototype.stopRoutesFromStopID = function(stopID) {
-    // XXX: use the values cached in each stop's routeDict (?)
     return _(this.routes).chain()
             .map(function(r) { if (r.stopDict[stopID]) return {stopID: stopID, routeID: r.id }; })
             .compact()
             .value();
+};
+
+YY.System.prototype.stopRoutesFromStopName = function(stopName) {
+    var aggregator = [];
+    _(this.routes).each(function (r) {
+        _(r.stops).each(function (s) {
+            if (s.name === stopName) {
+                aggregator.push({stopID: s.id, routeID: r.id });
+            }
+        });
+    });
+    return aggregator;
 };
 
 // returns a new system with only passed in items included; if includeIDList is falsy, return a copy
@@ -72,12 +83,24 @@ YY.System.prototype.nearestStops = function(llArr, N, maxDist) {
     return _.map(answer, function(a) { return a[0]; });
 };
 
+YY.System.prototype.takeMeThereByName = function(startStopName, goalStopName) {
+    var startNodes = this.stopRoutesFromStopName(startStopName);
+    var goalNodes = this.stopRoutesFromStopName(goalStopName);
+    if (_.isEmpty(startNodes) || _.isEmpty(goalNodes)) return 'FAIL: Start / Goal not found';
+    // TODO: throw error if goal nodes are far away from each other
+    return this.takeMeThereByStop(startNodes, goalNodes[0]);
+}
+
+YY.System.prototype.takeMeThere = function(startStopID, goalStopID) {
+    var startNodes = this.stopRoutesFromStopID(startStopID);
+    var goalNodes = this.stopRoutesFromStopID(goalStopID);
+    return this.takeMeThereByStop(startNodes, goalNodes[0]);
+}
+
 // Return [route] where route contains [stops], and just the stops we use
 // Else return undefined
-YY.System.prototype.takeMeThere = function(startStopID, goalStopID) {
+YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
     var system = this;
-    var startNodes = system.stopRoutesFromStopID(startStopID);
-    var goalNode = system.stopRoutesFromStopID(goalStopID)[0];
     var openset = {};
     var closedset = {}; 
     var gScores = {};
@@ -120,7 +143,7 @@ YY.System.prototype.takeMeThere = function(startStopID, goalStopID) {
             //console.log('open-begin', _.map(_(openset).values(), stopNameFromObj));
             //console.log('closed-begin', _.map(_(closedset).values(), stopNameFromObj));
 
-            if (current.stopID === goalStopID) {
+            if (current.stopID === goalNode.stopID) {
                 return reconstructPath(current);
             }
             delete(openset[current.stopID + "," + current.routeID]);
@@ -204,7 +227,7 @@ YY.Route = function(id, stops, segments, tag, startSegID) {
         this._unconnectedSegments = this.segments;
         this._noTerminus = true;
     }
-    this.deriveStopDict();
+    this.deriveStopDict(); // note: this must happen after the order call
 };
 
 YY.Route.prototype.deriveStopDict = function () {
