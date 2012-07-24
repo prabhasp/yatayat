@@ -52,7 +52,7 @@ describe("Yatayat Library", function () {
         it("should fail when asking route from pulchowk to damkal in testSystem1", function () {
             expect(testSystem1.takeMeThere("317532042", "1278980875")).toBe('FAIL');
         });
-        it("should take me to babarmahal to sinamangal through koteshwore", function () {
+        it("should take me from babarmahal to sinamangal through koteshwore", function () {
             var s2b = testSystem1.takeMeThere("1273375058", "31150613");
             expect(s2b.length).toEqual(2); // go through two routes
             expect(s2b[0].stops.length).toEqual(2); // go through two routes
@@ -70,9 +70,11 @@ describe("Yatayat Library", function () {
         });
     });
     describe( "takeMeThere by name", function () {
-        it("should take me to babarmahal to sinamangal through koteshwore", function () {
+        it("should fail to take me from sinamangal to babarmahal", function() {
+            expect(testSystem1.takeMeThereByName("Sinamangal", "Babarmahal")).toEqual('FAIL');
+        });
+        it("should take me from babarmahal to sinamangal through koteshwore", function () {
             var b2s = testSystem1.takeMeThereByName("Babarmahal", "Sinamangal");
-            console.log(b2s);
             expect(b2s.length).toEqual(2); // go through two routes
             expect(b2s[0].stops.length).toEqual(2); // go through two routes
             expect(b2s[1].stops.length).toEqual(2); // go through two routes
