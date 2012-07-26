@@ -62,10 +62,10 @@ YY.System.prototype.prune = function(includeIDList) {
     return new YY.System(this.routes.map(function(route) {
         if (route.id in includeIDList) return route;
         else return new YY.Route(route.id,
-            route.stops.filter(function(s) { return s in includeIDList; }),
-            route.segments.filter(function(s) { return s in includeIDList; }),
+            route.stops.filter(function(s) { return s.id in includeIDList; }),
+            route.segments.filter(function(s) { return s.id in includeIDList; }),
             route.tag,
-            "Please don't order this route; can't find this ID");
+            undefined); //Please don't order this route; this is not a valid startSegID
          })
     );
 };
