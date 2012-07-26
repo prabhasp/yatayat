@@ -188,22 +188,24 @@ YY.System.prototype.neighborNodes = function(stopID, routeID) {
     var transferDistance = 5;
     var neighbors = []; 
     _.each(thisRoute.stops, function(s, idx) {
-        var templateObj = {routeID: thisRoute.id, distToNeighbor: sameRouteDistance};
         if (s.id === stopID) {
             if (idx < thisRoute.stops.length - 1) // not the end of list
-                neighbors.push(_.extend(templateObj, 
-                    {stopID: thisRoute.stops[idx + 1].id}));
-            else if (thisRoute.isCyclical) // end of list on cyclical route
-                neighbors.push(_.extend(templateObj,
-                    {stopID: thisRoute.stops[0].id}));
-            if (thisRoute.isBiDirectional) {
-                if (idx > 0)
-                    neighbors.push(_.extend(templateObj,
-                        {stopID: thisRoute.stops[idx - 1].id}));
-                else if (thisRoute.isCyclical)
+                neighbors.push({routeID: thisRoute.id, distToNeighbor: sameRouteDistance, 
+                    stopID: thisRoute.stops[idx + 1].id});
+            /*else if (thisRoute.isCyclical) // end of list on cyclical route
+                neighbors.push({routeID: thisRoute.id, distToNeighbor: sameRouteDistance,
+                    stopID: thisRoute.stops[0].id});
+            */
+            
+            //if (!thisRoute.isDirectional) {
+            if (idx > 0)
+                neighbors.push({routeID: thisRoute.id, distToNeighbor: sameRouteDistance,
+                    stopID: thisRoute.stops[idx - 1].id});
+            /*else if (thisRoute.isCyclical)
                     neighbors.push(_.extend(templateObj,
                         {stopID: _.last(thisRoute.stops).id}));
-            }
+            */
+            //}
         } 
     });
     _.each(this.routes, function(r) {
