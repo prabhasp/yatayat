@@ -52,8 +52,7 @@ describe("Yatayat Library", function () {
         it("should fail when asking route from pulchowk to damkal in testSystem1", function () {
             expect(testSystem1.takeMeThere("317532042", "1278980875")).toBe('FAIL');
         });
-        it("should take me to sinamangal to babarmahal through two routes", function () {
-            console.log("S2B\n\nS2B");
+        it("should take me from babarmahal to sinamangal through koteshwore", function () {
             var s2b = testSystem1.takeMeThere("1273375058", "31150613");
             expect(s2b.length).toEqual(2); // go through two routes
             expect(s2b[0].stops.length).toEqual(2); // go through two routes
@@ -62,13 +61,25 @@ describe("Yatayat Library", function () {
             expect(s2b[1].stops[0].id).toEqual("31228768");
         });
         it("should take me from damkal to harihar bhawan in two steps", function () {
-            console.log("D2H\n\nD2H");
             var d2h = testSystem1.takeMeThere("1278980875", "317532037");
             expect(d2h.length).toEqual(1); // go through one route
             expect(d2h[0].stops.length).toEqual(3); // and three stops
             expect(d2h[0].stops[0].id).toEqual("1278980875");
             expect(d2h[0].stops[1].id).toEqual("317532042");
             expect(d2h[0].stops[2].id).toEqual("317532037");
+        });
+    });
+    describe( "takeMeThere by name", function () {
+        it("should fail to take me from sinamangal to babarmahal", function() {
+            expect(testSystem1.takeMeThereByName("Sinamangal", "Babarmahal")).toEqual('FAIL');
+        });
+        it("should take me from babarmahal to sinamangal through koteshwore", function () {
+            var b2s = testSystem1.takeMeThereByName("Babarmahal", "Sinamangal");
+            expect(b2s.length).toEqual(2); // go through two routes
+            expect(b2s[0].stops.length).toEqual(2); // go through two routes
+            expect(b2s[1].stops.length).toEqual(2); // go through two routes
+            expect(b2s[0].stops[1].name).toEqual("koteshwore");
+            expect(b2s[1].stops[0].name).toEqual("koteshwore");
         });
     });
 });
