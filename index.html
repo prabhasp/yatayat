@@ -81,8 +81,9 @@ body {
                          else {
                              var inclusionDict = {};
                              var outputHTML = "";
+                             _(system.routes).each(function(r) { inclusionDict[r.id] = true; }); // render everything
                              _(gettingThereRoutes).each(function(r,idx) {
-                                 //inclusionDict[r.id] = true;
+                                //inclusionDict[r.id] = true;
                                 outputHTML += "Get on " + toTitleCase(r.transport) + " " + 
                                     r.ref + " (" + r.name + ") at " + r.stops[0].name + 
                                     " and ride till " + _.last(r.stops).name + "<br/>";
@@ -90,7 +91,9 @@ body {
                                     inclusionDict[s.id] = true;
                                 });
                              });
-                             YY.render_(system, map, inclusionDict);
+                             YY.render_(system, map, inclusionDict,
+                                {route: {color: '#555', opacity: 1, weight: 1}}
+                             );
                              $('#routedisplay').show();
                              $('#routedisplay').html(outputHTML);
                         }
@@ -161,6 +164,7 @@ body {
         // render the stops as circle markers 
         _(filteredSystem.routes).each(function(route) { 
             route.stops.forEach(function(stop) {
+                if (includeIDDict && !(stop.id in includeIDDict)) return;
                 var Lll = new L.LatLng(stop.lat, stop.lng);
                 var marker = new L.CircleMarker(Lll,
                     (leafletBaseOptions && leafletBaseOptions.stop) ||
