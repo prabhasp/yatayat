@@ -36,6 +36,9 @@ body {
         <div id="publicTransportMap" style="width: 100%; height: 100%">Loading ...</div>
 
 <script type="text/javascript" language="javascript">
+    // UI HACK
+    $('#textboxes').hide();
+
     // initialize the map
     var map = new L.Map('publicTransportMap');
 
@@ -56,6 +59,7 @@ body {
                  //ROUTING
                  var stopNames = _.compact(_.pluck(system.allStops(), 'name'));
                  $('.typeahead').typeahead({source: stopNames});
+                 $('#textboxes').show();
                  $('input.typeahead').change(function(f) {
                      var start = $('#startstop')[0].value;
                      var end = $('#endstop')[0].value;
