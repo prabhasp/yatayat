@@ -31,6 +31,8 @@ body {
             <b>Start</b> <input type="text" id="startstop" class="typeahead" data-provide="typeahead" class="span1"/>
             <b>End</b> <input type="text" id="endstop" class="typeahead" data-provide="typeahead" class="span1"/>
         </div>
+        <div id="routedisplay" style="position:absolute;top:40;left:60;z-index:999">
+        </div>
         <div id="publicTransportMap" style="width: 100%; height: 100%">Loading ...</div>
 
 <script type="text/javascript" language="javascript">
@@ -63,15 +65,21 @@ body {
                          if (gettingThereRoutes === 'FAIL') alert('cannot find a route from ', start, ' to ', end);
                          else {
                              var inclusionDict = {};
-                             _(gettingThereRoutes).each(function(r) {
+                             var outputHTML = "";
+                             _(gettingThereRoutes).each(function(r,idx) {
                                  //inclusionDict[r.id] = true;
-                                 _(r.stops).each(function(s) {
+                                outputHTML += "Get on route " + r.ref + "(" + r.name + ")" +
+                                     " at " + r.stops[0].name + " and ride till " + _.last(r.stops).name + "<br/>";
+                                _(r.stops).each(function(s) {
                                     inclusionDict[s.id] = true;
-                                 });
+                                });
                              });
-                             
                              YY.render_(system, map, inclusionDict);
+                             $('#routedisplay').html(outputHTML);
                         }
+                     } else {
+                         YY.render_(system, map);
+                         $('#routedisplay').html("");
                      }
                  });
 
