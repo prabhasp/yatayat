@@ -2,6 +2,7 @@
 <head>
     <title> Kathmandu Public Transport </title>
 <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
 <!--[if lte IE 8]>
     <link rel="stylesheet" href="lib/leaflet/leaflet.ie.css" />
 <![endif]-->
@@ -14,11 +15,24 @@ body {
 <script src="lib/underscore-min.js"></script>
 <script src="lib/leaflet/leaflet.js"></script>
 <script src="lib/kdtree/src/web/kdTree.js"></script>
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="yatayat.js"></script>
 <script src="config.js"></script>
 </head>
 <body>
-<div id="publicTransportMap" style="width: 100%; height: 100%">Loading ...</div>
+      <!--Sidebar content>
+        <div id="buttons" style="position:absolute;top:10;left:60;z-index:999"> 
+            <input type="checkbox" name="vehicle1" value="bus" checked ="yes"/>Bus
+            <input type="checkbox" name="vehicle2" value="microbus"checked ="yes"/>Micro-Bus
+            <input type="checkbox" name="vehicle3" value="tempo"checked ="yes"/>Tempo (3 - wheeler)
+        </div>
+        -->
+        <div id="textboxes" style="position:absolute;top:20;left:60;z-index:999"> 
+            <b>Start</b> <input type="text" id="startstop" class="typeahead" data-provide="typeahead" class="span1"/>
+            <b>End</b> <input type="text" id="endstop" class="typeahead" data-provide="typeahead" class="span1"/>
+        </div>
+        <div id="publicTransportMap" style="width: 100%; height: 100%">Loading ...</div>
+
 <script type="text/javascript" language="javascript">
     // initialize the map
     var map = new L.Map('publicTransportMap');
@@ -36,6 +50,17 @@ body {
 				 		undefined, //includeIDObject; try {"2269045": true} for an example
 				 		undefined // leafletBaseOptions
 				 );
+                 var stopNames = _.compact(_.pluck(system.allStops(), 'name'));
+                 $('.typeahead').typeahead({source: stopNames});
+
+                 $('input.typeahead').change(function(f) {
+                     var start = $('#startstop').value;
+                     var end = $('#endstop').value;
+                     if (start && end) {
+                         // do the routing here
+                     }
+                 });
+
              }});
 
     if(YY.TILE_SOURCE) {
