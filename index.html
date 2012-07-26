@@ -68,8 +68,9 @@ body {
                              var outputHTML = "";
                              _(gettingThereRoutes).each(function(r,idx) {
                                  //inclusionDict[r.id] = true;
-                                outputHTML += "Get on route " + r.ref + "(" + r.name + ")" +
-                                     " at " + r.stops[0].name + " and ride till " + _.last(r.stops).name + "<br/>";
+                                outputHTML += "Get on " + toTitleCase(r.transport) + " " + 
+                                    r.ref + " (" + r.name + ") at " + r.stops[0].name + 
+                                    " and ride till " + _.last(r.stops).name + "<br/>";
                                 _(r.stops).each(function(s) {
                                     inclusionDict[s.id] = true;
                                 });
@@ -180,6 +181,11 @@ body {
             map.addLayer(marker);
         });
     };
+
+    function toTitleCase(str)
+    {
+        return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    }
 
         // // testing
         // YY.test_map = map;
