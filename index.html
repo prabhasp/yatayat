@@ -80,6 +80,7 @@ body {
                          if (gettingThereRoutes === 'FAIL') alert('cannot find a route from ', start, ' to ', end);
                          else {
                              var inclusionDict = {};
+                             var overrideDict = {};
                              var outputHTML = "";
                              _(system.routes).each(function(r) { inclusionDict[r.id] = true; }); // render everything
                              _(gettingThereRoutes).each(function(r,idx) {
@@ -90,9 +91,17 @@ body {
                                 _(r.stops).each(function(s) {
                                     inclusionDict[s.id] = true;
                                 });
+                                if (idx===0) {
+                                    overrideDict[r.stops[0].id] = {color: 'green', opacity: 0.5, radius: 5};
+                                } else { 
+                                    overrideDict[r.stops[0].id] = {color: 'orange', opacity: 0.5, radius: 5};
+                                }
+                                if (idx === gettingThereRoutes.length - 1)
+                                    overrideDict[_.last(r.stops).id] = {color: 'green', opacity: 0.5, radius: 5};
                              });
                              YY.render_(system, map, inclusionDict,
-                                {route: {color: '#555', opacity: 1, weight: 1}}
+                                {route: {color: '#555', opacity: 1, weight: 1}},
+                                overrideDict
                              );
                              $('#routedisplay').show();
                              $('#routedisplay').html(outputHTML);
@@ -158,6 +167,9 @@ body {
                 }),
                 (leafletBaseOptions && leafletBaseOptions.route) || 
                     defaultOptions.route);
+            if (leafletOverrideOptions && (route.id in leafletOverrideOptions)) {
+                routeMPL.setOptions(leafletOverrideOptions[route.id] || leafletBaseOptions.route);
+            }
             routeMPL.bindPopup(route.ref + " : " + route.name);
             YY._layerGroup.addLayer(routeMPL);
         });
@@ -166,9 +178,15 @@ body {
             route.stops.forEach(function(stop) {
                 if (includeIDDict && !(stop.id in includeIDDict)) return;
                 var Lll = new L.LatLng(stop.lat, stop.lng);
-                var marker = new L.CircleMarker(Lll,
-                    (leafletBaseOptions && leafletBaseOptions.stop) ||
-                         defaultOptions.stop);
+                var marker;
+                if (leafletOverrideOptions && (stop.id in leafletOverrideOptions)) {
+                    marker = new L.CircleMarker(Lll,
+                        leafletOverrideOptions[stop.id] || leafletBaseOptions.stop);
+                } else {
+                    marker = new L.CircleMarker(Lll,
+                        (leafletBaseOptions && leafletBaseOptions.stop) ||
+                            defaultOptions.stop);
+                }
                 marker.bindPopup(stop.name);
                 YY._layerGroup.addLayer(marker);
             });
