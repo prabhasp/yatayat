@@ -7,7 +7,8 @@ YY.GET_OR_POST = 'POST';
 // Alternative layerings:
 // http://{s}.tile.cloudmade.com/[API-key]/997/256/
 // http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
-YY.TILE_SOURCE = 'http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png';
+YY.WAX = true;
+YY.TILE_SOURCE = 'http://a.tiles.mapbox.com/v3/modilabs.map-p543gvbh.jsonp'; // 'http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png';
 YY.ATTRIBUTION = 'Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">';
 
 YY.LNG = 85.3;

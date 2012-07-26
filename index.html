@@ -14,6 +14,7 @@ body {
 <script src="lib/jquery-1.7.2.min.js"></script>
 <script src="lib/underscore-min.js"></script>
 <script src="lib/leaflet/leaflet.js"></script>
+<script src="lib/wax.leaf.min.js"></script>
 <script src="lib/kdtree/src/web/kdTree.js"></script>
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="yatayat.js"></script>
@@ -91,13 +92,19 @@ body {
              }});
 
     if(YY.TILE_SOURCE) {
-        var tiles = new L.TileLayer(YY.TILE_SOURCE, {
-            attribution: YY.ATTRIBUTION,
-            maxZoom: 18
-        });
+        if (YY.WAX) {
+            wax.tilejson(YY.TILE_SOURCE, function(tilejson) {
+                map.addLayer(new wax.leaf.connector(tilejson));
+            });
+        } else {
+            var tiles = new L.TileLayer(YY.TILE_SOURCE, {
+                attribution: YY.ATTRIBUTION,
+                maxZoom: 18
+            });
+            map.addLayer(tiles);
+        }
 
         // add the layer to the map, set the view to a given place and zoom
-        map.addLayer(tiles);
     }
 
     map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
@@ -125,8 +132,8 @@ body {
         
         var filteredSystem = system.prune(includeIDDict);
         var defaultOptions = 
-            {"route" : {color: 'red', opacity: 1},
-             "stop"  : {color: 'red', fillOpacity: 1, radius: 8}};
+            {"route" : {color: '#378AAD', opacity: 1, weight: 3},
+             "stop"  : {color: '#378AAD', fillOpacity: 0.5, radius: 5}};
         // render the route as a multi-polyline
         _(filteredSystem.routes).each(function(route) {
             var routeMPL = new L.MultiPolyline(
