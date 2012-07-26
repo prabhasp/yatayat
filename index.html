@@ -32,10 +32,10 @@ body {
             <b>Start</b> <input type="text" id="startstop" class="typeahead" data-provide="typeahead" class="span1"/>
             <b>End</b> <input type="text" id="endstop" class="typeahead" data-provide="typeahead" class="span1"/>
         </div>
-        <div id="report" style="position:absolute;top:20;right:120;z-index:999">
+        <div id="report" style="position:absolute;top:20;right:60;z-index:999">
             <a class="btn" id="reportmissing" data-toggle="modal" href="#myModal"> Report missing route </a> 
         </div>
-        <div id="routedisplay" style="position:absolute;top:40;left:60;z-index:999">
+        <div class="alert" id="routedisplay" style="background:white;position:absolute;top:60;left:60;z-index:999">
         </div>
         <div id="publicTransportMap" style="width: 100%; height: 100%">Loading ...</div>
         <div class="modal hide" id="myModal"> 
@@ -49,6 +49,7 @@ body {
 <script type="text/javascript" language="javascript">
     // UI HACK
     $('#textboxes').hide();
+    $('#routedisplay').hide()
     // initialize the map
     var map = new L.Map('publicTransportMap');
 
@@ -90,11 +91,12 @@ body {
                                 });
                              });
                              YY.render_(system, map, inclusionDict);
+                             $('#routedisplay').show();
                              $('#routedisplay').html(outputHTML);
                         }
                      } else {
                          YY.render_(system, map);
-                         $('#routedisplay').html("");
+                         $('#routedisplay').hide()
                      }
                  });
 
