@@ -220,7 +220,6 @@ YY.Route = function(id, stops, segments, tag, startSegID) {
     this.tag = tag;
     this.name = tag.name;
     this.ref = tag.ref;
-    this.deriveStopDict();
     this.transport = tag.route;
     //this.orientingSegmentID = orientingSegmentID;
     if (startSegID) _.defer(this.order(startSegID));
