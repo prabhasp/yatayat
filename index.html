@@ -44,20 +44,34 @@ body {
              data: YY.QUERY_STRING,
              dataType: 'text',
              success: function(data) {
-                 //osmdata = data;
+                 // DATA DISPLAY
                  system = YY.fromOSM(data);
-				 var renderLayer = 	YY.render_(system, map,
+				 YY.render_(system, map,
 				 		undefined, //includeIDObject; try {"2269045": true} for an example
 				 		undefined // leafletBaseOptions
 				 );
+
+                 //ROUTING
                  var stopNames = _.compact(_.pluck(system.allStops(), 'name'));
                  $('.typeahead').typeahead({source: stopNames});
-
                  $('input.typeahead').change(function(f) {
-                     var start = $('#startstop').value;
-                     var end = $('#endstop').value;
+                     var start = $('#startstop')[0].value;
+                     var end = $('#endstop')[0].value;
                      if (start && end) {
-                         // do the routing here
+                         console.log('routing from', start,' to ',end);
+                         var gettingThereRoutes = system.takeMeThereByName(start, end);
+                         if (gettingThereRoutes === 'FAIL') alert('cannot find a route from ', start, ' to ', end);
+                         else {
+                             var inclusionDict = {};
+                             _(gettingThereRoutes).each(function(r) {
+                                 //inclusionDict[r.id] = true;
+                                 _(r.stops).each(function(s) {
+                                    inclusionDict[s.id] = true;
+                                 });
+                             });
+                             
+                             YY.render_(system, map, inclusionDict);
+                        }
                      }
                  });
 
