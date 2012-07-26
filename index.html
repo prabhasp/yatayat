@@ -32,14 +32,23 @@ body {
             <b>Start</b> <input type="text" id="startstop" class="typeahead" data-provide="typeahead" class="span1"/>
             <b>End</b> <input type="text" id="endstop" class="typeahead" data-provide="typeahead" class="span1"/>
         </div>
+        <div id="report" style="position:absolute;top:20;right:120;z-index:999">
+            <a class="btn" id="reportmissing" data-toggle="modal" href="#myModal"> Report missing route </a> 
+        </div>
         <div id="routedisplay" style="position:absolute;top:40;left:60;z-index:999">
         </div>
         <div id="publicTransportMap" style="width: 100%; height: 100%">Loading ...</div>
+        <div class="modal hide" id="myModal"> 
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">X</button>
+            </div>
+            <br/>
+            <iframe src="https://docs.google.com/spreadsheet/embeddedform?formkey=dFdZeG9PYnVpY1FBMk4zVjBDaFNua1E6MQ" width="700" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+        </div>
 
 <script type="text/javascript" language="javascript">
     // UI HACK
     $('#textboxes').hide();
-
     // initialize the map
     var map = new L.Map('publicTransportMap');
 
