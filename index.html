@@ -31,6 +31,7 @@ body {
         <div id="textboxes" style="position:absolute;top:20;left:60;z-index:999"> 
             <b>Start</b> <input type="text" id="startstop" class="typeahead" data-provide="typeahead" class="span1"/>
             <b>End</b> <input type="text" id="endstop" class="typeahead" data-provide="typeahead" class="span1"/>
+            <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY.render_(system,map);"> Clear </a>
         </div>
         <div id="report" style="position:absolute;top:20;right:60;z-index:999">
             <a class="btn" id="reportmissing" data-toggle="modal" href="#myModal"> Report missing route </a> 
