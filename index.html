@@ -92,12 +92,12 @@ body {
                                     inclusionDict[s.id] = true;
                                 });
                                 if (idx===0) {
-                                    overrideDict[r.stops[0].id] = {color: 'green', opacity: 0.5, radius: 5};
+                                    overrideDict[r.stops[0].id] = {color: 'orange', opacity: 1, radius: 8};
                                 } else { 
-                                    overrideDict[r.stops[0].id] = {color: 'orange', opacity: 0.5, radius: 5};
+                                    overrideDict[r.stops[0].id] = {color: 'orange', opacity: 1, radius: 8};
                                 }
                                 if (idx === gettingThereRoutes.length - 1)
-                                    overrideDict[_.last(r.stops).id] = {color: 'green', opacity: 0.5, radius: 5};
+                                    overrideDict[_.last(r.stops).id] = {color: 'orange', opacity: 1, radius: 8};
                              });
                              YY.render_(system, map, inclusionDict,
                                 {route: {color: '#555', opacity: 1, weight: 1}},
