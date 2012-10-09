@@ -329,6 +329,7 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
             if (n === _.keys(segmentOrderDict).length) return accumulator;
             n = n + 1;
             accumulator.push(seg);
+            if (! (seg.id in segmentOrderDict)) { console.log("Warning: segment not in segmentOrderDict: ", seg); return accumulator; }
             return buildSegmentsInOrder(segmentOrderDict[seg.id], accumulator); 
         })(startSegment, []);
         this._unconnectedSegments = _.difference(this.segments, connectedSegments);
