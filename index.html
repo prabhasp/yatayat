@@ -58,12 +58,7 @@ body {
     var osmdata;
 
 YY.fromConfig("config.stable.json", function(sys) {
-    // $.ajax({ type: YY.GET_OR_POST, url: YY.API_URL,
-    //          data: YY.QUERY_STRING,
-    //          dataType: 'text',
-    //          success: function(data) {
-                 // DATA DISPLAY
-    system = sys;//YY.fromOSM(data);
+    system = sys;
 	YY.render_(system, map,
 			   undefined, //includeIDObject; try {"2269045": true} for an example
 			   undefined // leafletBaseOptions
