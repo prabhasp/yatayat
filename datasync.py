@@ -7,11 +7,32 @@
 import argparse
 import json
 import subprocess
-import os
+import shutil
 import urllib2
+
+def email(address, errors):
+    msg = """To: %s
+From: Yatayat Sanity Bot <yatayat@NUMM.ORG>
+Subject: [yatayat-QC] Errors found in today's Overpass data
+
+%s
+""" % (address, errors)
+    p = subprocess.Popen(["/usr/sbin/sendmail", address],
+                     stdin=subprocess.PIPE)
+    p.stdin.write(msg)
+    p.stdin.close()
+    p.wait()
+
+def push(files):
+    ret = subprocess.call(["git", "commit", "-m", "datasync: overpass files updated"] + files)
+    if ret == 0:
+        subprocess.call(["git", "push"])
 
 def parse_args():
     parser = argparse.ArgumentParser(description="synchronize osm data through the overpass API")
+    parser.add_argument("--address",
+                        default="yatayat@NUMM.ORG",
+                        help="address to email with errors")
     parser.add_argument("--config",
                         default="config.overpass.json",
                         type=argparse.FileType('r'),
@@ -49,7 +70,18 @@ def run():
     p = subprocess.Popen(["./cli_dataquality.js", opts.experimental],
                          stdout=subprocess.PIPE)
     err = p.stdout.read()
-    print err
+
+    if len(err.strip()) > 0 and not opts.force:
+        # There were errors
+        if not opts.silent:
+            email(opts.address, err)
+            # only push experimental
+            push([opts.experimental])
+    else:
+        # Copy "experimental" to "stable"
+        shutil.copy(opts.experimental, opts.stable)
+        if not opts.silent:
+            push([opts.experimental, opts.stable])
 
 if __name__=='__main__':
     run()
