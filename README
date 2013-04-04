@@ -41,18 +41,19 @@ Segment:            // mostly useful to rendering and internal fns.
   - listOfLatLng: [(lat,lng), ...]
   - tag: {}
 
-== API
+== CLI
 
-We define a node.js-based API for external applications to make
-high-level queries of public transit data.
+There are commandline tools for verifying data quality.
 
-% node api.node.js
+These make use of nodejs. On Debian-based systems,
+all external dependencies can be installed via APT:
 
-+ http://localhost:8020/route
+% apt-get install nodejs node-jquery node-underscore
 
-  Returns all routes and stops as a JSON object.
+Elsewhere, you can try your luck with NPM:
 
-The API requires that jquery and underscore be installed for node:
+% npm install jquery underscore
 
-% npm install underscore
-% npm install jquery
+Then, you can run:
+
+% nodejs cli_dataquality.js
