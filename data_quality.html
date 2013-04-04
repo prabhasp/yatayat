@@ -36,6 +36,7 @@ body {
 <script src="lib/wax.leaf.min.js"></script>
 <script src="lib/kdtree/src/web/kdTree.js"></script>
 <script src="yatayat.js"></script>
+<script src="dataquality.js"></script>
 <script src="config.js"></script>
 </head>
 <body>
@@ -94,163 +95,28 @@ map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 var SAME_STOP_DIST = Math.pow(0.0005,2);
 
 YY.error_render = function(system, route, log) {
-
-function nearbyDifferentStops(system, route) {
-    stopClosest = {};
-
-    route.stops.forEach(function(stop) {
-        var stops = system.nearestStops([stop.lat, stop.lng], 2, SAME_STOP_DIST)
-            .filter(function(s) { return s.id !== stop.id; });
-        if(stops.length > 0 && stop.name && stops[0].name && stops[0].name !== stop.name) {
-            stopClosest[stop.id] = stops[0];
-        }
-    });
-
-    return stopClosest;
-}
-
-function unnamedStops(route) {
-    unnamedStops = {};
-
-    route.stops.forEach(function(stop) {
-        if(!stop.name) {
-            unnamedStops[stop.id] = true;
-            }
-    });
-
-    return unnamedStops;
-}
-
-function similarNames(system, route) {
-    // thanks! http://thinkphp.ro/apps/js-hacks/String.levenshtein/String.levenshtein.html
-    var levenshtein = function(stringa, stringb) {
-        var cost = new Array(),
-        str1 = stringa,
-        str2 = stringb,
-        n = str1.length,
-        m = str2.length,
-        i, j;
-        var minimum = function(a,b,c) {
-            var min = a;
-            if(b < min) {
-                min = b;
-            }
-            if(c < min) {
-                min = c;
-            }
-            return min;
-        }
-
-        if(n == 0 || m == 0) {
-            return;  
-        } 
-
-        for(var i=0;i<=n;i++) {
-            cost[i] = new Array();
-        }
-
-        for(i=0;i<=n;i++) {
-            cost[i][0] = i;
-        }
-
-        for(j=0;j<=m;j++) {
-            cost[0][j] = j;
-        }
-
-        for(i=1;i<=n;i++) {
-            var x = str1.charAt(i-1);
-            for(j=1;j<=m;j++) {
-                var y = str2.charAt(j-1);
-                if(x == y) {
-                    cost[i][j] = cost[i-1][j-1]; 
-                } else {
-                    cost[i][j] = 1 + minimum(cost[i-1][j-1], cost[i][j-1], cost[i-1][j]);
-                } 
-            }
-        }
-        return cost[n][m];  
-    };
-
-    var preprocess = function(str) {
-        return str.toLowerCase().replace(' ', '');
-    };
-
-    similarNames = {};
-
-    // n^2 algorithm that compares string-distance between every two pairs of stop
-    route.stops.forEach(function(stop) {
-            
-        system.routes.forEach(function(route2) {
-            route.stops.forEach(function(stop2) {
-
-                if(stop.name && stop2.name && levenshtein(stop.name, stop2.name) < 3) {
-                    var physicalDistance = Math.pow(stop.lat-stop2.lat,2) + Math.pow(stop.lng-stop2.lng,2);
-                    if(physicalDistance > SAME_STOP_DIST) {
-                        // console.log(stop.name, stop2.name, physicalDistance);
-                        similarNames[stop.id] = stop2;
-                    }
-                    else if(stop.id != stop2.id) {
-                        //console.log(stop.name, stop2.name, 'nearby');
-                    }
-                }
-                
-            });
-        });
-    });
-    return similarNames;
-}
-
-var noTerminus = function(route) {
-    return false ||  route._noTerminus;
-};
-
-var unconnectedSegments = function(route) {
-    unconnected = {};
-    /*var last_seg = null;
-    route.segments.forEach(function(segment) {
-        if(last_seg) {
-            var s1f = segment.listOfLatLng[0];
-            var s1r = segment.listOfLatLng[segment.listOfLatLng.length-1];
-            var s2f = last_seg.listOfLatLng[0];
-            var s2r = last_seg.listOfLatLng[last_seg.listOfLatLng.length-1];
-            
-            // Something is wrong in the order() call.
-            // Let's just check all pairs of starts and ends.
-            if(!(_.isEqual(s1f, s2f) || _.isEqual(s1f, s2r) || 
-                 _.isEqual(s1r, s2f) || _.isEqual(s1r, s2r))) {
-                unconnected[last_seg.id] = segment;
-            }
-        }
-        last_seg = segment;
-    });*/
-    route._unconnectedSegments.forEach(function(seg) {
-        unconnected[seg.id] = true;
-    });
-    return unconnected;
-};
-
     var layer = new L.LayerGroup();
     log.innerHTML = "";
 
     // Check for four classes of errors
 
     // 1. Nearby stops (are they the same?)
-    var nearby = nearbyDifferentStops(system, route);
+    var nearby = DQ.nearbyDifferentStops(route, system);
     var nearbycol = 'yellow';
 
     // 2. Unnamed stop
-    var unnamed = unnamedStops(route);
+    var unnamed = DQ.unnamedStops(route);
     var unnamedcol = 'black';
 
     // 3. Similarly-named stop (that are far away)
-    var simnames = similarNames(system, route);
+    var simnames = DQ.similarNames(route, system);
     var simnamescol = 'magenta';
 
     // 4.1 Routes without a start / terminus
-    var noTerminus = noTerminus(route);
+    var noTerminus = DQ.noTerminus(route);
 
     // 4.2 Unconnected segments (show only if terminus found)
-    var unconnected = unconnectedSegments(route);
+    var unconnected = DQ.unconnectedSegments(route);
     var unconnectedcol = 'red';
 
     // 5. Stops with the same name one after another
