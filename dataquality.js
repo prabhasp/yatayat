@@ -45,6 +45,22 @@ DQ.sanityChecks = {
         }
     },
 
+    "first segment doesn't end at a stop": {
+        run: function(route) {
+            var firstStop = route.stops[0];
+            var firstSegmentEnd = route.segments[0].listOfLatLng[0];
+            if (!firstStop) return true;
+            return firstStop.lat == firstSegmentEnd[0] && firstStop.lng == firstSegmentEnd[1];
+        },
+        print: function(run_output, route) {
+            if (run_output) {
+                var out = "First segment of route (id:" + route.segments[0].id + 
+                    ") doesn't start at a properly key-ed stop.\n";
+                return out;
+            }
+        }
+    },
+
     "unnamed stops":  {
         run: function(route) {
             // Returns: stop.id -> true, when stop is unnamed
