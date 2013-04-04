@@ -18,7 +18,6 @@ body {
 <script src="lib/kdtree/src/web/kdTree.js"></script>
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="yatayat.js"></script>
-<script src="config.js"></script>
 </head>
 <body>
       <!--Sidebar content>
@@ -57,64 +56,63 @@ body {
     //var ktmBB = "85.2885,27.6839,85.3368,27.7299";
     var system;
     var osmdata;
-    $.ajax({ type: YY.GET_OR_POST, url: YY.API_URL,
-             data: YY.QUERY_STRING,
-             dataType: 'text',
-             success: function(data) {
+
+YY.fromConfig("config.stable.json", function(sys) {
+    // $.ajax({ type: YY.GET_OR_POST, url: YY.API_URL,
+    //          data: YY.QUERY_STRING,
+    //          dataType: 'text',
+    //          success: function(data) {
                  // DATA DISPLAY
-                 system = YY.fromOSM(data);
-				 YY.render_(system, map,
-				 		undefined, //includeIDObject; try {"2269045": true} for an example
-				 		undefined // leafletBaseOptions
-				 );
+    system = sys;//YY.fromOSM(data);
+	YY.render_(system, map,
+			   undefined, //includeIDObject; try {"2269045": true} for an example
+			   undefined // leafletBaseOptions
+			  );
 
-                 //ROUTING
-                 var stopNames = _.compact(_.pluck(system.allStops(), 'name'));
-                 $('.typeahead').typeahead({source: stopNames});
-                 $('#textboxes').show();
-                 $('input.typeahead').change(function(f) {
-                     var start = $('#startstop')[0].value;
-                     var end = $('#endstop')[0].value;
-                     if (start && end) {
-                         console.log('routing from', start,' to ',end);
-                         var gettingThereRoutes = system.takeMeThereByName(start, end);
-                         if (gettingThereRoutes === 'FAIL') alert('cannot find a route from ', start, ' to ', end);
-                         else {
-                             var inclusionDict = {};
-                             var overrideDict = {};
-                             var outputHTML = "";
-                             _(system.routes).each(function(r) { inclusionDict[r.id] = true; }); // render everything
-                             _(gettingThereRoutes).each(function(r,idx) {
-                                //inclusionDict[r.id] = true;
-                                outputHTML += "Get on " + toTitleCase(r.transport) + " " + 
-                                    r.ref + " (" + r.name + ") at " + r.stops[0].name + 
-                                    " and ride till " + _.last(r.stops).name + "<br/>";
-                                _(r.stops).each(function(s) {
-                                    inclusionDict[s.id] = true;
-                                });
-                                if (idx===0) {
-                                    overrideDict[r.stops[0].id] = {color: 'orange', opacity: 1, radius: 8};
-                                } else { 
-                                    overrideDict[r.stops[0].id] = {color: 'orange', opacity: 1, radius: 8};
-                                }
-                                if (idx === gettingThereRoutes.length - 1)
-                                    overrideDict[_.last(r.stops).id] = {color: 'orange', opacity: 1, radius: 8};
-                             });
-                             YY.render_(system, map, inclusionDict,
-                                {route: {color: '#555', opacity: 1, weight: 1}},
-                                overrideDict
-                             );
-                             $('#routedisplay').show();
-                             $('#routedisplay').html(outputHTML);
-                        }
-                     } else {
-                         YY.render_(system, map);
-                         $('#routedisplay').hide()
-                     }
-                 });
-
-             }});
-
+    //ROUTING
+    var stopNames = _.compact(_.pluck(system.allStops(), 'name'));
+    $('.typeahead').typeahead({source: stopNames});
+    $('#textboxes').show();
+    $('input.typeahead').change(function(f) {
+        var start = $('#startstop')[0].value;
+        var end = $('#endstop')[0].value;
+        if (start && end) {
+            console.log('routing from', start,' to ',end);
+            var gettingThereRoutes = system.takeMeThereByName(start, end);
+            if (gettingThereRoutes === 'FAIL') alert('cannot find a route from ', start, ' to ', end);
+            else {
+                var inclusionDict = {};
+                var overrideDict = {};
+                var outputHTML = "";
+                _(system.routes).each(function(r) { inclusionDict[r.id] = true; }); // render everything
+                _(gettingThereRoutes).each(function(r,idx) {
+                    //inclusionDict[r.id] = true;
+                    outputHTML += "Get on " + toTitleCase(r.transport) + " " + 
+                        r.ref + " (" + r.name + ") at " + r.stops[0].name + 
+                        " and ride till " + _.last(r.stops).name + "<br/>";
+                    _(r.stops).each(function(s) {
+                        inclusionDict[s.id] = true;
+                    });
+                    if (idx===0) {
+                        overrideDict[r.stops[0].id] = {color: 'orange', opacity: 1, radius: 8};
+                    } else { 
+                        overrideDict[r.stops[0].id] = {color: 'orange', opacity: 1, radius: 8};
+                    }
+                    if (idx === gettingThereRoutes.length - 1)
+                        overrideDict[_.last(r.stops).id] = {color: 'orange', opacity: 1, radius: 8};
+                });
+                YY.render_(system, map, inclusionDict,
+                           {route: {color: '#555', opacity: 1, weight: 1}},
+                           overrideDict
+                          );
+                $('#routedisplay').show();
+                $('#routedisplay').html(outputHTML);
+            }
+        } else {
+            YY.render_(system, map);
+            $('#routedisplay').hide()
+        }
+    });
     if(YY.TILE_SOURCE) {
         if (YY.WAX) {
             wax.tilejson(YY.TILE_SOURCE, function(tilejson) {
@@ -132,6 +130,9 @@ body {
     }
 
     map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
+
+});
+
 
 
     YY.viz = function(route, map) {
