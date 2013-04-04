@@ -335,7 +335,7 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
 
         this._unconnectedSegments = _.difference(this.segments, connectedSegments);
     } else {
-        console.log('ordering successful for route ', route.name);
+        // console.log('ordering successful for route ', route.name);
         this._unconnectedSegments = [];
     }
     //console.log(_.chain(this._unconnectedSegments).pluck('orderedListofStops').flatten().pluck('tag').value());
