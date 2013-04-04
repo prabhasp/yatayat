@@ -1,0 +1,10 @@
+{
+    "API_URL": "http://www.overpass-api.de/api/interpreter",
+    "QUERY_STRING": "<osm-script> <union> <query type=\"relation\"> <has-kv k=\"type\" v=\"route\"/> <bbox-query s=\"27.6839\" n=\"27.7299\" w=\"85.2885\" e=\"85.3368\"/> </query> <recurse type=\"relation-way\"/> <recurse type=\"way-node\"/> </union> <print/> </osm-script>",
+    "GET_OR_POST": "POST",
+    "WAX": true,
+    "TILE_SOURCE": "http://a.tiles.mapbox.com/v3/modilabs.map-p543gvbh.jsonp",
+    "ATTRIBUTION": "Tiles Courtesy of <a href=\"http://www.mapquest.com/\" target=\"_blank\">MapQuest</a> <img src=\"http://developer.mapquest.com/content/osm/mq_logo.png\">",
+    "LNG": 85.3,
+    "LAT": 27.7
+}
