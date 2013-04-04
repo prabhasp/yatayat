@@ -357,6 +357,21 @@ YY.Segment = function(id, listOfLatLng, tag, orderedStops) {
     this.orderedListofStops = orderedStops; // intermediarily needed
 };
 
+YY.fromConfig = function(config_path, cb) {
+    // sequentially loads config file, and the system it calls for
+    // cb is called on the resulting system.
+    $.getJSON(config_path, {}, function(conf) {
+        // blend in the conf to the YY namespace
+        for(var key in conf) {
+            YY[key] = conf[key];
+        }
+        // load in & parse XML
+        $.get(YY.API_URL, {}, function(res) {
+            cb(YY.fromOSM(res));
+        });
+    });
+};
+
 YY.fromOSM = function (overpassXML) {
     var nodes = {};
     var segments = {};

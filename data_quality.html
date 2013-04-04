@@ -66,15 +66,12 @@ function routeToggler(system) {
     });
 }
 
-$.ajax({ type: YY.GET_OR_POST, url: YY.API_URL,
-         data: YY.QUERY_STRING,
-         dataType: 'text',
-         success: function(data) {
-             sys = YY.fromOSM(data);
-             routeToggler(sys);
-	     renderLayer = YY.error_render(sys, sys.routes[0], document.getElementById('errorLog'));
-             map.addLayer(renderLayer);
-         }});
+YY.fromConfig("config.experimental.json", function(system) {
+    sys = system;
+    routeToggler(sys);
+    renderLayer = YY.error_render(sys, sys.routes[0], document.getElementById("errorLog"));
+    map.addLayer(renderLayer);
+});
 
 if(YY.TILE_SOURCE) {
         if (YY.WAX) {
