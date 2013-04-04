@@ -260,11 +260,16 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
         return;
     }
     var llToObj = function(ll, seg) { return {lat: ll[0], lng: ll[1], seg: seg}; } 
+    // kd-tree consisting of the 'start-endpoints' of a segment
     var startKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(seg.listOfLatLng[0], seg); }), 
                         distanceForObjLL, ["lat","lng"]);
+    // kd-tree consisting of the 'end-endpoints' of a segment
     var endKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(_.last(seg.listOfLatLng), seg); }), 
                         distanceForObjLL, ["lat","lng"]);
 
+    // find, among all the 'start' and 'end' points in other segments, what the closest endpoint is
+    // and then put it in the segmentOrderObj, which is a linked list in the form on an obj 
+    // (segmentOrderDict[seg.id]) == followingSeg.id, where followingSeg is the segment that should be after seg
     function closestSegment(thisSegment, end) {
         var ret, segmentEnd;
         if (end === 'first') {
@@ -324,13 +329,10 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
         this._unconnectedSegments = this.segments;
     } else if (_.keys(segmentOrderDict).length !== route.segments.length) {  // TODO: do this only in debug mode
         console.log('ordering not quite successful for route ', route.name);
-        var n = 0;
-        var connectedSegments = (function buildSegmentsInOrder(seg, accumulator) {
-            if (n === _.keys(segmentOrderDict).length) return accumulator;
-            n = n + 1;
-            accumulator.push(seg);
-            return buildSegmentsInOrder(segmentOrderDict[seg.id], accumulator); 
-        })(startSegment, []);
+        var connectedSegmentIds = _.keys(segmentOrderDict)
+        var connectedSegments = _(this.segments).filter(function(s) { 
+            return _(connectedSegmentIds).find(function(id) { return s.id === id; }) });
+
         this._unconnectedSegments = _.difference(this.segments, connectedSegments);
     } else {
         console.log('ordering successful for route ', route.name);
