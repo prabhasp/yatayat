@@ -92,8 +92,6 @@ if(YY.TILE_SOURCE) {
 
 map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 
-var SAME_STOP_DIST = Math.pow(0.0005,2);
-
 YY.error_render = function(system, route, log) {
     var layer = new L.LayerGroup();
     log.innerHTML = "";
