@@ -52,7 +52,7 @@ OSM Data is transformed into Routes, Stops, and Segments:
 
 ## CLI
 
-There are commandline tools for verifying data quality.
+### data quality.
 
 These make use of nodejs. On Debian-based systems,
 all external dependencies can be installed via APT:
@@ -70,5 +70,16 @@ Elsewhere, you can try your luck with NPM:
 Then, you can run:
 
 ```sh
-% nodejs cli_dataquality.js
+% nodejs cli_dataquality.js transit.experimental.xml
+```
+
+Additionally, the "datasync.py" python wrapper downloads the latest
+route information from OSM through overpass, checks for quality
+issues, and depending on the results of cli_dataquality, can e-mail
+relevant parties or else commit the new info into git.
+
+### GTFS
+
+```sh
+% nodejs dump_gtfs.js transit.experimental.xml
 ```
