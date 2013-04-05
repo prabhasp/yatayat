@@ -1,6 +1,6 @@
 #!/usr/bin/env nodejs
 
-var yy = require('./yatayat.js');
+var YY = require('./yatayat.js');
 var DQ = require('./dataquality.js');
 
 var fs = require("fs");
@@ -14,7 +14,7 @@ if(process.argv.length < 3) {
 }
 
 // Load system as YY.System
-var system = yy(fs.readFileSync(process.argv[2], "utf-8"));
+var system = YY.fromOSM(fs.readFileSync(process.argv[2], "utf-8"));
 
 // Run tests: this will be silent if there are no errors
 if(process.argv.length > 3) {
