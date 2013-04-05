@@ -266,15 +266,16 @@ YY.Route.prototype.order = function(startSegID) {
 }
 
 YY.Route.prototype.keepOrdering = function(way, stop) {
-    console.log('route :', this.name);
-    console.log('this way: ',way.listOfLatLng)
-    console.log('these stops: ',way.orderedListofStops);
-    console.log('this stop: ',stop);
+    var route = this;
     if(way.listOfLatLng[0][0] !== stop.lat || way.listOfLatLng[0][1] !== stop.lng) {
-        console.log('violation of invariant: keepOrdering can only be called if way begins with stop' +
-            'route :' this.id);
+        console.log('violation of invariant: keepOrdering can only be called if way begins with stop ; ' +
+            'route :'  + route.name);
         return;
     }
+    // some prep for later
+    function tos(ll) { return ll[0] + "," + ll[1]; }
+    var thisWaysEnd; // will be filled in later
+
     // Okay, now that we confirm first stop is here, chuck it.
     // Is there another stop in this way?
     var stop2 = _.first(_.rest(way.orderedListofStops));
@@ -282,7 +283,8 @@ YY.Route.prototype.keepOrdering = function(way, stop) {
     if (stop2) { // Yes, stop2 is remaining in the way
 
         // Take the chunk of nodes from way1 and way2 
-        var indexUntil = _(way.listOfLatLng).indexOf([stop2.lat, stop2.lng]);
+        var indexUntil = _.compact(_.map(way.listOfLatLng, function(ll, idx) { 
+            if (ll[0] == stop2.lat && ll[1] == stop2.lng) return idx; }))[0];
         var chunkedLLL = way.listOfLatLng.slice(0, indexUntil+1);
         
         // and throw that chunk away
@@ -290,32 +292,45 @@ YY.Route.prototype.keepOrdering = function(way, stop) {
         way.listOfLatLng = way.listOfLatLng.slice(indexUntil);
         
         // add the chunked segment to segmentsInOrder
-        this.segmentsInOrder.push(
+        route.segmentsInOrder.push(
             new YY.Segment(_.uniqueId(), chunkedLLL, way.tag, [stop, stop2]));
+        route.stops.push(stop);
 
         // call keepOrdering(way, stop2); continue 
-        this.keepOrdering(way, stop2);
+        if (way.listOfLatLng.length > 1) {
+            route.keepOrdering(way, stop2);
 
-    } else { // No stop remaining in this way
+        } else { // special case: the whole way is filed away... need to go down to stop2 logic, but with special exceptions
+            stop = stop2;
+            stop2 = undefined;
+            thisWaysEnd = tos(_.last(way.listOfLatLng));
+            way.listOfLatLng = [];
+        }
+    } 
+    if (!stop2) { // No stop remaining in this way
 
+        route._unconnectedSegments = _.without(route._unconnectedSegments, way);
         // Search all other way-endings to match this way's end
-        var fronts = _(this._unconnectedSegments).map(function(uS) { return _.first(uS.listOfLatLng); })
-        var backs = _(this._unconnectedSegments).map(function(uS) { return _.last(uS.listOfLatLng); })
+        var fronts = _(route._unconnectedSegments).map(function(uS) { return tos(_.first(uS.listOfLatLng)); })
+        var backs = _(route._unconnectedSegments).map(function(uS) { return tos(_.last(uS.listOfLatLng)); })
 
-        var thisWaysEnd = _.last(way.listOfLatLng);
+        // this ways end (unless already defined, for the special case)
+        var thisWaysEnd = thisWaysEnd || tos(_.last(way.listOfLatLng));
 
-        var way2FrontCnxn = _(fronts).indexOf(thisWaysEnd);
-        var way2BackCnxn = _(backs).indexOf(thisWaysEnd);
+        var way2FrontCnxn = _(fronts).indexOf(thisWaysEnd); /* TODO: kdtree ? */
+        var way2BackCnxn = _(backs).indexOf(thisWaysEnd);   /* TODO: kdtree ? */
 
             // ERROR / END conditions
             if (way2FrontCnxn > -1 && way2BackCnxn > -1) {
                 console.log( "branching at lat/lng: " + thisWaysEnd);
                 return;
             } else if (way2FrontCnxn === -1 && way2BackCnxn === -1) {
+                console.log("search space exhausted with ", route._unconnectedSegments.length,
+                 " ways left for route: ", route.name);
                 return; // search space exhausted
             }
-        var way2 = (way2FrontCnxn > -1) ? this._unconnectedSegments[way2FrontCnxn] :
-                                          this._unconnectedSegments[way2BackCnxn];
+        var way2 = (way2FrontCnxn > -1) ? route._unconnectedSegments[way2FrontCnxn] :
+                                          route._unconnectedSegments[way2BackCnxn];
         // If you find it on the "back-side" of another way, flip that second way
         if (way2BackCnxn > -1) {
             way2.flip();
@@ -323,106 +338,10 @@ YY.Route.prototype.keepOrdering = function(way, stop) {
 
         // call keepOrdering(concat(way,way2), stop) (shrinking _unconnectedSegments appropriately)
         // remember that at this point: way.orderedListOfStops is empty, and they are oriented the same way
-        this._unconnectedSegments = _.without(this._unconnectedSegments, way);
         way2.listOfLatLng = way.listOfLatLng.concat(way2.listOfLatLng);
-        this.keepOrdering(way2, stop);
+        route.keepOrdering(way2, stop);
     }
-}
-
-YY.Route.prototype.order__ = function(orientingSegmentID) {
-    var route = this;
-    var segmentOrderDict = {};
     
-    // find orienting way
-    var stops = [];
-    var n = 0;
-    var startSegment = _.find(route.segments, function(seg) { return seg.id === orientingSegmentID; });
-    if (!startSegment) {
-        console.log('Ordering not possible for route: ', route.name, '; start segmend likely not in route ... ?');
-        return;
-    }
-
-    var llToObj = function(ll, seg) { return {lat: ll[0], lng: ll[1], seg: seg}; } 
-    // kd-tree consisting of the 'start-endpoints' of a segment
-    var startKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(seg.listOfLatLng[0], seg); }), 
-                        distanceForObjLL, ["lat","lng"]);
-    // kd-tree consisting of the 'end-endpoints' of a segment
-    var endKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(_.last(seg.listOfLatLng), seg); }), 
-                        distanceForObjLL, ["lat","lng"]);
-
-    // find, among all the 'start' and 'end' points in other segments, what the closest endpoint is
-    // and then put it in the segmentOrderObj, which is a linked list in the form on an obj 
-    // (segmentOrderDict[seg.id]) == followingSeg.id, where followingSeg is the segment that should be after seg
-    function closestSegment(thisSegment, end) {
-        var ret, segmentEnd;
-        if (end === 'first') {
-            segmentEnd = thisSegment.listOfLatLng[ 0 ];
-        } else { // also the default
-            segmentEnd = _.last(thisSegment.listOfLatLng);
-        }
-
-        ret = startKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
-        var nextFwdTreeCnxn = _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
-        ret = endKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
-        var nextBwdTreeCnxn =  _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
-        var cnxnChanger = (end === 'first') ? {'fwd': 'bwd', 'bwd': 'fwd'} : {'fwd': 'fwd', 'bwd': 'bwd'};
-        if (nextFwdTreeCnxn[1] < nextBwdTreeCnxn[1]) {
-            segmentOrderDict[thisSegment.id] = nextFwdTreeCnxn[0].seg;
-            return { nextSeg: nextFwdTreeCnxn[0].seg, sqDist: nextFwdTreeCnxn[1], cnxn: cnxnChanger['fwd'] };
-        } else {
-            segmentOrderDict[thisSegment.id] = nextBwdTreeCnxn[0].seg;
-            return { nextSeg: nextBwdTreeCnxn[0].seg, sqDist: nextBwdTreeCnxn[1], cnxn: cnxnChanger['bwd'] };
-        }
-    }
-
-    // go through it, putting all public stops in
-    function recurse(thisSegment, flipped) {
-        if (n === route.segments.length) return;
-        n = n + 1;
-
-        if (flipped) {
-            thisSegment.listOfLatLng.reverse();
-            thisSegment.orderedListofStops.reverse();
-        }
-        if (_.last(stops) === thisSegment.orderedListofStops[0]) {
-            thisSegment.orderedListofStops = _.rest(thisSegment.orderedListofStops);
-        }
-        stops = stops.concat(thisSegment.orderedListofStops);
-
-        var next = closestSegment(thisSegment);
-        if (next.cnxn === 'fwd') {
-            recurse(next.nextSeg, false);
-        } else {
-            recurse(next.nextSeg, true);
-        }
-    }
-    var fwdFacing = closestSegment(startSegment);
-    var bwdFacing = closestSegment(startSegment, 'first'); // nearest to first node = bwd facing
-    if (fwdFacing.sqDist < bwdFacing.sqDist) {
-        recurse(startSegment, false);
-    } else {
-        recurse(startSegment, true);
-    }
-
-    this.stops = _.map(stops, function(s) { return new YY.Stop(s.id, s.lat, s.lng, s.tag); });
-    //console.log(_.pluck(route.stops, 'name'));
-   
-    if (_.keys(segmentOrderDict).length === 0) {
-        console.log('ordering not quite successful for route ', route.name);
-        this._unconnectedSegments = this.segments;
-    } else if (_.keys(segmentOrderDict).length !== route.segments.length) {  // TODO: do this only in debug mode
-        console.log('ordering not quite successful for route ', route.name);
-        var connectedSegmentIds = _.keys(segmentOrderDict)
-        var connectedSegments = _(this.segments).filter(function(s) { 
-            return _(connectedSegmentIds).find(function(id) { return s.id === id; }) });
-
-        this._unconnectedSegments = _.difference(this.segments, connectedSegments);
-    } else {
-        // console.log('ordering successful for route ', route.name);
-        this._unconnectedSegments = [];
-    }
-    //console.log(_.chain(this._unconnectedSegments).pluck('orderedListofStops').flatten().pluck('tag').value());
-    //DEBUG: _.each(stops, function(s) {console.log(s.tag.name)});
 };
 
 YY.Stop = function(id, lat, lng, tag) {
