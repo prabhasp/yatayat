@@ -131,30 +131,22 @@ YY.error_render = function(system, route, log) {
         marker.on('click', pop);
         log.appendChild($msg);
     }
+    _.each(route._unconnectedSegments, function(seg, idx) {
+        var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
+        var poly = new L.Polyline(latlngs, {color: unconnectedcol});
+        if (noTerminus && !idx) {
+            var msg = "no start-point (or terminus) defined";
+            addLog(msg, latlngs[Math.floor(latlngs.length / 2)], poly);
+        } else if (!noTerminus) {
+            var msg = "unconnected segment";
+            addLog(msg, latlngs[Math.floor(latlngs.length / 2)], poly);
+        }
+        layer.addLayer(poly);
+    });
     _.each(route.segments,function(seg, idx) {
-        if(seg.id in unconnected) {
-            var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
-            var poly = new L.Polyline(latlngs, {color: unconnectedcol});
-            if (noTerminus && !idx) {
-                var msg = "no start-point (or terminus) defined";
-                addLog(msg, latlngs[Math.floor(latlngs.length / 2)], poly);
-            } else if (!noTerminus) {
-                var msg = "unconnected segment";
-                addLog(msg, latlngs[Math.floor(latlngs.length / 2)], poly);
-            }
-            layer.addLayer(poly);
-
-            // var seg2 = unconnected[seg.id];
-            // var ll2 = seg2.listOfLatLng.map(function(LL) {return new L.LatLng(LL[0], LL[1]);});
-            // var poly2 = new L.Polyline(ll2, {color: 'black'});
-            // layer.addLayer(poly2);
-            // delete unconnectedcol[seg.id]; // don't draw twice;
-        }
-        else {
-            var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
-            var poly = new L.Polyline(latlngs, {color: 'green'});
-            layer.addLayer(poly);
-        }
+        var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
+        var poly = new L.Polyline(latlngs, {color: 'green'});
+        layer.addLayer(poly);
     });
 
     route.stops.forEach(function(stop) {
