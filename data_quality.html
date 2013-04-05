@@ -68,7 +68,7 @@ function routeToggler(system) {
 
 YY.fromConfig("config.experimental.json", function(system) {
     map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
-    system.routes.sort(function(x,y) { return x.name > y.name; });
+    system.routes.sort(function(x,y) { return x.name > y.name ? 1 : -1; });
 
 
     sys = system;
