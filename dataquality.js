@@ -47,6 +47,9 @@ DQ.sanityChecks = {
 
     "first segment doesn't end at a stop": {
         run: function(route) {
+            if(route.stops.length === 0 || route.segments.length === 0) {
+                return true;
+            }
             var firstStop = route.stops[0];
             var firstSegmentEnd = route.segments[0].listOfLatLng[0];
             if (!firstStop) return true;
@@ -54,9 +57,11 @@ DQ.sanityChecks = {
         },
         print: function(run_output, route) {
             if (run_output) {
-                var out = "First segment of route (id:" + route.segments[0].id + 
+                if(route.stops.length === 0 || route.segments.length === 0) {
+                    return "Without stops or segments, it's still to talk about whether the first segment will end at a stop.";
+                }
+                return "First segment of route (id:" + route.segments[0].id + 
                     ") doesn't start at a properly key-ed stop.\n";
-                return out;
             }
         }
     },
