@@ -368,9 +368,12 @@ YY.fromConfig = function(config_path, cb) {
             YY[key] = conf[key];
         }
         // load in & parse XML
-        $.get(YY.API_URL, {}, function(res) {
-            cb(YY.fromOSM(res));
-        });
+        $.ajax({type: YY.GET_OR_POST, url: YY.API_URL,
+                data: YY.QUERY_STRING,
+                dataType: "text",
+                success: function(res) {
+                    cb(YY.fromOSM(res));
+                }});
     });
 };
 

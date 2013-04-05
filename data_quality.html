@@ -37,7 +37,6 @@ body {
 <script src="lib/kdtree/src/web/kdTree.js"></script>
 <script src="yatayat.js"></script>
 <script src="dataquality.js"></script>
-<script src="config.js"></script>
 </head>
 <body>
 <div id="publicTransportMap" style="width: 100%; height: 100%">Loading ...</div>
@@ -67,6 +66,8 @@ function routeToggler(system) {
 }
 
 YY.fromConfig("config.experimental.json", function(system) {
+    map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
+
     sys = system;
     routeToggler(sys);
     renderLayer = YY.error_render(sys, sys.routes[0], document.getElementById("errorLog"));
@@ -86,8 +87,6 @@ if(YY.TILE_SOURCE) {
             map.addLayer(tiles);
         }
 }
-
-map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 
 YY.error_render = function(system, route, log) {
     var layer = new L.LayerGroup();
