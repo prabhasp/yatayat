@@ -215,21 +215,25 @@ YY.System.prototype.neighborNodes = function(stopID, routeID) {
     return neighbors;
 };
 
-YY.Route = function(id, stops, segments, tag, startSegID) {
+YY.Route = function(id, stops, ways, tag, startSegID) {
     this.id = id;
     this.stops = stops;
-    this.segments = segments;
+
+    //for the ordering function
+    this._unconnectedSegments = ways;
+    this.segmentsInOrder = [];
+
     this.tag = tag;
     this.name = tag.name;
     this.ref = tag.ref;
     this.transport = tag.route;
-    //this.orientingSegmentID = orientingSegmentID;
+
     if (startSegID) this.order(startSegID);
-    else {
-        this._unconnectedSegments = this.segments;
-        this._noTerminus = true;
-    }
+    else this._noTerminus = true;
     this.deriveStopDict(); // note: this must happen after the order call
+
+    //TODO: remove
+    this.segments = this.segmentsInOrder;
 };
 
 YY.Route.prototype.deriveStopDict = function () {
@@ -244,102 +248,100 @@ var distanceForObjLL = function(ll1, ll2) { return Math.pow(ll1.lat - ll2.lat, 2
 var distanceForArrLL = function(ll1, ll2) { return Math.pow(ll1[0] - ll2[1], 2) + Math.pow(ll1[0] - ll2[1], 2); };
 
 YY.Route.prototype.order = function(startSegID) {
-    return this.order_(startSegID);
+    var route = this;
+    // Find the first segment; if necessary, flip it, and call keepOrdering 
+    var startSegment = _.find(route._unconnectedSegments, function(seg) { return seg.id === startSegID; });
+    var startingStop = _.find(startSegment.orderedListofStops, function(s) { return s.is_start; });
+    if (!startSegment || !startingStop) { 
+        console.log('violation of assumption that startSegment exists in route: ', this.id); 
+        return;
+        //throw 'violation of assumption that startSegment exists';
+    }
+
+    var ends = [_.first(startSegment.listOfLatLng), _.last(startSegment.listOfLatLng)];
+    if (ends[1][0] === startingStop.lat && ends[1][1] === startingStop.lng)
+        startSegment.flip();
+
+    this.keepOrdering(startSegment, startingStop);
 }
 
-YY.Route.prototype.order_ = function(orientingSegmentID) {
+YY.Route.prototype.keepOrdering = function(way, stop) {
     var route = this;
-    var segmentOrderDict = {};
-    
-    // find orienting way
-    var stops = [];
-    var n = 0;
-    var startSegment = _.find(route.segments, function(seg) { return seg.id === orientingSegmentID; });
-    if (!startSegment) {
-        console.log('Ordering not possible for route: ', route.name, '; start segmend likely not in route ... ?');
+    if(way.listOfLatLng[0][0] !== stop.lat || way.listOfLatLng[0][1] !== stop.lng) {
+        console.log('violation of invariant: keepOrdering can only be called if way begins with stop ; ' +
+            'route :'  + route.name);
         return;
     }
-    var llToObj = function(ll, seg) { return {lat: ll[0], lng: ll[1], seg: seg}; } 
-    // kd-tree consisting of the 'start-endpoints' of a segment
-    var startKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(seg.listOfLatLng[0], seg); }), 
-                        distanceForObjLL, ["lat","lng"]);
-    // kd-tree consisting of the 'end-endpoints' of a segment
-    var endKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(_.last(seg.listOfLatLng), seg); }), 
-                        distanceForObjLL, ["lat","lng"]);
+    // some prep for later
+    function tos(ll) { return ll[0] + "," + ll[1]; }
+    var thisWaysEnd; // will be filled in later
 
-    // find, among all the 'start' and 'end' points in other segments, what the closest endpoint is
-    // and then put it in the segmentOrderObj, which is a linked list in the form on an obj 
-    // (segmentOrderDict[seg.id]) == followingSeg.id, where followingSeg is the segment that should be after seg
-    function closestSegment(thisSegment, end) {
-        var ret, segmentEnd;
-        if (end === 'first') {
-            segmentEnd = thisSegment.listOfLatLng[ 0 ];
-        } else { // also the default
-            segmentEnd = _.last(thisSegment.listOfLatLng);
+    // Okay, now that we confirm first stop is here, chuck it.
+    // Is there another stop in this way?
+    var stop2 = _.first(_.rest(way.orderedListofStops));
+
+    if (stop2) { // Yes, stop2 is remaining in the way
+
+        // Take the chunk of nodes from way1 and way2 
+        var indexUntil = _.compact(_.map(way.listOfLatLng, function(ll, idx) { 
+            if (ll[0] == stop2.lat && ll[1] == stop2.lng) return idx; }))[0];
+        var chunkedLLL = way.listOfLatLng.slice(0, indexUntil+1);
+        
+        // and throw that chunk away
+        way.orderedListofStops = _.rest(way.orderedListofStops);
+        way.listOfLatLng = way.listOfLatLng.slice(indexUntil);
+        
+        // add the chunked segment to segmentsInOrder
+        route.segmentsInOrder.push(
+            new YY.Segment(_.uniqueId(), chunkedLLL, way.tag, [stop, stop2]));
+        route.stops.push(stop);
+
+        // call keepOrdering(way, stop2); continue 
+        if (way.listOfLatLng.length > 1) {
+            route.keepOrdering(way, stop2);
+
+        } else { // special case: the whole way is filed away... need to go down to stop2 logic, but with special exceptions
+            stop = stop2;
+            stop2 = undefined;
+            thisWaysEnd = tos(_.last(way.listOfLatLng));
+            way.listOfLatLng = [];
+        }
+    } 
+    if (!stop2) { // No stop remaining in this way
+
+        route._unconnectedSegments = _.without(route._unconnectedSegments, way);
+        // Search all other way-endings to match this way's end
+        var fronts = _(route._unconnectedSegments).map(function(uS) { return tos(_.first(uS.listOfLatLng)); })
+        var backs = _(route._unconnectedSegments).map(function(uS) { return tos(_.last(uS.listOfLatLng)); })
+
+        // this ways end (unless already defined, for the special case)
+        var thisWaysEnd = thisWaysEnd || tos(_.last(way.listOfLatLng));
+
+        var way2FrontCnxn = _(fronts).indexOf(thisWaysEnd); /* TODO: kdtree ? */
+        var way2BackCnxn = _(backs).indexOf(thisWaysEnd);   /* TODO: kdtree ? */
+
+            // ERROR / END conditions
+            if (way2FrontCnxn > -1 && way2BackCnxn > -1) {
+                console.log( "branching at lat/lng: " + thisWaysEnd);
+                return;
+            } else if (way2FrontCnxn === -1 && way2BackCnxn === -1) {
+                console.log("search space exhausted with ", route._unconnectedSegments.length,
+                 " ways left for route: ", route.name);
+                return; // search space exhausted
+            }
+        var way2 = (way2FrontCnxn > -1) ? route._unconnectedSegments[way2FrontCnxn] :
+                                          route._unconnectedSegments[way2BackCnxn];
+        // If you find it on the "back-side" of another way, flip that second way
+        if (way2BackCnxn > -1) {
+            way2.flip();
         }
 
-        ret = startKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
-        var nextFwdTreeCnxn = _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
-        ret = endKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
-        var nextBwdTreeCnxn =  _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
-        var cnxnChanger = (end === 'first') ? {'fwd': 'bwd', 'bwd': 'fwd'} : {'fwd': 'fwd', 'bwd': 'bwd'};
-        if (nextFwdTreeCnxn[1] < nextBwdTreeCnxn[1]) {
-            segmentOrderDict[thisSegment.id] = nextFwdTreeCnxn[0].seg;
-            return { nextSeg: nextFwdTreeCnxn[0].seg, sqDist: nextFwdTreeCnxn[1], cnxn: cnxnChanger['fwd'] };
-        } else {
-            segmentOrderDict[thisSegment.id] = nextBwdTreeCnxn[0].seg;
-            return { nextSeg: nextBwdTreeCnxn[0].seg, sqDist: nextBwdTreeCnxn[1], cnxn: cnxnChanger['bwd'] };
-        }
+        // call keepOrdering(concat(way,way2), stop) (shrinking _unconnectedSegments appropriately)
+        // remember that at this point: way.orderedListOfStops is empty, and they are oriented the same way
+        way2.listOfLatLng = way.listOfLatLng.concat(way2.listOfLatLng);
+        route.keepOrdering(way2, stop);
     }
-
-    // go through it, putting all public stops in
-    function recurse(thisSegment, flipped) {
-        if (n === route.segments.length) return;
-        n = n + 1;
-
-        if (flipped) {
-            thisSegment.listOfLatLng.reverse();
-            thisSegment.orderedListofStops.reverse();
-        }
-        if (_.last(stops) === thisSegment.orderedListofStops[0]) {
-            thisSegment.orderedListofStops = _.rest(thisSegment.orderedListofStops);
-        }
-        stops = stops.concat(thisSegment.orderedListofStops);
-
-        var next = closestSegment(thisSegment);
-        if (next.cnxn === 'fwd') {
-            recurse(next.nextSeg, false);
-        } else {
-            recurse(next.nextSeg, true);
-        }
-    }
-    var fwdFacing = closestSegment(startSegment);
-    var bwdFacing = closestSegment(startSegment, 'first'); // nearest to first node = bwd facing
-    if (fwdFacing.sqDist < bwdFacing.sqDist) {
-        recurse(startSegment, false);
-    } else {
-        recurse(startSegment, true);
-    }
-
-    this.stops = _.map(stops, function(s) { return new YY.Stop(s.id, s.lat, s.lng, s.tag); });
-    //console.log(_.pluck(route.stops, 'name'));
-   
-    if (_.keys(segmentOrderDict).length === 0) {
-        console.log('ordering not quite successful for route ', route.name);
-        this._unconnectedSegments = this.segments;
-    } else if (_.keys(segmentOrderDict).length !== route.segments.length) {  // TODO: do this only in debug mode
-        console.log('ordering not quite successful for route ', route.name);
-        var connectedSegmentIds = _.keys(segmentOrderDict)
-        var connectedSegments = _(this.segments).filter(function(s) { 
-            return _(connectedSegmentIds).find(function(id) { return s.id === id; }) });
-
-        this._unconnectedSegments = _.difference(this.segments, connectedSegments);
-    } else {
-        // console.log('ordering successful for route ', route.name);
-        this._unconnectedSegments = [];
-    }
-    //console.log(_.chain(this._unconnectedSegments).pluck('orderedListofStops').flatten().pluck('tag').value());
-    //DEBUG: _.each(stops, function(s) {console.log(s.tag.name)});
+    
 };
 
 YY.Stop = function(id, lat, lng, tag) {
@@ -375,6 +377,11 @@ YY.fromConfig = function(config_path, cb) {
     });
 };
 
+YY.Segment.prototype.flip = function() {
+    this.listOfLatLng = _(this.listOfLatLng).reverse();
+    this.orderedListofStops = _(this.orderedListofStops).reverse();
+}
+
 YY.fromOSM = function (overpassXML) {
     var nodes = {};
     var segments = {};
@@ -387,6 +394,7 @@ YY.fromOSM = function (overpassXML) {
             tags[$t.attr('k')] = $t.attr('v'); });
         return tags; 
     };
+    /* Step 1: process all the returned nodes; put them in local nodes obj */
     _.each($(overpassXML).find('node'), function(n) {
         var $n = $(n);
         var tagObj = tagToObj($n.find('tag'));
@@ -396,6 +404,7 @@ YY.fromOSM = function (overpassXML) {
                                 tag: tagObj,
                                 is_stop: tagObj.public_transport === 'stop_position'};
     });
+    /* Step 2: put all ways from overpass into local segments obj + stopToSegDict */ 
     _.each($(overpassXML).find('way'), function(w) {
         var $w = $(w);
         var myNodes = [];
@@ -410,6 +419,7 @@ YY.fromOSM = function (overpassXML) {
             }
             myNodes.push([node.lat, node.lng]);
         });
+        // At this point, myNodes = ordered list of nodes in this segment, myStops = ordered list of stops
         segments[$w.attr('id')] = new YY.Segment($w.attr('id'), myNodes, tagToObj($w.find('tag')), myStops);
     });
     var routes = _.map($(overpassXML).find('relation'), function(r) {
@@ -424,8 +434,10 @@ YY.fromOSM = function (overpassXML) {
                 var n = nodes[$m.attr('ref')];
                 if (n && n.lat && n.lng) {
                     var stop = new YY.Stop($m.attr('ref'), n.lat, n.lng, n.tag);
-                    if ($m.attr('role') === 'terminus' || $m.attr('role') === 'start')
+                    if ($m.attr('role') === 'terminus' || $m.attr('role') === 'start') {
                         startStop = stop;
+                        n.is_start = true;
+                    }
                 }
             } 
         });
