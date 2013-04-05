@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-04-04T20:47:03Z"/>
+<meta osm_base="2013-04-05T02:47:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -1104,7 +1104,6 @@
     <tag k="name" v="नयाँ बानेश्वर"/>
     <tag k="name:en" v="New Baneshwor"/>
     <tag k="name:ne" v="नयाँ बानेश्वर"/>
-    <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="313917671" lat="27.7088290" lon="85.3152920">
     <tag k="name" v="Biswajyoti (Jamal) Stop"/>
@@ -2510,8 +2509,14 @@
   <node id="1805062871" lat="27.6982230" lon="85.3216372"/>
   <node id="1805062879" lat="27.6984786" lon="85.3215129"/>
   <node id="1805062883" lat="27.6985282" lon="85.3213966"/>
+  <node id="1805062899" lat="27.6986259" lon="85.3214357"/>
+  <node id="1805062909" lat="27.6986650" lon="85.3212242"/>
+  <node id="1805062926" lat="27.6987456" lon="85.3207628"/>
+  <node id="1805062937" lat="27.6988835" lon="85.3200224"/>
   <node id="1805062943" lat="27.6989657" lon="85.3166707"/>
   <node id="1805062949" lat="27.6990117" lon="85.3164962"/>
+  <node id="1805062950" lat="27.6990240" lon="85.3193201"/>
+  <node id="1805062961" lat="27.6991619" lon="85.3186414"/>
   <node id="1805062965" lat="27.6991865" lon="85.3163964"/>
   <node id="1805062967" lat="27.6992567" lon="85.3176921"/>
   <node id="1805062970" lat="27.6993518" lon="85.3177129">
@@ -2965,6 +2970,11 @@
   </node>
   <node id="1937703882" lat="27.6756332" lon="85.3188164"/>
   <node id="1937728798" lat="27.6821130" lon="85.3195955"/>
+  <node id="1939246636" lat="27.6984345" lon="85.3216802"/>
+  <node id="1939246637" lat="27.6985564" lon="85.3215902"/>
+  <node id="1939246638" lat="27.6985842" lon="85.3215313"/>
+  <node id="1939246639" lat="27.6984873" lon="85.3216556"/>
+  <node id="1939246640" lat="27.6985262" lon="85.3216400"/>
   <node id="1941180378" lat="27.6838132" lon="85.3333457"/>
   <node id="1942462601" lat="27.6698739" lon="85.3280478"/>
   <node id="1942462677" lat="27.6752094" lon="85.3528176"/>
@@ -3224,6 +3234,10 @@
   <node id="2022576553" lat="27.7284475" lon="85.3248283"/>
   <node id="2022576557" lat="27.7296345" lon="85.3248528"/>
   <node id="2022576563" lat="27.7340277" lon="85.3300490"/>
+  <node id="2022632174" lat="27.7352541" lon="85.3076282">
+    <tag k="name" v="Balaju Bus Park"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <node id="2022632179" lat="27.7352514" lon="85.3076318"/>
   <node id="2028654048" lat="27.6995331" lon="85.3448772"/>
   <node id="2028654072" lat="27.6996933" lon="85.3446150"/>
@@ -3292,6 +3306,7 @@
   <node id="2084139221" lat="27.6839118" lon="85.3022725"/>
   <node id="2085592081" lat="27.7230336" lon="85.3311511"/>
   <node id="2085592110" lat="27.7239407" lon="85.3310899"/>
+  <node id="2088245269" lat="27.6985371" lon="85.3216220"/>
   <node id="2088657276" lat="27.7076114" lon="85.3120656"/>
   <node id="2090577411" lat="27.6942853" lon="85.3202467"/>
   <node id="2090577412" lat="27.6947918" lon="85.3202811"/>
@@ -3729,18 +3744,6 @@
     <nd ref="31150615"/>
     <nd ref="31150616"/>
     <nd ref="31150617"/>
-    <nd ref="31150618"/>
-    <nd ref="31150619"/>
-    <nd ref="1919833113"/>
-    <nd ref="31150620"/>
-    <nd ref="31150621"/>
-    <nd ref="31150622"/>
-    <nd ref="31150623"/>
-    <nd ref="31150624"/>
-    <nd ref="2160737992"/>
-    <nd ref="31150625"/>
-    <nd ref="31150626"/>
-    <nd ref="31150627"/>
     <tag k="highway" v="secondary"/>
     <tag k="name" v="Sinamangal Road"/>
   </way>
@@ -5323,6 +5326,18 @@
     <tag k="oneway" v="yes"/>
     <tag k="surface" v="paved"/>
   </way>
+  <way id="169336484">
+    <nd ref="1805062970"/>
+    <nd ref="1805062961"/>
+    <nd ref="1805062950"/>
+    <nd ref="1805062937"/>
+    <nd ref="1805062926"/>
+    <nd ref="1805062909"/>
+    <nd ref="1805062899"/>
+    <tag k="highway" v="primary"/>
+    <tag k="layer" v="2"/>
+    <tag k="oneway" v="yes"/>
+  </way>
   <way id="169336486">
     <nd ref="31148727"/>
     <nd ref="1805063069"/>
@@ -5422,14 +5437,6 @@
     <nd ref="1950423190"/>
     <nd ref="1805087571"/>
     <nd ref="1933482458"/>
-    <nd ref="1872733915"/>
-    <nd ref="1817037504"/>
-    <nd ref="2168953899"/>
-    <nd ref="2051135669"/>
-    <nd ref="1817037501"/>
-    <nd ref="2051135668"/>
-    <nd ref="1933491193"/>
-    <nd ref="1933482456"/>
     <tag k="highway" v="primary"/>
     <tag k="lanes" v="2"/>
     <tag k="oneway" v="yes"/>
@@ -6779,9 +6786,6 @@
   <way id="182984266">
     <nd ref="313735983"/>
     <nd ref="1933482458"/>
-    <nd ref="1882457826"/>
-    <nd ref="1882601487"/>
-    <nd ref="1882453048"/>
     <tag k="highway" v="secondary"/>
     <tag k="lanes" v="2"/>
     <tag k="name" v="Old Baneshwor Road"/>
@@ -6842,10 +6846,23 @@
     <nd ref="1817037493"/>
     <nd ref="1817037490"/>
     <nd ref="1990638925"/>
-    <nd ref="317530944"/>
     <tag k="highway" v="primary"/>
     <tag k="lanes" v="2"/>
     <tag k="oneway" v="yes"/>
+  </way>
+  <way id="183527582">
+    <nd ref="1805062899"/>
+    <nd ref="1939246638"/>
+    <nd ref="1939246637"/>
+    <nd ref="2088245269"/>
+    <nd ref="1939246640"/>
+    <nd ref="1939246639"/>
+    <nd ref="1939246636"/>
+    <tag k="bicycle" v="yes"/>
+    <tag k="foot" v="no"/>
+    <tag k="highway" v="primary"/>
+    <tag k="oneway" v="yes"/>
+    <tag k="surface" v="paved"/>
   </way>
   <way id="183827054">
     <nd ref="1280128354"/>
@@ -7209,6 +7226,13 @@
     <nd ref="945666475"/>
     <tag k="highway" v="primary"/>
     <tag k="name" v="Tripureshwor Marg"/>
+  </way>
+  <way id="188434895">
+    <nd ref="1990638925"/>
+    <nd ref="317530947"/>
+    <tag k="highway" v="primary"/>
+    <tag k="lanes" v="1"/>
+    <tag k="oneway" v="yes"/>
   </way>
   <way id="188434896">
     <nd ref="317530944"/>
@@ -8058,6 +8082,15 @@
     <tag k="source" v="Self, www.dor.gov.np"/>
     <tag k="surface" v="paved"/>
   </way>
+  <way id="189665508">
+    <nd ref="2002501609"/>
+    <nd ref="2022632174"/>
+    <nd ref="2022632179"/>
+    <tag k="bridge" v="yes"/>
+    <tag k="highway" v="trunk"/>
+    <tag k="layer" v="1"/>
+    <tag k="name" v="Ringroad"/>
+  </way>
   <way id="190532597">
     <nd ref="2011801802"/>
     <nd ref="31148057"/>
@@ -8113,21 +8146,6 @@
     <nd ref="1273503607"/>
     <nd ref="1273503599"/>
     <nd ref="31150664"/>
-    <nd ref="1273515748"/>
-    <nd ref="1835392122"/>
-    <nd ref="31147686"/>
-    <nd ref="1960142038"/>
-    <nd ref="31147687"/>
-    <nd ref="1525726643"/>
-    <nd ref="1273515720"/>
-    <nd ref="1273515754"/>
-    <nd ref="1273515715"/>
-    <nd ref="31230922"/>
-    <nd ref="317532021"/>
-    <nd ref="1273515725"/>
-    <nd ref="1273515717"/>
-    <nd ref="317532020"/>
-    <nd ref="2038006738"/>
     <tag k="Micro Bus Fare" v="Rs. 14 - Rs. 25 depending on distance"/>
     <tag k="Micro Bus No." v="18"/>
     <tag k="Time" v="4 am to 8 pm"/>
@@ -8169,71 +8187,6 @@
   <way id="191532021">
     <nd ref="2021190880"/>
     <nd ref="1776714288"/>
-    <nd ref="1776714304"/>
-    <nd ref="1776714291"/>
-    <nd ref="1906600780"/>
-    <nd ref="1776714293"/>
-    <nd ref="1917103296"/>
-    <nd ref="1917103280"/>
-    <nd ref="2131800987"/>
-    <nd ref="669456490"/>
-    <nd ref="1830567772"/>
-    <nd ref="1874186545"/>
-    <nd ref="1830567771"/>
-    <nd ref="669456909"/>
-    <nd ref="1917103005"/>
-    <nd ref="1917102997"/>
-    <nd ref="2131895386"/>
-    <nd ref="1776714296"/>
-    <nd ref="2022576563"/>
-    <nd ref="1874101799"/>
-    <nd ref="2021174030"/>
-    <nd ref="480424567"/>
-    <nd ref="2074073659"/>
-    <nd ref="2021174025"/>
-    <nd ref="2090627862"/>
-    <nd ref="1835462540"/>
-    <nd ref="2021174028"/>
-    <nd ref="2071321931"/>
-    <nd ref="2071315827"/>
-    <nd ref="2071315822"/>
-    <nd ref="2072662343"/>
-    <nd ref="2071631615"/>
-    <nd ref="2071631546"/>
-    <nd ref="2021174027"/>
-    <nd ref="2022576557"/>
-    <nd ref="2021174029"/>
-    <nd ref="2071327114"/>
-    <nd ref="1835462270"/>
-    <nd ref="1776714292"/>
-    <nd ref="2022576553"/>
-    <nd ref="1776714306"/>
-    <nd ref="2021174031"/>
-    <nd ref="1776714295"/>
-    <nd ref="1794137298"/>
-    <nd ref="1950354246"/>
-    <nd ref="2103614757"/>
-    <nd ref="2074412148"/>
-    <nd ref="1776714653"/>
-    <nd ref="2074412117"/>
-    <nd ref="1979266949"/>
-    <nd ref="2102383199"/>
-    <nd ref="1775824909"/>
-    <nd ref="1776714651"/>
-    <nd ref="1950480617"/>
-    <nd ref="932366316"/>
-    <nd ref="1776714654"/>
-    <nd ref="2102387771"/>
-    <nd ref="789051259"/>
-    <nd ref="1954292588"/>
-    <nd ref="1950480548"/>
-    <nd ref="1730492299"/>
-    <nd ref="558561819"/>
-    <nd ref="1730492304"/>
-    <nd ref="31019738"/>
-    <nd ref="2064586641"/>
-    <nd ref="2064586604"/>
-    <nd ref="31019734"/>
     <tag k="highway" v="primary"/>
     <tag k="lanes" v="2"/>
     <tag k="name" v="Lazimpath Road; Lazimpath Rd; Maharajgunj Road; Maharajgunj Road"/>
@@ -8270,7 +8223,6 @@
     <nd ref="1899616683"/>
     <nd ref="1909209730"/>
     <nd ref="31228768"/>
-    <nd ref="1942462680"/>
     <tag k="Micro Bus Fare" v="Rs. 14 - Rs. 25 depending on distance"/>
     <tag k="Micro Bus No." v="18"/>
     <tag k="Route" v="Kalanki-Lagankhel"/>
@@ -8742,12 +8694,234 @@
     <tag k="source" v="KVDA Bylaw"/>
     <tag k="surface" v="paved"/>
   </way>
+  <way id="215506634">
+    <nd ref="1776714288"/>
+    <nd ref="1776714304"/>
+    <nd ref="1776714291"/>
+    <nd ref="1906600780"/>
+    <nd ref="1776714293"/>
+    <nd ref="1917103296"/>
+    <nd ref="1917103280"/>
+    <nd ref="2131800987"/>
+    <nd ref="669456490"/>
+    <nd ref="1830567772"/>
+    <nd ref="1874186545"/>
+    <nd ref="1830567771"/>
+    <nd ref="669456909"/>
+    <nd ref="1917103005"/>
+    <nd ref="1917102997"/>
+    <nd ref="2131895386"/>
+    <nd ref="1776714296"/>
+    <nd ref="2022576563"/>
+    <nd ref="1874101799"/>
+    <nd ref="2021174030"/>
+    <nd ref="480424567"/>
+    <tag k="highway" v="primary"/>
+    <tag k="lanes" v="2"/>
+    <tag k="name" v="Lazimpath Road; Lazimpath Rd; Maharajgunj Road; Maharajgunj Road"/>
+  </way>
+  <way id="215506635">
+    <nd ref="480424567"/>
+    <nd ref="2074073659"/>
+    <nd ref="2021174025"/>
+    <nd ref="2090627862"/>
+    <nd ref="1835462540"/>
+    <nd ref="2021174028"/>
+    <nd ref="2071321931"/>
+    <nd ref="2071315827"/>
+    <nd ref="2071315822"/>
+    <nd ref="2072662343"/>
+    <nd ref="2071631615"/>
+    <nd ref="2071631546"/>
+    <nd ref="2021174027"/>
+    <nd ref="2022576557"/>
+    <nd ref="2021174029"/>
+    <nd ref="2071327114"/>
+    <nd ref="1835462270"/>
+    <nd ref="1776714292"/>
+    <nd ref="2022576553"/>
+    <nd ref="1776714306"/>
+    <nd ref="2021174031"/>
+    <nd ref="1776714295"/>
+    <nd ref="1794137298"/>
+    <nd ref="1950354246"/>
+    <nd ref="2103614757"/>
+    <nd ref="2074412148"/>
+    <nd ref="1776714653"/>
+    <nd ref="2074412117"/>
+    <nd ref="1979266949"/>
+    <nd ref="2102383199"/>
+    <nd ref="1775824909"/>
+    <nd ref="1776714651"/>
+    <nd ref="1950480617"/>
+    <nd ref="932366316"/>
+    <nd ref="1776714654"/>
+    <nd ref="2102387771"/>
+    <nd ref="789051259"/>
+    <nd ref="1954292588"/>
+    <nd ref="1950480548"/>
+    <nd ref="1730492299"/>
+    <nd ref="558561819"/>
+    <nd ref="1730492304"/>
+    <nd ref="31019738"/>
+    <nd ref="2064586641"/>
+    <nd ref="2064586604"/>
+    <nd ref="31019734"/>
+    <tag k="highway" v="primary"/>
+    <tag k="lanes" v="2"/>
+    <tag k="name" v="Lazimpath Road; Lazimpath Rd; Maharajgunj Road; Maharajgunj Road"/>
+  </way>
+  <way id="215506636">
+    <nd ref="1882601487"/>
+    <nd ref="1882453048"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="lanes" v="2"/>
+    <tag k="name" v="Old Baneshwor Road"/>
+  </way>
+  <way id="215506637">
+    <nd ref="1933482458"/>
+    <nd ref="1882457826"/>
+    <nd ref="1882601487"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="lanes" v="2"/>
+    <tag k="name" v="Old Baneshwor Road"/>
+  </way>
+  <way id="215506638">
+    <nd ref="1933482458"/>
+    <nd ref="1872733915"/>
+    <nd ref="1817037504"/>
+    <nd ref="2168953899"/>
+    <nd ref="2051135669"/>
+    <nd ref="1817037501"/>
+    <nd ref="2051135668"/>
+    <nd ref="1933491193"/>
+    <nd ref="1933482456"/>
+    <tag k="highway" v="primary"/>
+    <tag k="lanes" v="2"/>
+    <tag k="oneway" v="yes"/>
+  </way>
+  <way id="215507254">
+    <nd ref="1835392122"/>
+    <nd ref="31147686"/>
+    <nd ref="1960142038"/>
+    <nd ref="31147687"/>
+    <nd ref="1525726643"/>
+    <nd ref="1273515720"/>
+    <nd ref="1273515754"/>
+    <nd ref="1273515715"/>
+    <nd ref="31230922"/>
+    <nd ref="317532021"/>
+    <nd ref="1273515725"/>
+    <nd ref="1273515717"/>
+    <nd ref="317532020"/>
+    <nd ref="2038006738"/>
+    <tag k="Micro Bus Fare" v="Rs. 14 - Rs. 25 depending on distance"/>
+    <tag k="Micro Bus No." v="18"/>
+    <tag k="Time" v="4 am to 8 pm"/>
+    <tag k="bicycle" v="yes"/>
+    <tag k="cycleway" v="no"/>
+    <tag k="foot" v="designated"/>
+    <tag k="highway" v="trunk"/>
+    <tag k="int_name" v="Ring Road"/>
+    <tag k="lanes" v="4"/>
+    <tag k="name" v="चक्रपथ"/>
+    <tag k="name:en" v="Ring Road"/>
+    <tag k="name:ne" v="चक्रपथ"/>
+    <tag k="oneway" v="no"/>
+    <tag k="route" v="Kalanki-Lagankhel"/>
+    <tag k="source" v="Bing"/>
+    <tag k="surface" v="paved"/>
+    <tag k="watch:80n" v="Katmandu"/>
+  </way>
+  <way id="215507255">
+    <nd ref="31228768"/>
+    <nd ref="1942462680"/>
+    <tag k="Micro Bus Fare" v="Rs. 14 - Rs. 25 depending on distance"/>
+    <tag k="Micro Bus No." v="18"/>
+    <tag k="Route" v="Kalanki-Lagankhel"/>
+    <tag k="Time" v="4 am to 8 pm"/>
+    <tag k="bicycle" v="yes"/>
+    <tag k="cycleway" v="no"/>
+    <tag k="foot" v="designated"/>
+    <tag k="highway" v="trunk"/>
+    <tag k="int_name" v="Ring Road"/>
+    <tag k="lanes" v="4"/>
+    <tag k="name" v="Ring Road"/>
+    <tag k="name:en" v="Ring Road"/>
+    <tag k="name:ne" v="चक्रपथ"/>
+    <tag k="source" v="Bing"/>
+    <tag k="surface" v="paved"/>
+    <tag k="watch:80n" v="Katmandu"/>
+  </way>
+  <way id="215507256">
+    <nd ref="31150664"/>
+    <nd ref="1273515748"/>
+    <nd ref="1835392122"/>
+    <tag k="Micro Bus Fare" v="Rs. 14 - Rs. 25 depending on distance"/>
+    <tag k="Micro Bus No." v="18"/>
+    <tag k="Time" v="4 am to 8 pm"/>
+    <tag k="bicycle" v="yes"/>
+    <tag k="cycleway" v="no"/>
+    <tag k="foot" v="designated"/>
+    <tag k="highway" v="trunk"/>
+    <tag k="int_name" v="Ring Road"/>
+    <tag k="lanes" v="4"/>
+    <tag k="name" v="चक्रपथ"/>
+    <tag k="name:en" v="Ring Road"/>
+    <tag k="name:ne" v="चक्रपथ"/>
+    <tag k="oneway" v="no"/>
+    <tag k="route" v="Kalanki-Lagankhel"/>
+    <tag k="source" v="Bing"/>
+    <tag k="surface" v="paved"/>
+    <tag k="watch:80n" v="Katmandu"/>
+  </way>
+  <way id="215507257">
+    <nd ref="31150617"/>
+    <nd ref="31150618"/>
+    <nd ref="31150619"/>
+    <nd ref="1919833113"/>
+    <nd ref="31150620"/>
+    <nd ref="31150621"/>
+    <nd ref="31150622"/>
+    <nd ref="31150623"/>
+    <nd ref="31150624"/>
+    <nd ref="2160737992"/>
+    <nd ref="31150625"/>
+    <nd ref="31150626"/>
+    <nd ref="31150627"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="name" v="Sinamangal Road"/>
+  </way>
+  <way id="215508153">
+    <nd ref="1939246636"/>
+    <nd ref="1805062871"/>
+    <tag k="access" v="yes"/>
+    <tag k="bicycle" v="yes"/>
+    <tag k="foot" v="no"/>
+    <tag k="highway" v="primary"/>
+    <tag k="lanes" v="1"/>
+    <tag k="maxspeed" v="30"/>
+    <tag k="motor_vehicle" v="yes"/>
+    <tag k="name" v="Ram Shah Path"/>
+    <tag k="oneway" v="yes"/>
+    <tag k="surface" v="paved"/>
+  </way>
+  <way id="215508154">
+    <nd ref="1990638925"/>
+    <nd ref="317530944"/>
+    <tag k="highway" v="primary"/>
+    <tag k="lanes" v="2"/>
+    <tag k="oneway" v="yes"/>
+  </way>
   <relation id="2276770">
     <member type="node" ref="360889656" role="end"/>
     <member type="node" ref="1274184084" role="start"/>
     <member type="way" ref="171203194" role=""/>
     <member type="way" ref="171603744" role=""/>
     <member type="way" ref="58423999" role=""/>
+    <member type="way" ref="169336484" role=""/>
+    <member type="way" ref="183527582" role=""/>
+    <member type="way" ref="215508153" role=""/>
     <member type="way" ref="171203196" role=""/>
     <member type="way" ref="36498467" role=""/>
     <member type="way" ref="173044199" role=""/>
@@ -8755,22 +8929,16 @@
     <member type="way" ref="172126340" role=""/>
     <member type="way" ref="169339097" role=""/>
     <member type="way" ref="169339098" role=""/>
+    <member type="way" ref="215506638" role=""/>
     <member type="way" ref="182984833" role=""/>
     <member type="way" ref="182984835" role=""/>
-    <member type="way" ref="188434896" role=""/>
+    <member type="way" ref="188434895" role=""/>
     <member type="way" ref="120032858" role=""/>
+    <member type="way" ref="193289326" role=""/>
     <member type="way" ref="172481629" role=""/>
     <member type="way" ref="185402774" role=""/>
     <member type="way" ref="194607852" role=""/>
     <member type="way" ref="171203193" role=""/>
-    <member type="way" ref="170533892" role=""/>
-    <member type="way" ref="190532597" role=""/>
-    <member type="way" ref="190532598" role=""/>
-    <member type="way" ref="193289327" role=""/>
-    <member type="way" ref="193289326" role=""/>
-    <member type="way" ref="196277319" role=""/>
-    <member type="way" ref="183827054" role=""/>
-    <member type="way" ref="183827055" role=""/>
     <tag k="name" v="New Bus Park-Thimi"/>
     <tag k="ref" v="10"/>
     <tag k="route" v="microbus"/>
@@ -8814,12 +8982,16 @@
     <member type="way" ref="121517656" role=""/>
     <member type="way" ref="120105832" role=""/>
     <member type="way" ref="120105828" role=""/>
+    <member type="way" ref="215507257" role=""/>
     <member type="way" ref="4840223" role=""/>
     <member type="way" ref="170533892" role=""/>
     <member type="way" ref="190532597" role=""/>
     <member type="way" ref="190532598" role=""/>
+    <member type="way" ref="215507256" role=""/>
+    <member type="way" ref="215507254" role=""/>
     <member type="way" ref="193289327" role=""/>
     <member type="way" ref="193289326" role=""/>
+    <member type="way" ref="215507255" role=""/>
     <member type="way" ref="196277319" role=""/>
     <member type="way" ref="183827054" role=""/>
     <member type="way" ref="183827055" role=""/>
@@ -8841,31 +9013,31 @@
     <member type="node" ref="31150664" role=""/>
     <member type="node" ref="31228768" role="terminus"/>
     <member type="node" ref="31230922" role=""/>
-    <member type="way" ref="4840223" role=""/>
-    <member type="way" ref="120105828" role=""/>
-    <member type="way" ref="120105832" role=""/>
-    <member type="way" ref="121517656" role=""/>
-    <member type="way" ref="171227895" role=""/>
-    <member type="way" ref="4840039" role=""/>
-    <member type="way" ref="121782640" role=""/>
-    <member type="way" ref="173980139" role=""/>
-    <member type="way" ref="111965837" role=""/>
-    <member type="way" ref="111965821" role=""/>
-    <member type="way" ref="120430420" role=""/>
-    <member type="way" ref="171227893" role=""/>
-    <member type="way" ref="4840054" role=""/>
-    <member type="way" ref="4840073" role=""/>
-    <member type="way" ref="28579442" role=""/>
+    <member type="node" ref="1274184084" role="terminus"/>
+    <member type="way" ref="24683731" role=""/>
+    <member type="way" ref="171215507" role=""/>
     <member type="way" ref="28579443" role=""/>
     <member type="way" ref="111984888" role=""/>
-    <member type="way" ref="170533892" role=""/>
-    <member type="way" ref="190532597" role=""/>
-    <member type="way" ref="190532598" role=""/>
+    <member type="way" ref="28579442" role=""/>
+    <member type="way" ref="4840073" role=""/>
+    <member type="way" ref="4840054" role=""/>
+    <member type="way" ref="171227893" role=""/>
+    <member type="way" ref="120430420" role=""/>
+    <member type="way" ref="111965821" role=""/>
+    <member type="way" ref="111965837" role=""/>
+    <member type="way" ref="173980139" role=""/>
+    <member type="way" ref="121782640" role=""/>
+    <member type="way" ref="4840039" role=""/>
+    <member type="way" ref="171227895" role=""/>
+    <member type="way" ref="121517656" role=""/>
+    <member type="way" ref="120105832" role=""/>
+    <member type="way" ref="120105828" role=""/>
+    <member type="way" ref="215507257" role=""/>
+    <member type="way" ref="4840223" role=""/>
+    <member type="way" ref="215507256" role=""/>
+    <member type="way" ref="215507254" role=""/>
     <member type="way" ref="193289327" role=""/>
     <member type="way" ref="193289326" role=""/>
-    <member type="way" ref="196277319" role=""/>
-    <member type="way" ref="183827054" role=""/>
-    <member type="way" ref="183827055" role=""/>
     <tag k="name" v="Koteshwor - Ratna Park"/>
     <tag k="ref" v="annapurna B"/>
     <tag k="route" v="tempo"/>
@@ -9052,6 +9224,8 @@
     <member type="way" ref="28543722" role=""/>
     <member type="way" ref="172387568" role=""/>
     <member type="way" ref="191532021" role=""/>
+    <member type="way" ref="215506634" role=""/>
+    <member type="way" ref="215506635" role=""/>
     <member type="way" ref="191532022" role=""/>
     <member type="way" ref="123389789" role=""/>
     <member type="way" ref="172375466" role=""/>
@@ -9327,8 +9501,11 @@
     <member type="way" ref="170533892" role=""/>
     <member type="way" ref="190532597" role=""/>
     <member type="way" ref="190532598" role=""/>
+    <member type="way" ref="215507256" role=""/>
+    <member type="way" ref="215507254" role=""/>
     <member type="way" ref="193289327" role=""/>
     <member type="way" ref="193289326" role=""/>
+    <member type="way" ref="215507255" role=""/>
     <member type="way" ref="196277319" role=""/>
     <member type="way" ref="183827054" role=""/>
     <member type="way" ref="183827055" role=""/>
@@ -9343,9 +9520,13 @@
     <member type="way" ref="112785219" role=""/>
     <member type="way" ref="182984267" role=""/>
     <member type="way" ref="182984266" role=""/>
+    <member type="way" ref="215506637" role=""/>
+    <member type="way" ref="215506636" role=""/>
     <member type="way" ref="169339098" role=""/>
+    <member type="way" ref="215506638" role=""/>
     <member type="way" ref="182984833" role=""/>
     <member type="way" ref="182984835" role=""/>
+    <member type="way" ref="215508154" role=""/>
     <member type="way" ref="188434896" role=""/>
     <member type="way" ref="169339097" role=""/>
     <member type="way" ref="172126340" role=""/>
@@ -9440,6 +9621,8 @@
     <member type="way" ref="28543722" role=""/>
     <member type="way" ref="172387568" role=""/>
     <member type="way" ref="191532021" role=""/>
+    <member type="way" ref="215506634" role=""/>
+    <member type="way" ref="215506635" role=""/>
     <member type="way" ref="191532022" role=""/>
     <member type="way" ref="123389789" role=""/>
     <member type="node" ref="1806066068" role=""/>
@@ -9473,6 +9656,8 @@
   <relation id="2301206">
     <member type="way" ref="28543722" role=""/>
     <member type="way" ref="191532021" role=""/>
+    <member type="way" ref="215506634" role=""/>
+    <member type="way" ref="215506635" role=""/>
     <member type="way" ref="191532022" role=""/>
     <member type="way" ref="123389789" role=""/>
     <member type="node" ref="1806066068" role=""/>
@@ -9507,6 +9692,7 @@
     <tag k="type" v="route"/>
   </relation>
   <relation id="2301263">
+    <member type="way" ref="189665508" role=""/>
     <member type="node" ref="31230922" role=""/>
     <member type="node" ref="31150664" role=""/>
     <member type="node" ref="31147572" role=""/>
@@ -9547,20 +9733,25 @@
     <member type="way" ref="170533892" role=""/>
     <member type="way" ref="190532597" role=""/>
     <member type="way" ref="190532598" role=""/>
+    <member type="way" ref="215507256" role=""/>
+    <member type="way" ref="215507254" role=""/>
     <member type="way" ref="193289327" role=""/>
     <member type="way" ref="193289326" role=""/>
+    <member type="way" ref="215507255" role=""/>
     <member type="way" ref="196277319" role=""/>
     <member type="way" ref="183827054" role=""/>
     <member type="way" ref="183827055" role=""/>
-    <member type="node" ref="2022632174" role="terminus"/>
+    <member type="node" ref="2022632174" role="start"/>
     <tag k="direction" v="cyclical"/>
     <tag k="name" v="Chakrapath Parikrama"/>
     <tag k="route" v="bus"/>
     <tag k="type" v="route"/>
   </relation>
   <relation id="2301306">
+    <member type="way" ref="180373622" role=""/>
     <member type="way" ref="166186938" role=""/>
-    <member type="way" ref="196281724" role=""/>
+    <member type="way" ref="215506634" role=""/>
+    <member type="way" ref="215506637" role=""/>
     <member type="way" ref="172385216" role=""/>
     <member type="way" ref="171215514" role=""/>
     <member type="way" ref="4840054" role=""/>
@@ -9577,7 +9768,6 @@
     <member type="node" ref="31228768" role=""/>
     <member type="node" ref="1817037493" role=""/>
     <member type="node" ref="1817037501" role=""/>
-    <member type="node" ref="313735983" role=""/>
     <member type="node" ref="1830679639" role=""/>
     <member type="node" ref="1281221676" role=""/>
     <member type="node" ref="1830679640" role=""/>
@@ -9596,21 +9786,22 @@
     <member type="way" ref="172385224" role=""/>
     <member type="way" ref="28598634" role=""/>
     <member type="way" ref="4840288" role=""/>
-    <member type="node" ref="268307761" role=""/>
     <member type="way" ref="172387586" role=""/>
     <member type="way" ref="170533892" role=""/>
     <member type="way" ref="190532597" role=""/>
     <member type="way" ref="190532598" role=""/>
+    <member type="way" ref="215507256" role=""/>
+    <member type="way" ref="215507254" role=""/>
     <member type="way" ref="193289327" role=""/>
     <member type="way" ref="193289326" role=""/>
+    <member type="way" ref="215507255" role=""/>
     <member type="way" ref="196277319" role=""/>
     <member type="way" ref="183827054" role=""/>
-    <member type="way" ref="183827055" role=""/>
-    <member type="way" ref="169339098" role=""/>
+    <member type="way" ref="215506638" role=""/>
     <member type="way" ref="182984833" role=""/>
     <member type="way" ref="182984835" role=""/>
+    <member type="way" ref="215508154" role=""/>
     <member type="way" ref="188434896" role=""/>
-    <member type="way" ref="191532021" role=""/>
     <member type="node" ref="2115670104" role=""/>
     <member type="node" ref="2115670119" role=""/>
     <tag k="name" v="Balkumari-Gopi Krishna"/>
@@ -9660,16 +9851,23 @@
     <member type="way" ref="170533892" role=""/>
     <member type="way" ref="190532597" role=""/>
     <member type="way" ref="190532598" role=""/>
+    <member type="way" ref="215507256" role=""/>
+    <member type="way" ref="215507254" role=""/>
     <member type="way" ref="193289327" role=""/>
     <member type="way" ref="193289326" role=""/>
+    <member type="way" ref="215507255" role=""/>
     <member type="way" ref="196277319" role=""/>
     <member type="way" ref="183827054" role=""/>
     <member type="way" ref="183827055" role=""/>
     <member type="way" ref="169339098" role=""/>
+    <member type="way" ref="215506638" role=""/>
     <member type="way" ref="182984833" role=""/>
     <member type="way" ref="182984835" role=""/>
+    <member type="way" ref="215508154" role=""/>
     <member type="way" ref="188434896" role=""/>
     <member type="way" ref="191532021" role=""/>
+    <member type="way" ref="215506634" role=""/>
+    <member type="way" ref="215506635" role=""/>
     <member type="node" ref="2115670104" role=""/>
     <member type="node" ref="2115670119" role=""/>
     <tag k="name" v="Gopi Krishna-Balkumari"/>
@@ -9731,6 +9929,8 @@
     <member type="node" ref="296319794" role="end"/>
     <member type="node" ref="2004031734" role="end"/>
     <member type="way" ref="191532021" role=""/>
+    <member type="way" ref="215506634" role=""/>
+    <member type="way" ref="215506635" role=""/>
     <member type="node" ref="2036232310" role=""/>
     <tag k="name" v="Patan Dhoka - Nag Pokhari"/>
     <tag k="ref" v="26"/>
@@ -9747,6 +9947,8 @@
     <member type="way" ref="4840264" role=""/>
     <member type="way" ref="171603747" role=""/>
     <member type="way" ref="191532021" role=""/>
+    <member type="way" ref="215506634" role=""/>
+    <member type="way" ref="215506635" role=""/>
     <tag k="name" v="Naya Baneshwor-Teaching"/>
     <tag k="ref" v="-"/>
     <tag k="route" v="microbus"/>
@@ -9769,6 +9971,8 @@
     <member type="node" ref="1399427366" role=""/>
     <member type="way" ref="172137062" role=""/>
     <member type="way" ref="191532021" role=""/>
+    <member type="way" ref="215506634" role=""/>
+    <member type="way" ref="215506635" role=""/>
     <tag k="direction" v="one_way"/>
     <tag k="name" v="Teaching-NayaBaneshwar"/>
     <tag k="ref" v="-"/>
@@ -9804,15 +10008,20 @@
     <member type="way" ref="172126340" role=""/>
     <member type="way" ref="169339097" role=""/>
     <member type="way" ref="169339098" role=""/>
+    <member type="way" ref="215506638" role=""/>
     <member type="way" ref="182984833" role=""/>
     <member type="way" ref="182984835" role=""/>
+    <member type="way" ref="215508154" role=""/>
     <member type="way" ref="188434896" role=""/>
     <member type="way" ref="120032858" role=""/>
     <member type="way" ref="170533892" role=""/>
     <member type="way" ref="190532597" role=""/>
     <member type="way" ref="190532598" role=""/>
+    <member type="way" ref="215507256" role=""/>
+    <member type="way" ref="215507254" role=""/>
     <member type="way" ref="193289327" role=""/>
     <member type="way" ref="193289326" role=""/>
+    <member type="way" ref="215507255" role=""/>
     <member type="way" ref="196277319" role=""/>
     <member type="way" ref="183827054" role=""/>
     <member type="way" ref="183827055" role=""/>
@@ -9821,13 +10030,22 @@
     <tag k="type" v="route"/>
   </relation>
   <relation id="2323381">
-    <member type="way" ref="28543722" role=""/>
-    <member type="way" ref="172387568" role=""/>
-    <member type="way" ref="191532021" role=""/>
-    <member type="way" ref="191532022" role=""/>
-    <member type="way" ref="123389789" role=""/>
-    <member type="way" ref="172375466" role=""/>
     <member type="way" ref="172123575" role=""/>
+    <member type="way" ref="172375466" role=""/>
+    <member type="way" ref="123389789" role=""/>
+    <member type="way" ref="191532022" role=""/>
+    <member type="way" ref="191532021" role=""/>
+    <member type="way" ref="215506634" role=""/>
+    <member type="way" ref="215506635" role=""/>
+    <member type="way" ref="172387568" role=""/>
+    <member type="way" ref="172387565" role=""/>
+    <member type="way" ref="28543722" role=""/>
+    <member type="way" ref="4840092" role=""/>
+    <member type="way" ref="176144614" role=""/>
+    <member type="way" ref="169442474" role=""/>
+    <member type="way" ref="28579443" role=""/>
+    <member type="way" ref="171215507" role=""/>
+    <member type="way" ref="171603746" role=""/>
     <member type="node" ref="943246313" role="end"/>
     <member type="node" ref="1806066068" role=""/>
     <member type="node" ref="558561819" role=""/>
@@ -9839,12 +10057,6 @@
     <member type="node" ref="1376180845" role=""/>
     <member type="node" ref="1830567764" role=""/>
     <member type="node" ref="1830567768" role="start"/>
-    <member type="way" ref="4840092" role=""/>
-    <member type="way" ref="176144614" role=""/>
-    <member type="way" ref="169442474" role=""/>
-    <member type="way" ref="28579443" role=""/>
-    <member type="way" ref="171215507" role=""/>
-    <member type="way" ref="171603746" role=""/>
     <tag k="name" v="Budhanilkantha School- Ratna Park"/>
     <tag k="ref" v="5"/>
     <tag k="route" v="microbus"/>
