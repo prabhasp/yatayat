@@ -238,6 +238,18 @@ DQ.findErrors = function(system) {
     });
     return out;
 };
+DQ.findCorrectRoutes = function(system) {
+    return system.routes.filter(function(route) {
+        for(var testname in DQ.sanityChecks) {
+            var res = DQ.sanityChecks[testname].run(route, system);
+            var errout = DQ.sanityChecks[testname].print(res, route, system);
+            if(errout) {
+                return false;
+            }
+        }
+        return true;
+    });
+};
 
 
 // export as a node module
