@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-04-05T12:12:02Z"/>
+<meta osm_base="2013-04-07T19:12:03Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -3647,6 +3647,7 @@
   <node id="2246184642" lat="27.7056628" lon="85.3336255"/>
   <node id="2246184650" lat="27.7057641" lon="85.3336784"/>
   <node id="2248198017" lat="27.6922934" lon="85.3182498"/>
+  <node id="2254730479" lat="27.6871135" lon="85.2648694"/>
   <way id="4825630">
     <nd ref="31019141"/>
     <nd ref="1806066074"/>
@@ -7196,7 +7197,6 @@
     <nd ref="1905826405"/>
     <nd ref="296332799"/>
     <nd ref="564118343"/>
-    <nd ref="945656946"/>
     <tag k="Micro Bus Fare" v="Rs. 14 - Rs. 25 depending on distance"/>
     <tag k="Micro Bus No." v="18"/>
     <tag k="Route" v="Kalanki-Lagankhel"/>
@@ -8340,6 +8340,7 @@
     <tag k="watch:80n" v="Katmandu"/>
   </way>
   <way id="195858822">
+    <nd ref="564118343"/>
     <nd ref="945656946"/>
     <nd ref="945656945"/>
     <tag k="Micro Bus Fare" v="Rs. 14 - Rs. 25 depending on distance"/>
@@ -8483,6 +8484,7 @@
     <nd ref="356102509"/>
     <nd ref="356102503"/>
     <nd ref="356102502"/>
+    <nd ref="2254730479"/>
     <nd ref="356102500"/>
     <nd ref="356102496"/>
     <nd ref="356102494"/>
@@ -9058,7 +9060,6 @@
     <member type="way" ref="44384567" role=""/>
     <member type="way" ref="184867817" role=""/>
     <member type="way" ref="184867816" role=""/>
-    <member type="way" ref="185470034" role=""/>
     <member type="way" ref="195858822" role=""/>
     <member type="way" ref="195858821" role=""/>
     <member type="way" ref="23395604" role=""/>
