@@ -1,8 +1,7 @@
-* New Bus Park - Thimi seems correct in OSM, but doesn't get processed correctly by YY [pp]
-  * Stop names don't show up.
-* Fix #2, then get to DQ-0 [pp]
+* move back git.numm.org to github
+* emails, documentation, etc. get help from osm-nepal to get to dq-0. [pp, deadline: April 21]
   * Make videos, upload to youtube, add to OSM wiki [pp]
-* Show the fucking routes [pp]
 * Once we hit DQ-0, re-convene [rmo, pp]
 * Progress report onto yatayat-dev list
 * Normalize transit types to one of (bus|microbus|tempo) []
+* Show the fucking routes [pp, deadline: April 31st]
