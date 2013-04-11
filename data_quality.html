@@ -61,11 +61,14 @@ function getRouteIdx(id) {
             return idx;
         }
     }
+    return -1;
 }
 function editRouteByHash() {
     var route_id = window.location.hash.slice(1);
-    console.log("hash change", route_id);
     var idx = getRouteIdx(route_id);
+    if(idx < 0) {
+        return;
+    }
     var $rp = $("#routepicker");
     editRouteByIdx(idx);
     if($rp[0].selectedIndex != idx) {
