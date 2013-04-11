@@ -166,7 +166,7 @@ YY.error_render = function(system, route, log) {
             var msg = "no start-point (or terminus) defined";
             addLog(msg, latlngs[Math.floor(latlngs.length / 2)], poly);
         } else if (!noTerminus) {
-            var msg = "unconnected segment";
+            var msg = "unconnected segment (id:"+seg.id+")";
             addLog(msg, latlngs[Math.floor(latlngs.length / 2)], poly);
         }
         layer.addLayer(poly);
