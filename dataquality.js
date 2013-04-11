@@ -58,7 +58,7 @@ DQ.sanityChecks = {
         print: function(run_output, route) {
             if (run_output) {
                 if(route.stops.length === 0 || route.segments.length === 0) {
-                    return "Without stops or segments, it's still to talk about whether the first segment will end at a stop.";
+                    return "Without stops or segments, it's silly to talk about whether the first segment will end at a stop.\n\n";
                 }
                 return "First segment of route (id:" + route.segments[0].id + 
                     ") doesn't start at a properly key-ed stop.\n";
