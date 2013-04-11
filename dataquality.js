@@ -45,6 +45,27 @@ DQ.sanityChecks = {
         }
     },
 
+    "first segment doesn't end at a stop": {
+        run: function(route) {
+            if(route.stops.length === 0 || route.segments.length === 0) {
+                return true;
+            }
+            var firstStop = route.stops[0];
+            var firstSegmentEnd = route.segments[0].listOfLatLng[0];
+            if (!firstStop) return true;
+            return firstStop.lat == firstSegmentEnd[0] && firstStop.lng == firstSegmentEnd[1];
+        },
+        print: function(run_output, route) {
+            if (run_output) {
+                if(route.stops.length === 0 || route.segments.length === 0) {
+                    return "Without stops or segments, it's silly to talk about whether the first segment will end at a stop.\n\n";
+                }
+                return "First segment of route (id:" + route.segments[0].id + 
+                    ") doesn't start at a properly key-ed stop.\n";
+            }
+        }
+    },
+
     "unnamed stops":  {
         run: function(route) {
             // Returns: stop.id -> true, when stop is unnamed
@@ -230,6 +251,7 @@ DQ.findErrors = function(system) {
             if(errout) {
                 if(!haserrors) {
                     out += "\n### Route: " + route.name + " (" + route.id + ")\n\n"
+                    out += "http://yatayat.monsooncollective.org/data_quality.html#" + route.id + "\n\n";
                     haserrors = true;
                 }
                 out += errout;
@@ -237,6 +259,18 @@ DQ.findErrors = function(system) {
         }
     });
     return out;
+};
+DQ.findCorrectRoutes = function(system) {
+    return system.routes.filter(function(route) {
+        for(var testname in DQ.sanityChecks) {
+            var res = DQ.sanityChecks[testname].run(route, system);
+            var errout = DQ.sanityChecks[testname].print(res, route, system);
+            if(errout) {
+                return false;
+            }
+        }
+        return true;
+    });
 };
 
 

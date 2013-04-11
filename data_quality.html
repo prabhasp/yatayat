@@ -37,7 +37,6 @@ body {
 <script src="lib/kdtree/src/web/kdTree.js"></script>
 <script src="yatayat.js"></script>
 <script src="dataquality.js"></script>
-<script src="config.js"></script>
 </head>
 <body>
 <div id="publicTransportMap" style="width: 100%; height: 100%">Loading ...</div>
@@ -49,16 +48,40 @@ var map = new L.Map('publicTransportMap'),
 renderLayer,
 sys;
 
+function editRouteByIdx(idx) {
+    if(renderLayer) {
+        map.removeLayer(renderLayer);
+    }
+    renderLayer = YY.error_render(sys, sys.routes[idx], document.getElementById('errorLog'));
+    map.addLayer(renderLayer);
+}
+function getRouteIdx(id) {
+    for(var idx=0; idx<sys.routes.length; idx++) {
+        if(sys.routes[idx].id === id) {
+            return idx;
+        }
+    }
+}
+function editRouteByHash() {
+    var route_id = window.location.hash.slice(1);
+    console.log("hash change", route_id);
+    var idx = getRouteIdx(route_id);
+    var $rp = $("#routepicker");
+    editRouteByIdx(idx);
+    if($rp[0].selectedIndex != idx) {
+        $rp[0].selectedIndex = idx;
+    }
+}
+
+// Watch hash changes and edit route
+window.onhashchange = editRouteByHash;
+
 function routeToggler(system) {
     var $rp = $('#routepicker')
         .change(function() {
-            if(renderLayer) {
-                map.removeLayer(renderLayer);
-            }
-            console.log('YY.error_render(',sys, sys.routes[$rp[0].selectedIndex], document.getElementById('errorLog'));
-            renderLayer = YY.error_render(sys, sys.routes[$rp[0].selectedIndex], document.getElementById('errorLog'));
-            map.addLayer(renderLayer);
+            window.location.hash = "#"+sys.routes[$rp[0].selectedIndex].id;
         });
+
     system.routes.forEach(function(route) {
         var $opt = $('<option>')
             .html(route.name)
@@ -66,15 +89,18 @@ function routeToggler(system) {
     });
 }
 
-$.ajax({ type: YY.GET_OR_POST, url: YY.API_URL,
-         data: YY.QUERY_STRING,
-         dataType: 'text',
-         success: function(data) {
-             sys = YY.fromOSM(data);
-             routeToggler(sys);
-	     renderLayer = YY.error_render(sys, sys.routes[0], document.getElementById('errorLog'));
-             map.addLayer(renderLayer);
-         }});
+YY.fromConfig("config.experimental.json", function(system) {
+    map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
+    system.routes.sort(function(x,y) { return x.name > y.name ? 1 : -1; });
+
+
+    sys = system;
+    routeToggler(sys);
+    renderLayer = YY.error_render(sys, sys.routes[0], document.getElementById("errorLog"));
+    map.addLayer(renderLayer);
+
+    editRouteByHash();
+});
 
 if(YY.TILE_SOURCE) {
         if (YY.WAX) {
@@ -89,10 +115,6 @@ if(YY.TILE_SOURCE) {
             map.addLayer(tiles);
         }
 }
-
-map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
-
-var SAME_STOP_DIST = Math.pow(0.0005,2);
 
 YY.error_render = function(system, route, log) {
     var layer = new L.LayerGroup();
@@ -137,30 +159,32 @@ YY.error_render = function(system, route, log) {
         marker.on('click', pop);
         log.appendChild($msg);
     }
+    var goodPop = function(msg, latlng, marker) {
+        var pop = function() { 
+            var popup = new L.Popup();
+            popup.setLatLng(latlng);
+            popup.setContent(msg);
+            map.openPopup(popup);
+        };
+        marker.on('click', pop);
+    }
+    _.each(route._unconnectedSegments, function(seg, idx) {
+        var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
+        var poly = new L.Polyline(latlngs, {color: unconnectedcol});
+        if (noTerminus && !idx) {
+            var msg = "no start-point (or terminus) defined";
+            addLog(msg, latlngs[Math.floor(latlngs.length / 2)], poly);
+        } else if (!noTerminus) {
+            var msg = "unconnected segment (id:"+seg.id+")";
+            addLog(msg, latlngs[Math.floor(latlngs.length / 2)], poly);
+        }
+        layer.addLayer(poly);
+    });
     _.each(route.segments,function(seg, idx) {
-        if(seg.id in unconnected) {
-            var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
-            var poly = new L.Polyline(latlngs, {color: unconnectedcol});
-            if (noTerminus && !idx) {
-                var msg = "no start-point (or terminus) defined";
-                addLog(msg, latlngs[Math.floor(latlngs.length / 2)], poly);
-            } else if (!noTerminus) {
-                var msg = "unconnected segment";
-                addLog(msg, latlngs[Math.floor(latlngs.length / 2)], poly);
-            }
-            layer.addLayer(poly);
-
-            // var seg2 = unconnected[seg.id];
-            // var ll2 = seg2.listOfLatLng.map(function(LL) {return new L.LatLng(LL[0], LL[1]);});
-            // var poly2 = new L.Polyline(ll2, {color: 'black'});
-            // layer.addLayer(poly2);
-            // delete unconnectedcol[seg.id]; // don't draw twice;
-        }
-        else {
-            var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
-            var poly = new L.Polyline(latlngs, {color: 'green'});
-            layer.addLayer(poly);
-        }
+        var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
+        var poly = new L.Polyline(latlngs, {color: 'green'});
+        layer.addLayer(poly);
+        goodPop("seg: "+seg.id, latlngs[Math.floor(latlngs.length / 2)], poly);
     });
 
     route.stops.forEach(function(stop) {
@@ -173,13 +197,13 @@ YY.error_render = function(system, route, log) {
             for(var rid in nearby[stop.id].routeDict) {
                 routename = nearby[stop.id].routeDict[rid].name;
             }
-            var msg = stop.name + " is rather close to " + nearby[stop.id].name + " (in route: "+ routename + ") but they have different names";
+            var msg = stop.name + " is rather close to " + nearby[stop.id].name + " (in route: "+ routename + ") but they have different names (id:"+stop.id+")";
             addLog(msg, ll, marker);
         }
         else if(stop.id in unnamed) {
             marker = new L.CircleMarker(ll,
                                         {color: unnamedcol});
-            var msg = "unnamed stop";
+            var msg = "unnamed stop (id:"+stop.id+")";
             addLog(msg, ll, marker);
         }
         else if(stop.id in simnames) {
@@ -189,12 +213,15 @@ YY.error_render = function(system, route, log) {
             for(var rid in simnames[stop.id].routeDict) {
                 routename = simnames[stop.id].routeDict[rid].name;
             }
-            var msg = stop.name + " has a similar name to far-off stop " + simnames[stop.id].name + ' (in route: ' + routename + ")";
+            var msg = stop.name + " (id:"+stop.id+") has a similar name to far-off stop " + simnames[stop.id].name + ' in route ' + routename;
             addLog(msg, ll, marker);
         }
         else {
             marker = new L.CircleMarker(ll,
                                         {color: 'green', opacity:0.2});
+
+            goodPop(stop.name + " (id:"+stop.id+")", ll, marker);
+
         }
         if(marker)
             layer.addLayer(marker);

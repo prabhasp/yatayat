@@ -357,6 +357,29 @@ YY.Segment = function(id, listOfLatLng, tag, orderedStops) {
     this.orderedListofStops = orderedStops; // intermediarily needed
 };
 
+YY.fromConfig = function(config_path, cb) {
+    // sequentially loads config file, and the system it calls for
+    // cb is called on the resulting system.
+    $.getJSON(config_path, {}, function(conf) {
+        // blend in the conf to the YY namespace
+        for(var key in conf) {
+            YY[key] = conf[key];
+        }
+        // load in & parse XML
+        $.ajax({type: YY.GET_OR_POST, url: YY.API_URL,
+                data: YY.QUERY_STRING,
+                dataType: "text",
+                success: function(res) {
+                    cb(YY.fromOSM(res));
+                }});
+    });
+};
+
+YY.Segment.prototype.flip = function() {
+    this.listOfLatLng = _(this.listOfLatLng).reverse();
+    this.orderedListofStops = _(this.orderedListofStops).reverse();
+}
+
 YY.fromOSM = function (overpassXML) {
     var nodes = {};
     var segments = {};
@@ -369,6 +392,7 @@ YY.fromOSM = function (overpassXML) {
             tags[$t.attr('k')] = $t.attr('v'); });
         return tags; 
     };
+    /* Step 1: process all the returned nodes; put them in local nodes obj */
     _.each($(overpassXML).find('node'), function(n) {
         var $n = $(n);
         var tagObj = tagToObj($n.find('tag'));
@@ -378,6 +402,7 @@ YY.fromOSM = function (overpassXML) {
                                 tag: tagObj,
                                 is_stop: tagObj.public_transport === 'stop_position'};
     });
+    /* Step 2: put all ways from overpass into local segments obj + stopToSegDict */ 
     _.each($(overpassXML).find('way'), function(w) {
         var $w = $(w);
         var myNodes = [];
@@ -392,6 +417,7 @@ YY.fromOSM = function (overpassXML) {
             }
             myNodes.push([node.lat, node.lng]);
         });
+        // At this point, myNodes = ordered list of nodes in this segment, myStops = ordered list of stops
         segments[$w.attr('id')] = new YY.Segment($w.attr('id'), myNodes, tagToObj($w.find('tag')), myStops);
     });
     var routes = _.map($(overpassXML).find('relation'), function(r) {
@@ -406,8 +432,10 @@ YY.fromOSM = function (overpassXML) {
                 var n = nodes[$m.attr('ref')];
                 if (n && n.lat && n.lng) {
                     var stop = new YY.Stop($m.attr('ref'), n.lat, n.lng, n.tag);
-                    if ($m.attr('role') === 'terminus' || $m.attr('role') === 'start')
+                    if ($m.attr('role') === 'terminus' || $m.attr('role') === 'start') {
                         startStop = stop;
+                        n.is_start = true;
+                    }
                 }
             } 
         });
@@ -415,6 +443,10 @@ YY.fromOSM = function (overpassXML) {
         return new YY.Route($r.attr('id'), [], mySegments, tagToObj($r.find('tag')), startSegID);
         /* TODO: now adding stops through the order() step; refactor accordingly */
     });
+
+    // Filter out hiking routes
+    routes = routes.filter(function(x) { return x.transport !== "hiking"; });
+
     return new YY.System(routes);
 };
 
@@ -448,5 +480,5 @@ var colors = (function() {
 
 // selectively export as a node module
 var module = module || {};
-module.exports = YY.fromOSM;
+module.exports = YY;
 
