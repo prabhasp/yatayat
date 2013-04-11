@@ -251,6 +251,7 @@ DQ.findErrors = function(system) {
             if(errout) {
                 if(!haserrors) {
                     out += "\n### Route: " + route.name + " (" + route.id + ")\n\n"
+                    out += "http://yatayat.monsooncollective.org/data_quality.html#" + route.id + "\n\n";
                     haserrors = true;
                 }
                 out += errout;
