@@ -8,4 +8,3 @@
 * Progress report onto yatayat-dev list
 * Make sure heritage walk doesn't show (ignore route=hiking) [rmo]
 * Normalize transit types to one of (bus|microbus|tempo) []
-* Refactor the DQ page, add route-hashes [rmo]
