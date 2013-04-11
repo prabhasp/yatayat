@@ -273,7 +273,9 @@ YY.Route.prototype.keepOrdering = function(way, stop) {
         return;
     }
     // some prep for later
-    function tos(ll) { return ll[0] + "," + ll[1]; }
+    function tos(ll) { 
+        if(ll) return ll[0] + "," + ll[1];
+    }
     var thisWaysEnd; // will be filled in later
 
     // Okay, now that we confirm first stop is here, chuck it.
