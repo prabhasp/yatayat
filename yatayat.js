@@ -447,6 +447,10 @@ YY.fromOSM = function (overpassXML) {
         return new YY.Route($r.attr('id'), [], mySegments, tagToObj($r.find('tag')), startSegID);
         /* TODO: now adding stops through the order() step; refactor accordingly */
     });
+
+    // Filter out hiking routes
+    routes = routes.filter(function(x) { return x.transport !== "hiking"; });
+
     return new YY.System(routes);
 };
 

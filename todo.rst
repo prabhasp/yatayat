@@ -6,5 +6,4 @@
 * Deploy data_sync with a cron job on numm [rmo]
 * Once we hit DQ-0, re-convene [rmo, pp]
 * Progress report onto yatayat-dev list
-* Make sure heritage walk doesn't show (ignore route=hiking) [rmo]
 * Normalize transit types to one of (bus|microbus|tempo) []
