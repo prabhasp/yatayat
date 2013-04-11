@@ -65,7 +65,7 @@ def parse_args():
 
 def run():
     # Change CWD to location of this script
-    os.chdir(os.path.dirname(__file__))
+    os.chdir(os.path.abspath(os.path.dirname(__file__)))
 
     opts = parse_args()
 
