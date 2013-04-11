@@ -25,6 +25,10 @@ Subject: %s
     p.stdin.close()
     p.wait()
 
+def pull():
+    subprocess.call(["git", "stash"])
+    subprocess.call(["git", "pull"])
+
 def push(files):
     ret = subprocess.call(["git", "commit", "-m", "datasync: overpass files updated"] + files)
     if ret == 0:
@@ -66,6 +70,9 @@ def run():
     opts = parse_args()
 
     conf = json.load(opts.config)
+
+    # update code & data
+    pull()
 
     # Download latest data from overpass
     if not opts.no_overpass:
