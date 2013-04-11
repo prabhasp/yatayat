@@ -17,7 +17,7 @@ Subject: [yatayat-QC] Errors found in today's Overpass data
 
 %s
 """ % (address, errors)
-    p = subprocess.Popen(["/usr/sbin/sendmail", address],
+    p = subprocess.Popen(["/usr/lib/sendmail", '--', address],
                      stdin=subprocess.PIPE)
     p.stdin.write(msg)
     p.stdin.close()
