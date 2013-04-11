@@ -1,5 +1,3 @@
-#!/usr/bin/env nodejs
-
 var YY = require('./yatayat.js');
 var DQ = require('./dataquality.js');
 

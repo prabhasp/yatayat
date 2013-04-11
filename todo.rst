@@ -1,4 +1,3 @@
-* fix datasync to work when nodejs is called node [rmo]
 * New Bus Park - Thimi seems correct in OSM, but doesn't get processed correctly by YY [pp]
   * Stop names don't show up.
 * Fix #2, then get to DQ-0 [pp]

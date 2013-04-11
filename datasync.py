@@ -8,15 +8,16 @@ import argparse
 import json
 import subprocess
 import shutil
+import sys
 import urllib2
 
-def email(address, errors):
+def email(address, errors, subject="QC Errors found in today's Overpass data"):
     msg = """To: %s
 From: Yatayat Sanity Bot <yatayat@NUMM.ORG>
-Subject: [yatayat-QC] Errors found in today's Overpass data
+Subject: %s
 
 %s
-""" % (address, errors)
+""" % (address, subject, errors)
     p = subprocess.Popen(["/usr/lib/sendmail", '--', address],
                      stdin=subprocess.PIPE)
     p.stdin.write(msg)
@@ -66,11 +67,19 @@ def run():
         open(opts.experimental, 'w').write(
             urllib2.urlopen(conf["API_URL"], data=conf["QUERY_STRING"]).read())
 
-    # Check data for quality errors
-    p = subprocess.Popen(["./cli_dataquality.js", opts.experimental],
-                         stdout=subprocess.PIPE)
-    err = p.stdout.read()
+    NODE = 'nodejs'              # debian
+    if sys.platform == 'darwin': # osx
+        NODE = 'node'
 
+    # Check data for quality errors
+    p = subprocess.Popen([NODE, "cli_dataquality.js", opts.experimental],
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    err = p.stdout.read()
+    stderr = p.stderr.read()
+    if len(stderr.strip()) > 0 and not opts.force:
+        # code-wise errors (!)
+        if not opts.silent:
+            email(opts.address, stderr, subject="URGENT JS ERRORS IN YATAYAT")
     if len(err.strip()) > 0 and not opts.force:
         # There were errors
         if not opts.silent:
