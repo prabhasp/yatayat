@@ -6,6 +6,7 @@
 
 import argparse
 import json
+import os
 import subprocess
 import shutil
 import sys
@@ -59,7 +60,11 @@ def parse_args():
     return parser.parse_args()
 
 def run():
+    # Change CWD to location of this script
+    os.chdir(os.path.dirname(__file__))
+
     opts = parse_args()
+
     conf = json.load(opts.config)
 
     # Download latest data from overpass
