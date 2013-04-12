@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-04-11T06:13:03Z"/>
+<meta osm_base="2013-04-11T23:59:03Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -2731,7 +2731,6 @@
   <node id="2126598726" lat="27.7083815" lon="85.3140438"/>
   <node id="2126598729" lat="27.7085106" lon="85.3143827"/>
   <node id="2127116483" lat="27.7081434" lon="85.3099979"/>
-  <node id="2127116484" lat="27.7082381" lon="85.3096023"/>
   <node id="2127168046" lat="27.7172096" lon="85.3154512"/>
   <node id="2128609405" lat="27.6846428" lon="85.3186255"/>
   <node id="2129447227" lat="27.6984058" lon="85.2993510"/>
@@ -2874,6 +2873,7 @@
   <node id="2254730479" lat="27.6871135" lon="85.2648694"/>
   <node id="2256329322" lat="27.6750530" lon="85.3557429"/>
   <node id="2256748974" lat="27.6900241" lon="85.3358986"/>
+  <node id="2262531879" lat="27.7305459" lon="85.3258174"/>
   <way id="4825630">
     <nd ref="31019141"/>
     <nd ref="1806066074"/>
@@ -3086,7 +3086,6 @@
     <nd ref="2126480291"/>
     <nd ref="31152994"/>
     <nd ref="2127116483"/>
-    <nd ref="2127116484"/>
     <nd ref="670169117"/>
     <tag k="designation" v="Heritage Walk"/>
     <tag k="highway" v="residential"/>
@@ -6993,6 +6992,7 @@
     <nd ref="2071315827"/>
     <nd ref="2071315822"/>
     <nd ref="2072662343"/>
+    <nd ref="2262531879"/>
     <nd ref="2071631615"/>
     <nd ref="2071631546"/>
     <nd ref="2021174027"/>
