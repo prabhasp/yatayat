@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-04-11T23:59:03Z"/>
+<meta osm_base="2013-04-12T23:59:03Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -1983,7 +1983,10 @@
   <node id="1830679648" lat="27.6905306" lon="85.3354348"/>
   <node id="1830679649" lat="27.6906990" lon="85.3350078"/>
   <node id="1830679651" lat="27.6937797" lon="85.3276632"/>
-  <node id="1830679652" lat="27.7009514" lon="85.3229183"/>
+  <node id="1830679652" lat="27.7009514" lon="85.3229183">
+    <tag k="name" v="New Plaza Stop"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <node id="1830679654" lat="27.7010943" lon="85.3223612"/>
   <node id="1830711730" lat="27.6991375" lon="85.3183070">
     <tag k="name" v="Bhadrakali"/>
