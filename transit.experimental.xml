@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-04-14T23:59:03Z"/>
+<meta osm_base="2013-04-15T23:59:03Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -2877,6 +2877,9 @@
   <node id="2256329322" lat="27.6750530" lon="85.3557429"/>
   <node id="2256748974" lat="27.6900241" lon="85.3358986"/>
   <node id="2262531879" lat="27.7305459" lon="85.3258174"/>
+  <node id="2267964855" lat="27.7068874" lon="85.3447116">
+    <tag k="designation" v="Bankali Chowk"/>
+  </node>
   <way id="4825630">
     <nd ref="31019141"/>
     <nd ref="1806066074"/>
@@ -4663,6 +4666,7 @@
     <nd ref="31148041"/>
     <nd ref="31148043"/>
     <nd ref="849954109"/>
+    <nd ref="2267964855"/>
     <nd ref="1281196435"/>
     <nd ref="31148051"/>
     <nd ref="360818365"/>
