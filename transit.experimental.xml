@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-05-02T23:59:03Z"/>
+<meta osm_base="2013-05-03T23:59:04Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -1912,7 +1912,6 @@
     <tag k="name" v="gathaghar"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="1825181708" lat="27.6746856" lon="85.3608012"/>
   <node id="1826042154" lat="27.7086869" lon="85.3318256">
     <tag k="name" v="Gyaneshwor Chowk"/>
     <tag k="public_transport" v="stop_position"/>
@@ -2064,7 +2063,6 @@
   <node id="1835421151" lat="27.7179839" lon="85.3481880"/>
   <node id="1835421180" lat="27.7183561" lon="85.3468648"/>
   <node id="1835421233" lat="27.7186648" lon="85.3495985"/>
-  <node id="1835421612" lat="27.7214595" lon="85.3702642"/>
   <node id="1835462228" lat="27.7281686" lon="85.3308831"/>
   <node id="1835462270" lat="27.7287298" lon="85.3249583"/>
   <node id="1835462368" lat="27.7294042" lon="85.3308491"/>
@@ -2520,7 +2518,7 @@
     <tag k="name" v="Patan Dhoka"/>
   </node>
   <node id="2050912179" lat="27.6853476" lon="85.3182881"/>
-  <node id="2051114317" lat="27.6748177" lon="85.3586077"/>
+  <node id="2051114317" lat="27.6748455" lon="85.3586100"/>
   <node id="2051135668" lat="27.6870231" lon="85.3416424"/>
   <node id="2051135669" lat="27.6872081" lon="85.3408353"/>
   <node id="2052363038" lat="27.6785344" lon="85.3209967"/>
@@ -4874,7 +4872,6 @@
     <nd ref="1280109762"/>
     <nd ref="2169058979"/>
     <nd ref="1280109772"/>
-    <nd ref="1835421612"/>
     <nd ref="2169105876"/>
     <nd ref="360704931"/>
     <nd ref="1279096755"/>
@@ -6471,7 +6468,6 @@
     <nd ref="1960042859"/>
     <nd ref="1835365964"/>
     <nd ref="1960042856"/>
-    <nd ref="1825181708"/>
     <nd ref="1822721401"/>
     <nd ref="2051114317"/>
     <nd ref="1835345600"/>
