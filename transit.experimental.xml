@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-05-05T23:59:04Z"/>
+<meta osm_base="2013-05-06T23:59:04Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -2335,7 +2335,7 @@
   <node id="1923681668" lat="27.6725308" lon="85.3413319"/>
   <node id="1924770781" lat="27.6763322" lon="85.3456270"/>
   <node id="1924770794" lat="27.6769231" lon="85.3464783"/>
-  <node id="1924771869" lat="27.6740905" lon="85.3428129"/>
+  <node id="1924771869" lat="27.6740905" lon="85.3428239"/>
   <node id="1926678600" lat="27.6741763" lon="85.3428925"/>
   <node id="1926722302" lat="27.6767654" lon="85.3462234"/>
   <node id="1927668257" lat="27.7023445" lon="85.3167036"/>
@@ -3330,8 +3330,8 @@
     <nd ref="31151653"/>
     <nd ref="31151654"/>
     <nd ref="31151483"/>
-    <tag k="created_by" v="Potlatch alpha"/>
     <tag k="highway" v="primary"/>
+    <tag k="oneway" v="yes"/>
   </way>
   <way id="4840409">
     <nd ref="31019262"/>
