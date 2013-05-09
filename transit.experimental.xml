@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-05-07T23:59:04Z"/>
+<meta osm_base="2013-05-08T23:58:04Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -200,7 +200,11 @@
   <node id="31229788" lat="27.6762782" lon="85.4335012"/>
   <node id="31229789" lat="27.6760638" lon="85.4338270"/>
   <node id="31229794" lat="27.6769336" lon="85.4358158"/>
-  <node id="31229796" lat="27.6773304" lon="85.4369032"/>
+  <node id="31229796" lat="27.6773304" lon="85.4369032">
+    <tag k="bus" v="yes"/>
+    <tag k="name" v="Kamal Binayak"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <node id="31230922" lat="27.6872755" lon="85.3505597">
     <tag k="name" v="Gairigaun Stop"/>
     <tag k="public_transport" v="stop_position"/>
@@ -3034,11 +3038,7 @@
     <tag k="name" v="Jadibuti"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="2291478685" lat="27.6771788" lon="85.4364363">
-    <tag k="bus" v="yes"/>
-    <tag k="name" v="Kamal Binayak"/>
-    <tag k="public_transport" v="stop_position"/>
-  </node>
+  <node id="2291478685" lat="27.6771788" lon="85.4364363"/>
   <node id="2291478686" lat="27.6759638" lon="85.4318311">
     <tag k="bus" v="yes"/>
     <tag k="name" v="Mahakali Stop"/>
@@ -3089,7 +3089,6 @@
     <tag k="name" v="Tinkune Subidhanagar"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="2291478696" lat="27.7056814" lon="85.3171507"/>
   <node id="2294227607" lat="27.7075764" lon="85.3121321"/>
   <node id="2294255938" lat="27.6932108" lon="85.3400806"/>
   <node id="2294255942" lat="27.6932285" lon="85.3401334"/>
@@ -6799,9 +6798,9 @@
     <tag k="highway" v="primary"/>
   </way>
   <way id="185944629">
-    <nd ref="1966300242"/>
-    <nd ref="1966300243"/>
     <nd ref="31229092"/>
+    <nd ref="1966300243"/>
+    <nd ref="1966300242"/>
     <tag k="highway" v="primary"/>
   </way>
   <way id="188434895">
@@ -6975,13 +6974,13 @@
     <tag k="oneway" v="no"/>
   </way>
   <way id="193289326">
-    <nd ref="268308347"/>
-    <nd ref="1909209725"/>
-    <nd ref="1899616707"/>
-    <nd ref="1899616705"/>
-    <nd ref="1899616683"/>
-    <nd ref="1909209730"/>
     <nd ref="31228768"/>
+    <nd ref="1909209730"/>
+    <nd ref="1899616683"/>
+    <nd ref="1899616705"/>
+    <nd ref="1899616707"/>
+    <nd ref="1909209725"/>
+    <nd ref="268308347"/>
     <tag k="Micro Bus Fare" v="Rs. 14 - Rs. 25 depending on distance"/>
     <tag k="Micro Bus No." v="18"/>
     <tag k="Route" v="Kalanki-Lagankhel"/>
@@ -7874,7 +7873,6 @@
     <nd ref="1906524972"/>
     <nd ref="1595627710"/>
     <nd ref="2291478678"/>
-    <nd ref="2291478696"/>
     <tag k="highway" v="residential"/>
   </way>
   <relation id="2276770">
@@ -9065,11 +9063,13 @@
     <member type="way" ref="220025933" role=""/>
     <member type="node" ref="1822721401" role=""/>
     <member type="node" ref="2249140889" role=""/>
-    <tag k="direction" v="forward"/>
+    <member type="node" ref="2291478678" role="end"/>
+    <member type="node" ref="31229796" role="start"/>
     <tag k="from" v="Bhaktapur"/>
     <tag k="loc_ref" v="Bhaktapur"/>
+    <tag k="name" v="Kamalbinayak-Ratnapark"/>
     <tag k="operator" v="Bhaktapur Minibus Samiti"/>
-    <tag k="ref" v="Kamalbinayak-Ratnapark(7)"/>
+    <tag k="ref" v="7"/>
     <tag k="route" v="bus"/>
     <tag k="to" v="Kathmandu"/>
     <tag k="type" v="route"/>
