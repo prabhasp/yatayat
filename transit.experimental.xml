@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-05-08T23:58:04Z"/>
+<meta osm_base="2013-05-09T23:59:04Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -1483,8 +1483,8 @@
   <node id="1347468309" lat="27.6986671" lon="85.3482406"/>
   <node id="1347468314" lat="27.6989046" lon="85.3478461"/>
   <node id="1347468319" lat="27.6999337" lon="85.3442319"/>
-  <node id="1347468329" lat="27.6993299" lon="85.3474207"/>
-  <node id="1347468354" lat="27.6991642" lon="85.3473940"/>
+  <node id="1347468329" lat="27.6992615" lon="85.3474024"/>
+  <node id="1347468354" lat="27.6991855" lon="85.3474211"/>
   <node id="1348908771" lat="27.6985680" lon="85.3211452"/>
   <node id="1348908774" lat="27.6988830" lon="85.3195151"/>
   <node id="1348908781" lat="27.6992488" lon="85.3176247"/>
@@ -2023,10 +2023,6 @@
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="1826042155" lat="27.7088003" lon="85.3313245"/>
-  <node id="1826116453" lat="27.6727577" lon="85.4049372">
-    <tag k="name" v="Srijana nagar"/>
-    <tag k="public_transport" v="stop_position"/>
-  </node>
   <node id="1829613369" lat="27.7068728" lon="85.3148430"/>
   <node id="1829640331" lat="27.6738021" lon="85.3228965"/>
   <node id="1829640334" lat="27.6718263" lon="85.3257934"/>
@@ -3092,6 +3088,9 @@
   <node id="2294227607" lat="27.7075764" lon="85.3121321"/>
   <node id="2294255938" lat="27.6932108" lon="85.3400806"/>
   <node id="2294255942" lat="27.6932285" lon="85.3401334"/>
+  <node id="2296825746" lat="27.6994052" lon="85.3472924"/>
+  <node id="2296825747" lat="27.6993470" lon="85.3473729"/>
+  <node id="2296825748" lat="27.6992366" lon="85.3473930"/>
   <way id="4825630">
     <nd ref="31019141"/>
     <nd ref="1806066074"/>
@@ -4422,6 +4421,7 @@
   </way>
   <way id="120105828">
     <nd ref="1347468329"/>
+    <nd ref="2296825748"/>
     <nd ref="1347468354"/>
     <nd ref="1347468314"/>
     <nd ref="1347468309"/>
@@ -4433,6 +4433,8 @@
   <way id="120105832">
     <nd ref="1274031393"/>
     <nd ref="1347468279"/>
+    <nd ref="2296825746"/>
+    <nd ref="2296825747"/>
     <nd ref="1347468329"/>
     <tag k="bridge" v="yes"/>
     <tag k="highway" v="tertiary"/>
@@ -7050,7 +7052,6 @@
   </way>
   <way id="194607861">
     <nd ref="360720177"/>
-    <nd ref="1826116453"/>
     <nd ref="2291478692"/>
     <nd ref="1835695030"/>
     <nd ref="296329360"/>
@@ -9026,6 +9027,10 @@
     <tag k="type" v="route"/>
   </relation>
   <relation id="2909799">
+    <member type="node" ref="2291478678" role="end"/>
+    <member type="node" ref="31229796" role="start"/>
+    <member type="node" ref="1822721401" role=""/>
+    <member type="node" ref="2249140889" role=""/>
     <member type="way" ref="220025932" role=""/>
     <member type="way" ref="24691025" role=""/>
     <member type="way" ref="137569858" role=""/>
@@ -9061,17 +9066,13 @@
     <member type="way" ref="171603745" role="forward"/>
     <member type="way" ref="4840124" role="forward"/>
     <member type="way" ref="220025933" role=""/>
-    <member type="node" ref="1822721401" role=""/>
-    <member type="node" ref="2249140889" role=""/>
-    <member type="node" ref="2291478678" role="end"/>
-    <member type="node" ref="31229796" role="start"/>
-    <tag k="from" v="Bhaktapur"/>
+    <tag k="from" v="Kamalbinayak"/>
     <tag k="loc_ref" v="Bhaktapur"/>
     <tag k="name" v="Kamalbinayak-Ratnapark"/>
     <tag k="operator" v="Bhaktapur Minibus Samiti"/>
     <tag k="ref" v="7"/>
     <tag k="route" v="bus"/>
-    <tag k="to" v="Kathmandu"/>
+    <tag k="to" v="Ratnapark"/>
     <tag k="type" v="route"/>
   </relation>
 
