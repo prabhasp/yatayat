@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-05-09T23:59:04Z"/>
+<meta osm_base="2013-05-10T23:59:05Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -2012,10 +2012,6 @@
   <node id="1822721401" lat="27.6747350" lon="85.3602734">
     <tag k="highway" v="bus_stop"/>
     <tag k="name" v="Lokanthali"/>
-    <tag k="public_transport" v="stop_position"/>
-  </node>
-  <node id="1822721402" lat="27.6739602" lon="85.3732107">
-    <tag k="name" v="gathaghar"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="1826042154" lat="27.7086869" lon="85.3318256">
@@ -7024,7 +7020,6 @@
   </way>
   <way id="194607852">
     <nd ref="1487748793"/>
-    <nd ref="1822721402"/>
     <nd ref="2291478683"/>
     <nd ref="1960042857"/>
     <nd ref="1960042859"/>
@@ -7408,6 +7403,7 @@
     <nd ref="558561819"/>
     <nd ref="1730492304"/>
     <nd ref="31019738"/>
+    <tag k="construction:lanes" v="4"/>
     <tag k="highway" v="primary"/>
     <tag k="lanes" v="2"/>
     <tag k="name" v="Lazimpath Road; Lazimpath Rd; Maharajgunj Road; Maharajgunj Road"/>
@@ -7734,6 +7730,7 @@
     <nd ref="2064586641"/>
     <nd ref="2064586604"/>
     <nd ref="31019734"/>
+    <tag k="construction:lanes" v="4"/>
     <tag k="highway" v="primary"/>
     <tag k="lanes" v="2"/>
     <tag k="name" v="Lazimpath Road; Lazimpath Rd; Maharajgunj Road; Maharajgunj Road"/>
