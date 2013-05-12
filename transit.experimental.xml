@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-05-10T23:59:05Z"/>
+<meta osm_base="2013-05-11T23:59:04Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -8021,7 +8021,7 @@
     <tag k="description" v="Bus and microbus route from Ratna Park to Kirtipur"/>
     <tag k="name" v="Ratna Park - Kirtipur"/>
     <tag k="ref" v="21"/>
-    <tag k="route" v="bus, microbus"/>
+    <tag k="route" v="bus;microbus"/>
     <tag k="type" v="route"/>
   </relation>
   <relation id="2282101">
