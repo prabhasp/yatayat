@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-05-15T23:59:04Z"/>
+<meta osm_base="2013-05-16T23:59:04Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -242,6 +242,7 @@
   <node id="36462723" lat="27.6877944" lon="85.2902878"/>
   <node id="36462724" lat="27.6875366" lon="85.2907613"/>
   <node id="36462731" lat="27.6852845" lon="85.2943118"/>
+  <node id="36471778" lat="27.6937862" lon="85.2185246"/>
   <node id="36471780" lat="27.6936114" lon="85.2192799"/>
   <node id="36471781" lat="27.6934974" lon="85.2195374"/>
   <node id="36471782" lat="27.6933379" lon="85.2197004"/>
@@ -566,9 +567,12 @@
   <node id="356102525" lat="27.6886370" lon="85.2326960"/>
   <node id="356102526" lat="27.6889562" lon="85.2294172"/>
   <node id="356102527" lat="27.6890322" lon="85.2285074"/>
-  <node id="356102528" lat="27.6890626" lon="85.2279238"/>
-  <node id="356102529" lat="27.6890854" lon="85.2276749"/>
-  <node id="356102531" lat="27.6890018" lon="85.2272286"/>
+  <node id="356102528" lat="27.6890242" lon="85.2279424"/>
+  <node id="356102529" lat="27.6890030" lon="85.2276377"/>
+  <node id="356102531" lat="27.6890018" lon="85.2272286">
+    <tag k="name" v="Thankot Checkpost"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <node id="356102532" lat="27.6890322" lon="85.2270483"/>
   <node id="356102533" lat="27.6891766" lon="85.2267307"/>
   <node id="356102534" lat="27.6899366" lon="85.2252802"/>
@@ -1692,10 +1696,6 @@
   <node id="1645448851" lat="27.6978701" lon="85.3033546"/>
   <node id="1651322059" lat="27.6704494" lon="85.2906221">
     <tag k="name" v="Kirtipur"/>
-    <tag k="public_transport" v="stop_position"/>
-  </node>
-  <node id="1659427859" lat="27.6936942" lon="85.2189792">
-    <tag k="name" v="Thankot Checkpost"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="1659430258" lat="27.7234101" lon="85.2946749">
@@ -3111,6 +3111,13 @@
   <node id="2303875221" lat="27.7213078" lon="85.3687479"/>
   <node id="2303993914" lat="27.7390317" lon="85.3874515"/>
   <node id="2303993915" lat="27.7390317" lon="85.3874515"/>
+  <node id="2306304591" lat="27.6870688" lon="85.2646794"/>
+  <node id="2306373794" lat="27.6872730" lon="85.2675994"/>
+  <node id="2306373873" lat="27.6931943" lon="85.2198099"/>
+  <node id="2306373880" lat="27.6935530" lon="85.2194117"/>
+  <node id="2306373884" lat="27.6937065" lon="85.2188692"/>
+  <node id="2306396976" lat="27.6953916" lon="85.2987177"/>
+  <node id="2306645439" lat="27.6715036" lon="85.3187640"/>
   <way id="4825630">
     <nd ref="31019141"/>
     <nd ref="1806066074"/>
@@ -5499,6 +5506,7 @@
     <nd ref="1127867456"/>
     <nd ref="1480909426"/>
     <nd ref="1127867468"/>
+    <nd ref="2306645439"/>
     <nd ref="314964026"/>
     <nd ref="1273478300"/>
     <nd ref="1273478115"/>
@@ -6665,6 +6673,7 @@
   <way id="184867816">
     <nd ref="564118331"/>
     <nd ref="1954400567"/>
+    <nd ref="2306396976"/>
     <nd ref="1965722832"/>
     <nd ref="671498903"/>
     <nd ref="1832500490"/>
@@ -7286,9 +7295,11 @@
     <nd ref="356102509"/>
     <nd ref="356102503"/>
     <nd ref="356102502"/>
+    <nd ref="2306304591"/>
     <nd ref="2254730479"/>
     <nd ref="356102500"/>
     <nd ref="356102496"/>
+    <nd ref="2306373794"/>
     <nd ref="356102494"/>
     <nd ref="356102492"/>
     <nd ref="356102487"/>
@@ -7573,10 +7584,13 @@
     <tag k="oneway" v="yes"/>
   </way>
   <way id="216281900">
-    <nd ref="1659427859"/>
+    <nd ref="36471778"/>
+    <nd ref="2306373884"/>
     <nd ref="36471780"/>
+    <nd ref="2306373880"/>
     <nd ref="36471781"/>
     <nd ref="36471782"/>
+    <nd ref="2306373873"/>
     <nd ref="36471783"/>
     <nd ref="36471784"/>
     <nd ref="36471785"/>
@@ -8138,7 +8152,6 @@
     <tag k="type" v="route"/>
   </relation>
   <relation id="2282154">
-    <member type="node" ref="1659427859" role="terminus"/>
     <member type="node" ref="356102517" role=""/>
     <member type="node" ref="356102511" role=""/>
     <member type="node" ref="313544725" role=""/>
