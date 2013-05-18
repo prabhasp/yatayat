@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-05-16T23:59:04Z"/>
+<meta osm_base="2013-05-17T23:59:04Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -908,7 +908,7 @@
     <tag k="name" v="Natole"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="425256551" lat="27.6754992" lon="85.3189249"/>
+  <node id="425256551" lat="27.6755301" lon="85.3189416"/>
   <node id="425306813" lat="27.6735742" lon="85.3142370"/>
   <node id="425306815" lat="27.6730715" lon="85.3138563"/>
   <node id="425306923" lat="27.6947235" lon="85.3207805"/>
@@ -3118,6 +3118,7 @@
   <node id="2306373884" lat="27.6937065" lon="85.2188692"/>
   <node id="2306396976" lat="27.6953916" lon="85.2987177"/>
   <node id="2306645439" lat="27.6715036" lon="85.3187640"/>
+  <node id="2308270432" lat="27.6630755" lon="85.3241326"/>
   <way id="4825630">
     <nd ref="31019141"/>
     <nd ref="1806066074"/>
@@ -6058,6 +6059,7 @@
   </way>
   <way id="172962756">
     <nd ref="1273477941"/>
+    <nd ref="2308270432"/>
     <nd ref="268308061"/>
     <nd ref="360455499"/>
     <nd ref="1933305705"/>
