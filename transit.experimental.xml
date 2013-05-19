@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-05-17T23:59:04Z"/>
+<meta osm_base="2013-05-18T23:59:04Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -2020,7 +2020,7 @@
   <node id="1826042155" lat="27.7088003" lon="85.3313245"/>
   <node id="1829613369" lat="27.7068728" lon="85.3148430"/>
   <node id="1829640331" lat="27.6738021" lon="85.3228965"/>
-  <node id="1829640334" lat="27.6718263" lon="85.3257934"/>
+  <node id="1829640334" lat="27.6718129" lon="85.3257783"/>
   <node id="1829640344" lat="27.6704790" lon="85.3272192">
     <tag k="name" v="Saughal"/>
     <tag k="public_transport" v="stop_position"/>
@@ -3119,6 +3119,9 @@
   <node id="2306396976" lat="27.6953916" lon="85.2987177"/>
   <node id="2306645439" lat="27.6715036" lon="85.3187640"/>
   <node id="2308270432" lat="27.6630755" lon="85.3241326"/>
+  <node id="2309012017" lat="27.6715511" lon="85.3260613"/>
+  <node id="2309012057" lat="27.6720455" lon="85.3255408"/>
+  <node id="2309012079" lat="27.6724408" lon="85.3251352"/>
   <way id="4825630">
     <nd ref="31019141"/>
     <nd ref="1806066074"/>
@@ -4729,8 +4732,11 @@
     <nd ref="1933312051"/>
     <nd ref="1933312052"/>
     <nd ref="425227541"/>
+    <nd ref="2309012017"/>
     <nd ref="1829640334"/>
+    <nd ref="2309012057"/>
     <nd ref="2165660975"/>
+    <nd ref="2309012079"/>
     <nd ref="253205163"/>
     <tag k="bicycle" v="yes"/>
     <tag k="cycleway" v="no"/>
