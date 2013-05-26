@@ -328,14 +328,14 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
         console.log('ordering not quite successful for route ', route.name);
         this._unconnectedSegments = this.segments;
     } else if (_.keys(segmentOrderDict).length !== route.segments.length) {  // TODO: do this only in debug mode
-        console.log('ordering not quite successful for route ', route.name);
+        // console.log('ordering not quite successful for route ', route.name);
         var connectedSegmentIds = _.keys(segmentOrderDict)
         var connectedSegments = _(this.segments).filter(function(s) { 
             return _(connectedSegmentIds).find(function(id) { return s.id === id; }) });
 
         this._unconnectedSegments = _.difference(this.segments, connectedSegments);
     } else {
-        console.log('ordering successful for route ', route.name);
+        // console.log('ordering successful for route ', route.name);
         this._unconnectedSegments = [];
     }
     //console.log(_.chain(this._unconnectedSegments).pluck('orderedListofStops').flatten().pluck('tag').value());

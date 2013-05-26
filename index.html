@@ -192,37 +192,6 @@ YY.fromConfig("config.stable.json", function(sys) {
         map.addLayer(YY._layerGroup);
     };
                                 
-    YY.render = function(route, map) {
-        // draw a route on a map!
-
-        var color = 'red';
-
-        // render the route as a multi-polyline
-        var routeMPL = new L.MultiPolyline(
-            _.map(route.segments, function(seg) {
-                return _.map(seg.listOfLatLng, function(LL) {
-                    return new L.LatLng(LL[0], LL[1]);
-                });
-            }),
-            {color: color, opacity: 1});
-        routeMPL.bindPopup(route.name);
-        map.addLayer(routeMPL);
-
-        // and stops as markers
-        route.stops.forEach(function(stop) {
-            var latlng = new L.LatLng(stop.lat, stop.lng);
-
-            var opts = {color: 'black', fillColor: color, fillOpacity: 1, radius: 8}
-            if(_.keys(stop.routeDict).length > 1) {
-                opts = {color: 'white', fillColor: color, fillOpacity: 1, radius: 8}
-            }
-
-            var marker = new L.CircleMarker(latlng, opts);
-            marker.bindPopup(stop.name);
-            map.addLayer(marker);
-        });
-    };
-
     function toTitleCase(str)
     {
         return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
