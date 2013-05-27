@@ -22,5 +22,5 @@ if(process.argv.length > 3) {
     }));
 }
 else {
-    console.log(DQ.findErrors(system));
+    console.log(DQ.errorString(system));
 }
