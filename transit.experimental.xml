@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-05-25T23:59:04Z"/>
+<meta osm_base="2013-05-26T23:59:04Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -2322,7 +2322,7 @@
   <node id="1918582708" lat="27.7408437" lon="85.3378245"/>
   <node id="1919833113" lat="27.6963317" lon="85.3518893"/>
   <node id="1919884269" lat="27.7081687" lon="85.3354718"/>
-  <node id="1919949854" lat="27.7101200" lon="85.3441089"/>
+  <node id="1919949854" lat="27.7101125" lon="85.3441127"/>
   <node id="1920098168" lat="27.7148504" lon="85.3457798"/>
   <node id="1920130571" lat="27.7199057" lon="85.3463603"/>
   <node id="1923681668" lat="27.6725308" lon="85.3413319"/>
@@ -3133,6 +3133,8 @@
   <node id="2318133083" lat="27.7504871" lon="85.4143447"/>
   <node id="2318228711" lat="27.6720125" lon="85.3171124"/>
   <node id="2319626266" lat="27.6647427" lon="85.3141394"/>
+  <node id="2320306648" lat="27.7101980" lon="85.3441395"/>
+  <node id="2320306649" lat="27.7101980" lon="85.3441395"/>
   <way id="4825630">
     <nd ref="31019141"/>
     <nd ref="1806066074"/>
@@ -5466,14 +5468,7 @@
     <nd ref="1847690843"/>
     <nd ref="31151495"/>
     <nd ref="1274031906"/>
-    <nd ref="1919949854"/>
-    <nd ref="316974278"/>
-    <nd ref="1894972591"/>
-    <nd ref="1274038035"/>
-    <nd ref="1274038039"/>
-    <nd ref="1274038041"/>
-    <nd ref="1832985899"/>
-    <nd ref="31148041"/>
+    <nd ref="2320306648"/>
     <tag k="bicycle" v="yes"/>
     <tag k="cycleway" v="no"/>
     <tag k="foot" v="designated"/>
@@ -7990,6 +7985,30 @@
     <tag k="layer" v="2"/>
     <tag k="oneway" v="yes"/>
   </way>
+  <way id="223093274">
+    <nd ref="2320306649"/>
+    <nd ref="1919949854"/>
+    <nd ref="316974278"/>
+    <nd ref="1894972591"/>
+    <nd ref="1274038035"/>
+    <nd ref="1274038039"/>
+    <nd ref="1274038041"/>
+    <nd ref="1832985899"/>
+    <nd ref="31148041"/>
+    <tag k="bicycle" v="yes"/>
+    <tag k="cycleway" v="no"/>
+    <tag k="foot" v="designated"/>
+    <tag k="highway" v="trunk"/>
+    <tag k="int_name" v="Ring Road"/>
+    <tag k="lanes" v="4"/>
+    <tag k="name" v="Ring Road"/>
+    <tag k="name:en" v="Ring Road"/>
+    <tag k="name:ne" v="चक्रपथ"/>
+    <tag k="oneway" v="no"/>
+    <tag k="source" v="Bing"/>
+    <tag k="surface" v="paved"/>
+    <tag k="watch:80n" v="Katmandu"/>
+  </way>
   <relation id="2276770">
     <member type="node" ref="360889656" role="end"/>
     <member type="node" ref="1274184084" role="start"/>
@@ -8160,6 +8179,7 @@
     <member type="way" ref="111965835" role=""/>
     <member type="way" ref="173980141" role=""/>
     <member type="way" ref="4840264" role=""/>
+    <member type="way" ref="223093274" role=""/>
     <member type="way" ref="171603747" role=""/>
     <member type="way" ref="4840318" role=""/>
     <member type="way" ref="24707457" role=""/>
@@ -8784,6 +8804,7 @@
     <member type="node" ref="1496627058" role=""/>
     <member type="node" ref="31228768" role=""/>
     <member type="way" ref="171603747" role=""/>
+    <member type="way" ref="223093274" role=""/>
     <member type="way" ref="4840304" role=""/>
     <member type="way" ref="180216483" role=""/>
     <member type="way" ref="180373624" role=""/>
@@ -9018,6 +9039,7 @@
     <member type="way" ref="121782640" role=""/>
     <member type="way" ref="112783299" role=""/>
     <member type="way" ref="4840264" role=""/>
+    <member type="way" ref="223093274" role=""/>
     <member type="way" ref="171603747" role=""/>
     <tag k="name" v="Naya Baneshwor-Teaching"/>
     <tag k="ref" v="-"/>
@@ -9035,6 +9057,7 @@
     <member type="node" ref="360695713" role=""/>
     <member type="node" ref="1399427366" role=""/>
     <member type="way" ref="171603747" role=""/>
+    <member type="way" ref="223093274" role=""/>
     <member type="way" ref="4840030" role=""/>
     <member type="way" ref="4840039" role=""/>
     <member type="way" ref="172138852" role=""/>
