@@ -456,7 +456,7 @@ YY.fromOSM = function (overpassXML) {
     routes = routes.filter(function(x) { return x.transport !== "hiking"; });
 
     return new YY.System(routes);
-};
+}
 
 // COLORS MODULE
 var colors = (function() {
