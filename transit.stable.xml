@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-06-08T23:59:05Z"/>
+<meta osm_base="2013-06-09T23:59:05Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -4641,6 +4641,7 @@
   </node>
   <node id="2336968998" lat="27.6681473" lon="85.4149791"/>
   <node id="2337289828" lat="27.6657656" lon="85.3314239"/>
+  <node id="2338508459" lat="27.6915767" lon="85.3261028"/>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -6744,7 +6745,7 @@
     <tag k="foot" v="yes"/>
     <tag k="highway" v="secondary"/>
     <tag k="name" v="Dilli Bazaar Road (डिल्लिबजार)"/>
-    <tag k="oneway" v="true"/>
+    <tag k="oneway" v="yes"/>
     <tag k="surface" v="paved"/>
   </way>
   <way id="120430421">
@@ -8128,6 +8129,7 @@
     <nd ref="1805087644"/>
     <nd ref="1805087637"/>
     <nd ref="1805087624"/>
+    <nd ref="2338508459"/>
     <nd ref="1950483594"/>
     <nd ref="2172879730"/>
     <nd ref="1805087609"/>
