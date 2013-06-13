@@ -19,10 +19,12 @@ if(opts['show_correct_routes']) {
         return route.name + " (" + route.id + ")";
     }));
 } else {
-    console.log("\n\n~~~~~~~~~~~ERRORS:~~~~~~~~~~~~~~\n\n");
-    console.log(DQ.errorString(system));
+    var errors = DQ.errorString(system);
+    if(errors.length > 0)
+        console.log("\n\n~~~~~~~~~~~ERRORS:~~~~~~~~~~~~~~\n\n" + errors);
     if (opts['--include-warnings']) {
-        console.log("\n\n~~~~~~~~~~~WARNINGS:~~~~~~~~~~~~~~\n\n");
-        console.log(DQ.errorString(system, 'WARNING'));
+        var warnings = DQ.errorString(system, 'WARNING');
+        if(warnings.length > 0)
+            console.log("\n\n~~~~~~~~~~~WARNINGS:~~~~~~~~~~~~~~\n\n" + warnings);
     }
 } 
