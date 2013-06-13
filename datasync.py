@@ -61,6 +61,10 @@ def parse_args():
                         default=False,
                         action="store_true",
                         help="suppresses git or e-mail outputs")
+    parser.add_argument("--no-pull",
+                        default=False,
+                        action="store_true",
+                        help="don't pull code from remote before running rest of script")
     return parser.parse_args()
 
 def run():
@@ -72,7 +76,8 @@ def run():
     conf = json.load(opts.config)
 
     # update code & data
-    pull()
+    if not opts.no_pull:
+        pull()
 
     # Download latest data from overpass
     if not opts.no_overpass:
@@ -87,7 +92,7 @@ def run():
     ep = subprocess.Popen([NODE, "cli_dataquality.js", opts.experimental],
                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     e_out = ep.stdout.read()
-    s_err = ep.stderr.read()
+    e_err = ep.stderr.read()
     wp = subprocess.Popen([NODE, "cli_dataquality.js", opts.experimental, '--include-warnings'],
                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     w_out = wp.stdout.read()
@@ -99,7 +104,7 @@ def run():
             email(opts.address, e_err + w_err, subject="URGENT JS ERRORS IN YATAYAT")
     if len(w_out.strip()) > 0 and not opts.silent:
         # warnings present -- email
-        email(opts.address, e_out)
+        email(opts.address, w_out)
     ## DATA
     if len(e_out.strip()) > 0 and not opts.force:
         # There were errors
