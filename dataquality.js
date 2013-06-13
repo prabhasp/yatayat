@@ -1,6 +1,7 @@
 // Data Quality: headless sanity checks for Yatayat System data.
 
 var DQ = DQ || {};
+var _ = _ || require("underscore");
 
 // nearestStops returns squared-distance; 
 // regardless, this is a magic number.
@@ -248,7 +249,7 @@ DQ.unconnectedSegments = DQ.sanityChecks["unconnected segments"].run;
 DQ.errorString = function(system, which) {
     var which = which || 'ERROR'; // possible options: 'ERROR', 'WARNING'
     var errForRoute = function(route) {
-        var errs = DQ.findErrorsAndWarnings(route, sys)[which];
+        var errs = DQ.findErrorsAndWarnings(route, system)[which];
         var prequel = "\n### Route: " + route.name + " (" + route.id + ")\n\n" +
                   "http://yatayat.monsooncollective.org/data_quality.html#" + route.id + "\n\n";
         return errs ? prequel + errs : "";
