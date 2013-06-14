@@ -1,6 +1,6 @@
 var YY = require('./yatayat.js');
 var DQ = require('./dataquality.js');
-var docopt = require('docopt');
+var docopt = require('./docopt.coffee/');
 
 var fs = require("fs");
 var docstring = "\n" +
