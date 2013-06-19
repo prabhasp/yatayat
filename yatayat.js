@@ -400,8 +400,11 @@ YY.fromOSM = function (overpassXML) {
             tags[$t.attr('k')] = $t.attr('v'); });
         return tags; 
     };
+
+    var $overpassXML = $(overpassXML);
+
     /* Step 1: process all the returned nodes; put them in local nodes obj */
-    _.each($(overpassXML).find('node'), function(n) {
+    _.each($overpassXML.find('node'), function(n) {
         var $n = $(n);
         var tagObj = tagToObj($n.find('tag'));
         nodes[$n.attr('id')] = {id: $n.attr('id'),
@@ -410,8 +413,9 @@ YY.fromOSM = function (overpassXML) {
                                 tag: tagObj,
                                 is_stop: tagObj.public_transport === 'stop_position'};
     });
+
     /* Step 2: put all ways from overpass into local segments obj + stopToSegDict */ 
-    _.each($(overpassXML).find('way'), function(w) {
+    _.each($overpassXML.find('way'), function(w) {
         var $w = $(w);
         var myNodes = [];
         var myStops = [];
@@ -428,7 +432,7 @@ YY.fromOSM = function (overpassXML) {
         // At this point, myNodes = ordered list of nodes in this segment, myStops = ordered list of stops
         segments[$w.attr('id')] = new YY.Segment($w.attr('id'), myNodes, tagToObj($w.find('tag')), myStops);
     });
-    var routes = _.map($(overpassXML).find('relation'), function(r) {
+    var routes = _.map($overpassXML.find('relation'), function(r) {
         var $r = $(r);
         var mySegments = [];
         var startStop, startSegID;
