@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-06-13T23:59:05Z"/>
+<meta osm_base="2013-06-18T23:59:05Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -622,11 +622,10 @@
   <node id="268308540" lat="27.6741134" lon="85.4231839"/>
   <node id="268308542" lat="27.6732608" lon="85.4225611"/>
   <node id="268308547" lat="27.6728069" lon="85.4224717"/>
-  <node id="268308549" lat="27.6720130" lon="85.4224399">
+  <node id="268308549" lat="27.6720156" lon="85.4224395">
     <tag k="name" v="Dudhpati"/>
     <tag k="place" v="suburb"/>
   </node>
-  <node id="268308551" lat="27.6715568" lon="85.4215372"/>
   <node id="268308560" lat="27.6713648" lon="85.4194776"/>
   <node id="268308563" lat="27.6717829" lon="85.4147999"/>
   <node id="268545728" lat="27.7182038" lon="85.3121379">
@@ -829,9 +828,9 @@
   <node id="336237617" lat="27.6165292" lon="85.2643430"/>
   <node id="336237618" lat="27.6164076" lon="85.2643945"/>
   <node id="336237619" lat="27.6162326" lon="85.2646434"/>
-  <node id="336237620" lat="27.6161338" lon="85.2649867"/>
-  <node id="336237621" lat="27.6160577" lon="85.2651155"/>
-  <node id="336237622" lat="27.6157915" lon="85.2651670"/>
+  <node id="336237620" lat="27.6163229" lon="85.2650116"/>
+  <node id="336237621" lat="27.6161707" lon="85.2651598"/>
+  <node id="336237622" lat="27.6158013" lon="85.2652945"/>
   <node id="336237623" lat="27.6152364" lon="85.2653043"/>
   <node id="336237624" lat="27.6147268" lon="85.2653901"/>
   <node id="336237625" lat="27.6144302" lon="85.2653901"/>
@@ -1953,7 +1952,7 @@
     <tag k="name" v="Boudha"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="562962845" lat="27.6177811" lon="85.3194401"/>
+  <node id="562962845" lat="27.6177197" lon="85.3195468"/>
   <node id="562962854" lat="27.5990262" lon="85.3238949"/>
   <node id="562963441" lat="27.6571469" lon="85.3262184"/>
   <node id="564118331" lat="27.6960968" lon="85.2988078"/>
@@ -3146,7 +3145,7 @@
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="1821359035" lat="27.5744713" lon="85.3123180"/>
-  <node id="1822721401" lat="27.6747350" lon="85.3602734">
+  <node id="1822721401" lat="27.6747493" lon="85.3599341">
     <tag k="highway" v="bus_stop"/>
     <tag k="name" v="Lokanthali"/>
     <tag k="public_transport" v="stop_position"/>
@@ -3665,8 +3664,8 @@
   <node id="1957364482" lat="27.7266061" lon="85.3453338"/>
   <node id="1960037401" lat="27.6751426" lon="85.3548741"/>
   <node id="1960042856" lat="27.6744801" lon="85.3642698">
-    <tag k="bus" v="yes"/>
-    <tag k="name" v="Kaushaltar"/>
+    <tag k="highway" v="bus_stop"/>
+    <tag k="name" v="kaushaltar"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="1960042857" lat="27.6743989" lon="85.3653986"/>
@@ -3730,7 +3729,6 @@
   <node id="1963141992" lat="27.6726707" lon="85.3414615"/>
   <node id="1963985532" lat="27.7178389" lon="85.3132160"/>
   <node id="1964121121" lat="27.6713256" lon="85.4214723"/>
-  <node id="1964124084" lat="27.6718944" lon="85.4222881"/>
   <node id="1964144943" lat="27.6713839" lon="85.4204571"/>
   <node id="1964720666" lat="27.5934221" lon="85.5181224"/>
   <node id="1965646270" lat="27.6771493" lon="85.2813895"/>
@@ -3912,7 +3910,8 @@
   <node id="2049278532" lat="27.6767939" lon="85.3161927"/>
   <node id="2049458850" lat="27.6813729" lon="85.3176878"/>
   <node id="2050912179" lat="27.6853476" lon="85.3182881"/>
-  <node id="2051114285" lat="27.6748387" lon="85.3602348">
+  <node id="2051114285" lat="27.6749080" lon="85.3597899">
+    <tag k="highway" v="bus_stop"/>
     <tag k="name" v="Lokanthali"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
@@ -3926,10 +3925,12 @@
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="2051114288" lat="27.6740598" lon="85.3733041">
+    <tag k="highway" v="bus_stop"/>
     <tag k="name" v="gathaghar"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="2051114289" lat="27.6746027" lon="85.3644278">
+    <tag k="highway" v="bus_stop"/>
     <tag k="name" v="kaushaltar"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
@@ -4200,7 +4201,7 @@
   <node id="2131315175" lat="27.6839773" lon="85.3333672"/>
   <node id="2131800987" lat="27.7383656" lon="85.3353844"/>
   <node id="2131895386" lat="27.7342790" lon="85.3303678"/>
-  <node id="2136844253" lat="27.6730068" lon="85.4121626"/>
+  <node id="2136844253" lat="27.6729879" lon="85.4121669"/>
   <node id="2139807311" lat="27.6978391" lon="85.3380075"/>
   <node id="2139832138" lat="27.7041306" lon="85.3062621"/>
   <node id="2139832139" lat="27.7041898" lon="85.3063530"/>
@@ -4451,11 +4452,6 @@
     <tag k="name" v="Baneshwor Bus Station"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="2291478680" lat="27.6719862" lon="85.4224056">
-    <tag k="bus" v="yes"/>
-    <tag k="name" v="Bhaktapur Hospital Stop"/>
-    <tag k="public_transport" v="stop_position"/>
-  </node>
   <node id="2291478681" lat="27.6893299" lon="85.3310390">
     <tag k="bus" v="yes"/>
     <tag k="name" v="Buddhanagar Stop"/>
@@ -4468,7 +4464,8 @@
   </node>
   <node id="2291478683" lat="27.6739692" lon="85.3730508">
     <tag k="bus" v="yes"/>
-    <tag k="name" v="Gathaghar"/>
+    <tag k="highway" v="bus_stop"/>
+    <tag k="name" v="gathaghar"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="2291478684" lat="27.6751899" lon="85.3539203">
@@ -4618,6 +4615,17 @@
   <node id="2342349321" lat="27.6895824" lon="85.2839836"/>
   <node id="2342349324" lat="27.6899195" lon="85.2837390"/>
   <node id="2343574167" lat="27.7475674" lon="85.4114635"/>
+  <node id="2343968531" lat="27.6719882" lon="85.4224082">
+    <tag k="bus" v="yes"/>
+    <tag k="name" v="Bhaktapur Hospital Stop"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
+  <node id="2343968543" lat="27.6715476" lon="85.4215455"/>
+  <node id="2343968544" lat="27.6718898" lon="85.4222910"/>
+  <node id="2351276003" lat="27.6739133" lon="85.3740330">
+    <tag k="name" v="Gathaghar"/>
+    <tag k="place" v="suburb"/>
+  </node>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -5035,9 +5043,9 @@
     <nd ref="2071120863"/>
     <nd ref="268308547"/>
     <nd ref="268308549"/>
-    <nd ref="2291478680"/>
-    <nd ref="1964124084"/>
-    <nd ref="268308551"/>
+    <nd ref="2343968531"/>
+    <nd ref="2343968544"/>
+    <nd ref="2343968543"/>
     <nd ref="1964121121"/>
     <nd ref="1964144943"/>
     <nd ref="1990812436"/>
@@ -9810,7 +9818,7 @@
     <tag k="watch:80n" v="Katmandu"/>
   </way>
   <way id="194607852">
-    <nd ref="1487748793"/>
+    <nd ref="2351276003"/>
     <nd ref="2291478683"/>
     <nd ref="1960042857"/>
     <nd ref="1960042859"/>

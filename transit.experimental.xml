@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-06-17T23:59:05Z"/>
+<meta osm_base="2013-06-18T23:59:05Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -1872,6 +1872,19 @@
   <node id="480431031" lat="27.7351070" lon="85.3422012"/>
   <node id="553319546" lat="27.6241936" lon="85.5494564"/>
   <node id="553324934" lat="27.6205298" lon="85.5533330"/>
+  <node id="558555620" lat="27.5871094" lon="85.5133814">
+    <tag k="name" v="Panauti"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
+  <node id="558555621" lat="27.5874106" lon="85.5135480"/>
+  <node id="558555622" lat="27.5878934" lon="85.5136099"/>
+  <node id="558555623" lat="27.5882301" lon="85.5138213"/>
+  <node id="558555624" lat="27.5887304" lon="85.5143836"/>
+  <node id="558555625" lat="27.5889509" lon="85.5146399"/>
+  <node id="558555627" lat="27.5893635" lon="85.5155524"/>
+  <node id="558555628" lat="27.5897882" lon="85.5162399"/>
+  <node id="558555629" lat="27.5902590" lon="85.5166148"/>
+  <node id="558555630" lat="27.5908775" lon="85.5168128"/>
   <node id="558555631" lat="27.5910999" lon="85.5168310"/>
   <node id="558555632" lat="27.5920097" lon="85.5169126"/>
   <node id="558555633" lat="27.5923790" lon="85.5168293"/>
@@ -1939,7 +1952,7 @@
     <tag k="name" v="Boudha"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="562962845" lat="27.6177811" lon="85.3194401"/>
+  <node id="562962845" lat="27.6177197" lon="85.3195468"/>
   <node id="562962854" lat="27.5990262" lon="85.3238949"/>
   <node id="562963441" lat="27.6571469" lon="85.3262184"/>
   <node id="564118331" lat="27.6960968" lon="85.2988078"/>
@@ -2768,6 +2781,7 @@
   <node id="1632564303" lat="27.7080707" lon="85.3379967"/>
   <node id="1633642826" lat="27.6086817" lon="85.3215144"/>
   <node id="1633642832" lat="27.6159768" lon="85.3191464"/>
+  <node id="1635608590" lat="27.5872567" lon="85.5134293"/>
   <node id="1645448845" lat="27.6982904" lon="85.3016950"/>
   <node id="1645448851" lat="27.6978701" lon="85.3033546"/>
   <node id="1656490470" lat="27.6213533" lon="85.5533847"/>
@@ -3131,7 +3145,7 @@
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="1821359035" lat="27.5744713" lon="85.3123180"/>
-  <node id="1822721401" lat="27.6747350" lon="85.3602734">
+  <node id="1822721401" lat="27.6747493" lon="85.3599341">
     <tag k="highway" v="bus_stop"/>
     <tag k="name" v="Lokanthali"/>
     <tag k="public_transport" v="stop_position"/>
@@ -3650,8 +3664,8 @@
   <node id="1957364482" lat="27.7266061" lon="85.3453338"/>
   <node id="1960037401" lat="27.6751426" lon="85.3548741"/>
   <node id="1960042856" lat="27.6744801" lon="85.3642698">
-    <tag k="bus" v="yes"/>
-    <tag k="name" v="Kaushaltar"/>
+    <tag k="highway" v="bus_stop"/>
+    <tag k="name" v="kaushaltar"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="1960042857" lat="27.6743989" lon="85.3653986"/>
@@ -3896,7 +3910,8 @@
   <node id="2049278532" lat="27.6767939" lon="85.3161927"/>
   <node id="2049458850" lat="27.6813729" lon="85.3176878"/>
   <node id="2050912179" lat="27.6853476" lon="85.3182881"/>
-  <node id="2051114285" lat="27.6748387" lon="85.3602348">
+  <node id="2051114285" lat="27.6749080" lon="85.3597899">
+    <tag k="highway" v="bus_stop"/>
     <tag k="name" v="Lokanthali"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
@@ -3910,10 +3925,12 @@
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="2051114288" lat="27.6740598" lon="85.3733041">
+    <tag k="highway" v="bus_stop"/>
     <tag k="name" v="gathaghar"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="2051114289" lat="27.6746027" lon="85.3644278">
+    <tag k="highway" v="bus_stop"/>
     <tag k="name" v="kaushaltar"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
@@ -4447,7 +4464,8 @@
   </node>
   <node id="2291478683" lat="27.6739692" lon="85.3730508">
     <tag k="bus" v="yes"/>
-    <tag k="name" v="Gathaghar"/>
+    <tag k="highway" v="bus_stop"/>
+    <tag k="name" v="gathaghar"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="2291478684" lat="27.6751899" lon="85.3539203">
@@ -4604,6 +4622,10 @@
   </node>
   <node id="2343968543" lat="27.6715476" lon="85.4215455"/>
   <node id="2343968544" lat="27.6718898" lon="85.4222910"/>
+  <node id="2351276003" lat="27.6739133" lon="85.3740330">
+    <tag k="name" v="Gathaghar"/>
+    <tag k="place" v="suburb"/>
+  </node>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -7918,6 +7940,24 @@
     <nd ref="253198534"/>
     <tag k="highway" v="secondary"/>
   </way>
+  <way id="171609948">
+    <nd ref="558555620"/>
+    <nd ref="1635608590"/>
+    <nd ref="558555621"/>
+    <nd ref="558555622"/>
+    <nd ref="558555623"/>
+    <nd ref="558555624"/>
+    <nd ref="558555625"/>
+    <nd ref="558555627"/>
+    <nd ref="558555628"/>
+    <nd ref="558555629"/>
+    <nd ref="558555630"/>
+    <nd ref="558555631"/>
+    <tag k="highway" v="primary"/>
+    <tag k="name" v="Panauti Road"/>
+    <tag k="oneway" v="no"/>
+    <tag k="surface" v="paved"/>
+  </way>
   <way id="171609949">
     <nd ref="558555688"/>
     <nd ref="1767431974"/>
@@ -9778,7 +9818,7 @@
     <tag k="watch:80n" v="Katmandu"/>
   </way>
   <way id="194607852">
-    <nd ref="1487748793"/>
+    <nd ref="2351276003"/>
     <nd ref="2291478683"/>
     <nd ref="1960042857"/>
     <nd ref="1960042859"/>
@@ -12937,6 +12977,7 @@
     <member type="way" ref="171609949" role=""/>
     <member type="way" ref="163599579" role=""/>
     <member type="way" ref="205350969" role=""/>
+    <member type="way" ref="171609948" role=""/>
     <member type="node" ref="558555620" role="start"/>
     <member type="node" ref="1274184084" role="end"/>
     <tag k="name" v="Panauti - Ratnapark"/>
