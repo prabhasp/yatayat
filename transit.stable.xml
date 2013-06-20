@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-06-18T23:59:05Z"/>
+<meta osm_base="2013-06-19T23:59:05Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -3271,7 +3271,7 @@
   <node id="1832500504" lat="27.6942531" lon="85.3122938"/>
   <node id="1832500538" lat="27.6969059" lon="85.2989057"/>
   <node id="1832500541" lat="27.6969540" lon="85.2989209"/>
-  <node id="1832500548" lat="27.6976520" lon="85.2991970"/>
+  <node id="1832500548" lat="27.6976368" lon="85.2992050"/>
   <node id="1832500552" lat="27.6978699" lon="85.2976232"/>
   <node id="1832500554" lat="27.6981396" lon="85.2984468"/>
   <node id="1832593601" lat="27.6727456" lon="85.3033229"/>
@@ -4626,6 +4626,7 @@
     <tag k="name" v="Gathaghar"/>
     <tag k="place" v="suburb"/>
   </node>
+  <node id="2352563577" lat="27.6969293" lon="85.2944426"/>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -8528,6 +8529,7 @@
     <nd ref="268113991"/>
     <nd ref="268113999"/>
     <nd ref="1968266279"/>
+    <nd ref="2352563577"/>
     <nd ref="728153021"/>
     <nd ref="1832500552"/>
     <nd ref="1954408036"/>
