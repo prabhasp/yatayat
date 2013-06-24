@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-06-22T23:59:05Z"/>
+<meta osm_base="2013-06-23T23:59:05Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -30,6 +30,7 @@
   <node id="31019734" lat="27.7170479" lon="85.3160463">
     <tag k="highway" v="bus_stop"/>
     <tag k="name" v="Lainchour Chowk Bus Stop"/>
+    <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="31019738" lat="27.7181723" lon="85.3171488"/>
   <node id="31147572" lat="27.7007282" lon="85.3536657">
@@ -543,7 +544,7 @@
   <node id="253198587" lat="27.7227040" lon="85.3729338"/>
   <node id="253198588" lat="27.7223866" lon="85.3729768"/>
   <node id="253198589" lat="27.7220970" lon="85.3728168"/>
-  <node id="253205163" lat="27.6726417" lon="85.3249818">
+  <node id="253205163" lat="27.6726408" lon="85.3249900">
     <tag k="name" v="Mangalbazar"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
@@ -573,8 +574,8 @@
     <tag k="name" v="Bhedasing"/>
     <tag k="place" v="locality"/>
   </node>
-  <node id="268301925" lat="27.7064357" lon="85.3159496"/>
-  <node id="268301932" lat="27.7062797" lon="85.3162896"/>
+  <node id="268301925" lat="27.7064316" lon="85.3159543"/>
+  <node id="268301932" lat="27.7062756" lon="85.3162943"/>
   <node id="268301942" lat="27.7024225" lon="85.3164976"/>
   <node id="268301944" lat="27.6990749" lon="85.3164333"/>
   <node id="268307702" lat="27.7178933" lon="85.3228679"/>
@@ -1629,7 +1630,6 @@
   <node id="360711693" lat="27.6851612" lon="85.3570191"/>
   <node id="360711694" lat="27.6858436" lon="85.3575241"/>
   <node id="360711696" lat="27.6866826" lon="85.3582418"/>
-  <node id="360712059" lat="27.6896509" lon="85.3606600"/>
   <node id="360715450" lat="27.6887099" lon="85.3610302"/>
   <node id="360715456" lat="27.6866604" lon="85.3639478"/>
   <node id="360715460" lat="27.6864631" lon="85.3642239"/>
@@ -2119,7 +2119,7 @@
   <node id="932366290" lat="27.7173269" lon="85.3257118"/>
   <node id="932366316" lat="27.7227812" lon="85.3211165"/>
   <node id="932366320" lat="27.7179172" lon="85.3218075"/>
-  <node id="943246313" lat="27.7067206" lon="85.3152522">
+  <node id="943246313" lat="27.7067053" lon="85.3152489">
     <tag k="name" v="Ratna Park"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
@@ -2813,9 +2813,7 @@
   </node>
   <node id="1523358470" lat="27.7780774" lon="85.3610225"/>
   <node id="1523705695" lat="27.6880091" lon="85.2699912"/>
-  <node id="1525726643" lat="27.6913153" lon="85.3528677">
-    <tag k="public_transport" v="stop_position"/>
-  </node>
+  <node id="1525726643" lat="27.6913153" lon="85.3528677"/>
   <node id="1595627710" lat="27.7059237" lon="85.3172388"/>
   <node id="1632564303" lat="27.7080707" lon="85.3379967"/>
   <node id="1633642826" lat="27.6086817" lon="85.3215144"/>
@@ -3030,7 +3028,7 @@
   <node id="1805062846" lat="27.6952797" lon="85.3209599"/>
   <node id="1805062848" lat="27.6960261" lon="85.3211383"/>
   <node id="1805062851" lat="27.6965549" lon="85.3212565">
-    <tag k="name" v="Singa Darbar West Stop"/>
+    <tag k="name" v="Singha Durbar West Stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="1805062853" lat="27.6975097" lon="85.3214739"/>
@@ -4709,7 +4707,8 @@
   <node id="2343968543" lat="27.6715476" lon="85.4215455"/>
   <node id="2343968544" lat="27.6718898" lon="85.4222910"/>
   <node id="2352563577" lat="27.6969293" lon="85.2944426"/>
-  <node id="2355688659" lat="27.6714204" lon="85.4224132">
+  <node id="2355688659" lat="27.6714204" lon="85.4224132"/>
+  <node id="2356769263" lat="27.6713069" lon="85.4224157">
     <tag k="name" v="Bhaktapur Bus Park"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
@@ -7116,32 +7115,6 @@
   <way id="136518312">
     <nd ref="1489359102"/>
     <nd ref="360309100"/>
-    <nd ref="360309103"/>
-    <nd ref="1966262129"/>
-    <nd ref="1966262120"/>
-    <nd ref="360309106"/>
-    <nd ref="1273477975"/>
-    <nd ref="1829640346"/>
-    <nd ref="360309108"/>
-    <nd ref="360309110"/>
-    <nd ref="2224247837"/>
-    <nd ref="1829640347"/>
-    <nd ref="360309113"/>
-    <nd ref="425227540"/>
-    <nd ref="1382902557"/>
-    <nd ref="1942462601"/>
-    <nd ref="103589426"/>
-    <nd ref="1829640344"/>
-    <nd ref="2329313950"/>
-    <nd ref="1933312051"/>
-    <nd ref="1933312052"/>
-    <nd ref="425227541"/>
-    <nd ref="2309012017"/>
-    <nd ref="1829640334"/>
-    <nd ref="2309012057"/>
-    <nd ref="2165660975"/>
-    <nd ref="2309012079"/>
-    <nd ref="253205163"/>
     <tag k="bicycle" v="yes"/>
     <tag k="cycleway" v="no"/>
     <tag k="foot" v="yes"/>
@@ -11729,14 +11702,47 @@
     <nd ref="268308563"/>
     <tag k="highway" v="primary"/>
   </way>
-  <way id="226834867">
-    <nd ref="558561818"/>
-    <nd ref="360712059"/>
-    <tag k="highway" v="primary"/>
-  </way>
   <way id="226834868">
+    <nd ref="2356769263"/>
     <nd ref="2355688659"/>
     <nd ref="457278027"/>
+    <tag k="name" v="toBhaktapurBusPark"/>
+  </way>
+  <way id="226937170">
+    <nd ref="360309100"/>
+    <nd ref="360309103"/>
+    <nd ref="1966262129"/>
+    <nd ref="1966262120"/>
+    <nd ref="360309106"/>
+    <nd ref="1273477975"/>
+    <nd ref="1829640346"/>
+    <nd ref="360309108"/>
+    <nd ref="360309110"/>
+    <nd ref="2224247837"/>
+    <nd ref="1829640347"/>
+    <nd ref="360309113"/>
+    <nd ref="425227540"/>
+    <nd ref="1382902557"/>
+    <nd ref="1942462601"/>
+    <nd ref="103589426"/>
+    <nd ref="1829640344"/>
+    <nd ref="2329313950"/>
+    <nd ref="1933312051"/>
+    <nd ref="1933312052"/>
+    <nd ref="425227541"/>
+    <nd ref="2309012017"/>
+    <nd ref="1829640334"/>
+    <nd ref="2309012057"/>
+    <nd ref="2165660975"/>
+    <nd ref="2309012079"/>
+    <nd ref="253205163"/>
+    <tag k="bicycle" v="yes"/>
+    <tag k="cycleway" v="no"/>
+    <tag k="foot" v="yes"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="name" v="mangalbazar to gwarko"/>
+    <tag k="oneway" v="no"/>
+    <tag k="surface" v="paved"/>
   </way>
   <relation id="2276770">
     <member type="node" ref="360889656" role="end"/>
@@ -11767,14 +11773,16 @@
     <member type="way" ref="185402774" role=""/>
     <member type="way" ref="194607852" role=""/>
     <member type="way" ref="171203193" role=""/>
-    <tag k="name" v="New Bus Park-Thimi"/>
+    <tag k="name" v="Purano Bus Park-Thimi"/>
     <tag k="ref" v="10"/>
     <tag k="route" v="microbus"/>
     <tag k="type" v="route"/>
   </relation>
   <relation id="2276999">
+    <member type="node" ref="31150618" role=""/>
+    <member type="node" ref="31150627" role=""/>
+    <member type="node" ref="1394568906" role=""/>
     <member type="node" ref="31228768" role="end"/>
-    <member type="node" ref="1525726643" role=""/>
     <member type="node" ref="1281218812" role=""/>
     <member type="node" ref="1274038133" role=""/>
     <member type="node" ref="1490234323" role=""/>
@@ -11946,9 +11954,10 @@
     <tag k="type" v="route"/>
   </relation>
   <relation id="2294107">
-    <member type="node" ref="360309100" role="start"/>
+    <member type="node" ref="1489359102" role="start"/>
     <member type="node" ref="943246313" role="end"/>
     <member type="way" ref="136518312" role=""/>
+    <member type="way" ref="226937170" role=""/>
     <member type="way" ref="172126341" role=""/>
     <member type="way" ref="169846460" role=""/>
     <member type="way" ref="34122640" role=""/>
@@ -13650,7 +13659,6 @@
     <member type="way" ref="194610100" role=""/>
     <member type="way" ref="194610102" role=""/>
     <member type="way" ref="32133392" role=""/>
-    <member type="way" ref="226834867" role=""/>
     <member type="way" ref="226834863" role=""/>
     <member type="way" ref="193289326" role=""/>
     <member type="way" ref="120032858" role=""/>
@@ -13673,8 +13681,8 @@
     <member type="way" ref="171603745" role=""/>
     <member type="way" ref="4840124" role=""/>
     <member type="way" ref="220025933" role=""/>
-    <member type="node" ref="2291478678" role=""/>
-    <member type="node" ref="2355688659" role=""/>
+    <member type="node" ref="2291478678" role="end"/>
+    <member type="node" ref="2356769263" role="start"/>
     <tag k="name" v="Bhaktapur-Purano Thimi- Purano Bus Park"/>
     <tag k="operator" v="Bhaktapur Minibus Samiti"/>
     <tag k="ref" v="7"/>
