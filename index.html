@@ -144,6 +144,15 @@ YY.fromConfig("config.stable.json",
     });
     };
 
+    function get_random_color() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.round(Math.random() * 15)];
+    }
+    return color;
+    }
+
     YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOverrideOptions) {
         //TODO: Handle overrideOptions
 
@@ -152,23 +161,20 @@ YY.fromConfig("config.stable.json",
         
         var filteredSystem = system.prune(includeIDDict);
         var defaultOptions = 
-            {"route" : {color: '#378AAD', opacity: 1, weight: 3},
+            {"route" : function() { return {color: get_random_color(), opacity: 1, weight: 3}; },
              "stop"  : {color: '#378AAD', fillOpacity: 0.5, radius: 5}};
         // render the route as a multi-polyline
         _(filteredSystem.routes).each(function(route) {
-            var routeMPL = new L.MultiPolyline(
-                _.map(route.segments, function(seg) {
-                    return _.map(seg.listOfLatLng, function(LL) {
-                        return new L.LatLng(LL[0], LL[1]);
-                    });
-                }),
-                (leafletBaseOptions && leafletBaseOptions.route) || 
-                    defaultOptions.route);
-            if (leafletOverrideOptions && (route.id in leafletOverrideOptions)) {
-                routeMPL.setOptions(leafletOverrideOptions[route.id] || leafletBaseOptions.route);
-            }
-            routeMPL.bindPopup(route.ref + " : " + route.name);
-            YY._layerGroup.addLayer(routeMPL);
+            route.segments.forEach(function(seg) {
+                var segMPL = new L.Polyline(
+                        _.map(seg.listOfLatLng, function(LL) {
+                            return new L.LatLng(LL[0], LL[1]);
+                        }),
+                    (leafletBaseOptions && leafletBaseOptions.route) || 
+                        defaultOptions.route());
+                segMPL.bindPopup(route.ref + " : " + route.name);
+                YY._layerGroup.addLayer(segMPL);
+            });
         });
         // render the stops as circle markers 
         _(filteredSystem.routes).each(function(route) { 
