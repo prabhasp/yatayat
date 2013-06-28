@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-06-26T23:59:06Z"/>
+<meta osm_base="2013-06-27T23:59:05Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -262,6 +262,10 @@
   <node id="31303551" lat="27.7347693" lon="85.3054933"/>
   <node id="31303566" lat="27.7279489" lon="85.3052698"/>
   <node id="31303567" lat="27.7274444" lon="85.3049949"/>
+  <node id="31303568" lat="27.7270610" lon="85.3046132">
+    <tag k="name" v="Balaju"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <node id="31303845" lat="27.7264790" lon="85.3036975"/>
   <node id="31303847" lat="27.7262454" lon="85.3032697"/>
   <node id="31303848" lat="27.7260766" lon="85.3028446"/>
@@ -3350,10 +3354,6 @@
   <node id="1805087623" lat="27.6916362" lon="85.3258353"/>
   <node id="1805087624" lat="27.6917369" lon="85.3257606"/>
   <node id="1805087637" lat="27.6926081" lon="85.3240016"/>
-  <node id="1805087644" lat="27.6931086" lon="85.3229449">
-    <tag k="name" v="Babarmahal"/>
-    <tag k="public_transport" v="stop_position"/>
-  </node>
   <node id="1805087651" lat="27.6950668" lon="85.3209060"/>
   <node id="1806046374" lat="27.7094910" lon="85.3172012"/>
   <node id="1806046387" lat="27.7093039" lon="85.3169219"/>
@@ -4324,7 +4324,6 @@
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="2051114288" lat="27.6740598" lon="85.3733041">
-    <tag k="highway" v="bus_stop"/>
     <tag k="name" v="gathaghar"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
@@ -4923,8 +4922,6 @@
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="2291478683" lat="27.6739692" lon="85.3730508">
-    <tag k="bus" v="yes"/>
-    <tag k="highway" v="bus_stop"/>
     <tag k="name" v="gathaghar"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
@@ -5116,7 +5113,6 @@
     <tag k="name" v="Teaching Hospital stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="2361646167" lat="27.7270610" lon="85.3046132"/>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -5663,7 +5659,7 @@
     <tag k="ref" v="H03"/>
   </way>
   <way id="27033730">
-    <nd ref="2361646167"/>
+    <nd ref="31303568"/>
     <nd ref="1952134601"/>
     <nd ref="268117052"/>
     <nd ref="268117053"/>
@@ -8858,7 +8854,6 @@
     <nd ref="1950468417"/>
     <nd ref="1968234741"/>
     <nd ref="1805074834"/>
-    <nd ref="1805087644"/>
     <nd ref="1805087637"/>
     <nd ref="1805087624"/>
     <nd ref="2338508459"/>
@@ -9506,7 +9501,7 @@
     <tag k="watch:80n" v="Katmandu"/>
   </way>
   <way id="176147962">
-    <nd ref="2361646167"/>
+    <nd ref="31303568"/>
     <nd ref="31303567"/>
     <nd ref="31303566"/>
     <nd ref="1496686322"/>
@@ -10115,7 +10110,7 @@
     <nd ref="31303848"/>
     <nd ref="31303847"/>
     <nd ref="31303845"/>
-    <nd ref="2361646167"/>
+    <nd ref="31303568"/>
     <tag k="bicycle" v="yes"/>
     <tag k="cycleway" v="no"/>
     <tag k="foot" v="designated"/>
@@ -13289,7 +13284,6 @@
     <member type="node" ref="1805062970" role=""/>
     <member type="node" ref="1805062851" role=""/>
     <member type="node" ref="1805074834" role=""/>
-    <member type="node" ref="1805087644" role=""/>
     <member type="node" ref="313735983" role=""/>
     <member type="node" ref="1805087571" role=""/>
     <tag k="direction" v="one_way"/>
@@ -14067,8 +14061,6 @@
     <tag k="type" v="route"/>
   </relation>
   <relation id="2988890">
-    <member type="node" ref="2291478678" role="start"/>
-    <member type="node" ref="31229796" role="end"/>
     <member type="way" ref="220025933" role=""/>
     <member type="way" ref="220025931" role=""/>
     <member type="way" ref="24683731" role="forward"/>
@@ -14109,9 +14101,12 @@
     <member type="way" ref="24691025" role=""/>
     <member type="way" ref="224832548" role=""/>
     <member type="way" ref="220025932" role=""/>
+    <member type="node" ref="2291478678" role="start"/>
+    <member type="node" ref="31229796" role="end"/>
+    <member type="node" ref="2051114288" role=""/>
     <tag k="from" v="Bagbazar"/>
     <tag k="loc_ref" v="Bhaktapur"/>
-    <tag k="name" v="Ratnapark-Kamalbinayak"/>
+    <tag k="name" v="Bagbazaar-Kamalbinayak"/>
     <tag k="operator" v="Bhaktapur Minibus Samiti"/>
     <tag k="ref" v="7"/>
     <tag k="route" v="bus"/>
@@ -14456,7 +14451,6 @@
     <member type="node" ref="1817037501" role=""/>
     <member type="node" ref="1805087571" role=""/>
     <member type="node" ref="1805087604" role=""/>
-    <member type="node" ref="1805087644" role=""/>
     <member type="node" ref="1805062851" role=""/>
     <member type="node" ref="1805062970" role=""/>
     <member type="node" ref="1274184084" role="start"/>
