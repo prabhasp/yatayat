@@ -57,78 +57,78 @@ body {
     var system;
     var osmdata;
 
-YY.fromConfig("config.stable.json", function(sys) {
-    system = sys;
-	YY.render_(system, map,
-			   undefined, //includeIDObject; try {"2269045": true} for an example
-			   undefined // leafletBaseOptions
-			  );
+YY.fromConfig("config.stable.json", 
+    function(sys) {
+        system = sys;
+    	YY.render_(system, 
+                    map,
+                    undefined, //includeIDObject; try {"2269045": true} for an example
+                    undefined // leafletBaseOptions
+    			  );
 
-    //ROUTING
-    var stopNames = _.compact(_.pluck(system.allStops(), 'name'));
-    $('.typeahead').typeahead({source: stopNames});
-    $('#textboxes').show();
-    $('input.typeahead').change(function(f) {
-        var start = $('#startstop')[0].value;
-        var end = $('#endstop')[0].value;
-        if (start && end) {
-            console.log('routing from', start,' to ',end);
-            var gettingThereRoutes = system.takeMeThereByName(start, end);
-            if (gettingThereRoutes === 'FAIL') alert('cannot find a route from ', start, ' to ', end);
-            else {
-                var inclusionDict = {};
-                var overrideDict = {};
-                var outputHTML = "";
-                _(system.routes).each(function(r) { inclusionDict[r.id] = true; }); // render everything
-                _(gettingThereRoutes).each(function(r,idx) {
-                    //inclusionDict[r.id] = true;
-                    outputHTML += "Get on " + toTitleCase(r.transport) + " " + 
-                        r.ref + " (" + r.name + ") at " + r.stops[0].name + 
-                        " and ride till " + _.last(r.stops).name + "<br/>";
-                    _(r.stops).each(function(s) {
-                        inclusionDict[s.id] = true;
+        //ROUTING
+        var stopNames = _.compact(_.pluck(system.allStops(), 'name'));
+        $('.typeahead').typeahead({source: stopNames});
+        $('#textboxes').show();
+        $('input.typeahead').change(function(f) {
+            var start = $('#startstop')[0].value;
+            var end = $('#endstop')[0].value;
+            if (start && end) {
+                // console.log('routing from', start,' to ',end);
+                var gettingThereRoutes = system.takeMeThereByName(start, end);
+                if (gettingThereRoutes === 'FAIL') alert('cannot find a route from ', start, ' to ', end);
+                else {
+                    var inclusionDict = {};
+                    var overrideDict = {};
+                    var outputHTML = "";
+                    _(system.routes).each(function(r) { inclusionDict[r.id] = true; }); // render everything
+                    _(gettingThereRoutes).each(function(r,idx) {
+                        //inclusionDict[r.id] = true;
+                        outputHTML += "Get on " + toTitleCase(r.transport) + " " + 
+                            r.ref + " (" + r.name + ") at " + r.stops[0].name + 
+                            " and ride till " + _.last(r.stops).name + "<br/>";
+                        _(r.stops).each(function(s) {
+                            inclusionDict[s.id] = true;
+                        });
+                        if (idx===0) {
+                            overrideDict[r.stops[0].id] = {color: 'orange', opacity: 1, radius: 8};
+                        } else { 
+                            overrideDict[r.stops[0].id] = {color: 'orange', opacity: 1, radius: 8};
+                        }
+                        if (idx === gettingThereRoutes.length - 1)
+                            overrideDict[_.last(r.stops).id] = {color: 'orange', opacity: 1, radius: 8};
                     });
-                    if (idx===0) {
-                        overrideDict[r.stops[0].id] = {color: 'orange', opacity: 1, radius: 8};
-                    } else { 
-                        overrideDict[r.stops[0].id] = {color: 'orange', opacity: 1, radius: 8};
-                    }
-                    if (idx === gettingThereRoutes.length - 1)
-                        overrideDict[_.last(r.stops).id] = {color: 'orange', opacity: 1, radius: 8};
-                });
-                YY.render_(system, map, inclusionDict,
-                           {route: {color: '#555', opacity: 1, weight: 1}},
-                           overrideDict
-                          );
-                $('#routedisplay').show();
-                $('#routedisplay').html(outputHTML);
+                    YY.render_(system, map, inclusionDict,
+                               {route: {color: '#555', opacity: 1, weight: 1}},
+                               overrideDict
+                              );
+                    $('#routedisplay').show();
+                    $('#routedisplay').html(outputHTML);
+                }
+            } else {
+                YY.render_(system, map);
+                $('#routedisplay').hide()
             }
-        } else {
-            YY.render_(system, map);
-            $('#routedisplay').hide()
+        });
+        if(YY.TILE_SOURCE) {
+            if (YY.WAX) {
+                wax.tilejson(YY.TILE_SOURCE, function(tilejson) {
+                    map.addLayer(new wax.leaf.connector(tilejson));
+                });
+            } else {
+                var tiles = new L.TileLayer(YY.TILE_SOURCE, {
+                    attribution: YY.ATTRIBUTION,
+                    maxZoom: 18
+                });
+                map.addLayer(tiles);
+            }
+
+            // add the layer to the map, set the view to a given place and zoom
         }
+
+        map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
+
     });
-    if(YY.TILE_SOURCE) {
-        if (YY.WAX) {
-            wax.tilejson(YY.TILE_SOURCE, function(tilejson) {
-                map.addLayer(new wax.leaf.connector(tilejson));
-            });
-        } else {
-            var tiles = new L.TileLayer(YY.TILE_SOURCE, {
-                attribution: YY.ATTRIBUTION,
-                maxZoom: 18
-            });
-            map.addLayer(tiles);
-        }
-
-        // add the layer to the map, set the view to a given place and zoom
-    }
-
-    map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
-
-});
-
-
 
     YY.viz = function(route, map) {
     route.segments.forEach(function(seg, idx) {

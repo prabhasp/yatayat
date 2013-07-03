@@ -46,6 +46,7 @@ YY.System.prototype.stopRoutesFromStopID = function(stopID) {
 
 YY.System.prototype.stopRoutesFromStopName = function(stopName) {
     var aggregator = [];
+    console.log(this);
     _(this.routes).each(function (r) {
         _(r.stops).each(function (s) {
             if (s.name === stopName) {
@@ -53,6 +54,7 @@ YY.System.prototype.stopRoutesFromStopName = function(stopName) {
             }
         });
     });
+    // console.log(aggregator)
     return aggregator;
 };
 
@@ -360,18 +362,24 @@ YY.Segment = function(id, listOfLatLng, tag, orderedStops) {
 YY.fromConfig = function(config_path, cb) {
     // sequentially loads config file, and the system it calls for
     // cb is called on the resulting system.
+    // console.log('$ in fromConfig',$);
+    //   
     $.getJSON(config_path, {}, function(conf) {
         // blend in the conf to the YY namespace
         for(var key in conf) {
             YY[key] = conf[key];
         }
         // load in & parse XML
-        $.ajax({type: YY.GET_OR_POST, url: YY.API_URL,
+        console.log('cb',cb);
+        $.ajax(
+            {   type: YY.GET_OR_POST, 
+                url: YY.API_URL,
                 data: YY.QUERY_STRING,
                 dataType: "text",
                 success: function(res) {
                     cb(YY.fromOSM(res));
-                }});
+                }
+            });
     });
 };
 
@@ -452,7 +460,7 @@ YY.fromOSM = function (overpassXML) {
     routes = routes.filter(function(x) { return x.transport !== "hiking"; });
 
     return new YY.System(routes);
-};
+}
 
 // COLORS MODULE
 var colors = (function() {
