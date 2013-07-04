@@ -1,0 +1,359 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' upload='true' generator='JOSM'>
+  <node id='31019147' timestamp='2013-01-09T05:40:11Z' uid='781054' user='Manoj-OSMNepal' visible='true' version='16' changeset='14582662' lat='27.7087514' lon='85.3146266' />
+  <node id='31019734' timestamp='2013-06-23T02:03:12Z' uid='647540' user='sures' visible='true' version='26' changeset='16663651' lat='27.7170479' lon='85.3160463'>
+    <tag k='highway' v='bus_stop' />
+    <tag k='name' v='Lainchour Chowk Bus Stop' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='31149202' timestamp='2012-07-19T09:40:43Z' uid='719592' user='rooneel' visible='true' version='10' changeset='12316568' lat='27.7081002' lon='85.3168181' />
+  <node id='31149337' timestamp='2012-06-29T11:46:04Z' uid='338611' user='marek kleciak' visible='true' version='13' changeset='12055564' lat='27.7090647' lon='85.3171041' />
+  <node id='31303568' timestamp='2013-06-27T02:52:11Z' uid='350005' user='prabhasp' visible='true' version='8' changeset='16721018' lat='27.727061' lon='85.3046132'>
+    <tag k='name' v='Balaju' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='268116939' timestamp='2013-06-25T12:06:01Z' uid='719507' user='Prabesh' visible='true' version='9' changeset='16698432' lat='27.7189672' lon='85.3096191'>
+    <tag k='highway' v='bus_stop' />
+    <tag k='name' v='Sorhakhutte' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='268116998' timestamp='2012-12-09T08:47:08Z' uid='1068220' user='Helina' visible='true' version='5' changeset='14209737' lat='27.7192972' lon='85.3095778' />
+  <node id='268117052' timestamp='2013-06-26T01:42:08Z' uid='647540' user='sures' visible='true' version='6' changeset='16707309' lat='27.726579' lon='85.3047868' />
+  <node id='268117053' timestamp='2013-06-26T01:42:08Z' uid='647540' user='sures' visible='true' version='6' changeset='16707309' lat='27.7261654' lon='85.3049748'>
+    <tag k='highway' v='bus_stop' />
+    <tag k='name' v='Balaju Chowk Bus Stop' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='268301463' timestamp='2012-06-21T03:41:43Z' uid='684247' user='jake958' visible='true' version='7' changeset='11964829' lat='27.7181481' lon='85.3101281' />
+  <node id='268301469' timestamp='2013-03-24T11:08:09Z' uid='680067' user='amritkarma' visible='true' version='7' changeset='15477010' lat='27.7181404' lon='85.3100031' />
+  <node id='268301925' timestamp='2013-06-23T02:50:31Z' uid='647540' user='sures' visible='true' version='9' changeset='16663817' lat='27.7064316' lon='85.3159543' />
+  <node id='268301932' timestamp='2013-06-23T02:50:31Z' uid='647540' user='sures' visible='true' version='18' changeset='16663817' lat='27.7062756' lon='85.3162943' />
+  <node id='268545728' timestamp='2012-07-26T12:18:30Z' uid='719592' user='rooneel' visible='true' version='12' changeset='12498491' lat='27.7182038' lon='85.3121379'>
+    <tag k='name' v='Shobhabhagwati' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='296329351' timestamp='2013-01-13T09:38:31Z' uid='781054' user='Manoj-OSMNepal' visible='true' version='5' changeset='14631588' lat='27.7254721' lon='85.3054362' />
+  <node id='296329358' timestamp='2013-01-13T09:38:31Z' uid='781054' user='Manoj-OSMNepal' visible='true' version='5' changeset='14631588' lat='27.7260532' lon='85.3050576' />
+  <node id='313131693' timestamp='2012-10-16T13:35:13Z' uid='338611' user='marek kleciak' visible='true' version='16' changeset='13519147' lat='27.7100489' lon='85.3148048'>
+    <tag k='source' v='Yahoo' />
+  </node>
+  <node id='313286659' timestamp='2012-06-20T06:17:25Z' uid='684247' user='jake958' visible='true' version='10' changeset='11955035' lat='27.7137405' lon='85.3154212' />
+  <node id='313917671' timestamp='2013-06-26T11:49:52Z' uid='647540' user='sures' visible='true' version='10' changeset='16712067' lat='27.708829' lon='85.315292'>
+    <tag k='name' v='Jamal' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='575231595' timestamp='2012-06-21T03:41:43Z' uid='684247' user='jake958' visible='true' version='4' changeset='11964829' lat='27.7182684' lon='85.3105234' />
+  <node id='724269945' timestamp='2012-12-09T08:47:08Z' uid='1068220' user='Helina' visible='true' version='8' changeset='14209737' lat='27.7089968' lon='85.3158909' />
+  <node id='728153897' timestamp='2012-07-26T12:19:02Z' uid='719592' user='rooneel' visible='true' version='6' changeset='12498501' lat='27.7173801' lon='85.3148107'>
+    <tag k='name' v='ASCOL Stop' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='943246313' timestamp='2013-06-26T01:42:08Z' uid='647540' user='sures' visible='true' version='7' changeset='16707309' lat='27.7067052' lon='85.3152489'>
+    <tag k='name' v='Ratna Park' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='943246316' timestamp='2012-06-21T03:41:43Z' uid='684247' user='jake958' visible='true' version='3' changeset='11964829' lat='27.7182868' lon='85.3113678' />
+  <node id='1273136916' timestamp='2012-10-14T21:23:40Z' uid='338611' user='marek kleciak' visible='true' version='5' changeset='13499008' lat='27.7093062' lon='85.3167379'>
+    <tag k='highway' v='crossing' />
+  </node>
+  <node id='1275280651' timestamp='2012-06-21T03:41:43Z' uid='684247' user='jake958' visible='true' version='2' changeset='11964829' lat='27.7182982' lon='85.3107947' />
+  <node id='1278029460' timestamp='2012-06-20T06:17:25Z' uid='684247' user='jake958' visible='true' version='3' changeset='11955035' lat='27.7115707' lon='85.3150269' />
+  <node id='1278029518' timestamp='2012-10-16T13:35:11Z' uid='338611' user='marek kleciak' visible='true' version='6' changeset='13519147' lat='27.7103284' lon='85.3148428' />
+  <node id='1795276690' timestamp='2012-06-20T06:28:23Z' uid='684247' user='jake958' visible='true' version='1' changeset='11955035' lat='27.706755' lon='85.3164394' />
+  <node id='1796592064' timestamp='2012-12-09T08:47:07Z' uid='1068220' user='Helina' visible='true' version='2' changeset='14209737' lat='27.7182674' lon='85.3098578' />
+  <node id='1801280175' timestamp='2012-06-25T03:28:36Z' uid='684247' user='jake958' visible='true' version='1' changeset='12006709' lat='27.718217' lon='85.3120463' />
+  <node id='1806046387' timestamp='2012-10-14T21:23:40Z' uid='338611' user='marek kleciak' visible='true' version='3' changeset='13499008' lat='27.7093039' lon='85.3169219' />
+  <node id='1806046396' timestamp='2012-10-14T21:23:40Z' uid='338611' user='marek kleciak' visible='true' version='2' changeset='13499008' lat='27.7091737' lon='85.3170795' />
+  <node id='1806046450' timestamp='2012-10-14T21:23:40Z' uid='338611' user='marek kleciak' visible='true' version='3' changeset='13499008' lat='27.7092823' lon='85.316985' />
+  <node id='1806066068' timestamp='2012-10-16T13:35:13Z' uid='338611' user='marek kleciak' visible='true' version='4' changeset='13519147' lat='27.7089122' lon='85.3146069'>
+    <tag k='name' v='Kantipath' />
+    <tag k='public_transport' v='stop_position' />
+  </node>
+  <node id='1806066077' timestamp='2012-06-29T12:10:01Z' uid='338611' user='marek kleciak' visible='true' version='1' changeset='12055564' lat='27.7087458' lon='85.3148275' />
+  <node id='1806071816' timestamp='2012-06-29T12:16:39Z' uid='338611' user='marek kleciak' visible='true' version='1' changeset='12055564' lat='27.7115275' lon='85.3150203' />
+  <node id='1906492115' timestamp='2012-09-09T06:24:56Z' uid='682234' user='bimal(Adyota)' visible='true' version='1' changeset='13040718' lat='27.7096742' lon='85.3147384' />
+  <node id='1918270902' timestamp='2012-09-17T07:37:34Z' uid='680067' user='amritkarma' visible='true' version='1' changeset='13139634' lat='27.710658' lon='85.3148867' />
+  <node id='1918270907' timestamp='2012-09-17T07:37:34Z' uid='680067' user='amritkarma' visible='true' version='1' changeset='13139634' lat='27.7109215' lon='85.3149271' />
+  <node id='1940051008' timestamp='2012-10-04T09:12:39Z' uid='680067' user='amritkarma' visible='true' version='2' changeset='13357877' lat='27.7195815' lon='85.3093882' />
+  <node id='1952134574' timestamp='2012-10-08T06:19:00Z' uid='680067' user='amritkarma' visible='true' version='1' changeset='13407915' lat='27.7232923' lon='85.306956' />
+  <node id='1952134595' timestamp='2012-10-08T06:19:01Z' uid='680067' user='amritkarma' visible='true' version='1' changeset='13407915' lat='27.7254319' lon='85.3054661' />
+  <node id='1952134601' timestamp='2012-10-08T06:19:01Z' uid='680067' user='amritkarma' visible='true' version='1' changeset='13407915' lat='27.7269088' lon='85.304668' />
+  <node id='1954584445' timestamp='2012-12-09T06:52:54Z' uid='1068220' user='Helina' visible='true' version='2' changeset='14209133' lat='27.7176746' lon='85.3137117' />
+  <node id='1963985532' timestamp='2012-12-20T06:26:33Z' uid='680067' user='amritkarma' visible='true' version='3' changeset='14339294' lat='27.7178389' lon='85.313216' />
+  <node id='1965697241' timestamp='2012-10-14T21:23:39Z' uid='338611' user='marek kleciak' visible='true' version='1' changeset='13499008' lat='27.7093126' lon='85.3168245' />
+  <node id='1965697242' timestamp='2012-10-14T21:23:39Z' uid='338611' user='marek kleciak' visible='true' version='1' changeset='13499008' lat='27.7092188' lon='85.3165133' />
+  <node id='1965697254' timestamp='2012-10-14T21:23:40Z' uid='338611' user='marek kleciak' visible='true' version='1' changeset='13499008' lat='27.7092372' lon='85.3170343' />
+  <node id='1968417708' timestamp='2012-10-16T13:35:06Z' uid='338611' user='marek kleciak' visible='true' version='1' changeset='13519147' lat='27.7087676' lon='85.3150363' />
+  <node id='1977485232' timestamp='2013-03-24T11:08:09Z' uid='680067' user='amritkarma' visible='true' version='2' changeset='15477010' lat='27.7181504' lon='85.3100665' />
+  <node id='1977485234' timestamp='2012-10-22T04:03:34Z' uid='964857' user='prashant_sh' visible='true' version='1' changeset='13588013' lat='27.7182156' lon='85.3120562' />
+  <node id='1977485242' timestamp='2012-10-22T04:03:34Z' uid='964857' user='prashant_sh' visible='true' version='1' changeset='13588013' lat='27.7182751' lon='85.3105844' />
+  <node id='1977485245' timestamp='2012-10-22T04:03:34Z' uid='964857' user='prashant_sh' visible='true' version='1' changeset='13588013' lat='27.7182853' lon='85.3115741' />
+  <node id='1977485303' timestamp='2012-12-09T08:47:07Z' uid='1068220' user='Helina' visible='true' version='2' changeset='14209737' lat='27.7187905' lon='85.3096836' />
+  <node id='1977514717' timestamp='2012-10-22T04:44:40Z' uid='964857' user='prashant_sh' visible='true' version='1' changeset='13588176' lat='27.719846' lon='85.3092148' />
+  <node id='1980583709' timestamp='2012-12-09T08:47:08Z' uid='1068220' user='Helina' visible='true' version='2' changeset='14209737' lat='27.7192631' lon='85.3095804' />
+  <node id='1980583710' timestamp='2013-05-03T12:07:37Z' uid='781054' user='Manoj-OSMNepal' visible='true' version='2' changeset='15959635' lat='27.7206921' lon='85.3086776' />
+  <node id='2053868507' timestamp='2012-12-07T04:54:13Z' uid='1060238' user='LenainKtm' visible='true' version='1' changeset='14183514' lat='27.712632' lon='85.3152198' />
+  <node id='2064586561' timestamp='2012-12-13T10:06:26Z' uid='781054' user='Manoj-OSMNepal' visible='true' version='1' changeset='14258195' lat='27.7171103' lon='85.3158242' />
+  <node id='2127168046' timestamp='2013-01-25T08:34:40Z' uid='1210199' user='manishpandey' visible='true' version='1' changeset='14777914' lat='27.7172096' lon='85.3154512' />
+  <node id='2127168061' timestamp='2013-01-25T08:34:40Z' uid='1210199' user='manishpandey' visible='true' version='1' changeset='14777914' lat='27.7182232' lon='85.3120035' />
+  <node id='2127168067' timestamp='2013-01-25T08:34:40Z' uid='1210199' user='manishpandey' visible='true' version='1' changeset='14777914' lat='27.718267' lon='85.3117005' />
+  <node id='2127168069' timestamp='2013-01-25T08:34:40Z' uid='1210199' user='manishpandey' visible='true' version='1' changeset='14777914' lat='27.7182892' lon='85.3112464' />
+  <node id='2169151685' timestamp='2013-02-23T17:47:41Z' uid='589596' user='lxbarth' visible='true' version='1' changeset='15138808' lat='27.7145642' lon='85.3155769' />
+  <node id='2290302763' timestamp='2013-05-03T12:07:29Z' uid='781054' user='Manoj-OSMNepal' visible='true' version='1' changeset='15959635' lat='27.7207752' lon='85.3086226' />
+  <way id='4840092' timestamp='2013-01-10T08:28:17Z' uid='680067' user='amritkarma' visible='true' version='20' changeset='14595040'>
+    <nd ref='31019147' />
+    <nd ref='1806066077' />
+    <nd ref='1968417708' />
+    <nd ref='313917671' />
+    <tag k='highway' v='primary' />
+    <tag k='name' v='Jamal Way' />
+    <tag k='oneway' v='yes' />
+  </way>
+  <way id='24667562' timestamp='2013-06-26T12:55:52Z' uid='647540' user='sures' visible='true' version='22' changeset='16712791'>
+    <nd ref='1952134574' />
+    <nd ref='2290302763' />
+    <nd ref='1980583710' />
+    <nd ref='1977514717' />
+    <nd ref='1940051008' />
+    <nd ref='268116998' />
+    <nd ref='1980583709' />
+    <nd ref='268116939' />
+    <tag k='highway' v='primary' />
+    <tag k='name' v='Balaju-Sourkhutte Sadak' />
+    <tag k='route' v='Micro' />
+    <tag k='type' v='route' />
+  </way>
+  <way id='27033730' timestamp='2013-06-27T02:52:09Z' uid='350005' user='prabhasp' visible='true' version='18' changeset='16721018'>
+    <nd ref='31303568' />
+    <nd ref='1952134601' />
+    <nd ref='268117052' />
+    <nd ref='268117053' />
+    <nd ref='296329358' />
+    <tag k='highway' v='primary' />
+    <tag k='name' v='Lekhnath Sadak' />
+    <tag k='ref' v='RatnaPark-Phutung' />
+    <tag k='route' v='Micro' />
+    <tag k='type' v='route' />
+  </way>
+  <way id='27033731' timestamp='2013-06-26T12:55:55Z' uid='647540' user='sures' visible='true' version='9' changeset='16712791'>
+    <nd ref='296329358' />
+    <nd ref='296329351' />
+    <tag k='highway' v='primary' />
+    <tag k='layer' v='1' />
+  </way>
+  <way id='28543722' timestamp='2013-06-26T12:55:53Z' uid='647540' user='sures' visible='true' version='20' changeset='16712791'>
+    <nd ref='313131693' />
+    <nd ref='1906492115' />
+    <nd ref='1806066068' />
+    <nd ref='31019147' />
+    <tag k='bicycle' v='yes' />
+    <tag k='cycleway' v='lane' />
+    <tag k='foot' v='yes' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='2' />
+    <tag k='name' v='Kanti Path' />
+    <tag k='ref' v='RatnaPark-Phutung' />
+    <tag k='route' v='Micro' />
+    <tag k='surface' v='paved' />
+    <tag k='type' v='route' />
+  </way>
+  <way id='28579443' timestamp='2013-01-10T08:28:17Z' uid='680067' user='amritkarma' visible='true' version='10' changeset='14595040'>
+    <nd ref='31149337' />
+    <nd ref='31149202' />
+    <tag k='highway' v='primary' />
+    <tag k='name' v='Durbar Marg' />
+    <tag k='oneway' v='yes' />
+  </way>
+  <way id='61163649' timestamp='2013-06-26T12:55:54Z' uid='647540' user='sures' visible='true' version='8' changeset='16712791'>
+    <nd ref='268116939' />
+    <nd ref='1977485303' />
+    <nd ref='1796592064' />
+    <nd ref='268301469' />
+    <tag k='highway' v='primary' />
+    <tag k='name' v='Ratna Park - Phutang' />
+    <tag k='ref' v='RatnaPark-Phutung' />
+    <tag k='route' v='Micro' />
+    <tag k='type' v='route' />
+  </way>
+  <way id='169442474' timestamp='2013-01-10T08:28:18Z' uid='680067' user='amritkarma' visible='true' version='4' changeset='14595040'>
+    <nd ref='1273136916' />
+    <nd ref='1965697241' />
+    <nd ref='1806046387' />
+    <nd ref='1806046450' />
+    <nd ref='1965697254' />
+    <nd ref='1806046396' />
+    <nd ref='31149337' />
+    <tag k='highway' v='primary' />
+    <tag k='name' v='Jamal Way' />
+    <tag k='oneway' v='yes' />
+  </way>
+  <way id='171215507' timestamp='2013-01-10T08:28:17Z' uid='680067' user='amritkarma' visible='true' version='3' changeset='14595040'>
+    <nd ref='31149202' />
+    <nd ref='1795276690' />
+    <nd ref='268301932' />
+    <tag k='highway' v='primary' />
+    <tag k='name' v='Durbar Marg' />
+    <tag k='oneway' v='yes' />
+  </way>
+  <way id='171215508' timestamp='2013-06-26T12:55:53Z' uid='647540' user='sures' visible='true' version='8' changeset='16712791'>
+    <nd ref='575231595' />
+    <nd ref='1977485242' />
+    <nd ref='1275280651' />
+    <nd ref='2127168069' />
+    <nd ref='943246316' />
+    <nd ref='1977485245' />
+    <nd ref='2127168067' />
+    <nd ref='2127168061' />
+    <nd ref='1801280175' />
+    <nd ref='1977485234' />
+    <nd ref='268545728' />
+    <tag k='highway' v='primary' />
+    <tag k='name' v='Lekhnath Sadak' />
+    <tag k='note' v='Lainchaur' />
+    <tag k='oneway' v='no' />
+    <tag k='ref' v='RatnaPark-Phutung' />
+    <tag k='route' v='Micro' />
+    <tag k='type' v='route' />
+  </way>
+  <way id='171215509' timestamp='2013-06-26T12:55:54Z' uid='647540' user='sures' visible='true' version='6' changeset='16712791'>
+    <nd ref='268301469' />
+    <nd ref='1977485232' />
+    <nd ref='268301463' />
+    <nd ref='575231595' />
+    <tag k='highway' v='secondary' />
+    <tag k='name' v='Lekhnath Sadak' />
+    <tag k='note' v='Lainchaur' />
+    <tag k='oneway' v='no' />
+    <tag k='ref' v='RatnaPark-Phutung' />
+    <tag k='route' v='Micro' />
+    <tag k='type' v='route' />
+  </way>
+  <way id='171215516' timestamp='2013-06-26T12:55:54Z' uid='647540' user='sures' visible='true' version='11' changeset='16712791'>
+    <nd ref='1963985532' />
+    <nd ref='1954584445' />
+    <nd ref='728153897' />
+    <tag k='highway' v='primary' />
+    <tag k='name' v='Lekhnath Sadak' />
+    <tag k='ref' v='RatnaPark-Phutung' />
+    <tag k='route' v='Micro' />
+    <tag k='type' v='route' />
+  </way>
+  <way id='171603746' timestamp='2013-06-26T11:49:52Z' uid='647540' user='sures' visible='true' version='4' changeset='16712067'>
+    <nd ref='943246313' />
+    <nd ref='268301925' />
+    <nd ref='268301932' />
+    <tag k='highway' v='primary' />
+    <tag k='name' v='Ratna Park Path' />
+    <tag k='oneway' v='no' />
+    <tag k='ref' v='RatnaPark-Phutung' />
+    <tag k='route' v='Micro' />
+    <tag k='type' v='route' />
+  </way>
+  <way id='172138201' timestamp='2013-06-26T12:55:54Z' uid='647540' user='sures' visible='true' version='10' changeset='16712791'>
+    <nd ref='728153897' />
+    <nd ref='2127168046' />
+    <nd ref='2064586561' />
+    <nd ref='31019734' />
+    <tag k='highway' v='primary' />
+    <tag k='name' v='Ratna Park - Phutang' />
+    <tag k='ref' v='RatnaPark-Phutung' />
+    <tag k='route' v='Micro' />
+    <tag k='type' v='route' />
+  </way>
+  <way id='172387565' timestamp='2013-06-26T12:55:53Z' uid='647540' user='sures' visible='true' version='5' changeset='16712791'>
+    <nd ref='1806071816' />
+    <nd ref='1918270907' />
+    <nd ref='1918270902' />
+    <nd ref='1278029518' />
+    <nd ref='313131693' />
+    <tag k='bicycle' v='yes' />
+    <tag k='cycleway' v='lane' />
+    <tag k='foot' v='yes' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='2' />
+    <tag k='name' v='Kantipath' />
+    <tag k='surface' v='paved' />
+  </way>
+  <way id='172387589' timestamp='2013-06-26T12:55:55Z' uid='647540' user='sures' visible='true' version='4' changeset='16712791'>
+    <nd ref='313286659' />
+    <nd ref='2053868507' />
+    <nd ref='1278029460' />
+    <nd ref='1806071816' />
+    <tag k='highway' v='primary' />
+  </way>
+  <way id='176144614' timestamp='2013-01-10T08:28:17Z' uid='680067' user='amritkarma' visible='true' version='5' changeset='14595040'>
+    <nd ref='313917671' />
+    <nd ref='724269945' />
+    <nd ref='1965697242' />
+    <nd ref='1273136916' />
+    <tag k='highway' v='primary' />
+    <tag k='name' v='Jamal Sadak' />
+    <tag k='oneway' v='yes' />
+  </way>
+  <way id='176144636' timestamp='2013-06-26T12:55:54Z' uid='647540' user='sures' visible='true' version='9' changeset='16712791'>
+    <nd ref='268545728' />
+    <nd ref='1963985532' />
+    <tag k='highway' v='primary' />
+    <tag k='name' v='Lekhnath Sadak' />
+    <tag k='ref' v='RatnaPark-Phutung' />
+    <tag k='route' v='Micro' />
+    <tag k='type' v='route' />
+  </way>
+  <way id='184708632' timestamp='2013-06-26T12:55:52Z' uid='647540' user='sures' visible='true' version='4' changeset='16712791'>
+    <nd ref='296329351' />
+    <nd ref='1952134595' />
+    <nd ref='1952134574' />
+    <tag k='highway' v='primary' />
+    <tag k='name' v='Balaju Sohrakhutte Sadak' />
+    <tag k='ref' v='RatnaPark-Phutung' />
+    <tag k='route' v='Micro' />
+    <tag k='type' v='route' />
+  </way>
+  <way id='224839048' timestamp='2013-06-26T12:55:53Z' uid='647540' user='sures' visible='true' version='2' changeset='16712791'>
+    <nd ref='31019734' />
+    <nd ref='2169151685' />
+    <nd ref='313286659' />
+    <tag k='bicycle' v='yes' />
+    <tag k='cycleway' v='lane' />
+    <tag k='foot' v='yes' />
+    <tag k='highway' v='primary' />
+    <tag k='lanes' v='2' />
+    <tag k='name' v='Kanti Path' />
+    <tag k='ref' v='RatnaPark-Phutung' />
+    <tag k='route' v='Micro' />
+    <tag k='surface' v='paved' />
+    <tag k='type' v='route' />
+  </way>
+  <relation id='3028077' timestamp='2013-06-26T11:49:50Z' uid='647540' user='sures' visible='true' version='1' changeset='16712067'>
+    <member type='way' ref='27033730' role='' />
+    <member type='way' ref='27033731' role='' />
+    <member type='way' ref='184708632' role='' />
+    <member type='way' ref='24667562' role='' />
+    <member type='way' ref='61163649' role='' />
+    <member type='way' ref='171215509' role='' />
+    <member type='way' ref='171215508' role='' />
+    <member type='way' ref='176144636' role='' />
+    <member type='way' ref='171215516' role='' />
+    <member type='way' ref='172138201' role='' />
+    <member type='way' ref='224839048' role='' />
+    <member type='way' ref='172387589' role='' />
+    <member type='way' ref='172387565' role='' />
+    <member type='way' ref='28543722' role='' />
+    <member type='way' ref='4840092' role='' />
+    <member type='way' ref='176144614' role='' />
+    <member type='way' ref='169442474' role='' />
+    <member type='way' ref='28579443' role='' />
+    <member type='way' ref='171215507' role='' />
+    <member type='way' ref='171603746' role='' />
+    <member type='node' ref='31303568' role='start' />
+    <member type='node' ref='943246313' role='end' />
+    <member type='node' ref='268116939' role='' />
+    <member type='node' ref='728153897' role='' />
+    <member type='node' ref='31019734' role='' />
+    <member type='node' ref='313917671' role='' />
+    <tag k='name' v='Balaju-Ratnapark' />
+    <tag k='operator' v='Balaju Microbus and tempo samitee' />
+    <tag k='route' v='microbus;tempo' />
+    <tag k='type' v='route' />
+  </relation>
+</osm>

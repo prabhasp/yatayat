@@ -1,5 +1,5 @@
 {
-    "API_URL": "transit.experimental.xml",
+    "API_URL": "transit.balaju-ratnapark.xml",
     "GET_OR_POST": "GET",
     "WAX": true,
     "TILE_SOURCE": "http://a.tiles.mapbox.com/v3/modilabs.map-p543gvbh.jsonp",
