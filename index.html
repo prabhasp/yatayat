@@ -14,6 +14,8 @@ body {
 <script src="lib/jquery-1.7.2.min.js"></script>
 <script src="lib/underscore-min.js"></script>
 <script src="lib/leaflet/leaflet.js"></script>
+<script src="lib/leaflet/spin.min.js"></script>
+<script src="lib/leaflet/leaflet.spin.js"></script>
 <script src="lib/wax.leaf.min.js"></script>
 <script src="lib/kdtree/src/web/kdTree.js"></script>
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
@@ -65,12 +67,20 @@ YY.fromConfig("config.stable.json",
                     undefined, //includeIDObject; try {"2269045": true} for an example
                     undefined // leafletBaseOptions
     			  );
+        //displaying stop name over stops
+        /*_.each(system.allStops(),function( v, key, list ) {
+            console.log('stoop name',v.name)
+            L.marker([v.lat,v.lng],{icon:L.divIcon({html:v.name})}).addTo(map);//.showLabel();//.bindLabel(v.name),{noHide:true})
+          // 
+        })
+        */
 
         //ROUTING
         var stopNames = _.compact(_.pluck(system.allStops(), 'name'));
         $('.typeahead').typeahead({source: stopNames});
         $('#textboxes').show();
         $('input.typeahead').change(function(f) {
+            map.spin(true);
             var start = $('#startstop')[0].value;
             var end = $('#endstop')[0].value;
             if (start && end) {
@@ -104,12 +114,15 @@ YY.fromConfig("config.stable.json",
                               );
                     $('#routedisplay').show();
                     $('#routedisplay').html(outputHTML);
+                    map.spin(false);  
                 }
             } else {
                 YY.render_(system, map);
                 $('#routedisplay').hide()
-            }
+                map.spin(false);  
+            }         
         });
+
         if(YY.TILE_SOURCE) {
             if (YY.WAX) {
                 wax.tilejson(YY.TILE_SOURCE, function(tilejson) {

@@ -370,7 +370,8 @@ YY.fromConfig = function(config_path, cb) {
             YY[key] = conf[key];
         }
         // load in & parse XML
-        console.log('cb',cb);
+        // console.log('cb',cb);
+        map.spin(true);
         $.ajax(
             {   type: YY.GET_OR_POST, 
                 url: YY.API_URL,
@@ -378,6 +379,7 @@ YY.fromConfig = function(config_path, cb) {
                 dataType: "text",
                 success: function(res) {
                     cb(YY.fromOSM(res));
+                    map.spin(false);
                 }
             });
     });
