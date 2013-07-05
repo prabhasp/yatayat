@@ -370,7 +370,7 @@ YY.fromConfig = function(config_path, cb) {
             YY[key] = conf[key];
         }
         // load in & parse XML
-        console.log('cb',cb);
+        // console.log('cb',cb);
         $.ajax(
             {   type: YY.GET_OR_POST, 
                 url: YY.API_URL,
