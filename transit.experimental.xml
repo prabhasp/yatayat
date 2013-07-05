@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-07-03T23:59:06Z"/>
+<meta osm_base="2013-07-04T23:59:07Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -2237,6 +2237,7 @@
   <node id="945656944" lat="27.6803429" lon="85.2980875"/>
   <node id="945656945" lat="27.6848924" lon="85.2976076"/>
   <node id="945656946" lat="27.6848452" lon="85.2980545"/>
+  <node id="945666473" lat="27.6940182" lon="85.3142372"/>
   <node id="945666475" lat="27.6938793" lon="85.3139531"/>
   <node id="945666476" lat="27.6937906" lon="85.3139857"/>
   <node id="945666477" lat="27.6937227" lon="85.3140849"/>
@@ -3714,7 +3715,10 @@
   <node id="1882457826" lat="27.6893189" lon="85.3357602"/>
   <node id="1882485975" lat="27.6816813" lon="85.3322652"/>
   <node id="1882485978" lat="27.6819294" lon="85.3324853"/>
-  <node id="1882490078" lat="27.6810950" lon="85.3315378"/>
+  <node id="1882490078" lat="27.6811284" lon="85.3315875">
+    <tag k="name" v="Sankhamul Stop"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <node id="1882601487" lat="27.6903265" lon="85.3359541">
     <tag k="name" v="New Baneshwor"/>
     <tag k="public_transport" v="stop_position"/>
@@ -4035,6 +4039,7 @@
   <node id="1954569522" lat="27.6947916" lon="85.2868736"/>
   <node id="1954584445" lat="27.7176746" lon="85.3137117"/>
   <node id="1954648588" lat="27.7022899" lon="85.3172500"/>
+  <node id="1954683817" lat="27.6940393" lon="85.3141757"/>
   <node id="1957158928" lat="27.7132874" lon="85.3239510"/>
   <node id="1957158930" lat="27.7133349" lon="85.3238698"/>
   <node id="1957364453" lat="27.7257260" lon="85.3450382"/>
@@ -4162,9 +4167,11 @@
   <node id="1966300243" lat="27.6724460" lon="85.4088634"/>
   <node id="1968234739" lat="27.6942673" lon="85.3204817"/>
   <node id="1968234741" lat="27.6941212" lon="85.3208194"/>
+  <node id="1968238384" lat="27.6940411" lon="85.3141172"/>
   <node id="1968238385" lat="27.6936193" lon="85.3144087"/>
   <node id="1968238387" lat="27.6937478" lon="85.3142458"/>
   <node id="1968238389" lat="27.6937270" lon="85.3141988"/>
+  <node id="1968238390" lat="27.6940273" lon="85.3140620"/>
   <node id="1968238397" lat="27.6939090" lon="85.3137431"/>
   <node id="1968238398" lat="27.6937756" lon="85.3142810"/>
   <node id="1968245228" lat="27.6939511" lon="85.3143069"/>
@@ -5111,6 +5118,10 @@
   </node>
   <node id="2360183669" lat="27.7345232" lon="85.3307108">
     <tag k="name" v="Teaching Hospital stop"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
+  <node id="2373352536" lat="27.6934485" lon="85.3145773">
+    <tag k="name" v="Tripureshwor"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
   <way id="4825621">
@@ -7277,23 +7288,6 @@
     <nd ref="1383959419"/>
     <nd ref="1838310454"/>
     <nd ref="1882490078"/>
-    <nd ref="1838310508"/>
-    <nd ref="1281234003"/>
-    <nd ref="1281233981"/>
-    <nd ref="1281233915"/>
-    <nd ref="2272598426"/>
-    <nd ref="1882485975"/>
-    <nd ref="1882485978"/>
-    <nd ref="1281234042"/>
-    <nd ref="1281234007"/>
-    <nd ref="1281234011"/>
-    <nd ref="1281234113"/>
-    <nd ref="1931989896"/>
-    <nd ref="1281234117"/>
-    <nd ref="1931989897"/>
-    <nd ref="1281233957"/>
-    <nd ref="1281234110"/>
-    <nd ref="1281234041"/>
     <tag k="alt_name" v="Sankhamool Road"/>
     <tag k="bicycle" v="yes"/>
     <tag k="cycleway" v="no"/>
@@ -7975,6 +7969,7 @@
     <nd ref="1273357597"/>
     <nd ref="1803547371"/>
     <nd ref="1968238385"/>
+    <nd ref="2373352536"/>
     <nd ref="1803547368"/>
     <nd ref="1803547364"/>
     <nd ref="1274192053"/>
@@ -10055,7 +10050,6 @@
     <nd ref="1965722849"/>
     <nd ref="1123087567"/>
     <nd ref="564118342"/>
-    <nd ref="564118343"/>
     <tag k="highway" v="primary"/>
     <tag k="name" v="University Path"/>
   </way>
@@ -11804,6 +11798,20 @@
     <tag k="name" v="Tripureshwore"/>
     <tag k="surface" v="paved"/>
   </way>
+  <way id="224826609">
+    <nd ref="103589515"/>
+    <nd ref="1968238390"/>
+    <nd ref="1968238384"/>
+    <nd ref="1954683817"/>
+    <nd ref="945666473"/>
+    <nd ref="1273357564"/>
+    <tag k="bicycle" v="yes"/>
+    <tag k="foot" v="designated"/>
+    <tag k="highway" v="primary"/>
+    <tag k="junction" v="roundabout"/>
+    <tag k="name" v="Tripureshwore"/>
+    <tag k="surface" v="paved"/>
+  </way>
   <way id="224826610">
     <nd ref="1273357597"/>
     <nd ref="945666478"/>
@@ -12648,6 +12656,40 @@
     <nd ref="1835407389"/>
     <tag k="highway" v="residential"/>
   </way>
+  <way id="228677437">
+    <nd ref="1882490078"/>
+    <nd ref="1838310508"/>
+    <nd ref="1281234003"/>
+    <nd ref="1281233981"/>
+    <nd ref="1281233915"/>
+    <nd ref="2272598426"/>
+    <nd ref="1882485975"/>
+    <nd ref="1882485978"/>
+    <nd ref="1281234042"/>
+    <nd ref="1281234007"/>
+    <nd ref="1281234011"/>
+    <nd ref="1281234113"/>
+    <nd ref="1931989896"/>
+    <nd ref="1281234117"/>
+    <nd ref="1931989897"/>
+    <nd ref="1281233957"/>
+    <nd ref="1281234110"/>
+    <nd ref="1281234041"/>
+    <tag k="alt_name" v="Sankhamool Road"/>
+    <tag k="bicycle" v="yes"/>
+    <tag k="cycleway" v="no"/>
+    <tag k="foot" v="yes"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="lanes" v="2"/>
+    <tag k="motor_vehicle" v="yes"/>
+    <tag k="name" v="Sankhamul Road"/>
+  </way>
+  <way id="228677438">
+    <nd ref="564118342"/>
+    <nd ref="564118343"/>
+    <tag k="highway" v="primary"/>
+    <tag k="name" v="University Path"/>
+  </way>
   <relation id="2276770">
     <member type="node" ref="360889656" role="end"/>
     <member type="node" ref="1274184084" role="start"/>
@@ -12801,6 +12843,7 @@
     <member type="way" ref="44384567" role=""/>
     <member type="way" ref="184867817" role=""/>
     <member type="way" ref="184867816" role=""/>
+    <member type="way" ref="228677438" role=""/>
     <member type="way" ref="195858822" role=""/>
     <member type="way" ref="195858821" role=""/>
     <member type="way" ref="224829987" role=""/>
@@ -13256,6 +13299,7 @@
   <relation id="2295986">
     <member type="node" ref="1830616461" role="start"/>
     <member type="way" ref="112785219" role=""/>
+    <member type="way" ref="228677437" role=""/>
     <member type="way" ref="182984267" role=""/>
     <member type="way" ref="182984266" role=""/>
     <member type="way" ref="169339098" role=""/>
@@ -14336,6 +14380,7 @@
     <member type="way" ref="44384567" role=""/>
     <member type="way" ref="184867817" role=""/>
     <member type="way" ref="184867816" role=""/>
+    <member type="way" ref="228677438" role=""/>
     <member type="way" ref="195858822" role=""/>
     <member type="way" ref="195858821" role=""/>
     <member type="way" ref="224829987" role=""/>
@@ -14678,6 +14723,7 @@
     <member type="way" ref="224829987" role=""/>
     <member type="way" ref="195858821" role=""/>
     <member type="way" ref="195858822" role=""/>
+    <member type="way" ref="228677438" role=""/>
     <member type="way" ref="184867816" role=""/>
     <member type="way" ref="184867817" role=""/>
     <member type="way" ref="44384567" role=""/>
@@ -14721,6 +14767,7 @@
     <member type="way" ref="44384567" role=""/>
     <member type="way" ref="184867817" role=""/>
     <member type="way" ref="184867816" role=""/>
+    <member type="way" ref="228677438" role=""/>
     <member type="way" ref="195858822" role=""/>
     <member type="way" ref="195858821" role=""/>
     <member type="way" ref="224829987" role=""/>
@@ -14762,6 +14809,7 @@
     <member type="way" ref="44384567" role=""/>
     <member type="way" ref="184867817" role=""/>
     <member type="way" ref="184867816" role=""/>
+    <member type="way" ref="228677438" role=""/>
     <member type="way" ref="195858822" role=""/>
     <member type="way" ref="195858821" role=""/>
     <member type="way" ref="224829987" role=""/>
@@ -14853,6 +14901,46 @@
     <member type="node" ref="313917671" role=""/>
     <tag k="name" v="Balaju-Ratnapark"/>
     <tag k="operator" v="Balaju Microbus and tempo samitee"/>
+    <tag k="route" v="microbus;tempo"/>
+    <tag k="type" v="route"/>
+  </relation>
+  <relation id="3062309">
+    <member type="way" ref="184867816" role=""/>
+    <member type="way" ref="184867817" role=""/>
+    <member type="way" ref="44384567" role=""/>
+    <member type="way" ref="136619565" role=""/>
+    <member type="way" ref="24691223" role=""/>
+    <member type="way" ref="24691222" role=""/>
+    <member type="way" ref="120353050" role=""/>
+    <member type="way" ref="185939504" role=""/>
+    <member type="way" ref="171599262" role=""/>
+    <member type="way" ref="224826609" role=""/>
+    <member type="way" ref="224826607" role=""/>
+    <member type="way" ref="169191889" role=""/>
+    <member type="way" ref="173044649" role=""/>
+    <member type="way" ref="118505089" role=""/>
+    <member type="way" ref="120031044" role=""/>
+    <member type="way" ref="172140337" role=""/>
+    <member type="way" ref="111845384" role=""/>
+    <member type="way" ref="170533894" role=""/>
+    <member type="way" ref="172126340" role=""/>
+    <member type="way" ref="169339097" role=""/>
+    <member type="way" ref="169339098" role=""/>
+    <member type="way" ref="182984266" role=""/>
+    <member type="way" ref="182984267" role=""/>
+    <member type="way" ref="228677437" role=""/>
+    <member type="node" ref="314528404" role=""/>
+    <member type="node" ref="1805074834" role=""/>
+    <member type="node" ref="1805087604" role=""/>
+    <member type="node" ref="1817322707" role=""/>
+    <member type="node" ref="313735983" role=""/>
+    <member type="node" ref="1882490078" role="end"/>
+    <member type="node" ref="2373352536" role=""/>
+    <member type="node" ref="564118342" role="start"/>
+    <member type="node" ref="317532028" role=""/>
+    <member type="node" ref="1805087571" role=""/>
+    <tag k="description" v="tempo and microbus(from balkhu to sankhamul)"/>
+    <tag k="name" v="Balkhu-NayaBaneshwor-Sankhamul"/>
     <tag k="route" v="microbus;tempo"/>
     <tag k="type" v="route"/>
   </relation>
