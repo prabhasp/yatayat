@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-07-05T23:59:06Z"/>
+<meta osm_base="2013-07-06T23:59:05Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -5123,6 +5123,10 @@
     <tag k="name" v="Tripureshwor"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
+  <node id="2376160425" lat="27.6847979" lon="85.2985923">
+    <tag k="name" v="Balkhu Stop"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -10141,6 +10145,7 @@
   <way id="185470034">
     <nd ref="1905826405"/>
     <nd ref="296332799"/>
+    <nd ref="2376160425"/>
     <nd ref="564118343"/>
     <tag k="Micro Bus Fare" v="Rs. 14 - Rs. 25 depending on distance"/>
     <tag k="Micro Bus No." v="18"/>
@@ -11611,7 +11616,7 @@
     <nd ref="1906524972"/>
     <nd ref="1595627710"/>
     <nd ref="2291478678"/>
-    <tag k="highway" v="residential"/>
+    <tag k="highway" v="service"/>
   </way>
   <way id="220042783">
     <nd ref="1990803559"/>
@@ -12781,6 +12786,7 @@
     <tag k="type" v="route"/>
   </relation>
   <relation id="2277212">
+    <member type="node" ref="31228768" role="terminus"/>
     <member type="node" ref="31150627" role=""/>
     <member type="node" ref="31148727" role=""/>
     <member type="node" ref="1281218812" role=""/>
@@ -12789,7 +12795,6 @@
     <member type="node" ref="1394568906" role=""/>
     <member type="node" ref="31150618" role=""/>
     <member type="node" ref="31150664" role=""/>
-    <member type="node" ref="31228768" role="terminus"/>
     <member type="node" ref="31230922" role=""/>
     <member type="node" ref="1274184084" role="terminus"/>
     <member type="way" ref="24683731" role=""/>
@@ -14941,6 +14946,70 @@
     <tag k="description" v="tempo and microbus(from balkhu to sankhamul)"/>
     <tag k="name" v="Balkhu-NayaBaneshwor-Sankhamul"/>
     <tag k="route" v="microbus;tempo"/>
+    <tag k="type" v="route"/>
+  </relation>
+  <relation id="3067910">
+    <member type="node" ref="2291478678" role="start"/>
+    <member type="way" ref="220025933" role=""/>
+    <member type="way" ref="220025931" role=""/>
+    <member type="way" ref="171603746" role=""/>
+    <member type="node" ref="943246313" role="end"/>
+    <tag k="from" v="Bagbazaar Stop"/>
+    <tag k="name" v="Bagbazaar- Ratnapark"/>
+    <tag k="route" v="foot"/>
+    <tag k="type" v="route"/>
+  </relation>
+  <relation id="3067911">
+    <member type="way" ref="24683731" role=""/>
+    <member type="way" ref="171603746" role=""/>
+    <member type="node" ref="943246313" role="end"/>
+    <member type="node" ref="1274184084" role="start"/>
+    <tag k="from" v="Purano bus Park"/>
+    <tag k="name" v="Purano Bus Park-Ratnapark"/>
+    <tag k="ref" v="on foot"/>
+    <tag k="route" v="foot"/>
+    <tag k="type" v="route"/>
+  </relation>
+  <relation id="3068536">
+    <member type="way" ref="225457469" role=""/>
+    <member type="way" ref="225457470" role=""/>
+    <member type="way" ref="175587327" role=""/>
+    <member type="way" ref="171599261" role=""/>
+    <member type="way" ref="195858821" role=""/>
+    <member type="way" ref="195858822" role=""/>
+    <member type="way" ref="185470034" role=""/>
+    <member type="way" ref="185470054" role=""/>
+    <member type="way" ref="175587305" role=""/>
+    <member type="way" ref="225456437" role=""/>
+    <member type="way" ref="225456436" role=""/>
+    <member type="way" ref="216297386" role=""/>
+    <member type="way" ref="216297391" role=""/>
+    <member type="way" ref="136524570" role=""/>
+    <member type="node" ref="1273477941" role=""/>
+    <member type="node" ref="313544725" role=""/>
+    <tag k="from" v="Kalanki"/>
+    <tag k="route" v="bus"/>
+    <tag k="type" v="route"/>
+  </relation>
+  <relation id="3068548">
+    <member type="way" ref="225457469" role=""/>
+    <member type="way" ref="225457470" role=""/>
+    <member type="way" ref="175587327" role=""/>
+    <member type="way" ref="171599261" role=""/>
+    <member type="way" ref="195858821" role=""/>
+    <member type="way" ref="195858822" role=""/>
+    <member type="way" ref="185470034" role=""/>
+    <member type="way" ref="185470054" role=""/>
+    <member type="way" ref="175587305" role=""/>
+    <member type="way" ref="225456437" role=""/>
+    <member type="way" ref="225456436" role=""/>
+    <member type="way" ref="216297386" role=""/>
+    <member type="way" ref="216297391" role=""/>
+    <member type="way" ref="136524570" role=""/>
+    <member type="node" ref="1273477941" role=""/>
+    <member type="node" ref="313544725" role=""/>
+    <tag k="from" v="Kalanki"/>
+    <tag k="route" v="bus"/>
     <tag k="type" v="route"/>
   </relation>
 
