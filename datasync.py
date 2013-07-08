@@ -99,7 +99,8 @@ def run():
             email(opts.address, e_err + w_err, subject="URGENT JS ERRORS IN YATAYAT")
     if len(w_out.strip()) > 0 and not opts.silent:
         # warnings present -- email
-        email(opts.address, w_out)
+        subject = "(warnings in yatayat overpass data)" if len(e_out.strip()) == 0 else "ERRORS detected in yatayat overpass data"
+        email(opts.address, w_out, subject=subject)
     ## DATA
     if len(e_out.strip()) > 0 and not opts.force:
         # There were errors
