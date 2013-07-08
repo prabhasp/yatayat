@@ -184,7 +184,8 @@ YY.fromConfig("config.stable.json",
                         (leafletBaseOptions && leafletBaseOptions.stop) ||
                             defaultOptions.stop);
                 }
-                marker.bindPopup(stop.name);
+                // marker.bindPopup(stop.name+"</br><a href='#'onclick='alert(\""+stop.name+"\")'>From Here</a>");
+                marker.bindPopup(stop.name+"</br><a href='#' onclick='document.getElementById(\"startstop\").value=\""+stop.name+"\";$(\"#startstop\").change()'>From Here</a>"+"</br><a href='#' onclick='document.getElementById(\"endstop\").value=\""+stop.name+"\";$(\"#endstop\").change()'>To Here</a>");
                 YY._layerGroup.addLayer(marker);
             });
         });
