@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-07-08T23:59:06Z"/>
+<meta osm_base="2013-07-09T23:59:05Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -16106,6 +16106,39 @@
     <tag k="description" v="Janata Yatayat (Matathirtha-kapan)"/>
     <tag k="name" v="Matathirtha-Naikap-Thapathali-KrishnaPauroti-Ratopul-Chabahil-kapan"/>
     <tag k="route" v="Janata Yatayat Bus"/>
+    <tag k="type" v="route"/>
+  </relation>
+  <relation id="3074202">
+    <member type="way" ref="138956759" role=""/>
+    <member type="way" ref="229195916" role=""/>
+    <member type="way" ref="180216483" role=""/>
+    <member type="way" ref="171603747" role=""/>
+    <member type="way" ref="223093274" role=""/>
+    <member type="way" ref="4840030" role=""/>
+    <member type="way" ref="4840039" role=""/>
+    <member type="way" ref="121782640" role=""/>
+    <member type="way" ref="173980139" role=""/>
+    <member type="way" ref="111965837" role=""/>
+    <member type="way" ref="111965821" role=""/>
+    <member type="way" ref="120430420" role=""/>
+    <member type="way" ref="4840124" role=""/>
+    <member type="way" ref="220025931" role=""/>
+    <member type="way" ref="171603746" role=""/>
+    <member type="node" ref="2378194788" role="start"/>
+    <member type="node" ref="360702826" role=""/>
+    <member type="node" ref="2010535723" role=""/>
+    <member type="node" ref="31151483" role=""/>
+    <member type="node" ref="1395061503" role=""/>
+    <member type="node" ref="1832985899" role=""/>
+    <member type="node" ref="31150643" role=""/>
+    <member type="node" ref="1281218812" role=""/>
+    <member type="node" ref="31148719" role=""/>
+    <member type="node" ref="31148727" role=""/>
+    <member type="node" ref="2291478689" role=""/>
+    <member type="node" ref="943246313" role="end"/>
+    <tag k="description" v="Microbus (kapan-Ratnapark)"/>
+    <tag k="name" v="kapan-Chabahil-Mitidevi-Ratnapark"/>
+    <tag k="route" v="Microbus"/>
     <tag k="type" v="route"/>
   </relation>
 
