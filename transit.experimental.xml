@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-07-09T23:59:05Z"/>
+<meta osm_base="2013-07-10T23:59:06Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -1232,7 +1232,7 @@
   <node id="356102472" lat="27.6905218" lon="85.2739033"/>
   <node id="356102479" lat="27.6896630" lon="85.2719206"/>
   <node id="356102480" lat="27.6894730" lon="85.2716030"/>
-  <node id="356102487" lat="27.6878845" lon="85.2697920"/>
+  <node id="356102487" lat="27.6879082" lon="85.2697710"/>
   <node id="356102492" lat="27.6874361" lon="85.2689594"/>
   <node id="356102494" lat="27.6872841" lon="85.2681698"/>
   <node id="356102496" lat="27.6872500" lon="85.2663847"/>
@@ -3063,7 +3063,7 @@
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="1523358470" lat="27.7780774" lon="85.3610225"/>
-  <node id="1523705695" lat="27.6880091" lon="85.2699912"/>
+  <node id="1523705695" lat="27.6880429" lon="85.2699702"/>
   <node id="1525726643" lat="27.6913153" lon="85.3528677"/>
   <node id="1595627710" lat="27.7059237" lon="85.3172388"/>
   <node id="1632564303" lat="27.7080707" lon="85.3379967"/>
@@ -5339,6 +5339,8 @@
     <tag k="name" v="Kapan Stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
+  <node id="2379741612" lat="27.6868402" lon="85.2522058"/>
+  <node id="2379741613" lat="27.6870111" lon="85.2502993"/>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -13216,8 +13218,10 @@
     <nd ref="2164930834"/>
     <nd ref="356102519"/>
     <nd ref="356102518"/>
+    <nd ref="2379741613"/>
     <nd ref="356102517"/>
     <nd ref="1839688878"/>
+    <nd ref="2379741612"/>
     <nd ref="356102516"/>
     <nd ref="356102515"/>
     <nd ref="356102513"/>
@@ -15775,48 +15779,6 @@
     <tag k="route" v="microbus"/>
     <tag k="type" v="route"/>
   </relation>
-  <relation id="3070116">
-    <member type="way" ref="24667319" role=""/>
-    <member type="way" ref="184867810" role=""/>
-    <member type="way" ref="184867809" role=""/>
-    <member type="way" ref="184867811" role=""/>
-    <member type="way" ref="172481630" role=""/>
-    <member type="way" ref="136619565" role=""/>
-    <member type="way" ref="24691223" role=""/>
-    <member type="way" ref="24691222" role=""/>
-    <member type="way" ref="120353050" role=""/>
-    <member type="way" ref="185939504" role=""/>
-    <member type="way" ref="171599262" role=""/>
-    <member type="way" ref="224826609" role=""/>
-    <member type="way" ref="224826607" role=""/>
-    <member type="way" ref="169191889" role=""/>
-    <member type="way" ref="173044649" role=""/>
-    <member type="way" ref="118505089" role=""/>
-    <member type="way" ref="120031044" role=""/>
-    <member type="way" ref="172140337" role=""/>
-    <member type="way" ref="111845384" role=""/>
-    <member type="way" ref="170533894" role=""/>
-    <member type="way" ref="172126340" role=""/>
-    <member type="way" ref="169339097" role=""/>
-    <member type="way" ref="169339098" role=""/>
-    <member type="way" ref="229143181" role=""/>
-    <member type="way" ref="215506638" role=""/>
-    <member type="way" ref="182984833" role=""/>
-    <member type="way" ref="225456438" role=""/>
-    <member type="way" ref="182984835" role=""/>
-    <member type="way" ref="188434895" role=""/>
-    <member type="way" ref="120032858" role=""/>
-    <member type="way" ref="193289326" role=""/>
-    <member type="way" ref="194607856" role=""/>
-    <member type="way" ref="229063565" role=""/>
-    <member type="way" ref="229063564" role=""/>
-    <member type="node" ref="558561818" role=""/>
-    <member type="node" ref="313544725" role=""/>
-    <tag k="from" v="Kalanki"/>
-    <tag k="ref" v="40"/>
-    <tag k="route" v="bus"/>
-    <tag k="type" v="route"/>
-  </relation>
   <relation id="3070257">
     <member type="way" ref="24667319" role=""/>
     <member type="way" ref="184867810" role=""/>
@@ -15851,11 +15813,10 @@
     <member type="way" ref="193289326" role=""/>
     <member type="way" ref="215507255" role=""/>
     <member type="way" ref="196277319" role=""/>
-    <member type="node" ref="313544725" role=""/>
-    <member type="node" ref="2377087410" role=""/>
+    <member type="node" ref="313544725" role="start"/>
+    <member type="node" ref="2377087410" role="end"/>
     <tag k="from" v="Kalanki"/>
     <tag k="name" v="kalanki-Balkumari"/>
-    <tag k="ref" v="40"/>
     <tag k="route" v="bus"/>
     <tag k="type" v="route"/>
   </relation>
@@ -15894,9 +15855,10 @@
     <member type="way" ref="194607856" role=""/>
     <member type="way" ref="229063565" role=""/>
     <member type="way" ref="229063564" role=""/>
-    <member type="node" ref="558561818" role=""/>
-    <member type="node" ref="313544725" role=""/>
+    <member type="node" ref="558561818" role="end"/>
+    <member type="node" ref="313544725" role="start"/>
     <tag k="from" v="Kalanki"/>
+    <tag k="name" v="Kalanki-Pepsacola"/>
     <tag k="route" v="bus"/>
     <tag k="type" v="route"/>
   </relation>
@@ -15938,8 +15900,8 @@
     <member type="way" ref="194607857" role=""/>
     <member type="way" ref="194607859" role=""/>
     <member type="way" ref="229075030" role=""/>
-    <member type="node" ref="2051114289" role=""/>
-    <member type="node" ref="356102511" role=""/>
+    <member type="node" ref="2051114289" role="start"/>
+    <member type="node" ref="356102511" role="end"/>
     <tag k="from" v="Kalanki"/>
     <tag k="name" v="Kausaltar-Naikap"/>
     <tag k="ref" v="40"/>
@@ -16030,7 +15992,7 @@
     <member type="node" ref="360455539" role=""/>
     <member type="node" ref="425307054" role=""/>
     <member type="node" ref="670651214" role=""/>
-    <member type="node" ref="2377740072" role=""/>
+    <member type="node" ref="2377740072" role="terminus"/>
     <tag k="from" v="Naya Baneshwor"/>
     <tag k="name" v="Naya Baneshwor, Koteshwor, Satdobato, Lagankhel, Jaulakhel, Kupandol, Naya Baneshwor"/>
     <tag k="ref" v="Tampoo"/>
