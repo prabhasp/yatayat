@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-07-11T23:58:06Z"/>
+<meta osm_base="2013-07-12T23:59:06Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -3771,9 +3771,9 @@
   <node id="1835677381" lat="27.6783174" lon="85.4341228"/>
   <node id="1835677433" lat="27.6796483" lon="85.4353270"/>
   <node id="1835695030" lat="27.6732904" lon="85.4029768"/>
-  <node id="1835695032" lat="27.6734342" lon="85.3823487"/>
+  <node id="1835695032" lat="27.6733858" lon="85.3823391"/>
   <node id="1835695033" lat="27.6735035" lon="85.3824496"/>
-  <node id="1835695039" lat="27.6735942" lon="85.3800138"/>
+  <node id="1835695039" lat="27.6734945" lon="85.3800009"/>
   <node id="1835695683" lat="27.6800543" lon="85.3984502">
     <tag k="name" v="Nikosera"/>
     <tag k="public_transport" v="stop_position"/>
@@ -3828,7 +3828,7 @@
   <node id="1874101799" lat="27.7340108" lon="85.3300285"/>
   <node id="1874101867" lat="27.7381688" lon="85.3253076"/>
   <node id="1874186545" lat="27.7364266" lon="85.3330611"/>
-  <node id="1874473943" lat="27.6868043" lon="85.3422526"/>
+  <node id="1874473943" lat="27.6867826" lon="85.3423011"/>
   <node id="1879942072" lat="27.6771271" lon="85.3163397"/>
   <node id="1880051594" lat="27.6734509" lon="85.3141112"/>
   <node id="1880051596" lat="27.6735740" lon="85.3141674"/>
@@ -4515,8 +4515,11 @@
   <node id="2051114293" lat="27.6733196" lon="85.3852004"/>
   <node id="2051114295" lat="27.6734870" lon="85.3827592"/>
   <node id="2051114296" lat="27.6735877" lon="85.3876480"/>
-  <node id="2051114297" lat="27.6736470" lon="85.3804243"/>
-  <node id="2051114298" lat="27.6736755" lon="85.3799995"/>
+  <node id="2051114297" lat="27.6735530" lon="85.3817169">
+    <tag k="name" v="Chardobato"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
+  <node id="2051114298" lat="27.6736413" lon="85.3799963"/>
   <node id="2051114299" lat="27.6737538" lon="85.3889306"/>
   <node id="2051114300" lat="27.6738629" lon="85.3897727"/>
   <node id="2051114301" lat="27.6740200" lon="85.3740270"/>
@@ -5341,6 +5344,10 @@
   </node>
   <node id="2379741612" lat="27.6868402" lon="85.2522058"/>
   <node id="2379741613" lat="27.6870111" lon="85.2502993"/>
+  <node id="2382181282" lat="27.6734240" lon="85.3811209">
+    <tag k="name" v="Chardobato"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -8477,6 +8484,7 @@
     <nd ref="360889656"/>
     <nd ref="268308354"/>
     <nd ref="1835695032"/>
+    <nd ref="2382181282"/>
     <nd ref="1835695039"/>
     <nd ref="1487748793"/>
     <tag k="access" v="yes"/>
@@ -10337,6 +10345,7 @@
     <nd ref="1965722849"/>
     <nd ref="1123087567"/>
     <nd ref="564118342"/>
+    <tag k="highway" v="primary"/>
     <tag k="name" v="University Path"/>
   </way>
   <way id="184867817">
