@@ -14,6 +14,8 @@ body {
 <script src="lib/jquery-1.7.2.min.js"></script>
 <script src="lib/underscore-min.js"></script>
 <script src="lib/leaflet/leaflet.js"></script>
+<script src="lib/leaflet/spin.min.js"></script>
+<script src="lib/leaflet/leaflet.spin.js"></script>
 <script src="lib/wax.leaf.min.js"></script>
 <script src="lib/kdtree/src/web/kdTree.js"></script>
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
@@ -57,7 +59,7 @@ body {
     var system;
     var osmdata;
 
-YY.fromConfig("config.stable.json", 
+YY.fromConfig("config.experimental.json", 
     function(sys) {
         system = sys;
     	YY.render_(system, 
@@ -65,12 +67,20 @@ YY.fromConfig("config.stable.json",
                     undefined, //includeIDObject; try {"2269045": true} for an example
                     undefined // leafletBaseOptions
     			  );
+        //displaying stop name over stops
+        /*_.each(system.allStops(),function( v, key, list ) {
+            console.log('stoop name',v.name)
+            L.marker([v.lat,v.lng],{icon:L.divIcon({html:v.name})}).addTo(map);//.showLabel();//.bindLabel(v.name),{noHide:true})
+          // 
+        })
+        */
 
         //ROUTING
         var stopNames = _.compact(_.pluck(system.allStops(), 'name'));
         $('.typeahead').typeahead({source: stopNames});
         $('#textboxes').show();
         $('input.typeahead').change(function(f) {
+            map.spin(true);
             var start = $('#startstop')[0].value;
             var end = $('#endstop')[0].value;
             if (start && end) {
@@ -104,12 +114,15 @@ YY.fromConfig("config.stable.json",
                               );
                     $('#routedisplay').show();
                     $('#routedisplay').html(outputHTML);
+                    map.spin(false);  
                 }
             } else {
                 YY.render_(system, map);
                 $('#routedisplay').hide()
-            }
+                map.spin(false);  
+            }         
         });
+
         if(YY.TILE_SOURCE) {
             if (YY.WAX) {
                 wax.tilejson(YY.TILE_SOURCE, function(tilejson) {
@@ -144,6 +157,15 @@ YY.fromConfig("config.stable.json",
     });
     };
 
+    function get_random_color() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.round(Math.random() * 15)];
+    }
+    return color;
+    }
+
     YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOverrideOptions) {
         //TODO: Handle overrideOptions
 
@@ -152,23 +174,20 @@ YY.fromConfig("config.stable.json",
         
         var filteredSystem = system.prune(includeIDDict);
         var defaultOptions = 
-            {"route" : {color: '#378AAD', opacity: 1, weight: 3},
+            {"route" : function() { return {color: get_random_color(), opacity: 1, weight: 3}; },
              "stop"  : {color: '#378AAD', fillOpacity: 0.5, radius: 5}};
         // render the route as a multi-polyline
         _(filteredSystem.routes).each(function(route) {
-            var routeMPL = new L.MultiPolyline(
-                _.map(route.segments, function(seg) {
-                    return _.map(seg.listOfLatLng, function(LL) {
-                        return new L.LatLng(LL[0], LL[1]);
-                    });
-                }),
-                (leafletBaseOptions && leafletBaseOptions.route) || 
-                    defaultOptions.route);
-            if (leafletOverrideOptions && (route.id in leafletOverrideOptions)) {
-                routeMPL.setOptions(leafletOverrideOptions[route.id] || leafletBaseOptions.route);
-            }
-            routeMPL.bindPopup(route.ref + " : " + route.name);
-            YY._layerGroup.addLayer(routeMPL);
+            route.segments.forEach(function(seg) {
+                var segMPL = new L.Polyline(
+                        _.map(seg.listOfLatLng, function(LL) {
+                            return new L.LatLng(LL[0], LL[1]);
+                        }),
+                    (leafletBaseOptions && leafletBaseOptions.route) || 
+                        defaultOptions.route());
+                segMPL.bindPopup(route.ref + " : " + route.name);
+                YY._layerGroup.addLayer(segMPL);
+            });
         });
         // render the stops as circle markers 
         _(filteredSystem.routes).each(function(route) { 
