@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-07-14T23:59:01Z"/>
+<meta osm_base="2013-07-15T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -698,12 +698,11 @@
   <node id="296340483" lat="27.6253136" lon="85.5477559"/>
   <node id="296340485" lat="27.6252853" lon="85.5480075"/>
   <node id="296340486" lat="27.6248721" lon="85.5486008"/>
-  <node id="296340513" lat="27.6197385" lon="85.5531366"/>
-  <node id="296340516" lat="27.6196830" lon="85.5531294"/>
-  <node id="296340517" lat="27.6192423" lon="85.5534885"/>
-  <node id="296340518" lat="27.6191788" lon="85.5537073"/>
-  <node id="296340519" lat="27.6188354" lon="85.5540084"/>
-  <node id="296340520" lat="27.6183864" lon="85.5540650">
+  <node id="296340513" lat="27.6202381" lon="85.5531695"/>
+  <node id="296340517" lat="27.6192931" lon="85.5532642"/>
+  <node id="296340518" lat="27.6191353" lon="85.5537449"/>
+  <node id="296340519" lat="27.6188380" lon="85.5539756"/>
+  <node id="296340520" lat="27.6184151" lon="85.5540152">
     <tag k="name" v="Dhulikhel Stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
@@ -1963,7 +1962,7 @@
   <node id="480429533" lat="27.7248640" lon="85.3447901"/>
   <node id="480431031" lat="27.7351070" lon="85.3422012"/>
   <node id="553319546" lat="27.6241936" lon="85.5494564"/>
-  <node id="553324934" lat="27.6205298" lon="85.5533330"/>
+  <node id="553324934" lat="27.6204026" lon="85.5532071"/>
   <node id="558555620" lat="27.5871094" lon="85.5133814">
     <tag k="name" v="Panauti"/>
     <tag k="public_transport" v="stop_position"/>
@@ -3684,11 +3683,11 @@
     <tag k="name" v="Gaushala Chowk Stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="1833814488" lat="27.6189780" lon="85.5539708"/>
-  <node id="1833814489" lat="27.6190862" lon="85.5538894"/>
-  <node id="1833814490" lat="27.6194059" lon="85.5532194"/>
-  <node id="1833814491" lat="27.6195332" lon="85.5531353"/>
-  <node id="1833814492" lat="27.6196053" lon="85.5531353"/>
+  <node id="1833814488" lat="27.6189643" lon="85.5539427"/>
+  <node id="1833814489" lat="27.6190655" lon="85.5538801"/>
+  <node id="1833814490" lat="27.6194139" lon="85.5531210"/>
+  <node id="1833814491" lat="27.6195843" lon="85.5530439"/>
+  <node id="1833814492" lat="27.6198707" lon="85.5530912"/>
   <node id="1835344495" lat="27.6436799" lon="85.3190918"/>
   <node id="1835344540" lat="27.6445680" lon="85.3192693"/>
   <node id="1835344586" lat="27.6455629" lon="85.3195339"/>
@@ -12136,7 +12135,6 @@
     <nd ref="1833814490"/>
     <nd ref="1833814491"/>
     <nd ref="1833814492"/>
-    <nd ref="296340516"/>
     <nd ref="296340513"/>
     <nd ref="553324934"/>
     <tag k="highway" v="primary"/>
