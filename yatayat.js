@@ -46,7 +46,7 @@ YY.System.prototype.stopRoutesFromStopID = function(stopID) {
 
 YY.System.prototype.stopRoutesFromStopName = function(stopName) {
     var aggregator = [];
-    console.log(this);
+    // console.log(this);
     _(this.routes).each(function (r) {
         _(r.stops).each(function (s) {
             if (s.name === stopName) {

@@ -58,6 +58,7 @@ body {
     //var ktmBB = "85.2885,27.6839,85.3368,27.7299";
     var system;
     var osmdata;
+    var routed;
 
 YY.fromConfig("config.experimental.json", 
     function(sys) {
@@ -86,8 +87,10 @@ YY.fromConfig("config.experimental.json",
             if (start && end) {
                 // console.log('routing from', start,' to ',end);
                 var gettingThereRoutes = system.takeMeThereByName(start, end);
+                routed = gettingThereRoutes;
                 if (gettingThereRoutes === 'FAIL') alert('cannot find a route from ', start, ' to ', end);
                 else {
+                    console.log('gettingThereRoutes',gettingThereRoutes);
                     var inclusionDict = {};
                     var overrideDict = {};
                     var outputHTML = "";
@@ -140,6 +143,11 @@ YY.fromConfig("config.experimental.json",
         }
 
         map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
+
+        //auto init routing at start
+    document.getElementById("startstop").value="Balaju";
+    document.getElementById("endstop").value="Kamal Binayak";
+    $('#endstop').change();
 
     });
 
@@ -223,7 +231,7 @@ YY.fromConfig("config.experimental.json",
         // script.setAttribute('src', 'sample/test.js');
         // document.body.appendChild(script);
 
-     
+    
 </script>
 </body>
 </html>
