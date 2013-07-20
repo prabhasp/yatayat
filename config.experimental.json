@@ -1,7 +1,5 @@
 {
-    "API_URL_2": "transit.balaju-chakrapath-thankot.xml",
-    "API_URL_1": "transit.balaju-chakrapath-thankot.xml",
-    "API_URL": "transit.july-5.1.xml",
+    "API_URL": "transit.experimental.xml",
     "GET_OR_POST": "GET",
     "WAX": true,
     "TILE_SOURCE": "http://a.tiles.mapbox.com/v3/modilabs.map-p543gvbh.jsonp",

@@ -379,10 +379,8 @@ YY.fromConfig = function(config_path, cb) {
         }
         // load in & parse XML
         // console.log('cb',cb);
-<<<<<<< HEAD
         map.spin(true);
-=======
->>>>>>> first-terminus-error
+
         $.ajax(
             {   type: YY.GET_OR_POST, 
                 url: YY.API_URL,
