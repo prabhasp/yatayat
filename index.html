@@ -123,21 +123,24 @@ YY.fromConfig("config.stable.json",
                         var endseg=[];
                         //finding index of first and last segment in list of segment
                         _(r.segments).each( function(seg) {
-                            ll=seg.listOfLatLng[0];
-                            if(startseg.length==0){
-                            if(ll[0]==r.stops[0].lat&&ll[1]==r.stops[0].lng){
-                                // startseg.push([r.segments.indexOf(seg),seg]);
-                                startseg =[r.segments.indexOf(seg),seg];
-                                console.log('start',startseg);
-                            }
-                            }
-                            if(endseg.length==0){
-                            if(ll[0]==_.last(r.stops).lat&&ll[1]==_.last(r.stops).lng){
-                                // endseg.push([r.segments.indexOf(seg),seg]);
-                                endseg =[r.segments.indexOf(seg),seg];
-                                console.log('end',endseg);
-                            }
-                            }
+                            // if(startseg.length==0){
+                                _(seg.listOfLatLng).each(function(ll){
+                                    if(ll[0]==r.stops[0].lat&&ll[1]==r.stops[0].lng){
+                                        // startseg.push([r.segments.indexOf(seg),seg]);
+                                        startseg =[r.segments.indexOf(seg),seg];
+                                        console.log('start',startseg);
+                                    }
+                                })
+                            // }
+                            // if(endseg.length==0){
+                                _(seg.listOfLatLng).each(function(ll){
+                                    if(ll[0]==_.last(r.stops).lat&&ll[1]==_.last(r.stops).lng){
+                                        // endseg.push([r.segments.indexOf(seg),seg]);
+                                        endseg =[r.segments.indexOf(seg),seg];
+                                        console.log('end',endseg);
+                                    }
+                                })
+                            // }
                         });
                         //index found and saved as 1st element in startseg and endseg
                         // alert();
