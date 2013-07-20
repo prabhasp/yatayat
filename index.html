@@ -59,6 +59,8 @@ body {
     var system;
     var osmdata;
     var routed;
+    var startseg=[];
+    var endseg=[];
 
 YY.fromConfig("config.experimental.json", 
     function(sys) {
@@ -95,6 +97,7 @@ YY.fromConfig("config.experimental.json",
                     var overrideDict = {};
                     var outputHTML = "";
                     _(system.routes).each(function(r) { inclusionDict[r.id] = true; }); // render everything
+                    counter =0 ;
                     _(gettingThereRoutes).each(function(r,idx) {
                         //inclusionDict[r.id] = true;
                         outputHTML += "Get on " + toTitleCase(r.transport) + " " + 
@@ -121,7 +124,29 @@ YY.fromConfig("config.experimental.json",
                             routed_route.addLatLng(new L.LatLng(s.lat,s.lng));
                         })
 
-                        map.addLayer(routed_route);
+                        col ='#'+counter*8+'3'+counter*8+'3'+counter*8+'3';
+                        console.log('col',col,typeof(col));
+
+                        map.addLayer(routed_route,{color:col});
+                        console.log('counter',++counter);
+
+                        _(r.segments).each( function(seg) {
+                            _(seg.listOfLatLng).each(function(ll){
+                                if(ll[0]==r.stops[0].lat&&ll[1]==r.stops[0].lng){
+                                    // startseg.push([r.segments.indexOf(seg),seg]);
+                                    startseg =[r.segments.indexOf(seg),seg];
+                                    console.log('start',startseg);
+                                }
+                                if(ll[0]==_.last(r.stops).lat&&ll[1]==_.last(r.stops).lng){
+                                    // endseg.push([r.segments.indexOf(seg),seg]);
+                                    endseg =[r.segments.indexOf(seg),seg];
+                                    console.log('end',endseg);
+                                }
+                            })
+                        });
+
+
+
                     });
 
 
@@ -132,6 +157,7 @@ YY.fromConfig("config.experimental.json",
                     $('#routedisplay').show();
                     $('#routedisplay').html(outputHTML);
                     map.spin(false);  
+
                 }
             } else {
                 YY.render_(system, map);
@@ -160,7 +186,7 @@ YY.fromConfig("config.experimental.json",
 
         //auto init routing at start
     document.getElementById("startstop").value="Balaju";
-    document.getElementById("endstop").value="Kamal Binayak";
+    document.getElementById("endstop").value="Dhungedhara";
     $('#endstop').change();
 
     });
