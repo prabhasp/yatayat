@@ -157,13 +157,7 @@ YY.fromConfig("config.stable.json",
                         {
                             seg = r.segments[segid];
                             console.log("comp",segid!=endseg[0]);
-                            // console.log('seg',seg);
-                            // _(seg.listOfLatLng).each(function(s){
                             _(seg).each(function(s){
-                                // console.log('s',s);
-                                // routed_route.addLatLng(new L.LatLng(parseFloat(s[0]),parseFloat(s[1])));
-                                // console.log('added',new L.LatLng(parseFloat(s[0]),parseFloat(s[1])));
-                                // 
                                 var segMPL = new L.Polyline(
                                     _.map(seg.listOfLatLng, function(LL) {
                                         return new L.LatLng(LL[0], LL[1]);
@@ -224,8 +218,8 @@ YY.fromConfig("config.stable.json",
         map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 
         //auto init routing at start
-    document.getElementById("startstop").value="Balaju";
-    document.getElementById("endstop").value="Kamal Binayak";
+    document.getElementById("startstop").value="Sinamangal";
+    document.getElementById("endstop").value="Jamal";
     $('#endstop').change();
 
     });
