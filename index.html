@@ -110,7 +110,21 @@ YY.fromConfig("config.experimental.json",
                         }
                         if (idx === gettingThereRoutes.length - 1)
                             overrideDict[_.last(r.stops).id] = {color: 'orange', opacity: 1, radius: 8};
+
+                        //show routed route
+                        var routed_route;
+                        if(routed_route)
+                            map.removeLayer(routed_route);
+
+                        routed_route = new L.Polyline([]);
+                        _(r.stops).each(function(s){
+                            routed_route.addLatLng(new L.LatLng(s.lat,s.lng));
+                        })
+
+                        map.addLayer(routed_route);
                     });
+
+
                     YY.render_(system, map, inclusionDict,
                                {route: {color: '#555', opacity: 1, weight: 1}},
                                overrideDict
