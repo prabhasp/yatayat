@@ -1,229 +1,71 @@
+<!doctype html>
 <html>
-<head>
-    <title> Kathmandu Public Transport </title>
-<link rel="stylesheet" href="lib/leaflet/leaflet.css" />
-<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
-<!--[if lte IE 8]>
-    <link rel="stylesheet" href="lib/leaflet/leaflet.ie.css" />
-<![endif]-->
-<style>
-body {
-  margin:0;
-}
-</style>
-<script src="lib/jquery-1.7.2.min.js"></script>
-<script src="lib/underscore-min.js"></script>
-<script src="lib/leaflet/leaflet.js"></script>
-<script src="lib/leaflet/spin.min.js"></script>
-<script src="lib/leaflet/leaflet.spin.js"></script>
-<script src="lib/wax.leaf.min.js"></script>
-<script src="lib/kdtree/src/web/kdTree.js"></script>
-<script src="lib/bootstrap/js/bootstrap.min.js"></script>
-<script src="yatayat.js"></script>
-</head>
-<body>
-      <!--Sidebar content>
-        <div id="buttons" style="position:absolute;top:10;left:60;z-index:999"> 
-            <input type="checkbox" name="vehicle1" value="bus" checked ="yes"/>Bus
-            <input type="checkbox" name="vehicle2" value="microbus"checked ="yes"/>Micro-Bus
-            <input type="checkbox" name="vehicle3" value="tempo"checked ="yes"/>Tempo (3 - wheeler)
-        </div>
-        -->
-        <div id="textboxes" style="position:absolute;top:20;left:60;z-index:999"> 
-            <b>Start</b> <input type="text" id="startstop" class="typeahead" data-provide="typeahead" class="span1"/>
-            <b>End</b> <input type="text" id="endstop" class="typeahead" data-provide="typeahead" class="span1"/>
-            <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY.render_(system,map);"> Clear </a>
-        </div>
-        <div id="report" style="position:absolute;top:20;right:60;z-index:999">
-            <a class="btn" id="reportmissing" data-toggle="modal" href="#myModal"> Report missing route </a> 
-        </div>
-        <div class="alert" id="routedisplay" style="background:white;position:absolute;top:60;left:60;z-index:999">
-        </div>
-        <div id="publicTransportMap" style="width: 100%; height: 100%">Loading ...</div>
-        <div class="modal hide" id="myModal"> 
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">X</button>
-            </div>
-            <br/>
-            <iframe src="https://docs.google.com/spreadsheet/embeddedform?formkey=dFdZeG9PYnVpY1FBMk4zVjBDaFNua1E6MQ" width="700" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
-        </div>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Kathmandu Valley Public Transport Network by amritkarma</title>
 
-<script type="text/javascript" language="javascript">
-    // UI HACK
-    $('#textboxes').hide();
-    $('#routedisplay').hide()
-    // initialize the map
-    var map = new L.Map('publicTransportMap');
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Kathmandu Valley Public Transport Network</h1>
+        <p>Gettng around Kathmandu in public transpor</p>
 
-    //var ktmBB = "85.2885,27.6839,85.3368,27.7299";
-    var system;
-    var osmdata;
+        <p class="view"><a href="https://github.com/amritkarma/yatayat">View the Project on GitHub <small>amritkarma/yatayat</small></a></p>
 
-YY.fromConfig("config.experimental.json", 
-    function(sys) {
-        system = sys;
-    	YY.render_(system, 
-                    map,
-                    undefined, //includeIDObject; try {"2269045": true} for an example
-                    undefined // leafletBaseOptions
-    			  );
-        //displaying stop name over stops
-        /*_.each(system.allStops(),function( v, key, list ) {
-            console.log('stoop name',v.name)
-            L.marker([v.lat,v.lng],{icon:L.divIcon({html:v.name})}).addTo(map);//.showLabel();//.bindLabel(v.name),{noHide:true})
-          // 
-        })
-        */
 
-        //ROUTING
-        var stopNames = _.compact(_.pluck(system.allStops(), 'name'));
-        $('.typeahead').typeahead({source: stopNames});
-        $('#textboxes').show();
-        $('input.typeahead').change(function(f) {
-            map.spin(true);
-            var start = $('#startstop')[0].value;
-            var end = $('#endstop')[0].value;
-            if (start && end) {
-                // console.log('routing from', start,' to ',end);
-                var gettingThereRoutes = system.takeMeThereByName(start, end);
-                if (gettingThereRoutes === 'FAIL') alert('cannot find a route from ', start, ' to ', end);
-                else {
-                    var inclusionDict = {};
-                    var overrideDict = {};
-                    var outputHTML = "";
-                    _(system.routes).each(function(r) { inclusionDict[r.id] = true; }); // render everything
-                    _(gettingThereRoutes).each(function(r,idx) {
-                        //inclusionDict[r.id] = true;
-                        outputHTML += "Get on " + toTitleCase(r.transport) + " " + 
-                            r.ref + " (" + r.name + ") at " + r.stops[0].name + 
-                            " and ride till " + _.last(r.stops).name + "<br/>";
-                        _(r.stops).each(function(s) {
-                            inclusionDict[s.id] = true;
-                        });
-                        if (idx===0) {
-                            overrideDict[r.stops[0].id] = {color: 'orange', opacity: 1, radius: 8};
-                        } else { 
-                            overrideDict[r.stops[0].id] = {color: 'orange', opacity: 1, radius: 8};
-                        }
-                        if (idx === gettingThereRoutes.length - 1)
-                            overrideDict[_.last(r.stops).id] = {color: 'orange', opacity: 1, radius: 8};
-                    });
-                    YY.render_(system, map, inclusionDict,
-                               {route: {color: '#555', opacity: 1, weight: 1}},
-                               overrideDict
-                              );
-                    $('#routedisplay').show();
-                    $('#routedisplay').html(outputHTML);
-                    map.spin(false);  
-                }
-            } else {
-                YY.render_(system, map);
-                $('#routedisplay').hide()
-                map.spin(false);  
-            }         
-        });
+        <ul>
+          <li><a href="https://github.com/amritkarma/yatayat/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/amritkarma/yatayat/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/amritkarma/yatayat">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h3>
+<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
 
-        if(YY.TILE_SOURCE) {
-            if (YY.WAX) {
-                wax.tilejson(YY.TILE_SOURCE, function(tilejson) {
-                    map.addLayer(new wax.leaf.connector(tilejson));
-                });
-            } else {
-                var tiles = new L.TileLayer(YY.TILE_SOURCE, {
-                    attribution: YY.ATTRIBUTION,
-                    maxZoom: 18
-                });
-                map.addLayer(tiles);
-            }
+<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
 
-            // add the layer to the map, set the view to a given place and zoom
-        }
+<pre><code>$ cd your_repo_root/repo_name
+$ git fetch origin
+$ git checkout gh-pages
+</code></pre>
 
-        map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
+<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
 
-    });
+<h3>
+<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
 
-    YY.viz = function(route, map) {
-    route.segments.forEach(function(seg, idx) {
-        var latlngs = seg.listOfLatLng.map(function(LL) {
-            return new L.LatLng(LL[0], LL[1]);
-        });
-        //var color = 0xffffff * (idx / route.segments.length * 1.0);  
-        var poly = new L.Polyline(latlngs, {color: colors.getProportional(idx / route.segments.length * 1.0)});
-        map.addLayer(new L.Circle(latlngs[0], 2, {color: 'blue', opacity: 0.5}));
-        map.addLayer(new L.Circle(latlngs[latlngs.length-1], 2, {color: 'green', opacity: 0.5}));
-        poly.bindPopup(route.name);
-        map.addLayer(poly);
-    });
-    };
+<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
 
-    function get_random_color() {
-    var letters = '0123456789ABCDEF'.split('');
-    var color = '#';
-    for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.round(Math.random() * 15)];
-    }
-    return color;
-    }
+<h3>
+<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
 
-    YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOverrideOptions) {
-        //TODO: Handle overrideOptions
+<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
 
-        if (!YY._layerGroup) { YY._layerGroup = new L.LayerGroup(); }
-        YY._layerGroup.clearLayers();
-        
-        var filteredSystem = system.prune(includeIDDict);
-        var defaultOptions = 
-            {"route" : function() { return {color: get_random_color(), opacity: 1, weight: 3}; },
-             "stop"  : {color: '#378AAD', fillOpacity: 0.5, radius: 5}};
-        // render the route as a multi-polyline
-        _(filteredSystem.routes).each(function(route) {
-            route.segments.forEach(function(seg) {
-                var segMPL = new L.Polyline(
-                        _.map(seg.listOfLatLng, function(LL) {
-                            return new L.LatLng(LL[0], LL[1]);
-                        }),
-                    (leafletBaseOptions && leafletBaseOptions.route) || 
-                        defaultOptions.route());
-                segMPL.bindPopup(route.ref + " : " + route.name);
-                YY._layerGroup.addLayer(segMPL);
-            });
-        });
-        // render the stops as circle markers 
-        _(filteredSystem.routes).each(function(route) { 
-            route.stops.forEach(function(stop) {
-                if (includeIDDict && !(stop.id in includeIDDict)) return;
-                var Lll = new L.LatLng(stop.lat, stop.lng);
-                var marker;
-                if (leafletOverrideOptions && (stop.id in leafletOverrideOptions)) {
-                    marker = new L.CircleMarker(Lll,
-                        leafletOverrideOptions[stop.id] || leafletBaseOptions.stop);
-                } else {
-                    marker = new L.CircleMarker(Lll,
-                        (leafletBaseOptions && leafletBaseOptions.stop) ||
-                            defaultOptions.stop);
-                }
-                // marker.bindPopup(stop.name+"</br><a href='#'onclick='alert(\""+stop.name+"\")'>From Here</a>");
-                marker.bindPopup(stop.name+"</br><a href='#' onclick='document.getElementById(\"startstop\").value=\""+stop.name+"\";$(\"#startstop\").change()'>From Here</a>"+"</br><a href='#' onclick='document.getElementById(\"endstop\").value=\""+stop.name+"\";$(\"#endstop\").change()'>To Here</a>");
-                YY._layerGroup.addLayer(marker);
-            });
-        });
-		map.removeLayer(YY._layerGroup);
-        map.addLayer(YY._layerGroup);
-    };
-                                
-    function toTitleCase(str)
-    {
-        return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-    }
+<h3>
+<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
 
-        // // testing
-        // YY.test_map = map;
-        // var script = document.createElement('script');
-        // script.setAttribute('src', 'sample/test.js');
-        // document.body.appendChild(script);
+<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
 
-     
-</script>
-</body>
+<h3>
+<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+
+<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/amritkarma">amritkarma</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
 </html>
