@@ -146,8 +146,10 @@ YY.fromConfig("config.stable.json",
                         // alert();
                         //actually drawing the route
                         var defaultOptions = 
-                        {"route" : function() { return {color: get_random_color(), opacity: 1, weight: 3}; },
+                        {"route" : function() { return {color: get_random_color(), opacity: 1, weight: 10}; },
                          "stop"  : {color: '#378AAD', fillOpacity: 0.5, radius: 5}};
+
+                         var eachroutestyleoption = defaultOptions.route();
 
 
                         // for(segid = startseg[0];segid != endseg[0];)
@@ -161,19 +163,11 @@ YY.fromConfig("config.stable.json",
                                 var segMPL = new L.Polyline(
                                     _.map(seg.listOfLatLng, function(LL) {
                                         return new L.LatLng(LL[0], LL[1]);
-                                    }),defaultOptions.route());
+                                    }),eachroutestyleoption);
                                 segMPL.bindPopup("<a href='http://www.openstreetmap.org/browse/way/"+seg.id+"' target='_blank'>"+seg.id+"</a>,"+segid+"");
                                 YY._routeGroup.addLayer(segMPL);
                                 LC.addOverlay(segMPL);
                             });
-                            // alert();
-                            // if(segid<endseg[0]){
-                            //     segid++;
-                            // }
-                            // else{
-                            //     segid--;
-                            // }
-
                         }
                         // console.log('routed_route',routed_route);
 
@@ -218,9 +212,9 @@ YY.fromConfig("config.stable.json",
         map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 
         //auto init routing at start
-    document.getElementById("startstop").value="Sinamangal";
-    document.getElementById("endstop").value="Jamal";
-    $('#endstop').change();
+    // document.getElementById("startstop").value="Sinamangal";
+    // document.getElementById("endstop").value="Jamal";
+    // $('#endstop').change();
 
     });
 
@@ -267,7 +261,7 @@ YY.fromConfig("config.stable.json",
                     (leafletBaseOptions && leafletBaseOptions.route) || 
                         defaultOptions.route());
                 // segMPL.bindPopup(route.ref + " : " + route.name);
-                // YY._layerGroup.addLayer(segMPL);
+                YY._layerGroup.addLayer(segMPL);
             });
         });
         // render the stops as circle markers 
