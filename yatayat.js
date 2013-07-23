@@ -46,7 +46,7 @@ YY.System.prototype.stopRoutesFromStopID = function(stopID) {
 
 YY.System.prototype.stopRoutesFromStopName = function(stopName) {
     var aggregator = [];
-    console.log(this);
+    // console.log(this);
     _(this.routes).each(function (r) {
         _(r.stops).each(function (s) {
             if (s.name === stopName) {
@@ -269,9 +269,17 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
     var endKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(_.last(seg.listOfLatLng), seg); }), 
                         distanceForObjLL, ["lat","lng"]);
 
-    // find, among all the 'start' and 'end' points in other segments, what the closest endpoint is
-    // and then put it in the segmentOrderObj, which is a linked list in the form on an obj 
-    // (segmentOrderDict[seg.id]) == followingSeg.id, where followingSeg is the segment that should be after seg
+    /**
+     * find, among all the 'start' and 'end' points in other segments, what the closest endpoint is
+     and then put it in the segmentOrderObj, which is a linked list in the form on an obj 
+     (segmentOrderDict[seg.id]) == followingSeg.id, where followingSeg is the segment that should be after seg
+     * @param  {segment} thisSegment [description]
+     * @param  {string} end         ["first" or null]
+     * @return {[type]}             [description]
+     * variables info:
+     *     nextFwdTreeCnxn -> segment.id
+     *     nextBwdTreeCnxn -> segment.id
+     */
     function closestSegment(thisSegment, end) {
         var ret, segmentEnd;
         if (end === 'first') {
@@ -370,7 +378,9 @@ YY.fromConfig = function(config_path, cb) {
             YY[key] = conf[key];
         }
         // load in & parse XML
-        console.log('cb',cb);
+        // console.log('cb',cb);
+        map.spin(true);
+
         $.ajax(
             {   type: YY.GET_OR_POST, 
                 url: YY.API_URL,
@@ -378,6 +388,7 @@ YY.fromConfig = function(config_path, cb) {
                 dataType: "text",
                 success: function(res) {
                     cb(YY.fromOSM(res));
+                    map.spin(false);
                 }
             });
     });
