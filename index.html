@@ -27,6 +27,8 @@ body {
             <input type="checkbox" name="vehicle3" value="tempo"checked ="yes"/>Tempo (3 - wheeler)
         </div>
         -->
+
+        
         <div id="textboxes" style="position:absolute;top:20;left:60;z-index:999"> 
             <b>Start</b> <input type="text" id="startstop" class="typeahead" data-provide="typeahead" class="span1"/>
             <b>End</b> <input type="text" id="endstop" class="typeahead" data-provide="typeahead" class="span1"/>
@@ -37,7 +39,7 @@ body {
         </div>
         <div class="alert" id="routedisplay" style="background:white;position:absolute;top:60;left:60;z-index:999">
         </div>
-        <div id="publicTransportMap" style="width: 100%; height: 100%">Loading ...</div>
+        <div id="publicTransportMap" style="width:80%; height: 100%">Loading ...</div>
         <div class="modal hide" id="myModal"> 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">X</button>
@@ -45,6 +47,14 @@ body {
             <br/>
             <iframe src="https://docs.google.com/spreadsheet/embeddedform?formkey=dFdZeG9PYnVpY1FBMk4zVjBDaFNua1E6MQ" width="700" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
         </div>
+        <!-- <suresh work> -->
+        <div id="routes Info" style="width:20%">
+        this is the routes availble
+        We are under construction
+            
+        </div>
+        <!-- <suresh work end> -->
+
 
 <script type="text/javascript" language="javascript">
     // UI HACK
@@ -117,8 +127,7 @@ YY.fromConfig("config.stable.json",
                 });
             } else {
                 var tiles = new L.TileLayer(YY.TILE_SOURCE, {
-                    attribution: YY.ATTRIBUTION,
-                    maxZoom: 18
+                    attribution: YY.ATTRIBUTION
                 });
                 map.addLayer(tiles);
             }
