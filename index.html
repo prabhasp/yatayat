@@ -10,6 +10,17 @@
 body {
   margin:0;
 }
+#routename {
+position: absolute;
+bottom: 0;
+right: 0;
+height: 100%;
+background-color: black;
+color: #00ff00;
+width: 20%;
+overflow: auto;
+}
+
 </style>
 <script src="lib/jquery-1.7.2.min.js"></script>
 <script src="lib/underscore-min.js"></script>
@@ -48,12 +59,7 @@ body {
             </div>
             <br/>
             <!-- <iframe src="https://docs.google.com/spreadsheet/embeddedform?formkey=dFdZeG9PYnVpY1FBMk4zVjBDaFNua1E6MQ" width="700" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe> -->
-        </div>
         <!-- <suresh work> -->
-        <div id="routes Info" style="width:20%">
-        this is the routes availble
-        We are under construction
-            
         </div>
         <!-- <suresh work end> -->
 
@@ -76,6 +82,7 @@ body {
 YY.fromConfig("config.stable.json", 
     function(sys) {
         system = sys;
+        console.log(system);
     	YY.render_(system, 
                     map,
                     undefined, //includeIDObject; try {"2269045": true} for an example
@@ -157,7 +164,8 @@ YY.fromConfig("config.stable.json",
                         //actually drawing the route
                         var defaultOptions = 
                         {"route" : function() { return {color: get_random_color(), opacity: 1, weight: 10}; },
-                         "stop"  : {color: '#378AAD', fillOpacity: 0.5, radius: 5}};
+                         "stop"  : {color: '#378AAD', fillOpacity: 0.5, radius: 5}
+                        };
 
                          var eachroutestyleoption = defaultOptions.route();
 
@@ -184,7 +192,9 @@ YY.fromConfig("config.stable.json",
                         map.removeLayer(YY._routeGroup);
                         map.addLayer(YY._routeGroup);
                         console.log('counter',++counter);
-                    });
+                    }
+                    //
+                    );
 
 
                     YY.render_(system, map, inclusionDict,
@@ -200,9 +210,11 @@ YY.fromConfig("config.stable.json",
                 YY.render_(system, map);
                 $('#routedisplay').hide()
                 map.spin(false);  
-            }         
+            }
         });
-
+// suresh work
+        routeinfopanel(system.routes);
+// suresh work end
         if(YY.TILE_SOURCE) {
             if (YY.WAX) {
                 wax.tilejson(YY.TILE_SOURCE, function(tilejson) {
@@ -224,7 +236,8 @@ YY.fromConfig("config.stable.json",
     // document.getElementById("startstop").value="Sinamangal";
     // document.getElementById("endstop").value="Jamal";
     // $('#endstop').change();
-
+    console.log("script end",system);
+    
     });
 
     YY.viz = function(route, map) {
@@ -237,6 +250,7 @@ YY.fromConfig("config.stable.json",
         map.addLayer(new L.Circle(latlngs[0], 2, {color: 'blue', opacity: 0.5}));
         map.addLayer(new L.Circle(latlngs[latlngs.length-1], 2, {color: 'green', opacity: 0.5}));
         poly.bindPopup(route.name);
+        console.log("inside viz");
         map.addLayer(poly);
     });
     };
@@ -306,8 +320,32 @@ YY.fromConfig("config.stable.json",
         // var script = document.createElement('script');
         // script.setAttribute('src', 'sample/test.js');
         // document.body.appendChild(script);
-
-    
+// suresh works
+    function routeinfopanel(routes){
+        console.log("routeinfo")
+        panel = document.getElementById("routename");
+        _(routes).each(function(r){
+            rdiv = document.createElement('div');
+            rdiv.id = "route_"+r.id;
+            rdiv.innerHTML = r.name;
+            // rdiv.onclick= map.addLayer(YY.render_(r, routes[r.id], document.getElementById(rdiv)));
+            rdiv.setAttribute("onclick","alert('name')");
+            panel.appendChild(rdiv);
+        }
+        )
+    }
+// suresh works end
 </script>
+<div id="routename">
+            <b>Nammmmmmmmmm</b>
+        <script>
+        console.log("script start",system);
+        //     System.routes.forEach(function(route){
+        //     var s;
+        //     (route.name).addTo(s);
+        // });
+        // document.write(s);
+        </script>           
+        </div>
 </body>
 </html>
