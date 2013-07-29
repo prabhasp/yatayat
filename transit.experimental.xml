@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-07-27T23:59:01Z"/>
+<meta osm_base="2013-07-28T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -14281,7 +14281,7 @@
     <tag k="type" v="route"/>
   </relation>
   <relation id="2277212">
-    <member type="node" ref="31228768" role="terminus"/>
+    <member type="node" ref="31228768" role="start"/>
     <member type="node" ref="31150627" role=""/>
     <member type="node" ref="31148727" role=""/>
     <member type="node" ref="1281218812" role=""/>
@@ -14291,7 +14291,7 @@
     <member type="node" ref="31150618" role=""/>
     <member type="node" ref="31150664" role=""/>
     <member type="node" ref="31230922" role=""/>
-    <member type="node" ref="1274184084" role="terminus"/>
+    <member type="node" ref="1274184084" role="end"/>
     <member type="way" ref="24683731" role=""/>
     <member type="way" ref="171215507" role=""/>
     <member type="way" ref="28579443" role=""/>
@@ -14299,8 +14299,9 @@
     <member type="way" ref="28579442" role=""/>
     <member type="way" ref="4840073" role=""/>
     <member type="way" ref="4840054" role=""/>
-    <member type="way" ref="171227893" role=""/>
     <member type="way" ref="229195912" role=""/>
+    <member type="way" ref="171227893" role=""/>
+    <member type="way" ref="231414549" role=""/>
     <member type="way" ref="120430420" role=""/>
     <member type="way" ref="111965821" role=""/>
     <member type="way" ref="111965837" role=""/>
@@ -15384,6 +15385,7 @@
     <member type="way" ref="4840048" role="forward"/>
     <member type="way" ref="171603745" role="forward"/>
     <member type="way" ref="4840124" role="forward"/>
+    <member type="way" ref="231414548" role="forward"/>
     <member type="way" ref="220025933" role=""/>
     <tag k="from" v="Kamalbinayak"/>
     <tag k="loc_ref" v="Bhaktapur"/>
