@@ -379,7 +379,7 @@ YY.fromConfig = function(config_path, cb) {
         }
         // load in & parse XML
         // console.log('cb',cb);
-        map.spin(true);
+        //map.spin(true);
 
         $.ajax(
             {   type: YY.GET_OR_POST, 
@@ -443,10 +443,12 @@ YY.fromOSM = function (overpassXML) {
         // At this point, myNodes = ordered list of nodes in this segment, myStops = ordered list of stops
         segments[$w.attr('id')] = new YY.Segment($w.attr('id'), myNodes, tagToObj($w.find('tag')), myStops);
     });
+    debugger;
     var routes = _.map($overpassXML.find('relation'), function(r) {
         var $r = $(r);
         var mySegments = [];
         var startStop, startSegID;
+        
         _.each($r.find('member'), function(m) {
             var $m = $(m); 
             if($m.attr('type') === 'way') {

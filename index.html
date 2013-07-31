@@ -42,7 +42,7 @@ overflow: auto;
         -->
 
         
-        <div id="textboxes" style="position:absolute;top:20;left:60;z-index:999"> 
+        <div id="textboxes" style="position:absolute;top:20;left:60;z-index:999;color:'red'"> 
             <b>Start</b> <input type="text" id="startstop" class="typeahead" data-provide="typeahead" class="span1"/>
             <b>End</b> <input type="text" id="endstop" class="typeahead" data-provide="typeahead" class="span1"/>
             <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY.render_(system,map);"> Clear </a>
@@ -79,7 +79,7 @@ overflow: auto;
     var routed_route;
     
 
-YY.fromConfig("config.stable.json", 
+YY.fromConfig("config.experimental.json", 
     function(sys) {
         system = sys;
         console.log(system);
@@ -158,20 +158,42 @@ YY.fromConfig("config.stable.json",
                                     }
                                 })
                             // }
+                            
                         });
+                        console.log('startseg',startseg);
+
+                        // var dist=distanc(startseg.listOfLatLng[0][0],startseg.listOfLatLng[1][0],startseg.listOfLatLng[0][1],startseg.listOfLatLng[1][1]);
+                        
+                        //console('endseg.length',endseg.length);
+
+                        function distanc(lat1,lon1,lat2,lon2){
+                            var R = 6371; // km
+                            console.log('lat',lat1);
+                            // var lttt=lat1*(Math.PI/180);
+                            var d = Math.acos(Math.sin(lat1*Math.PI/180)*Math.sin(lat2*Math.PI/180) + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180) * Math.cos(lon2*Math.PI/180-lon1*Math.PI/180)) * R;
+                            console.log('distance',d);
+                            return d;
+                            // return lttt;
+                        }
+
+                        //for disatnce
+                        var d=distanc(startseg[1].listOfLatLng[0][0],startseg[1].listOfLatLng[0][1],startseg[1].listOfLatLng[1][0],startseg[1].listOfLatLng[1][1]);
+                            console.log('dist',d);
+
                         //index found and saved as 1st element in startseg and endseg
                         // alert();
                         //actually drawing the route
                         var defaultOptions = 
                         {"route" : function() { return {color: get_random_color(), opacity: 1, weight: 10}; },
-                         "stop"  : {color: '#378AAD', fillOpacity: 0.5, radius: 5}
+                         "stop"  : {color: '#378AAD', fillOpacity: 0.5, radius: 5,icon: L.divIcon({html:stop.name})}
                         };
 
                          var eachroutestyleoption = defaultOptions.route();
 
 
                         // for(segid = startseg[0];segid != endseg[0];)
-                        for(segid = Math.min(startseg[0],endseg[0]);segid <= Math.max(startseg[0],endseg[0]);segid++)
+                        // for(segid = Math.min(startseg[0],endseg[0]);segid <= Math.max(startseg[0],endseg[0]);segid++)
+                        for(segid = Math.max(startseg[0]);segid <= Math.max(endseg[0]);segid++)
                         // segid = startseg[0];
                         // while(segid!=endseg[0])
                         {
@@ -185,6 +207,7 @@ YY.fromConfig("config.stable.json",
                                 segMPL.bindPopup("<a href='http://www.openstreetmap.org/browse/way/"+seg.id+"' target='_blank'>"+seg.id+"</a>,"+segid+"");
                                 YY._routeGroup.addLayer(segMPL);
                                 LC.addOverlay(segMPL);
+
                             });
                         }
                         // console.log('routed_route',routed_route);
@@ -198,7 +221,9 @@ YY.fromConfig("config.stable.json",
 
 
                     YY.render_(system, map, inclusionDict,
-                               {route: {color: '#555', opacity: 1, weight: 1}},
+                               {route: {color: '#555', opacity: 1, weight: 1}
+                                // stop: {color: '#378AAD', fillOpacity: 0.5, radius: 5}
+                                },
                                overrideDict
                               );
                     $('#routedisplay').show();
@@ -272,7 +297,7 @@ YY.fromConfig("config.stable.json",
         
         var filteredSystem = system.prune(includeIDDict);
         var defaultOptions = 
-            {"route" : function() { return {color: get_random_color(), opacity: 1, weight: 6}; },
+            {"route" : function() { return {color: 'yellow', opacity: 1, weight: 6}; },
              "stop"  : {color: '#378AAD', fillOpacity: 0.5, radius: 5}};
         // render the route as a multi-polyline
         _(filteredSystem.routes).each(function(route) {
@@ -294,12 +319,15 @@ YY.fromConfig("config.stable.json",
                 var Lll = new L.LatLng(stop.lat, stop.lng);
                 var marker;
                 if (leafletOverrideOptions && (stop.id in leafletOverrideOptions)) {
-                    marker = new L.CircleMarker(Lll,
-                        leafletOverrideOptions[stop.id] || leafletBaseOptions.stop);
-                } else {
-                    marker = new L.CircleMarker(Lll,
-                        (leafletBaseOptions && leafletBaseOptions.stop) ||
-                            defaultOptions.stop);
+                    marker = new L.marker(Lll, {icon:L.divIcon({html:stop.name})});
+                    //marker = new L.CircleMarker(Lll,
+                      //  leafletOverrideOptions[stop.id] || leafletBaseOptions.stop);
+                } 
+                else {
+                    //marker = new L.marker(Lll, {icon:L.divIcon({html:stop.name})}).addTo(map);
+                     marker = new L.CircleMarker(Lll,
+                         (leafletBaseOptions && leafletBaseOptions.stop) ||
+                             defaultOptions.stop);
                 }
                 // marker.bindPopup(stop.name+"</br><a href='#'onclick='alert(\""+stop.name+"\")'>From Here</a>");
                 marker.bindPopup(stop.name+"</br><a href='#' onclick='document.getElementById(\"startstop\").value=\""+stop.name+"\";$(\"#startstop\").change()'>From Here</a>"+"</br><a href='#' onclick='document.getElementById(\"endstop\").value=\""+stop.name+"\";$(\"#endstop\").change()'>To Here</a>");
@@ -322,24 +350,90 @@ YY.fromConfig("config.stable.json",
         // document.body.appendChild(script);
 // suresh works
     function routeinfopanel(routes){
-        console.log("routeinfo")
+
+        // console.log("routeinfo",routes);
         panel = document.getElementById("routename");
+        c=0;
         _(routes).each(function(r){
             rdiv = document.createElement('div');
-            rdiv.id = "route_"+r.id;
+            rdiv.id = c++;
             rdiv.innerHTML = r.name;
+            // console.log('system.routes[rdiv.id]',system.routes[rdiv.id]);
             // rdiv.onclick= map.addLayer(YY.render_(r, routes[r.id], document.getElementById(rdiv)));
-            rdiv.setAttribute("onclick","alert('name')");
+            rdiv.setAttribute("onclick","YY.error_render(system,system.routes[this.id])");
             panel.appendChild(rdiv);
+
         }
         )
     }
+    YY.error_render = function(system, route) {
+        // console.log('route',route);
+        
+        if(YY._singlelayer){
+            YY._singlelayer.clearLayers();
+            // map.removeLayer(YY._singlelayer);
+        }
+            
+        else
+            {YY._singlelayer = new L.LayerGroup();}
+        _.each(route.segments,function(seg, idx) {
+            var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
+            var poly = new L.Polyline(latlngs, {color: 'green',weight:7});
+            YY._singlelayer.addLayer(poly);
+            // goodPop("seg: "+seg.id, latlngs[Math.floor(latlngs.length / 2)], poly);
+        });
+        route.stops.forEach(function(stop) {
+            var marker;
+            var ll = new L.LatLng(stop.lat, stop.lng);
+            marker = new L.CircleMarker(ll,
+                                            {color: 'green', opacity:0.2});
+
+            // goodPop(stop.name + " (id:"+stop.id+")", ll, marker);
+
+            YY._singlelayer.addLayer(marker);
+        });
+        map.addLayer(YY._singlelayer);
+        console.log('Eroor render successful');
+        
+        return YY._singlelayer;
+    };
+
+        function editRouteByIdx(idx) {
+        if(map) {
+            map.removeLayer(map);
+        }
+        map = YY.error_render(system, map);
+        map.addLayer(map);
+    }
+    // Simple helper function; find the route index.
+    // function getRouteIdx(id) {
+    //     for(var idx=0; idx<sys.routes.length; idx++) {
+    //         if(sys.routes[idx].id === id) {
+    //             return idx;
+    //         }
+    //     }
+    //     return -1;
+    // }
+    // // Given the window hash, change the route on display 
+    // function editRouteByHash() {
+    //     var route_id = window.location.hash.slice(1);
+    //     var idx = getRouteIdx(route_id);
+    //     if(idx < 0) {
+    //         return;
+    //     }
+    //     var $rp = $("#routepicker");
+    //     editRouteByIdx(idx);
+    //     if($rp[0].selectedIndex != idx) {
+    //         $rp[0].selectedIndex = idx;
+    //     }
+    // }
 // suresh works end
 </script>
 <div id="routename">
             <b>Nammmmmmmmmm</b>
         <script>
-        console.log("script start",system);
+        //console.log("script start",system);
+        // <button onclick="error_render()">routename</button>
         //     System.routes.forEach(function(route){
         //     var s;
         //     (route.name).addTo(s);
