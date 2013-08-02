@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-07-31T23:59:02Z"/>
+<meta osm_base="2013-08-01T23:59:01Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -1449,7 +1449,7 @@
   <node id="360267978" lat="27.5722428" lon="85.3138306"/>
   <node id="360267979" lat="27.5720937" lon="85.3138242"/>
   <node id="360267983" lat="27.5717274" lon="85.3130492"/>
-  <node id="360267985" lat="27.5715688" lon="85.3127681">
+  <node id="360267985" lat="27.5741463" lon="85.3112237">
     <tag k="name" v="Tika Bhairab"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
