@@ -49,11 +49,16 @@ var map = new L.Map('publicTransportMap'),
 renderLayer,
 sys;
 
-var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-var osmAttrib='Map data © OpenStreetMap contributors';
-var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 22, attribution: osmAttrib})
-//map.setView(new L.LatLng(),9);
+// <iframe width='500' height='300' frameBorder='0' src='http://a.tiles.mapbox.com/v3/suress.map-n0sqwkgh.html#12/27.70131190165252/85.35158157348633'></iframe>
+
+var osmUrl='http://a.tiles.mapbox.com/v3/suress.map-n0sqwkgh.html#12/27.70131190165252/85.35158157348633'
+var osm=new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 22})
 map.addLayer(osm)
+// var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+// var osmAttrib='Map data © OpenStreetMap contributors';
+// var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 22, attribution: osmAttrib})
+//map.setView(new L.LatLng(),9);
+// map.addLayer(osm)
 
 // Changes which route is being viewed -- by changing page-global-var renderLayer
 function editRouteByIdx(idx) {

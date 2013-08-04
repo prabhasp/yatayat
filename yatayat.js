@@ -46,7 +46,7 @@ YY.System.prototype.stopRoutesFromStopID = function(stopID) {
 
 YY.System.prototype.stopRoutesFromStopName = function(stopName) {
     var aggregator = [];
-    // console.log(this);
+    // // console.log(this);
     _(this.routes).each(function (r) {
         _(r.stops).each(function (s) {
             if (s.name === stopName) {
@@ -54,7 +54,7 @@ YY.System.prototype.stopRoutesFromStopName = function(stopName) {
             }
         });
     });
-    // console.log(aggregator)
+    // // console.log(aggregator)
     return aggregator;
 };
 
@@ -142,8 +142,8 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
         var f = function (k) { return fScores[k]; };
         while(_.keys(openset).length) {
             var current = openset[_.min(_(openset).keys(), f)];
-            //console.log('open-begin', _.map(_(openset).values(), stopNameFromObj));
-            //console.log('closed-begin', _.map(_(closedset).values(), stopNameFromObj));
+            //// console.log('open-begin', _.map(_(openset).values(), stopNameFromObj));
+            //// console.log('closed-begin', _.map(_(closedset).values(), stopNameFromObj));
 
             if (current.stopID === goalNode.stopID) {
                 return reconstructPath(current);
@@ -168,7 +168,7 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
     }
     var res = aStar(); 
     // NOW CONVERT A-STAR OUTPUT FORMAT TO ROUTE / STOPS OUTPUT FORMAT
-    //console.log(res);
+    //// console.log(res);
     if (!res || res.length === 0) return 'FAIL';
     var ret = [];
     var curRoute;
@@ -180,7 +180,7 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
         }
         curRoute.stops.push(curRoute.stopDict[sro.stopID]);
     });
-    //console.log(ret);
+    //// console.log(ret);
     return ret;
 };
 // BIG TODO: Change everything to be dicts indexed by ids rather than lists
@@ -258,7 +258,7 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
     var n = 0;
     var startSegment = _.find(route.segments, function(seg) { return seg.id === orientingSegmentID; });
     if (!startSegment) {
-        console.log('Ordering not possible for route: ', route.name, '; start segmend likely not in route ... ?');
+        // console.log('Ordering not possible for route: ', route.name, '; start segmend likely not in route ... ?');
         return;
     }
     var llToObj = function(ll, seg) { return {lat: ll[0], lng: ll[1], seg: seg}; } 
@@ -332,24 +332,24 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
     }
 
     this.stops = _.map(stops, function(s) { return new YY.Stop(s.id, s.lat, s.lng, s.tag); });
-    //console.log(_.pluck(route.stops, 'name'));
+    //// console.log(_.pluck(route.stops, 'name'));
    
     if (_.keys(segmentOrderDict).length === 0) {
-        console.log('ordering not quite successful for route ', route.name);
+        // console.log('ordering not quite successful for route ', route.name);
         this._unconnectedSegments = this.segments;
     } else if (_.keys(segmentOrderDict).length !== route.segments.length) {  // TODO: do this only in debug mode
-        // console.log('ordering not quite successful for route ', route.name);
+        // // console.log('ordering not quite successful for route ', route.name);
         var connectedSegmentIds = _.keys(segmentOrderDict)
         var connectedSegments = _(this.segments).filter(function(s) { 
             return _(connectedSegmentIds).find(function(id) { return s.id === id; }) });
 
         this._unconnectedSegments = _.difference(this.segments, connectedSegments);
     } else {
-        // console.log('ordering successful for route ', route.name);
+        // // console.log('ordering successful for route ', route.name);
         this._unconnectedSegments = [];
     }
-    //console.log(_.chain(this._unconnectedSegments).pluck('orderedListofStops').flatten().pluck('tag').value());
-    //DEBUG: _.each(stops, function(s) {console.log(s.tag.name)});
+    //// console.log(_.chain(this._unconnectedSegments).pluck('orderedListofStops').flatten().pluck('tag').value());
+    //DEBUG: _.each(stops, function(s) {// console.log(s.tag.name)});
 };
 
 YY.Stop = function(id, lat, lng, tag) {
@@ -370,7 +370,7 @@ YY.Segment = function(id, listOfLatLng, tag, orderedStops) {
 YY.fromConfig = function(config_path, cb) {
     // sequentially loads config file, and the system it calls for
     // cb is called on the resulting system.
-    // console.log('$ in fromConfig',$);
+    // // console.log('$ in fromConfig',$);
     //   
     $.getJSON(config_path, {}, function(conf) {
         // blend in the conf to the YY namespace
@@ -378,7 +378,7 @@ YY.fromConfig = function(config_path, cb) {
             YY[key] = conf[key];
         }
         // load in & parse XML
-        // console.log('cb',cb);
+        // // console.log('cb',cb);
         //map.spin(true);
 
         $.ajax(
@@ -443,7 +443,6 @@ YY.fromOSM = function (overpassXML) {
         // At this point, myNodes = ordered list of nodes in this segment, myStops = ordered list of stops
         segments[$w.attr('id')] = new YY.Segment($w.attr('id'), myNodes, tagToObj($w.find('tag')), myStops);
     });
-    debugger;
     var routes = _.map($overpassXML.find('relation'), function(r) {
         var $r = $(r);
         var mySegments = [];
