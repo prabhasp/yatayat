@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-08-04T23:59:01Z"/>
+<meta osm_base="2013-08-05T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -488,6 +488,7 @@
   <node id="38926248" lat="27.7131075" lon="85.3454316"/>
   <node id="103589426" lat="27.6701912" lon="85.3275930"/>
   <node id="103589478" lat="27.6836728" lon="85.3187221"/>
+  <node id="103589490" lat="27.6874244" lon="85.3167829"/>
   <node id="103589501" lat="27.6889179" lon="85.3162733"/>
   <node id="103589504" lat="27.6903545" lon="85.3174699"/>
   <node id="103589515" lat="27.6939987" lon="85.3140135"/>
@@ -596,7 +597,7 @@
   </node>
   <node id="268301925" lat="27.7064316" lon="85.3159543"/>
   <node id="268301932" lat="27.7062756" lon="85.3162943"/>
-  <node id="268301942" lat="27.7024225" lon="85.3164976"/>
+  <node id="268301942" lat="27.7023663" lon="85.3165849"/>
   <node id="268301944" lat="27.6990749" lon="85.3164333"/>
   <node id="268307702" lat="27.7178933" lon="85.3228679"/>
   <node id="268307716" lat="27.7173896" lon="85.3248956"/>
@@ -616,6 +617,7 @@
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="268307822" lat="27.6728169" lon="85.3133445"/>
+  <node id="268307839" lat="27.6693508" lon="85.3219967"/>
   <node id="268307859" lat="27.6667475" lon="85.3234781"/>
   <node id="268307869" lat="27.6666269" lon="85.3235523"/>
   <node id="268307927" lat="27.6655518" lon="85.3238759"/>
@@ -773,9 +775,11 @@
   <node id="314911422" lat="27.6933822" lon="85.3275320"/>
   <node id="314911424" lat="27.6940842" lon="85.3277304"/>
   <node id="314911425" lat="27.6947240" lon="85.3276033"/>
+  <node id="314962637" lat="27.6849351" lon="85.3184925"/>
   <node id="314962644" lat="27.6801275" lon="85.3171663"/>
   <node id="314962647" lat="27.6778703" lon="85.3162902"/>
   <node id="314964020" lat="27.6886915" lon="85.3160979"/>
+  <node id="314964026" lat="27.6716467" lon="85.3184288"/>
   <node id="314967124" lat="27.6744543" lon="85.3145043"/>
   <node id="316974278" lat="27.7100465" lon="85.3440895"/>
   <node id="317530944" lat="27.6857904" lon="85.3473861"/>
@@ -793,11 +797,11 @@
   <node id="317532022" lat="27.6893729" lon="85.3308763"/>
   <node id="317532023" lat="27.6931394" lon="85.3186652"/>
   <node id="317532025" lat="27.6942727" lon="85.3194502"/>
-  <node id="317532028" lat="27.6917733" lon="85.3180108">
+  <node id="317532028" lat="27.6917671" lon="85.3180161">
     <tag k="name" v="Thapathali"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="317532029" lat="27.6910488" lon="85.3176517"/>
+  <node id="317532029" lat="27.6910426" lon="85.3176570"/>
   <node id="317532031" lat="27.6888331" lon="85.3161846"/>
   <node id="317532032" lat="27.6828998" lon="85.3184822"/>
   <node id="317532033" lat="27.6831654" lon="85.3186726"/>
@@ -811,6 +815,7 @@
   <node id="317532045" lat="27.6739418" lon="85.3221781"/>
   <node id="317532047" lat="27.6766054" lon="85.3173939"/>
   <node id="317532061" lat="27.6820129" lon="85.3179489"/>
+  <node id="317532202" lat="27.6868111" lon="85.3171780"/>
   <node id="317532267" lat="27.6936362" lon="85.3189605"/>
   <node id="317532268" lat="27.6938576" lon="85.3191139"/>
   <node id="317532271" lat="27.6900182" lon="85.3172446"/>
@@ -1456,6 +1461,7 @@
   <node id="360309110" lat="27.6683514" lon="85.3302768"/>
   <node id="360309113" lat="27.6690298" lon="85.3292305"/>
   <node id="360455499" lat="27.6639400" lon="85.3243682"/>
+  <node id="360455511" lat="27.6683075" lon="85.3215415"/>
   <node id="360455521" lat="27.6673117" lon="85.3222558">
     <tag k="name" v="Lalitpur Industrial Estate"/>
     <tag k="public_transport" v="stop_position"/>
@@ -1464,6 +1470,10 @@
     <tag k="name" v="Lagankhel Stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
+  <node id="360455540" lat="27.6700702" lon="85.3216322"/>
+  <node id="360455542" lat="27.6698630" lon="85.3217724"/>
+  <node id="360455543" lat="27.6720757" lon="85.3167200"/>
+  <node id="360455544" lat="27.6722962" lon="85.3153343"/>
   <node id="360464951" lat="27.6857413" lon="85.2930870"/>
   <node id="360464968" lat="27.6854701" lon="85.2935989"/>
   <node id="360464982" lat="27.6886012" lon="85.2853715"/>
@@ -2162,6 +2172,7 @@
   <node id="669259366" lat="27.6908436" lon="85.3176210"/>
   <node id="669456490" lat="27.7372512" lon="85.3340249"/>
   <node id="669456909" lat="27.7358194" lon="85.3323144"/>
+  <node id="669529183" lat="27.6721760" lon="85.3158847"/>
   <node id="669529273" lat="27.6944545" lon="85.3140870">
     <tag k="name" v="Tripureshwor"/>
     <tag k="public_transport" v="stop_position"/>
@@ -2172,6 +2183,7 @@
   <node id="669642835" lat="27.6726655" lon="85.3136957"/>
   <node id="669642837" lat="27.6729341" lon="85.3139147"/>
   <node id="669642839" lat="27.6731683" lon="85.3136600"/>
+  <node id="669642840" lat="27.6730208" lon="85.3133358"/>
   <node id="669796781" lat="27.6906828" lon="85.3175800"/>
   <node id="670169115" lat="27.7077058" lon="85.3073354"/>
   <node id="670169117" lat="27.7086169" lon="85.3076383"/>
@@ -2179,6 +2191,7 @@
     <tag k="name" v="Kupondole stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
+  <node id="670651215" lat="27.6876851" lon="85.3166041"/>
   <node id="671498626" lat="27.6970409" lon="85.3050388"/>
   <node id="671498729" lat="27.6962779" lon="85.3070186"/>
   <node id="671498853" lat="27.6977732" lon="85.2992500"/>
@@ -2202,6 +2215,10 @@
   <node id="724346627" lat="27.6750617" lon="85.4257941"/>
   <node id="724349918" lat="27.7206686" lon="85.3620851"/>
   <node id="724831599" lat="27.7012986" lon="85.3052258"/>
+  <node id="725879816" lat="27.6855933" lon="85.3181062">
+    <tag k="name" v="Jwagal"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <node id="725880071" lat="27.7351433" lon="85.3177257"/>
   <node id="725880233" lat="27.7349958" lon="85.3092594"/>
   <node id="725880854" lat="27.7362613" lon="85.3221707"/>
@@ -2362,7 +2379,7 @@
     <tag k="name" v="Shahid Gate"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="977642702" lat="27.7031675" lon="85.3164789"/>
+  <node id="977642702" lat="27.7031113" lon="85.3165662"/>
   <node id="990902904" lat="27.6655180" lon="85.4272382"/>
   <node id="992476570" lat="27.7190005" lon="85.3319106"/>
   <node id="992508225" lat="27.7779088" lon="85.3617528"/>
@@ -2439,6 +2456,8 @@
   <node id="1124409735" lat="27.6506724" lon="85.2840568"/>
   <node id="1124409983" lat="27.6743673" lon="85.2918545"/>
   <node id="1124409988" lat="27.6750556" lon="85.2922826"/>
+  <node id="1127867456" lat="27.6712315" lon="85.3193537"/>
+  <node id="1127867468" lat="27.6713884" lon="85.3190366"/>
   <node id="1127867559" lat="27.6603484" lon="85.3239885"/>
   <node id="1127867698" lat="27.6539723" lon="85.3216467"/>
   <node id="1241659776" lat="27.6919208" lon="85.2824200"/>
@@ -2456,6 +2475,7 @@
     <tag k="highway" v="crossing"/>
   </node>
   <node id="1273136918" lat="27.7055235" lon="85.3140396"/>
+  <node id="1273357420" lat="27.6877774" lon="85.3165214"/>
   <node id="1273357429" lat="27.7080596" lon="85.3181353"/>
   <node id="1273357430" lat="27.6948834" lon="85.3207727"/>
   <node id="1273357431" lat="27.6904771" lon="85.3174929"/>
@@ -2515,8 +2535,13 @@
   <node id="1273456448" lat="27.6521914" lon="85.3213710"/>
   <node id="1273456505" lat="27.6302387" lon="85.3181518"/>
   <node id="1273456508" lat="27.6304802" lon="85.3179675"/>
+  <node id="1273477939" lat="27.6696730" lon="85.3218707"/>
   <node id="1273477941" lat="27.6624613" lon="85.3239461">
     <tag k="name" v="Lagankhel"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
+  <node id="1273477942" lat="27.6708396" lon="85.3200979">
+    <tag k="name" v="Kumaripati"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="1273477959" lat="27.6616978" lon="85.3237634"/>
@@ -2524,12 +2549,19 @@
   <node id="1273478007" lat="27.6646857" lon="85.3239474"/>
   <node id="1273478078" lat="27.6652736" lon="85.3239392"/>
   <node id="1273478099" lat="27.6671342" lon="85.3223808"/>
+  <node id="1273478102" lat="27.6684893" lon="85.3216418">
+    <tag k="name" v="Patan Hospital"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
+  <node id="1273478103" lat="27.6704001" lon="85.3209748"/>
+  <node id="1273478115" lat="27.6719797" lon="85.3173157"/>
   <node id="1273478123" lat="27.6591092" lon="85.3244477"/>
   <node id="1273478273" lat="27.6570679" lon="85.3262883">
     <tag k="facilities" v="School"/>
     <tag k="name" v="MAV School"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
+  <node id="1273478300" lat="27.6717598" lon="85.3180474"/>
   <node id="1273478310" lat="27.6668224" lon="85.3233764"/>
   <node id="1273503554" lat="27.6784498" lon="85.3495612"/>
   <node id="1273503560" lat="27.6771633" lon="85.3496472"/>
@@ -2613,6 +2645,7 @@
   <node id="1274183469" lat="27.7099332" lon="85.3174733"/>
   <node id="1274183615" lat="27.7058181" lon="85.3191603"/>
   <node id="1274183622" lat="27.7003653" lon="85.3245177"/>
+  <node id="1274183714" lat="27.6731134" lon="85.3134172"/>
   <node id="1274183715" lat="27.6731819" lon="85.3135965"/>
   <node id="1274183734" lat="27.7032685" lon="85.3224980"/>
   <node id="1274183753" lat="27.6726566" lon="85.3136079"/>
@@ -2624,7 +2657,7 @@
   <node id="1274183971" lat="27.6725973" lon="85.3140672"/>
   <node id="1274183974" lat="27.6729914" lon="85.3139038"/>
   <node id="1274183982" lat="27.6728745" lon="85.3139108"/>
-  <node id="1274184084" lat="27.7037097" lon="85.3164292">
+  <node id="1274184084" lat="27.7036535" lon="85.3165165">
     <tag k="name" v="Purano Bus Park"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
@@ -2983,13 +3016,18 @@
   <node id="1446092247" lat="27.6285281" lon="85.5370660"/>
   <node id="1446092259" lat="27.6312178" lon="85.5187700"/>
   <node id="1480867596" lat="27.6881863" lon="85.3359364"/>
+  <node id="1480867609" lat="27.6851429" lon="85.3183832"/>
   <node id="1480867777" lat="27.6856604" lon="85.3351403"/>
   <node id="1480868048" lat="27.6874685" lon="85.3393585"/>
   <node id="1480868049" lat="27.6875548" lon="85.3389856"/>
   <node id="1480909322" lat="27.6743469" lon="85.3209051"/>
+  <node id="1480909353" lat="27.6701533" lon="85.3214594"/>
+  <node id="1480909362" lat="27.6707172" lon="85.3203608"/>
   <node id="1480909388" lat="27.6737941" lon="85.3229145"/>
   <node id="1480909414" lat="27.6746980" lon="85.3200097"/>
   <node id="1480909417" lat="27.6740409" lon="85.3217201"/>
+  <node id="1480909426" lat="27.6713491" lon="85.3191254"/>
+  <node id="1480913855" lat="27.6731492" lon="85.3134730"/>
   <node id="1480941446" lat="27.7180242" lon="85.3193551"/>
   <node id="1480941449" lat="27.7179535" lon="85.3205857"/>
   <node id="1480941472" lat="27.7181033" lon="85.3174770"/>
@@ -3126,7 +3164,7 @@
   </node>
   <node id="1523344498" lat="27.7421310" lon="85.3321425"/>
   <node id="1523344873" lat="27.7519706" lon="85.3462462"/>
-  <node id="1523358463" lat="27.7767777" lon="85.3621005">
+  <node id="1523358463" lat="27.7767430" lon="85.3621397">
     <tag k="name" v="Budhanilkantha Stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
@@ -3743,7 +3781,7 @@
     <tag k="name" v="Buddhanagar Stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="1832500457" lat="27.6916181" lon="85.3179346"/>
+  <node id="1832500457" lat="27.6916119" lon="85.3179399"/>
   <node id="1832500479" lat="27.6922222" lon="85.3182148"/>
   <node id="1832500490" lat="27.6926161" lon="85.2984667"/>
   <node id="1832500502" lat="27.6934759" lon="85.3188390"/>
@@ -3767,6 +3805,7 @@
   <node id="1832603429" lat="27.6655051" lon="85.3123775"/>
   <node id="1832609034" lat="27.6628339" lon="85.3164850"/>
   <node id="1832609089" lat="27.6643741" lon="85.3146037"/>
+  <node id="1832609117" lat="27.6709463" lon="85.3198649"/>
   <node id="1832985899" lat="27.7080610" lon="85.3434291">
     <tag k="name" v="Gaushala Chowk Stop"/>
     <tag k="public_transport" v="stop_position"/>
@@ -3896,6 +3935,10 @@
     <tag k="name" v="Bijulibazar Stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
+  <node id="1847670813" lat="27.6725769" lon="85.3141739">
+    <tag k="name" v="Jawlakhel Stop"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <node id="1847690843" lat="27.7115266" lon="85.3447826"/>
   <node id="1849665438" lat="27.6799141" lon="85.3204939"/>
   <node id="1866803496" lat="27.6703693" lon="85.2806484"/>
@@ -3941,6 +3984,14 @@
   </node>
   <node id="1880066212" lat="27.6773817" lon="85.3162416"/>
   <node id="1880066214" lat="27.6778655" lon="85.3162023"/>
+  <node id="1880066217" lat="27.6784606" lon="85.3164085"/>
+  <node id="1880066218" lat="27.6790831" lon="85.3166568"/>
+  <node id="1880066220" lat="27.6801361" lon="85.3170831"/>
+  <node id="1880066221" lat="27.6803312" lon="85.3171667"/>
+  <node id="1880066222" lat="27.6804791" lon="85.3172366"/>
+  <node id="1880066227" lat="27.6824450" lon="85.3180378"/>
+  <node id="1880066228" lat="27.6829225" lon="85.3184068"/>
+  <node id="1880066230" lat="27.6831819" lon="85.3185927"/>
   <node id="1882453048" lat="27.6909543" lon="85.3360811"/>
   <node id="1882457826" lat="27.6893189" lon="85.3357602"/>
   <node id="1882485975" lat="27.6816813" lon="85.3322652"/>
@@ -4169,6 +4220,8 @@
   <node id="1942462659" lat="27.6718093" lon="85.4084738"/>
   <node id="1942462677" lat="27.6752139" lon="85.3528176"/>
   <node id="1942462680" lat="27.6786441" lon="85.3491816"/>
+  <node id="1942462682" lat="27.6804759" lon="85.3172349"/>
+  <node id="1942462683" lat="27.6820111" lon="85.3178610"/>
   <node id="1945526774" lat="27.6745865" lon="85.3960559"/>
   <node id="1945526775" lat="27.6746269" lon="85.3965085"/>
   <node id="1945608885" lat="27.6902814" lon="85.3286599"/>
@@ -4429,7 +4482,7 @@
   <node id="1968245249" lat="27.6941344" lon="85.3140781"/>
   <node id="1968266279" lat="27.6968181" lon="85.2940624"/>
   <node id="1968417708" lat="27.7087676" lon="85.3150363"/>
-  <node id="1968417711" lat="27.7036173" lon="85.3164426"/>
+  <node id="1968417711" lat="27.7035611" lon="85.3165299"/>
   <node id="1968450265" lat="27.6999131" lon="85.3137887"/>
   <node id="1968450301" lat="27.6999831" lon="85.3135576"/>
   <node id="1968450309" lat="27.6996692" lon="85.3146373"/>
@@ -4574,6 +4627,7 @@
   <node id="2045419457" lat="27.6962955" lon="85.2154820"/>
   <node id="2045419463" lat="27.6970625" lon="85.2139820"/>
   <node id="2045419481" lat="27.6994360" lon="85.2087289"/>
+  <node id="2047751806" lat="27.6844028" lon="85.3186466"/>
   <node id="2048110167" lat="27.7201299" lon="85.3462720"/>
   <node id="2048110277" lat="27.7222424" lon="85.3485429"/>
   <node id="2048110299" lat="27.7240769" lon="85.3493991"/>
@@ -4588,7 +4642,9 @@
   <node id="2048173665" lat="27.7287110" lon="85.3521947"/>
   <node id="2048173669" lat="27.7290186" lon="85.3529849"/>
   <node id="2049278532" lat="27.6767939" lon="85.3161927"/>
+  <node id="2049458547" lat="27.6794991" lon="85.3168261"/>
   <node id="2049458850" lat="27.6813729" lon="85.3176878"/>
+  <node id="2050912179" lat="27.6853780" lon="85.3182309"/>
   <node id="2051114285" lat="27.6749080" lon="85.3597899">
     <tag k="highway" v="bus_stop"/>
     <tag k="name" v="Lokanthali"/>
@@ -4917,6 +4973,7 @@
   <node id="2127168061" lat="27.7182232" lon="85.3120035"/>
   <node id="2127168067" lat="27.7182670" lon="85.3117005"/>
   <node id="2127168069" lat="27.7182892" lon="85.3112464"/>
+  <node id="2128609405" lat="27.6846732" lon="85.3185683"/>
   <node id="2129447227" lat="27.6984078" lon="85.2993533"/>
   <node id="2131315175" lat="27.6839773" lon="85.3333672"/>
   <node id="2131800987" lat="27.7383656" lon="85.3353844"/>
@@ -5194,7 +5251,7 @@
   <node id="2276681442" lat="27.6584737" lon="85.4534767"/>
   <node id="2278250604" lat="27.7217776" lon="85.3767603"/>
   <node id="2278250611" lat="27.7216337" lon="85.3723430"/>
-  <node id="2281554348" lat="27.7035734" lon="85.3164461"/>
+  <node id="2281554348" lat="27.7035172" lon="85.3165334"/>
   <node id="2282807782" lat="27.6122640" lon="85.3201435"/>
   <node id="2282807797" lat="27.6135456" lon="85.3195320"/>
   <node id="2283988126" lat="27.6979024" lon="85.3494011"/>
@@ -5318,10 +5375,13 @@
   <node id="2306373880" lat="27.6935530" lon="85.2194117"/>
   <node id="2306373884" lat="27.6937065" lon="85.2188692"/>
   <node id="2306396976" lat="27.6953916" lon="85.2987177"/>
+  <node id="2306645439" lat="27.6715036" lon="85.3187640"/>
+  <node id="2308053006" lat="27.6811371" lon="85.3175048"/>
   <node id="2308270432" lat="27.6630755" lon="85.3241326"/>
   <node id="2309012017" lat="27.6715511" lon="85.3260613"/>
   <node id="2309012057" lat="27.6720455" lon="85.3255408"/>
   <node id="2309012079" lat="27.6724408" lon="85.3251352"/>
+  <node id="2313362837" lat="27.6703649" lon="85.3210347"/>
   <node id="2314314824" lat="27.6669558" lon="85.3323973"/>
   <node id="2314627383" lat="27.6937891" lon="85.2837169"/>
   <node id="2317885543" lat="27.6944300" lon="85.2856174"/>
@@ -5331,6 +5391,7 @@
   <node id="2318080065" lat="27.7403337" lon="85.3880913"/>
   <node id="2318107025" lat="27.7570274" lon="85.4194072"/>
   <node id="2318133083" lat="27.7504871" lon="85.4143447"/>
+  <node id="2318228711" lat="27.6720125" lon="85.3171124"/>
   <node id="2319626266" lat="27.6647427" lon="85.3141394"/>
   <node id="2320306648" lat="27.7101980" lon="85.3441395"/>
   <node id="2323966253" lat="27.6861771" lon="85.2610213"/>
@@ -9078,23 +9139,6 @@
     <nd ref="1382824340"/>
     <nd ref="2176739905"/>
     <nd ref="1281221704"/>
-    <nd ref="1382903026"/>
-    <nd ref="360695716"/>
-    <nd ref="360695714"/>
-    <nd ref="672589942"/>
-    <nd ref="2139807311"/>
-    <nd ref="1347468288"/>
-    <nd ref="360695713"/>
-    <nd ref="1317087941"/>
-    <nd ref="728152168"/>
-    <nd ref="360695712"/>
-    <nd ref="360695711"/>
-    <nd ref="1274038123"/>
-    <nd ref="1274038125"/>
-    <nd ref="1274038126"/>
-    <nd ref="1399427366"/>
-    <nd ref="2031624591"/>
-    <nd ref="360695605"/>
     <tag k="highway" v="secondary"/>
     <tag k="name" v="Devkota Sadak"/>
   </way>
@@ -10842,23 +10886,6 @@
     <nd ref="2080972370"/>
     <nd ref="2080972361"/>
     <nd ref="2080972360"/>
-    <nd ref="2080972358"/>
-    <nd ref="2080972356"/>
-    <nd ref="2336968998"/>
-    <nd ref="2080972350"/>
-    <nd ref="2080972348"/>
-    <nd ref="2080972346"/>
-    <nd ref="2080972342"/>
-    <nd ref="2080972336"/>
-    <nd ref="2080972333"/>
-    <nd ref="2336968995"/>
-    <nd ref="2080972331"/>
-    <nd ref="2080972330"/>
-    <nd ref="2080972328"/>
-    <nd ref="2080972326"/>
-    <nd ref="2210851371"/>
-    <nd ref="2080972323"/>
-    <nd ref="31230072"/>
     <tag k="highway" v="primary"/>
     <tag k="lanes" v="4"/>
     <tag k="maxspeed" v="80"/>
@@ -11388,15 +11415,6 @@
     <nd ref="2049278532"/>
     <nd ref="1937703833"/>
     <nd ref="1937703863"/>
-    <nd ref="1278980875"/>
-    <nd ref="1880051623"/>
-    <nd ref="1278980978"/>
-    <nd ref="1278980962"/>
-    <nd ref="1892823603"/>
-    <nd ref="1753692763"/>
-    <nd ref="314967124"/>
-    <nd ref="425306813"/>
-    <nd ref="1274183808"/>
     <tag k="highway" v="primary"/>
     <tag k="lanes" v="2"/>
     <tag k="oneway" v="yes"/>
@@ -12397,31 +12415,6 @@
     <nd ref="913398390"/>
     <nd ref="913398393"/>
     <nd ref="913398439"/>
-    <nd ref="913398395"/>
-    <nd ref="913398397"/>
-    <nd ref="913398399"/>
-    <nd ref="913398401"/>
-    <nd ref="913398403"/>
-    <nd ref="913398405"/>
-    <nd ref="913398407"/>
-    <nd ref="913398408"/>
-    <nd ref="1960744528"/>
-    <nd ref="913398409"/>
-    <nd ref="1960744451"/>
-    <nd ref="1960744537"/>
-    <nd ref="913398410"/>
-    <nd ref="1960744503"/>
-    <nd ref="1960744417"/>
-    <nd ref="1960744461"/>
-    <nd ref="1960744491"/>
-    <nd ref="913398414"/>
-    <nd ref="913398416"/>
-    <nd ref="2101168611"/>
-    <nd ref="1960744375"/>
-    <nd ref="1960744392"/>
-    <nd ref="913398418"/>
-    <nd ref="1960744353"/>
-    <nd ref="1960744390"/>
     <tag k="highway" v="tertiary"/>
     <tag k="name" v="Kirtipur Road"/>
     <tag k="oneway" v="no"/>
@@ -12464,23 +12457,6 @@
     <nd ref="913398374"/>
     <nd ref="913398375"/>
     <nd ref="977632829"/>
-    <nd ref="913398377"/>
-    <nd ref="1965646330"/>
-    <nd ref="1965646333"/>
-    <nd ref="1965646377"/>
-    <nd ref="913398380"/>
-    <nd ref="977636485"/>
-    <nd ref="913398383"/>
-    <nd ref="1965646391"/>
-    <nd ref="1965646311"/>
-    <nd ref="1965646373"/>
-    <nd ref="913398384"/>
-    <nd ref="913398386"/>
-    <nd ref="1965646300"/>
-    <nd ref="1965646292"/>
-    <nd ref="913398387"/>
-    <nd ref="913398388"/>
-    <nd ref="1487816150"/>
     <tag k="foot" v="yes"/>
     <tag k="highway" v="tertiary"/>
     <tag k="maxspeed" v="20"/>
@@ -14864,6 +14840,28 @@
     <nd ref="558561818"/>
     <tag k="highway" v="primary"/>
   </way>
+  <way id="232290886">
+    <nd ref="2376160425"/>
+    <nd ref="564118343"/>
+    <tag k="Micro Bus Fare" v="Rs. 14 - Rs. 25 depending on distance"/>
+    <tag k="Micro Bus No." v="18"/>
+    <tag k="Route" v="Kalanki-Lagankhel"/>
+    <tag k="Time" v="4 am to 8 pm"/>
+    <tag k="bicycle" v="yes"/>
+    <tag k="cycleway" v="no"/>
+    <tag k="foot" v="designated"/>
+    <tag k="highway" v="trunk"/>
+    <tag k="int_name" v="Ring Road"/>
+    <tag k="lanes" v="4"/>
+    <tag k="layer" v="1"/>
+    <tag k="name" v="Ring Road"/>
+    <tag k="name:en" v="Ring Road"/>
+    <tag k="name:ne" v="चक्रपथ"/>
+    <tag k="oneway" v="no"/>
+    <tag k="source" v="Bing"/>
+    <tag k="surface" v="paved"/>
+    <tag k="watch:80n" v="Katmandu"/>
+  </way>
   <way id="232348157">
     <nd ref="1845683513"/>
     <nd ref="360695723"/>
@@ -14906,6 +14904,263 @@
     <nd ref="1317084963"/>
     <tag k="highway" v="residential"/>
     <tag k="name" v="Surya Bikram Marga"/>
+  </way>
+  <way id="232351906">
+    <nd ref="425307054"/>
+    <nd ref="1480913855"/>
+    <nd ref="1274183714"/>
+    <nd ref="669642840"/>
+    <nd ref="1274183956"/>
+    <tag k="highway" v="primary"/>
+    <tag k="junction" v="roundabout"/>
+    <tag k="name" v="Jawalakhel"/>
+    <tag k="oneway" v="-1"/>
+    <tag k="route" v="junction"/>
+  </way>
+  <way id="232351910">
+    <nd ref="1273478102"/>
+    <nd ref="268307839"/>
+    <nd ref="1273477939"/>
+    <nd ref="360455542"/>
+    <nd ref="360455540"/>
+    <nd ref="1480909353"/>
+    <nd ref="2313362837"/>
+    <nd ref="1273478103"/>
+    <nd ref="1480909362"/>
+    <nd ref="1273477942"/>
+    <tag k="highway" v="primary"/>
+  </way>
+  <way id="232351911">
+    <nd ref="1273477942"/>
+    <nd ref="1832609117"/>
+    <nd ref="1127867456"/>
+    <nd ref="1480909426"/>
+    <nd ref="1127867468"/>
+    <nd ref="2306645439"/>
+    <nd ref="314964026"/>
+    <nd ref="1273478300"/>
+    <nd ref="1273478115"/>
+    <nd ref="2318228711"/>
+    <nd ref="360455543"/>
+    <nd ref="669529183"/>
+    <nd ref="360455544"/>
+    <nd ref="1847670813"/>
+    <tag k="highway" v="primary"/>
+  </way>
+  <way id="232351912">
+    <nd ref="1880066206"/>
+    <nd ref="1880066217"/>
+    <nd ref="1880066218"/>
+    <nd ref="2049458547"/>
+    <nd ref="1880066220"/>
+    <nd ref="1880066221"/>
+    <nd ref="1942462682"/>
+    <nd ref="1880066222"/>
+    <nd ref="2308053006"/>
+    <nd ref="1942462683"/>
+    <nd ref="1880066227"/>
+    <nd ref="1880066228"/>
+    <nd ref="1880066230"/>
+    <nd ref="103589478"/>
+    <tag k="highway" v="primary"/>
+    <tag k="lanes" v="2"/>
+    <tag k="oneway" v="yes"/>
+  </way>
+  <way id="232351913">
+    <nd ref="1847670813"/>
+    <nd ref="1274183971"/>
+    <tag k="highway" v="primary"/>
+  </way>
+  <way id="232351914">
+    <nd ref="360455521"/>
+    <nd ref="360455511"/>
+    <nd ref="1273478102"/>
+    <tag k="highway" v="primary"/>
+  </way>
+  <way id="232351915">
+    <nd ref="670651214"/>
+    <nd ref="1273357420"/>
+    <nd ref="670651215"/>
+    <nd ref="103589490"/>
+    <nd ref="317532202"/>
+    <tag k="highway" v="primary"/>
+    <tag k="oneway" v="no"/>
+  </way>
+  <way id="232351916">
+    <nd ref="725879816"/>
+    <nd ref="2050912179"/>
+    <nd ref="1480867609"/>
+    <nd ref="314962637"/>
+    <nd ref="2128609405"/>
+    <nd ref="2047751806"/>
+    <nd ref="103589478"/>
+    <tag k="highway" v="primary"/>
+    <tag k="oneway" v="no"/>
+  </way>
+  <way id="232400405">
+    <nd ref="1399427366"/>
+    <nd ref="2031624591"/>
+    <nd ref="360695605"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="name" v="Devkota Sadak"/>
+  </way>
+  <way id="232400406">
+    <nd ref="1281221704"/>
+    <nd ref="1382903026"/>
+    <nd ref="360695716"/>
+    <nd ref="360695714"/>
+    <nd ref="672589942"/>
+    <nd ref="2139807311"/>
+    <nd ref="1347468288"/>
+    <nd ref="360695713"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="name" v="Devkota Sadak"/>
+  </way>
+  <way id="232400407">
+    <nd ref="360695713"/>
+    <nd ref="1317087941"/>
+    <nd ref="728152168"/>
+    <nd ref="360695712"/>
+    <nd ref="360695711"/>
+    <nd ref="1274038123"/>
+    <nd ref="1274038125"/>
+    <nd ref="1274038126"/>
+    <nd ref="1399427366"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="name" v="Devkota Sadak"/>
+  </way>
+  <way id="232429763">
+    <nd ref="1937703863"/>
+    <nd ref="1278980875"/>
+    <tag k="highway" v="primary"/>
+    <tag k="lanes" v="2"/>
+    <tag k="oneway" v="yes"/>
+  </way>
+  <way id="232429764">
+    <nd ref="317532202"/>
+    <nd ref="725879816"/>
+    <tag k="highway" v="primary"/>
+    <tag k="oneway" v="no"/>
+  </way>
+  <way id="232429765">
+    <nd ref="1278980875"/>
+    <nd ref="1880051623"/>
+    <nd ref="1278980978"/>
+    <nd ref="1278980962"/>
+    <nd ref="1892823603"/>
+    <nd ref="1753692763"/>
+    <nd ref="314967124"/>
+    <nd ref="425306813"/>
+    <nd ref="1274183808"/>
+    <tag k="highway" v="primary"/>
+    <tag k="lanes" v="2"/>
+    <tag k="oneway" v="yes"/>
+  </way>
+  <way id="232434588">
+    <nd ref="2080972348"/>
+    <nd ref="2080972346"/>
+    <nd ref="2080972342"/>
+    <nd ref="2080972336"/>
+    <nd ref="2080972333"/>
+    <nd ref="2336968995"/>
+    <tag k="highway" v="primary"/>
+    <tag k="lanes" v="4"/>
+    <tag k="maxspeed" v="80"/>
+    <tag k="motor_vehicle" v="yes"/>
+    <tag k="name" v="Arniko Raj Marga"/>
+    <tag k="oneway" v="yes"/>
+    <tag k="ref" v="H03"/>
+    <tag k="surface" v="asphalt"/>
+  </way>
+  <way id="232434589">
+    <nd ref="2080972360"/>
+    <nd ref="2080972358"/>
+    <nd ref="2080972356"/>
+    <nd ref="2336968998"/>
+    <nd ref="2080972350"/>
+    <nd ref="2080972348"/>
+    <tag k="highway" v="primary"/>
+    <tag k="lanes" v="4"/>
+    <tag k="maxspeed" v="80"/>
+    <tag k="motor_vehicle" v="yes"/>
+    <tag k="name" v="Arniko Raj Marga"/>
+    <tag k="oneway" v="yes"/>
+    <tag k="ref" v="H03"/>
+    <tag k="surface" v="asphalt"/>
+  </way>
+  <way id="232434590">
+    <nd ref="2336968995"/>
+    <nd ref="2080972331"/>
+    <nd ref="2080972330"/>
+    <nd ref="2080972328"/>
+    <nd ref="2080972326"/>
+    <nd ref="2210851371"/>
+    <nd ref="2080972323"/>
+    <nd ref="31230072"/>
+    <tag k="highway" v="primary"/>
+    <tag k="lanes" v="4"/>
+    <tag k="maxspeed" v="80"/>
+    <tag k="motor_vehicle" v="yes"/>
+    <tag k="name" v="Arniko Raj Marga"/>
+    <tag k="oneway" v="yes"/>
+    <tag k="ref" v="H03"/>
+    <tag k="surface" v="asphalt"/>
+  </way>
+  <way id="232436490">
+    <nd ref="977632829"/>
+    <nd ref="913398377"/>
+    <nd ref="1965646330"/>
+    <nd ref="1965646333"/>
+    <nd ref="1965646377"/>
+    <nd ref="913398380"/>
+    <nd ref="977636485"/>
+    <nd ref="913398383"/>
+    <nd ref="1965646391"/>
+    <nd ref="1965646311"/>
+    <nd ref="1965646373"/>
+    <nd ref="913398384"/>
+    <nd ref="913398386"/>
+    <nd ref="1965646300"/>
+    <nd ref="1965646292"/>
+    <nd ref="913398387"/>
+    <nd ref="913398388"/>
+    <nd ref="1487816150"/>
+    <tag k="foot" v="yes"/>
+    <tag k="highway" v="tertiary"/>
+    <tag k="maxspeed" v="20"/>
+    <tag k="name" v="Kirtipur Ring Road"/>
+    <tag k="oneway" v="yes"/>
+  </way>
+  <way id="232436491">
+    <nd ref="913398439"/>
+    <nd ref="913398395"/>
+    <nd ref="913398397"/>
+    <nd ref="913398399"/>
+    <nd ref="913398401"/>
+    <nd ref="913398403"/>
+    <nd ref="913398405"/>
+    <nd ref="913398407"/>
+    <nd ref="913398408"/>
+    <nd ref="1960744528"/>
+    <nd ref="913398409"/>
+    <nd ref="1960744451"/>
+    <nd ref="1960744537"/>
+    <nd ref="913398410"/>
+    <nd ref="1960744503"/>
+    <nd ref="1960744417"/>
+    <nd ref="1960744461"/>
+    <nd ref="1960744491"/>
+    <nd ref="913398414"/>
+    <nd ref="913398416"/>
+    <nd ref="2101168611"/>
+    <nd ref="1960744375"/>
+    <nd ref="1960744392"/>
+    <nd ref="913398418"/>
+    <nd ref="1960744353"/>
+    <nd ref="1960744390"/>
+    <tag k="highway" v="tertiary"/>
+    <tag k="name" v="Kirtipur Road"/>
+    <tag k="oneway" v="no"/>
   </way>
   <relation id="2276770">
     <member type="node" ref="360889656" role="end"/>
@@ -15060,6 +15315,7 @@
     <member type="way" ref="171599263" role=""/>
     <member type="way" ref="196269536" role=""/>
     <member type="way" ref="196269539" role=""/>
+    <member type="way" ref="232104126" role=""/>
     <member type="way" ref="224826607" role=""/>
     <member type="way" ref="224826610" role=""/>
     <member type="way" ref="224826608" role=""/>
@@ -15074,13 +15330,17 @@
     <member type="way" ref="228677438" role=""/>
     <member type="way" ref="195858822" role=""/>
     <member type="way" ref="195858821" role=""/>
+    <member type="way" ref="232104127" role=""/>
+    <member type="way" ref="232104130" role=""/>
     <member type="way" ref="224829987" role=""/>
+    <member type="way" ref="232436491" role=""/>
     <member type="way" ref="227323028" role=""/>
-    <member type="way" ref="135469453" role="forward"/>
+    <member type="way" ref="135469453" role=""/>
     <member type="way" ref="135469452" role="forward"/>
     <member type="way" ref="227323027" role="forward"/>
     <member type="way" ref="227329270" role="forward"/>
-    <member type="way" ref="135469453" role="forward"/>
+    <member type="way" ref="232436490" role="forward"/>
+    <member type="way" ref="135469452" role=""/>
     <member type="node" ref="314528404" role=""/>
     <member type="node" ref="1274184084" role="start"/>
     <member type="node" ref="564118342" role=""/>
@@ -15203,6 +15463,8 @@
     <member type="way" ref="137312035" role=""/>
     <member type="way" ref="172003011" role=""/>
     <member type="way" ref="216283597" role=""/>
+    <member type="way" ref="232429763" role=""/>
+    <member type="way" ref="232429765" role=""/>
     <member type="way" ref="136524582" role=""/>
     <member type="way" ref="170558234" role=""/>
     <member type="way" ref="164827914" role=""/>
@@ -15405,24 +15667,36 @@
     <tag k="type" v="route"/>
   </relation>
   <relation id="2295941">
-    <member type="node" ref="1830679642" role=""/>
     <member type="way" ref="28559428" role=""/>
     <member type="way" ref="111823088" role=""/>
+    <member type="way" ref="196269537" role=""/>
     <member type="way" ref="171599263" role=""/>
     <member type="way" ref="120031049" role=""/>
     <member type="way" ref="171603744" role=""/>
     <member type="way" ref="24707457" role=""/>
+    <member type="way" ref="232348158" role=""/>
+    <member type="way" ref="232348159" role=""/>
     <member type="way" ref="225426572" role=""/>
     <member type="way" ref="225426576" role=""/>
     <member type="way" ref="172129989" role=""/>
     <member type="way" ref="169336482" role=""/>
+    <member type="way" ref="232095620" role=""/>
+    <member type="way" ref="232095621" role=""/>
+    <member type="way" ref="232095619" role=""/>
+    <member type="way" ref="232095622" role=""/>
+    <member type="way" ref="232095623" role=""/>
     <member type="way" ref="28653580" role=""/>
     <member type="way" ref="172137063" role=""/>
     <member type="way" ref="111845395" role=""/>
     <member type="way" ref="111845394" role=""/>
+    <member type="way" ref="232095610" role=""/>
+    <member type="way" ref="232095609" role=""/>
+    <member type="way" ref="232095611" role=""/>
     <member type="way" ref="215506636" role=""/>
+    <member type="way" ref="232348157" role=""/>
     <member type="way" ref="172137062" role=""/>
     <member type="way" ref="172138852" role=""/>
+    <member type="node" ref="1830616461" role="end"/>
     <member type="node" ref="1830679639" role=""/>
     <member type="node" ref="1281221676" role=""/>
     <member type="node" ref="1830679640" role=""/>
@@ -15433,14 +15707,13 @@
     <member type="node" ref="1830679652" role=""/>
     <member type="node" ref="1830679638" role=""/>
     <member type="node" ref="1830679633" role=""/>
-    <member type="node" ref="1830616461" role="end"/>
     <member type="node" ref="360695719" role=""/>
     <member type="node" ref="1281221704" role=""/>
     <member type="node" ref="360695713" role=""/>
-    <member type="node" ref="1399427366" role="start"/>
     <member type="node" ref="2115670110" role=""/>
     <member type="node" ref="2115670104" role=""/>
     <member type="node" ref="2115670119" role=""/>
+    <member type="node" ref="1399427366" role="start"/>
     <tag k="name" v="Old Baneshwar-Sundhara"/>
     <tag k="ref" v="1 MA"/>
     <tag k="route" v="tempo"/>
@@ -15540,6 +15813,8 @@
     <member type="way" ref="137312035" role=""/>
     <member type="way" ref="172003011" role=""/>
     <member type="way" ref="216283597" role=""/>
+    <member type="way" ref="232429763" role=""/>
+    <member type="way" ref="232429765" role=""/>
     <member type="way" ref="136524582" role=""/>
     <member type="way" ref="170558234" role=""/>
     <member type="way" ref="164827914" role=""/>
@@ -15603,9 +15878,18 @@
   <relation id="2301161">
     <member type="node" ref="1273478273" role="start"/>
     <member type="node" ref="1393448749" role=""/>
+    <member type="node" ref="360455521" role=""/>
+    <member type="node" ref="1830711730" role=""/>
+    <member type="node" ref="1817322707" role=""/>
+    <member type="node" ref="317532028" role=""/>
+    <member type="node" ref="670651214" role=""/>
+    <member type="node" ref="725879816" role=""/>
+    <member type="node" ref="317532042" role=""/>
+    <member type="node" ref="1278980875" role=""/>
     <member type="node" ref="1273477941" role=""/>
     <member type="node" ref="268307973" role=""/>
     <member type="node" ref="1273478102" role=""/>
+    <member type="node" ref="977642700" role=""/>
     <member type="node" ref="1273477942" role=""/>
     <member type="node" ref="425307054" role=""/>
     <member type="node" ref="1805074877" role=""/>
@@ -15615,17 +15899,28 @@
     <member type="way" ref="136524570" role=""/>
     <member type="way" ref="172962756" role=""/>
     <member type="way" ref="172008686" role=""/>
+    <member type="way" ref="232351914" role=""/>
+    <member type="way" ref="232351910" role=""/>
+    <member type="way" ref="232351911" role=""/>
+    <member type="way" ref="232351913" role=""/>
     <member type="way" ref="164827914" role=""/>
     <member type="way" ref="170558234" role=""/>
     <member type="way" ref="136524582" role=""/>
+    <member type="way" ref="232429765" role=""/>
+    <member type="way" ref="232429763" role=""/>
     <member type="way" ref="216283597" role=""/>
     <member type="way" ref="172003011" role=""/>
+    <member type="way" ref="232351916" role=""/>
+    <member type="way" ref="232429764" role=""/>
+    <member type="way" ref="232351915" role=""/>
     <member type="way" ref="137312035" role=""/>
     <member type="way" ref="136448418" role=""/>
     <member type="way" ref="136448419" role=""/>
     <member type="way" ref="184538892" role=""/>
     <member type="way" ref="136448417" role=""/>
     <member type="way" ref="118505089" role=""/>
+    <member type="way" ref="231885714" role=""/>
+    <member type="way" ref="231885713" role=""/>
     <member type="way" ref="120031044" role=""/>
     <member type="way" ref="172140337" role=""/>
     <member type="way" ref="170533896" role=""/>
@@ -15635,9 +15930,10 @@
     <member type="way" ref="120264257" role=""/>
     <member type="way" ref="225426574" role=""/>
     <member type="way" ref="225426573" role=""/>
+    <member type="way" ref="232099518" role=""/>
     <member type="way" ref="169336489" role=""/>
     <member type="way" ref="171599263" role=""/>
-    <member type="way" ref="196269536" role=""/>
+    <member type="way" ref="196269537" role=""/>
     <member type="way" ref="111823088" role=""/>
     <member type="way" ref="28559428" role=""/>
     <member type="way" ref="172129845" role=""/>
@@ -15676,6 +15972,7 @@
     <member type="way" ref="172387581" role=""/>
     <member type="way" ref="4825630" role=""/>
     <member type="way" ref="172387564" role=""/>
+    <member type="way" ref="231885504" role=""/>
     <member type="way" ref="28543722" role=""/>
     <member type="way" ref="172387565" role=""/>
     <member type="way" ref="172387568" role=""/>
@@ -15685,8 +15982,8 @@
     <member type="way" ref="232096102" role=""/>
     <member type="way" ref="232096100" role=""/>
     <member type="way" ref="215506635" role=""/>
-    <member type="way" ref="215506634" role=""/>
     <member type="way" ref="232095612" role=""/>
+    <member type="way" ref="215506634" role=""/>
     <member type="way" ref="191532021" role=""/>
     <member type="way" ref="221323015" role=""/>
     <member type="way" ref="221323022" role=""/>
@@ -15937,22 +16234,30 @@
   </relation>
   <relation id="2301342">
     <member type="way" ref="134727443" role=""/>
+    <member type="way" ref="232351916" role=""/>
+    <member type="way" ref="232429764" role=""/>
+    <member type="way" ref="232351915" role=""/>
     <member type="way" ref="137312035" role=""/>
     <member type="way" ref="52799481" role=""/>
     <member type="way" ref="52916461" role=""/>
     <member type="way" ref="52916460" role=""/>
     <member type="way" ref="231309040" role=""/>
     <member type="way" ref="118505089" role=""/>
+    <member type="way" ref="231885714" role=""/>
+    <member type="way" ref="231885713" role=""/>
     <member type="way" ref="120031044" role=""/>
     <member type="way" ref="172140337" role=""/>
     <member type="way" ref="170533896" role=""/>
     <member type="way" ref="173044198" role=""/>
     <member type="way" ref="169337734" role=""/>
+    <member type="way" ref="232095617" role=""/>
     <member type="way" ref="120264257" role=""/>
     <member type="way" ref="225426574" role=""/>
     <member type="way" ref="225426573" role=""/>
+    <member type="way" ref="232099518" role=""/>
     <member type="way" ref="169336489" role=""/>
     <member type="way" ref="171599263" role=""/>
+    <member type="way" ref="196269537" role=""/>
     <member type="way" ref="111823088" role=""/>
     <member type="way" ref="28559428" role=""/>
     <member type="way" ref="172129845" role=""/>
@@ -15963,6 +16268,7 @@
     <member type="way" ref="172387581" role=""/>
     <member type="way" ref="4825630" role=""/>
     <member type="way" ref="172387564" role=""/>
+    <member type="way" ref="231885504" role=""/>
     <member type="way" ref="28543722" role=""/>
     <member type="way" ref="172387565" role=""/>
     <member type="way" ref="172387568" role=""/>
@@ -15985,13 +16291,20 @@
     <member type="node" ref="1817322707" role=""/>
     <member type="node" ref="1805062851" role=""/>
     <member type="node" ref="1830711730" role=""/>
+    <member type="node" ref="31019734" role=""/>
     <member type="node" ref="1273136740" role=""/>
     <member type="node" ref="1830616461" role=""/>
+    <member type="node" ref="268307761" role=""/>
+    <member type="node" ref="296319786" role=""/>
     <member type="node" ref="31232256" role=""/>
     <member type="node" ref="1806066068" role=""/>
     <member type="node" ref="1806053892" role=""/>
+    <member type="node" ref="2396022575" role=""/>
     <member type="node" ref="268307740" role=""/>
+    <member type="node" ref="1805074877" role=""/>
+    <member type="node" ref="977642700" role=""/>
     <member type="node" ref="268307757" role=""/>
+    <member type="node" ref="670651214" role=""/>
     <member type="node" ref="1279198216" role=""/>
     <member type="node" ref="313140515" role=""/>
     <member type="node" ref="296319794" role="end"/>
@@ -16003,14 +16316,28 @@
   </relation>
   <relation id="2301357">
     <member type="node" ref="1882601487" role="start"/>
+    <member type="node" ref="1845683513" role=""/>
+    <member type="node" ref="1281221704" role=""/>
+    <member type="node" ref="360695713" role=""/>
+    <member type="node" ref="1399427366" role=""/>
+    <member type="node" ref="1281218920" role=""/>
+    <member type="node" ref="1832985899" role=""/>
+    <member type="node" ref="1395061503" role=""/>
     <member type="node" ref="31151483" role="end"/>
     <member type="way" ref="215506636" role=""/>
+    <member type="way" ref="232348157" role=""/>
     <member type="way" ref="172137062" role=""/>
     <member type="way" ref="172138852" role=""/>
+    <member type="way" ref="232400406" role=""/>
+    <member type="way" ref="232400407" role=""/>
+    <member type="way" ref="232400405" role=""/>
     <member type="way" ref="121782640" role=""/>
+    <member type="way" ref="173980139" role=""/>
     <member type="way" ref="112783299" role=""/>
     <member type="way" ref="4840264" role=""/>
+    <member type="way" ref="231414550" role=""/>
     <member type="way" ref="223093274" role=""/>
+    <member type="way" ref="231414552" role=""/>
     <member type="way" ref="171603747" role=""/>
     <tag k="name" v="Naya Baneshwor-Teaching"/>
     <tag k="ref" v="-"/>
@@ -16047,6 +16374,9 @@
     <member type="way" ref="4840030" role=""/>
     <member type="way" ref="4840039" role=""/>
     <member type="way" ref="172138852" role=""/>
+    <member type="way" ref="232400406" role=""/>
+    <member type="way" ref="232400407" role=""/>
+    <member type="way" ref="232400405" role=""/>
     <member type="way" ref="172137062" role=""/>
     <tag k="name" v="Teaching-NayaBaneshwar"/>
     <tag k="ref" v="-"/>
@@ -16054,8 +16384,8 @@
     <tag k="type" v="route"/>
   </relation>
   <relation id="2302674">
-    <member type="node" ref="1817037493" role=""/>
     <member type="node" ref="31228768" role="end"/>
+    <member type="node" ref="1817037493" role=""/>
     <member type="node" ref="1817037501" role=""/>
     <member type="node" ref="1805087571" role=""/>
     <member type="node" ref="1805087624" role=""/>
@@ -16071,22 +16401,33 @@
     <member type="way" ref="24691222" role=""/>
     <member type="way" ref="120353050" role=""/>
     <member type="way" ref="185939504" role=""/>
+    <member type="way" ref="171599262" role=""/>
+    <member type="way" ref="224826609" role=""/>
+    <member type="way" ref="224826607" role=""/>
     <member type="way" ref="169191889" role=""/>
+    <member type="way" ref="231885715" role=""/>
     <member type="way" ref="173044649" role=""/>
     <member type="way" ref="118505089" role=""/>
+    <member type="way" ref="231885714" role=""/>
+    <member type="way" ref="231885713" role=""/>
     <member type="way" ref="120031044" role=""/>
     <member type="way" ref="172140337" role=""/>
     <member type="way" ref="111845384" role=""/>
     <member type="way" ref="170533894" role=""/>
     <member type="way" ref="172126340" role=""/>
+    <member type="way" ref="231880678" role=""/>
+    <member type="way" ref="231882050" role=""/>
     <member type="way" ref="169339097" role=""/>
     <member type="way" ref="169339098" role=""/>
     <member type="way" ref="229143181" role=""/>
+    <member type="way" ref="231880680" role=""/>
     <member type="way" ref="215506638" role=""/>
     <member type="way" ref="231103976" role=""/>
+    <member type="way" ref="231880682" role=""/>
     <member type="way" ref="182984833" role=""/>
     <member type="way" ref="225456438" role=""/>
     <member type="way" ref="182984835" role=""/>
+    <member type="way" ref="231880681" role=""/>
     <member type="way" ref="215508154" role=""/>
     <member type="way" ref="188434896" role=""/>
     <member type="way" ref="120032858" role=""/>
@@ -16163,11 +16504,16 @@
     <member type="node" ref="1822721401" role=""/>
     <member type="node" ref="2249140889" role=""/>
     <member type="way" ref="220025932" role=""/>
+    <member type="way" ref="231882051" role=""/>
     <member type="way" ref="224832548" role=""/>
+    <member type="way" ref="231882055" role=""/>
+    <member type="way" ref="231882054" role=""/>
     <member type="way" ref="24691025" role=""/>
+    <member type="way" ref="231882052" role=""/>
     <member type="way" ref="226834866" role=""/>
     <member type="way" ref="137569858" role=""/>
     <member type="way" ref="188451226" role=""/>
+    <member type="way" ref="231882053" role=""/>
     <member type="way" ref="32133799" role=""/>
     <member type="way" ref="32133797" role=""/>
     <member type="way" ref="185944629" role=""/>
@@ -16193,10 +16539,14 @@
     <member type="way" ref="193289326" role=""/>
     <member type="way" ref="120032858" role="forward"/>
     <member type="way" ref="170533898" role="forward"/>
+    <member type="way" ref="232095629" role=""/>
     <member type="way" ref="229038204" role="forward"/>
     <member type="way" ref="27034031" role="forward"/>
     <member type="way" ref="225456435" role="forward"/>
     <member type="way" ref="182984272" role="forward"/>
+    <member type="way" ref="232095630" role=""/>
+    <member type="way" ref="232095625" role=""/>
+    <member type="way" ref="232095628" role=""/>
     <member type="way" ref="221323019" role="forward"/>
     <member type="way" ref="183110577" role="forward"/>
     <member type="way" ref="111846942" role="forward"/>
@@ -16263,9 +16613,12 @@
     <member type="way" ref="190532597" role=""/>
     <member type="way" ref="231786214" role=""/>
     <member type="way" ref="170533892" role=""/>
+    <member type="way" ref="231414550" role=""/>
     <member type="way" ref="223093274" role=""/>
+    <member type="way" ref="231414552" role=""/>
     <member type="way" ref="171603747" role=""/>
     <member type="way" ref="180216483" role=""/>
+    <member type="way" ref="231414551" role=""/>
     <member type="way" ref="229195913" role=""/>
     <member type="way" ref="180373624" role=""/>
     <member type="way" ref="190889376" role=""/>
@@ -16359,9 +16712,13 @@
     <member type="way" ref="190532597" role=""/>
     <member type="way" ref="231786214" role=""/>
     <member type="way" ref="170533892" role=""/>
+    <member type="way" ref="231414550" role=""/>
     <member type="way" ref="223093274" role=""/>
+    <member type="way" ref="231414552" role=""/>
     <member type="way" ref="171603747" role=""/>
     <member type="way" ref="4840318" role=""/>
+    <member type="way" ref="231880677" role=""/>
+    <member type="way" ref="231880676" role=""/>
     <member type="way" ref="171603743" role=""/>
     <member type="way" ref="27034169" role=""/>
     <member type="way" ref="27034168" role=""/>
@@ -16398,6 +16755,7 @@
     <member type="way" ref="172387581" role=""/>
     <member type="way" ref="4825630" role=""/>
     <member type="way" ref="172387564" role=""/>
+    <member type="way" ref="231885504" role=""/>
     <member type="way" ref="28543722" role=""/>
     <member type="way" ref="172387565" role=""/>
     <member type="way" ref="172387568" role=""/>
@@ -16407,8 +16765,8 @@
     <member type="way" ref="232096102" role=""/>
     <member type="way" ref="232096100" role=""/>
     <member type="way" ref="215506635" role=""/>
-    <member type="way" ref="215506634" role=""/>
     <member type="way" ref="232095612" role=""/>
+    <member type="way" ref="215506634" role=""/>
     <member type="way" ref="191532021" role=""/>
     <member type="way" ref="221323015" role=""/>
     <member type="way" ref="221323022" role=""/>
@@ -16600,32 +16958,48 @@
     <member type="way" ref="183527582" role=""/>
     <member type="way" ref="215508153" role=""/>
     <member type="way" ref="171203196" role=""/>
+    <member type="way" ref="231880679" role=""/>
     <member type="way" ref="36498467" role=""/>
     <member type="way" ref="170533894" role=""/>
     <member type="way" ref="172126340" role=""/>
+    <member type="way" ref="231880678" role=""/>
+    <member type="way" ref="231882050" role=""/>
     <member type="way" ref="169339097" role=""/>
     <member type="way" ref="169339098" role=""/>
     <member type="way" ref="229143181" role=""/>
+    <member type="way" ref="231880680" role=""/>
     <member type="way" ref="215506638" role=""/>
     <member type="way" ref="231103976" role=""/>
+    <member type="way" ref="231880682" role=""/>
     <member type="way" ref="182984833" role=""/>
     <member type="way" ref="225456438" role=""/>
     <member type="way" ref="182984835" role=""/>
+    <member type="way" ref="231880681" role=""/>
     <member type="way" ref="188434895" role=""/>
     <member type="way" ref="120032858" role=""/>
     <member type="way" ref="193289326" role=""/>
     <member type="way" ref="194607856" role=""/>
+    <member type="way" ref="231882049" role=""/>
     <member type="way" ref="229063563" role=""/>
     <member type="way" ref="194607857" role=""/>
     <member type="way" ref="194607859" role=""/>
+    <member type="way" ref="231882045" role=""/>
     <member type="way" ref="229075030" role=""/>
     <member type="way" ref="229075024" role=""/>
+    <member type="way" ref="231882046" role=""/>
+    <member type="way" ref="231882048" role=""/>
     <member type="way" ref="224823944" role=""/>
     <member type="way" ref="194607858" role=""/>
     <member type="way" ref="194607863" role=""/>
+    <member type="way" ref="231882047" role=""/>
+    <member type="way" ref="231882044" role=""/>
     <member type="way" ref="194607860" role=""/>
+    <member type="way" ref="232434589" role=""/>
+    <member type="way" ref="232434588" role=""/>
+    <member type="way" ref="232434590" role=""/>
     <member type="way" ref="4847094" role=""/>
     <member type="way" ref="25512537" role=""/>
+    <member type="way" ref="232099514" role=""/>
     <member type="way" ref="224835842" role=""/>
     <member type="way" ref="193053264" role=""/>
     <member type="way" ref="193053265" role=""/>
@@ -16822,6 +17196,9 @@
     <member type="way" ref="194607858" role=""/>
     <member type="way" ref="194607863" role=""/>
     <member type="way" ref="194607860" role=""/>
+    <member type="way" ref="232434589" role=""/>
+    <member type="way" ref="232434588" role=""/>
+    <member type="way" ref="232434590" role=""/>
     <member type="way" ref="4847094" role=""/>
     <member type="way" ref="25512537" role=""/>
     <member type="way" ref="224835842" role=""/>
@@ -16847,6 +17224,7 @@
     <member type="way" ref="171599263" role=""/>
     <member type="way" ref="196269536" role=""/>
     <member type="way" ref="196269539" role=""/>
+    <member type="way" ref="232104126" role=""/>
     <member type="way" ref="224826607" role=""/>
     <member type="way" ref="224826610" role=""/>
     <member type="way" ref="224826608" role=""/>
@@ -16861,6 +17239,8 @@
     <member type="way" ref="228677438" role=""/>
     <member type="way" ref="195858822" role=""/>
     <member type="way" ref="195858821" role=""/>
+    <member type="way" ref="232104127" role=""/>
+    <member type="way" ref="232104130" role=""/>
     <member type="way" ref="224829987" role=""/>
     <member type="way" ref="23395604" role=""/>
     <member type="way" ref="30474887" role=""/>
@@ -16990,9 +17370,13 @@
     <member type="way" ref="190532597" role=""/>
     <member type="way" ref="231786214" role=""/>
     <member type="way" ref="170533892" role=""/>
+    <member type="way" ref="231414550" role=""/>
     <member type="way" ref="223093274" role=""/>
+    <member type="way" ref="231414552" role=""/>
     <member type="way" ref="171603747" role=""/>
     <member type="way" ref="4840318" role=""/>
+    <member type="way" ref="231880677" role=""/>
+    <member type="way" ref="231880676" role=""/>
     <member type="way" ref="171603743" role=""/>
     <member type="node" ref="360705527" role="end"/>
     <member type="node" ref="560500317" role=""/>
@@ -17027,38 +17411,57 @@
     <member type="way" ref="171599263" role="forward"/>
     <member type="way" ref="196269536" role="forward"/>
     <member type="way" ref="196269539" role="forward"/>
+    <member type="way" ref="232104126" role=""/>
     <member type="way" ref="224826607" role="forward"/>
     <member type="way" ref="169191889" role="forward"/>
+    <member type="way" ref="231885715" role=""/>
     <member type="way" ref="173044649" role="forward"/>
     <member type="way" ref="118505089" role="forward"/>
+    <member type="way" ref="231885714" role=""/>
+    <member type="way" ref="231885713" role=""/>
     <member type="way" ref="120031044" role="forward"/>
     <member type="way" ref="172140337" role="forward"/>
     <member type="way" ref="111845384" role="forward"/>
     <member type="way" ref="170533894" role="forward"/>
     <member type="way" ref="172126340" role="forward"/>
+    <member type="way" ref="231880678" role=""/>
+    <member type="way" ref="231882050" role=""/>
     <member type="way" ref="169339097" role="forward"/>
     <member type="way" ref="169339098" role="forward"/>
     <member type="way" ref="229143181" role="forward"/>
+    <member type="way" ref="231880680" role=""/>
     <member type="way" ref="215506638" role="forward"/>
     <member type="way" ref="231103976" role="forward"/>
+    <member type="way" ref="231880682" role=""/>
     <member type="way" ref="182984833" role="forward"/>
     <member type="way" ref="225456438" role="forward"/>
     <member type="way" ref="182984835" role="forward"/>
+    <member type="way" ref="231880681" role=""/>
     <member type="way" ref="188434895" role="forward"/>
     <member type="way" ref="120032858" role=""/>
     <member type="way" ref="193289326" role=""/>
     <member type="way" ref="194607856" role="forward"/>
+    <member type="way" ref="231882049" role=""/>
     <member type="way" ref="229063563" role="forward"/>
     <member type="way" ref="194607857" role="forward"/>
     <member type="way" ref="194607859" role="forward"/>
+    <member type="way" ref="231882045" role=""/>
     <member type="way" ref="229075030" role="forward"/>
     <member type="way" ref="229075024" role="forward"/>
+    <member type="way" ref="231882046" role=""/>
+    <member type="way" ref="231882048" role=""/>
     <member type="way" ref="224823944" role="forward"/>
     <member type="way" ref="194607858" role="forward"/>
     <member type="way" ref="194607863" role="forward"/>
+    <member type="way" ref="231882047" role=""/>
+    <member type="way" ref="231882044" role=""/>
     <member type="way" ref="194607860" role="forward"/>
+    <member type="way" ref="232434589" role="forward"/>
+    <member type="way" ref="232434588" role="forward"/>
+    <member type="way" ref="232434590" role="forward"/>
     <member type="way" ref="4847094" role=""/>
     <member type="way" ref="25512537" role=""/>
+    <member type="way" ref="232099514" role=""/>
     <member type="way" ref="126549737" role=""/>
     <member type="way" ref="188446400" role=""/>
     <member type="way" ref="126549736" role=""/>
@@ -17318,6 +17721,7 @@
     <member type="way" ref="195858822" role=""/>
     <member type="way" ref="195858821" role=""/>
     <member type="way" ref="224829987" role=""/>
+    <member type="way" ref="232436491" role="forward"/>
     <member type="way" ref="227323028" role="forward"/>
     <member type="way" ref="135469453" role=""/>
     <member type="way" ref="135469452" role=""/>
@@ -17360,6 +17764,7 @@
     <member type="way" ref="195858822" role=""/>
     <member type="way" ref="195858821" role=""/>
     <member type="way" ref="224829987" role=""/>
+    <member type="way" ref="232436491" role=""/>
     <member type="way" ref="227323028" role=""/>
     <member type="way" ref="135469453" role=""/>
     <member type="way" ref="135469452" role=""/>
@@ -17572,16 +17977,23 @@
     <member type="way" ref="171599261" role=""/>
     <member type="way" ref="195858821" role=""/>
     <member type="way" ref="195858822" role=""/>
+    <member type="way" ref="232290886" role=""/>
     <member type="way" ref="185470034" role=""/>
     <member type="way" ref="185470054" role=""/>
+    <member type="way" ref="231786208" role=""/>
     <member type="way" ref="175587305" role=""/>
     <member type="way" ref="225456437" role=""/>
     <member type="way" ref="225456436" role=""/>
     <member type="way" ref="216297386" role=""/>
     <member type="way" ref="216297391" role=""/>
     <member type="way" ref="136524570" role=""/>
-    <member type="node" ref="1273477941" role="start"/>
     <member type="node" ref="313544725" role="end"/>
+    <member type="node" ref="360464983" role=""/>
+    <member type="node" ref="2376160425" role=""/>
+    <member type="node" ref="1496605759" role=""/>
+    <member type="node" ref="1497531299" role=""/>
+    <member type="node" ref="1667090463" role=""/>
+    <member type="node" ref="1273477941" role="start"/>
     <tag k="from" v="Kalanki"/>
     <tag k="name" v="Lagankhel - Kalanki"/>
     <tag k="route" v="bus"/>
@@ -17892,38 +18304,57 @@
   </relation>
   <relation id="3071562">
     <member type="way" ref="229143181" role=""/>
+    <member type="way" ref="231880680" role=""/>
     <member type="way" ref="215506638" role=""/>
     <member type="way" ref="231103976" role=""/>
+    <member type="way" ref="231880682" role=""/>
     <member type="way" ref="182984833" role=""/>
     <member type="way" ref="225456438" role=""/>
     <member type="way" ref="182984835" role=""/>
+    <member type="way" ref="231880681" role=""/>
     <member type="way" ref="188434895" role=""/>
     <member type="way" ref="120032858" role=""/>
     <member type="way" ref="193289326" role=""/>
     <member type="way" ref="215507255" role=""/>
     <member type="way" ref="196277319" role=""/>
+    <member type="way" ref="231786210" role=""/>
     <member type="way" ref="183827054" role=""/>
     <member type="way" ref="183827055" role=""/>
+    <member type="way" ref="231786212" role=""/>
+    <member type="way" ref="231786206" role=""/>
     <member type="way" ref="136524570" role=""/>
     <member type="way" ref="172962756" role=""/>
     <member type="way" ref="172008686" role=""/>
+    <member type="way" ref="232351914" role=""/>
+    <member type="way" ref="232351910" role=""/>
+    <member type="way" ref="232351911" role=""/>
+    <member type="way" ref="232351913" role=""/>
     <member type="way" ref="170533895" role=""/>
     <member type="way" ref="173810593" role=""/>
     <member type="way" ref="173810592" role=""/>
+    <member type="way" ref="232351906" role=""/>
     <member type="way" ref="171020947" role=""/>
     <member type="way" ref="177583582" role=""/>
     <member type="way" ref="177582765" role=""/>
+    <member type="way" ref="232351912" role=""/>
+    <member type="way" ref="232351916" role=""/>
+    <member type="way" ref="232429764" role=""/>
+    <member type="way" ref="232351915" role=""/>
     <member type="way" ref="137312035" role=""/>
     <member type="way" ref="52799481" role=""/>
     <member type="way" ref="52916461" role=""/>
     <member type="way" ref="52916460" role=""/>
     <member type="way" ref="231309040" role=""/>
     <member type="way" ref="118505089" role=""/>
+    <member type="way" ref="231885714" role=""/>
+    <member type="way" ref="231885713" role=""/>
     <member type="way" ref="120031044" role=""/>
     <member type="way" ref="172140337" role=""/>
     <member type="way" ref="111845384" role=""/>
     <member type="way" ref="170533894" role=""/>
     <member type="way" ref="172126340" role=""/>
+    <member type="way" ref="231880678" role=""/>
+    <member type="way" ref="231882050" role=""/>
     <member type="way" ref="169339097" role=""/>
     <member type="way" ref="169339098" role=""/>
     <member type="node" ref="31228768" role="terminus"/>
@@ -17958,8 +18389,11 @@
     <member type="way" ref="224826609" role=""/>
     <member type="way" ref="224826607" role=""/>
     <member type="way" ref="169191889" role=""/>
+    <member type="way" ref="231885715" role=""/>
     <member type="way" ref="173044649" role=""/>
     <member type="way" ref="118505089" role=""/>
+    <member type="way" ref="231885714" role=""/>
+    <member type="way" ref="231885713" role=""/>
     <member type="way" ref="120031044" role=""/>
     <member type="way" ref="172140337" role=""/>
     <member type="way" ref="170533896" role=""/>
