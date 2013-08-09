@@ -506,6 +506,41 @@ var colors = (function() {
     return colors;
 }());
 
+YY.single_route_render = function(system, route) {      
+        if(YY._routeGroup){
+            YY._routeGroup.clearLayers();
+        }
+        // this.style.background-color.Clear();
+
+        if(YY._singlelayer){
+            YY._singlelayer.clearLayers();
+            // map.removeLayer(YY._singlelayer);
+        }
+           
+        else
+            {YY._singlelayer = new L.LayerGroup();}
+        _.each(route.segments,function(seg, idx) {
+            var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
+            var poly = new L.Polyline(latlngs, {color: 'green',weight:7});
+            YY._singlelayer.addLayer(poly);
+            // goodPop("seg: "+seg.id, latlngs[Math.floor(latlngs.length / 2)], poly);
+        });
+        route.stops.forEach(function(stop) {
+            var marker;
+            var ll = new L.LatLng(stop.lat, stop.lng);
+            marker = new L.marker(ll, {icon:L.divIcon({html:stop.name})});
+            // goodPop(stop.name + " (id:"+stop.id+")", ll, marker);
+            YY._singlelayer.addLayer(marker);
+        });
+        map.addLayer(YY._singlelayer);
+        var rt_bd=new L.LatLngBounds();
+        rt_bd.extend(new L.LatLng(route.stops[0].lat,route.stops[0].lng));                      
+        rt_bd.extend(new L.LatLng(_.last(route.stops).lat,_.last(route.stops).lng));
+        map.fitBounds(rt_bd);
+        // // console.log('Eroor render successful');
+        return YY._singlelayer;
+    }; 
+
 // selectively export as a node module
 var module = module || {};
 module.exports = YY;
