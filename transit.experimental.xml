@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-08-07T23:59:01Z"/>
+<meta osm_base="2013-08-08T23:59:01Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -1485,8 +1485,8 @@
   <node id="360695526" lat="27.7030299" lon="85.3520826"/>
   <node id="360695569" lat="27.7057844" lon="85.3467389"/>
   <node id="360695605" lat="27.7015492" lon="85.3401296"/>
-  <node id="360695711" lat="27.7003013" lon="85.3389875"/>
-  <node id="360695712" lat="27.7000303" lon="85.3387110"/>
+  <node id="360695711" lat="27.7002776" lon="85.3390227"/>
+  <node id="360695712" lat="27.7000016" lon="85.3387251"/>
   <node id="360695713" lat="27.6990701" lon="85.3383269">
     <tag k="name" v="Apex College Stop"/>
     <tag k="public_transport" v="stop_position"/>
@@ -2632,9 +2632,9 @@
   <node id="1274038065" lat="27.7082243" lon="85.3410780"/>
   <node id="1274038069" lat="27.7081930" lon="85.3414996"/>
   <node id="1274038121" lat="27.7041737" lon="85.3416295"/>
-  <node id="1274038123" lat="27.7004269" lon="85.3391507"/>
-  <node id="1274038125" lat="27.7005146" lon="85.3394181"/>
-  <node id="1274038126" lat="27.7006109" lon="85.3395977"/>
+  <node id="1274038123" lat="27.7003496" lon="85.3391169"/>
+  <node id="1274038125" lat="27.7004772" lon="85.3394378"/>
+  <node id="1274038126" lat="27.7005997" lon="85.3396428"/>
   <node id="1274038127" lat="27.7083049" lon="85.3333750"/>
   <node id="1274038128" lat="27.7080952" lon="85.3334230"/>
   <node id="1274038129" lat="27.7076775" lon="85.3334005"/>
@@ -2651,7 +2651,10 @@
   <node id="1274038978" lat="27.7100317" lon="85.3198359"/>
   <node id="1274183469" lat="27.7099332" lon="85.3174733"/>
   <node id="1274183615" lat="27.7058181" lon="85.3191603"/>
-  <node id="1274183622" lat="27.7003653" lon="85.3245177"/>
+  <node id="1274183622" lat="27.7003653" lon="85.3245177">
+    <tag k="name" v="BaidyaKhana Stop"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <node id="1274183714" lat="27.6731134" lon="85.3134172"/>
   <node id="1274183715" lat="27.6731819" lon="85.3135965"/>
   <node id="1274183734" lat="27.7032685" lon="85.3224980"/>
@@ -3733,7 +3736,10 @@
     <tag k="name" v="Hanumanthan Stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="1830679638" lat="27.7017187" lon="85.3220253"/>
+  <node id="1830679638" lat="27.7017187" lon="85.3220253">
+    <tag k="name" v="Kanya Mandir School"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <node id="1830679639" lat="27.6903727" lon="85.3358296">
     <tag k="name" v="Naya Baneshwor Tempo Stop"/>
     <tag k="public_transport" v="stop_position"/>
@@ -5657,6 +5663,12 @@
     <tag k="name" v="Panipokhari stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
+  <node id="2410791778" lat="27.7001275" lon="85.3388711"/>
+  <node id="2410791779" lat="27.7002048" lon="85.3389457"/>
+  <node id="2410791780" lat="27.7004293" lon="85.3392809"/>
+  <node id="2410791781" lat="27.7004617" lon="85.3393556"/>
+  <node id="2410791783" lat="27.7004979" lon="85.3395260"/>
+  <node id="2410791784" lat="27.7005403" lon="85.3396049"/>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -14876,9 +14888,15 @@
     <nd ref="1317087941"/>
     <nd ref="728152168"/>
     <nd ref="360695712"/>
+    <nd ref="2410791778"/>
+    <nd ref="2410791779"/>
     <nd ref="360695711"/>
     <nd ref="1274038123"/>
+    <nd ref="2410791780"/>
+    <nd ref="2410791781"/>
     <nd ref="1274038125"/>
+    <nd ref="2410791783"/>
+    <nd ref="2410791784"/>
     <nd ref="1274038126"/>
     <nd ref="1399427366"/>
     <tag k="highway" v="secondary"/>
@@ -15662,10 +15680,12 @@
     <member type="way" ref="173980141" role=""/>
     <member type="way" ref="111965835" role=""/>
     <member type="way" ref="120430418" role=""/>
+    <member type="way" ref="232661481" role=""/>
     <member type="way" ref="232516700" role=""/>
     <member type="way" ref="61164307" role=""/>
     <member type="way" ref="120430421" role=""/>
     <member type="way" ref="232516699" role=""/>
+    <member type="way" ref="232661480" role=""/>
     <member type="way" ref="120031048" role=""/>
     <member type="way" ref="171215514" role=""/>
     <member type="way" ref="4840054" role=""/>
@@ -16051,10 +16071,11 @@
     <member type="way" ref="172137062" role=""/>
     <member type="way" ref="172138852" role=""/>
     <member type="way" ref="232504139" role=""/>
+    <member type="way" ref="232400406" role=""/>
+    <member type="way" ref="232400407" role=""/>
     <member type="node" ref="1830616461" role="end"/>
     <member type="node" ref="1830679639" role=""/>
     <member type="node" ref="1281221676" role=""/>
-    <member type="node" ref="1830679640" role=""/>
     <member type="node" ref="1830679636" role=""/>
     <member type="node" ref="415553223" role=""/>
     <member type="node" ref="1830679630" role=""/>
@@ -16065,9 +16086,6 @@
     <member type="node" ref="360695719" role=""/>
     <member type="node" ref="1281221704" role=""/>
     <member type="node" ref="360695713" role=""/>
-    <member type="node" ref="2115670110" role=""/>
-    <member type="node" ref="2115670104" role=""/>
-    <member type="node" ref="2115670119" role=""/>
     <member type="node" ref="1399427366" role="start"/>
     <tag k="name" v="Old Baneshwar-Sundhara"/>
     <tag k="ref" v="1 MA"/>
@@ -16733,7 +16751,6 @@
     <member type="node" ref="1281221704" role=""/>
     <member type="node" ref="360695713" role=""/>
     <member type="node" ref="1399427366" role=""/>
-    <member type="way" ref="232095612" role=""/>
     <member type="way" ref="215506634" role=""/>
     <member type="way" ref="191532021" role=""/>
     <member type="way" ref="221323015" role=""/>
