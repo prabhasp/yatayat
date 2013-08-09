@@ -10,15 +10,29 @@
 body {
   margin:0;
 }
-#routename {
+#accordion2 {
 position: absolute;
-bottom: 0;
+top: 0;
 right: 0;
 height: 100%;
-background-color: black;
+background-color: ;
 color: #00ff00;
 width: 20%;
 overflow: auto;
+font-size: 15;
+}
+#Title {
+position: absolute;
+top: 20 px;
+left: 25%;
+height: 30;
+background-color: rgb(53, 240, 240);
+color: black;
+width: 465;
+z-index: 1000;
+text-align: center;
+font-size: 25;
+border-radius: 20;
 }
 
 </style>
@@ -41,16 +55,21 @@ overflow: auto;
         </div>
         -->
 
-        
-        <div id="textboxes" style="position:absolute;top:20;left:60;z-index:999;color:'red'"> 
+                
+        <!--<div id="textboxes" style="position:absolute;top:20;left:60;z-index:999;color:'red'">        
             <b>Start</b> <input type="text" id="startstop" class="typeahead" data-provide="typeahead" class="span1"/>
             <b>End</b> <input type="text" id="endstop" class="typeahead" data-provide="typeahead" class="span1"/>
             <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY._routeGroup.clearLayers();YY.render_(system,map);"> Clear </a>
+        </div>-->
+    <!--    <div id="report" style="position:absolute;top:20;right:60;z-index:999">
+             <a class="btn" id="reportmissing" data-toggle="modal" href="#myModal"> Report missing route </a>  
+        </div>  -->
+
+        <div id="Title" >
+            Kathmandu Valley Public Transport App
         </div>
-        <div id="report" style="position:absolute;top:20;right:60;z-index:999">
-            <!-- <a class="btn" id="reportmissing" data-toggle="modal" href="#myModal"> Report missing route </a>  -->
-        </div>
-        <div class="alert" id="routedisplay" style="background:white;position:absolute;top:60;left:60;z-index:999">
+
+        <div class="alert" id="routedisplay" style="background:white;position:absolute;top:40;left:60;z-index:999">
         </div>
         <div id="publicTransportMap" style="width:80%; height: 100%">Loading ...</div>
         <div class="modal hide" id="myModal"> 
@@ -58,10 +77,10 @@ overflow: auto;
                 <button type="button" class="close" data-dismiss="modal">X</button>
             </div>
             <br/>
-            <!-- <iframe src="https://docs.google.com/spreadsheet/embeddedform?formkey=dFdZeG9PYnVpY1FBMk4zVjBDaFNua1E6MQ" width="700" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe> -->
-        <!-- <suresh work> -->
-        </div>
-        <!-- <suresh work end> -->
+            <iframe src="https://docs.google.com/spreadsheet/embeddedform?formkey=dFdZeG9PYnVpY1FBMk4zVjBDaFNua1E6MQ" width="700" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+        // suresh work
+        </div> 
+
 
 
 <script type="text/javascript" language="javascript">
@@ -81,6 +100,7 @@ overflow: auto;
 
 YY.fromConfig("config.stable.json", 
     function(sys) {
+        debugger;
         system = sys;
         // // console.log(system);
     	YY.render_(system, 
@@ -125,15 +145,11 @@ YY.fromConfig("config.stable.json",
                     
                     _(gettingThereRoutes).each(function(r,idx) {
                         //inclusionDict[r.id] = true;
-                        // outputHTML += "Get on " + toTitleCase(r.transport) + " " + 
-                        //     r.ref + " (" + r.name + ") at " + r.stops[0].name + 
-                        //     " and ride till " + _.last(r.stops).name + "<br/>";
-                        // if(!bounds.contains(new L.LatLngBounds(r.stops[0].lat,r.stops[0].lng))){
-                            bounds.extend(new L.LatLng(r.stops[0].lat,r.stops[0].lng));
-                        // }
-                        // if(!bounds.contains(new L.LatLngBounds(_.last(r.stops).lat,_.last(r.stops).lng))){
+                        
+                        
+                            bounds.extend(new L.LatLng(r.stops[0].lat,r.stops[0].lng));                      
                             bounds.extend(new L.LatLng(_.last(r.stops).lat,_.last(r.stops).lng));
-                        // }
+                        
                         _(r.stops).each(function(s) {
                             inclusionDict[s.id] = true;
 
@@ -156,7 +172,6 @@ YY.fromConfig("config.stable.json",
                             // if(startseg.length==0){
                                 _(seg.listOfLatLng).each(function(ll){
                                     if(ll[0]==r.stops[0].lat&&ll[1]==r.stops[0].lng){
-                                        // startseg.push([r.segments.indexOf(seg),seg]);
                                         startseg =[r.segments.indexOf(seg),seg];
                                         // console.log('start',startseg);
                                     }
@@ -165,7 +180,6 @@ YY.fromConfig("config.stable.json",
                             // if(endseg.length==0){
                                 _(seg.listOfLatLng).each(function(ll){
                                     if(ll[0]==_.last(r.stops).lat&&ll[1]==_.last(r.stops).lng){
-                                        // endseg.push([r.segments.indexOf(seg),seg]);
                                         endseg =[r.segments.indexOf(seg),seg];
                                         // // console.log('end',endseg);
                                     }
@@ -249,6 +263,7 @@ YY.fromConfig("config.stable.json",
                 map.spin(false);  
             }
         });
+
 // suresh work
         routeinfopanel(system.routes);
 // suresh work end
@@ -262,9 +277,7 @@ YY.fromConfig("config.stable.json",
                     attribution: YY.ATTRIBUTION
                 });
                 map.addLayer(tiles);
-            }
-
-            // add the layer to the map, set the view to a given place and zoom
+            }            
         }
 
         map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
@@ -318,19 +331,23 @@ YY.fromConfig("config.stable.json",
                 var Lll = new L.LatLng(stop.lat, stop.lng);
                 var marker;
                 if (leafletOverrideOptions && (stop.id in leafletOverrideOptions)) {
-                    // marker = new L.marker(Lll, {icon:L.divIcon({html:stop.name})});
-                    marker = new L.CircleMarker(Lll,
-                       leafletOverrideOptions[stop.id] || leafletBaseOptions.stop);
+                    marker = new L.marker(Lll, {icon:L.divIcon({html:stop.name})});
+                    // marker = new L.CircleMarker(Lll,
+                    //    leafletOverrideOptions[stop.id] || leafletBaseOptions.stop);
+                    // marker = new L.marker(Lll,
+                       // {icon: L.icon({iconUrl:'bus.jpg',iconSize: [20, 20],iconAnchor: [0, 0]})}).addTo(map);
                 } 
                 else {
-                    //marker = new L.marker(Lll, {icon:L.divIcon({html:stop.name})}).addTo(map);
-                     marker = new L.CircleMarker(Lll,
-                         (leafletBaseOptions && leafletBaseOptions.stop) ||
-                             defaultOptions.stop);
+                    // marker = new L.marker(Lll, {icon:L.divIcon({html:stop.name})}).addTo(map);
+                     // marker = new L.CircleMarker(Lll,
+                     //     (leafletBaseOptions && leafletBaseOptions.stop) ||
+                     //         defaultOptions.stop);
+                    marker = new L.marker(Lll,
+                       {icon: L.icon({iconUrl:'bus.jpg',iconSize: [15, 15],iconAnchor: [0, 0]}),title: stop.name, riseOnHover:true}).addTo(map);
                 }
-                // marker.bindPopup(stop.name+"</br><a href='#'onclick='alert(\""+stop.name+"\")'>From Here</a>");
-                marker.bindPopup(stop.name+"</br><a href='#' onclick='document.getElementById(\"startstop\").value=\""+stop.name+"\";$(\"#startstop\").change()'>From Here</a>"+"</br><a href='#' onclick='document.getElementById(\"endstop\").value=\""+stop.name+"\";$(\"#endstop\").change()'>To Here</a>");
-                YY._layerGroup.addLayer(marker);
+            // marker.bindPopup(stop.name+"</br><a href='#'onclick='alert(\""+stop.name+"\")'>From Here</a>");
+            marker.bindPopup(stop.name+"</br><a href='#' onclick='document.getElementById(\"startstop\").value=\""+stop.name+"\";$(\"#startstop\").change()'>From Here</a>"+"</br><a href='#' onclick='document.getElementById(\"endstop\").value=\""+stop.name+"\";$(\"#endstop\").change()'>To Here</a>");
+            YY._layerGroup.addLayer(marker);
             });
         });
 		map.removeLayer(YY._layerGroup);
@@ -341,15 +358,9 @@ YY.fromConfig("config.stable.json",
     {
         return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
     }
-
-        // // testing
-        // YY.test_map = map;
-        // var script = document.createElement('script');
-        // script.setAttribute('src', 'sample/test.js');
-        // document.body.appendChild(script);
 // suresh works
+// route information sidebar
     function routeinfopanel(routes){
-
         // // // console.log("routeinfo",routes);
         panel = document.getElementById("routename");
         c=0;
@@ -357,22 +368,23 @@ YY.fromConfig("config.stable.json",
             rdiv = document.createElement('div');
             rdiv.id = c++;
             rdiv.innerHTML = r.name;
-            // // // console.log('system.routes[rdiv.id]',system.routes[rdiv.id]);
+            // console.log('system.routes[rdiv.id]',system.routes[rdiv.id]);
             // rdiv.onclick= map.addLayer(YY.render_(r, routes[r.id], document.getElementById(rdiv)));
-            rdiv.setAttribute("onclick","YY.error_render(system,system.routes[this.id])");
+            rdiv.setAttribute("onclick","YY.single_route_render(system,system.routes[this.id]),this.style.background='blue'");
             panel.appendChild(rdiv);
-
-        }
-        )
+        })
     }
-    YY.error_render = function(system, route) {
-        // // // console.log('route',route);
-        
+    YY.single_route_render = function(system, route) {      
+        if(YY._routeGroup){
+            YY._routeGroup.clearLayers();
+        }
+        // this.style.background-color.Clear();
+
         if(YY._singlelayer){
             YY._singlelayer.clearLayers();
             // map.removeLayer(YY._singlelayer);
         }
-            
+           
         else
             {YY._singlelayer = new L.LayerGroup();}
         _.each(route.segments,function(seg, idx) {
@@ -384,34 +396,68 @@ YY.fromConfig("config.stable.json",
         route.stops.forEach(function(stop) {
             var marker;
             var ll = new L.LatLng(stop.lat, stop.lng);
-            marker = new L.CircleMarker(ll,
-                                            {color: 'green', opacity:0.2});
-
+            marker = new L.marker(ll, {icon:L.divIcon({html:stop.name})});
             // goodPop(stop.name + " (id:"+stop.id+")", ll, marker);
-
             YY._singlelayer.addLayer(marker);
         });
         map.addLayer(YY._singlelayer);
+        var rt_bd=new L.LatLngBounds();
+        rt_bd.extend(new L.LatLng(route.stops[0].lat,route.stops[0].lng));                      
+        rt_bd.extend(new L.LatLng(_.last(route.stops).lat,_.last(route.stops).lng));
+        map.fitBounds(rt_bd);
         // // console.log('Eroor render successful');
-        
         return YY._singlelayer;
-    };
-
-    function editRouteByIdx(idx) {
-        if(map) {
-            map.removeLayer(map);
-        }
-        map = YY.error_render(system, map);
-        map.addLayer(map);
-    }
-
-    
-   
+    };     
 // suresh works end
 </script>
-<div id="routename">
+
+<div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        ROUTING
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse in">
+      <div class="accordion-inner">
+        <div id="textboxes" >        
+            <b>Start</b> <input type="text" id="startstop" class="typeahead" data-provide="typeahead"/>
+            <b>End</b> <input type="text" id="endstop" class="typeahead" data-provide="typeahead" style="color:red" />
+            <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY._routeGroup.clearLayers();YY.render_(system,map);"> Clear </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+        Routes Of Kathmandu
+      </a>
+    </div>
+    <div id="collapseTwo" class="accordion-body collapse">
+      <div class="accordion-inner" >
+        <div id="routename" >
             <b> Routes of Kathmandu </b>
-           
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse3">
+        About Us
+      </a>
+    </div>
+    <div id="collapse3" class="accordion-body collapse" >
+      <div class="accordion-inner">
+        Designed By:
+        SUresh Shrestha
+      </div>
+    </div>
+  </div>
 </div>
+
+
+
 </body>
 </html>

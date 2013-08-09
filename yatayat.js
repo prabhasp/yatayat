@@ -113,6 +113,8 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
         var goalStop = system.routeDict[goalNode.routeID].stopDict[goalNode.stopID];
         var retval =  (goalStop.lat - stop.lat) * (goalStop.lat - stop.lat) +
             (goalStop.lng - stop.lng) * (goalStop.lng - stop.lng);
+        // var R=6370;
+        // var retval = Math.acos(Math.sin(stop.lat*Math.PI/180)*Math.sin(goalStop.lat*Math.PI/180) + Math.cos(stop.lat*Math.PI/180)*Math.cos(goalStop.lat*Math.PI/180) * Math.cos(goalStop.lng*Math.PI/180-stop.lng*Math.PI/180)) * R;
         return retval;
     };
     var set = function(dict, stopRouteObj, val) {
@@ -192,6 +194,8 @@ YY.System.prototype.neighborNodes = function(stopID, routeID) {
     _.each(thisRoute.stops, function(s, idx) {
         if (s.id === stopID) {
             if (idx < thisRoute.stops.length - 1) // not the end of list
+                // console.log(alert('hey'));
+                // console.log('thisRoute.stops.length',thisRoute.stops.length);
                 neighbors.push({routeID: thisRoute.id, distToNeighbor: sameRouteDistance, 
                     stopID: thisRoute.stops[idx + 1].id});
             /*else if (thisRoute.isCyclical) // end of list on cyclical route
