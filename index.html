@@ -127,7 +127,6 @@
                     _(gettingThereRoutes).each(function(r, idx) {
                         //inclusionDict[r.id] = true;
 
-
                         bounds.extend(new L.LatLng(r.stops[0].lat, r.stops[0].lng));
                         bounds.extend(new L.LatLng(_.last(r.stops).lat, _.last(r.stops).lng));
 
@@ -159,28 +158,39 @@
                         //show routed route
                         var startseg = [];
                         var endseg = [];
+                        var startsegid, endsegid;
 
                         //finding index of first and last segment in list of segment
                         _(r.segments).each(function(seg) {
                             // if(startseg.length==0){
                             _(seg.listOfLatLng).each(function(ll) {
                                 if (ll[0] == r.stops[0].lat && ll[1] == r.stops[0].lng) {
-                                    startseg = [r.segments.indexOf(seg), seg];
-                                    // console.log('start',startseg);
+                                    startseg.push(r.segments.indexOf(seg));
+                                    // segorder[r.segments.indexOf(seg)]="start";
+                                    console.log('start',startseg);
                                 }
                             })
                             // }
                             // if(endseg.length==0){
                             _(seg.listOfLatLng).each(function(ll) {
                                 if (ll[0] == _.last(r.stops).lat && ll[1] == _.last(r.stops).lng) {
-                                    endseg = [r.segments.indexOf(seg), seg];
-                                    // // console.log('end',endseg);
+                                    endseg.push(r.segments.indexOf(seg));
+                                    // segorder[r.segments.indexOf(seg)]="end";
+                                    console.log('end',endseg);
                                 }
                             })
-                            // }
+                            // console.log('segorder',segorder);
 
                         });
 
+
+                        if(startseg[0]<endseg[0]){
+                            startsegid=startseg[startseg.length-1];
+                            endsegid=endseg[0];
+                        }else{
+                            startsegid=startseg[0];
+                            endsegid=endseg[endseg.length-1];
+                        }
                         function distanc(lat1, lon1, lat2, lon2) {
                             var R = 6371000; // m
                             // // console.log('lat',lat1);
@@ -213,7 +223,7 @@
                         var eachroutestyleoption = defaultOptions.route();
 
                         dist = 0;
-                        for (segid = Math.min(startseg[0], endseg[0]); segid <= Math.max(startseg[0], endseg[0]); segid++) {
+                        for(segid = Math.min(startsegid,endsegid);segid <= Math.max(startsegid,endsegid);segid++){
                             seg = r.segments[segid];
                             // console.log("segid",segid);
                             var segMPL = new L.Polyline(seg.listOfLatLng, eachroutestyleoption);
@@ -224,16 +234,12 @@
                             for (i = 0; i < (seg.listOfLatLng.length) - 1; i++) {
                                 dist += distanc(seg.listOfLatLng[i][0], seg.listOfLatLng[i][1], seg.listOfLatLng[i + 1][0], seg.listOfLatLng[i + 1][1]);
                             }
-
-
                             // // console.log('routed_route',routed_route);
                             // console.log("dist",dist);
-
                             map.removeLayer(YY._routeGroup);
-                            map.addLayer(YY._routeGroup);
-
-                            // // console.log('counter',++counter);
+                            map.addLayer(YY._routeGroup);   
                         }
+                        console.log('counter',++counter);
                         //sures
 
                         outputHTML += "Get on " + toTitleCase(r.transport) + " " + r.ref + " (" + r.name + ") at " + r.stops[0].name + " and ride till " + _.last(r.stops).name + "with distance of " + Math.round(dist) + " meters" + "<br/>";
@@ -242,8 +248,6 @@
                     );
                     map.fitBounds(bounds);
                     //sures
-
-
 
                     YY.render_(system, map, inclusionDict, {
                         route: {
@@ -285,9 +289,9 @@
         map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 
         //auto init routing at start
-        // document.getElementById("startstop").value="Kamal Binayak";
-        // document.getElementById("endstop").value="Byasi Stop";
-        // $('#endstop').change();
+        document.getElementById("startstop").value="Ratna Park";
+        document.getElementById("endstop").value="Balaju";
+        $('#endstop').change();
         console.log("script end", system);
 
     });
