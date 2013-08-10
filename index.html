@@ -6,19 +6,11 @@
         </title>
         <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
         <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="lib/yatayat.css" />
         <!--[if lte IE 8]>
             <link rel="stylesheet" href="lib/leaflet/leaflet.ie.css" />
         <![endif]-->
-        <style>
-            body { margin:0; } #accordion2 { position: absolute; top: 0; right: 0;
-            height: 100%; background-color: ; color: #00ff00; width: 20%; overflow:
-            auto; font-size: 15; } #Title { position: absolute; top: 20 px; left: 25%;
-            height: 30; background-color: rgb(53, 240, 240); color: black; width: 465;
-            z-index: 1000; text-align: center; font-size: 25; border-radius: 20; }
-            button[type="radio"]{ width: 100%; color:#050; font: bold 84% 'trebuchet
-            ms',helvetica,sans-serif; background-color:#fed; border:1px solid; border-color:
-            #696 #363 #363 #696; }
-        </style>
+        
         <script src="lib/jquery-1.7.2.min.js">
         </script>
         <script src="lib/underscore-min.js">
@@ -37,6 +29,7 @@
         </script>
         <script src="yatayat.js">
         </script>
+        <script src="lib/routeinfopanel.js"></script>
     </head>
     
     <body>
@@ -271,7 +264,7 @@
 
         // suresh work
         routeinfopanel(system.routes);
-        $('.nav-tabs').button();
+        // $('.nav-tabs').button();
         // suresh work end
         if (YY.TILE_SOURCE) {
             if (YY.WAX) {
@@ -289,9 +282,9 @@
         map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 
         //auto init routing at start
-        document.getElementById("startstop").value="Ratna Park";
-        document.getElementById("endstop").value="Balaju";
-        $('#endstop').change();
+        // document.getElementById("startstop").value="Ratna Park";
+        // document.getElementById("endstop").value="Balaju";
+        // $('#endstop').change();
         console.log("script end", system);
 
     });
@@ -389,24 +382,7 @@
         });
     }
     // suresh works
-    // route information sidebar
 
-    function routeinfopanel(routes) {
-        // // // console.log("routeinfo",routes);
-        panel = document.getElementById("routename");
-        rdiv = document.createElement('div');
-        panel.appendChild(rdiv);
-        c = 0;
-        _(routes).each(function(r) {
-            button = document.createElement('button');
-            button.type = 'radio';
-            button.name = 'options';
-            button.id = c++;
-            button.innerHTML = r.name;
-            button.setAttribute("onclick", "YY.single_route_render(system,system.routes[this.id])");
-            rdiv.appendChild(button);
-        })
-    }
     // suresh works end
         </script>
         <div class="accordion" id="accordion2">
@@ -437,18 +413,12 @@
             <div class="accordion-group">
                 <div class="accordion-heading">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
-                    href="#collapseTwo">
-
-        Routes Of Kathmandu
-
-      </a>
+                    href="#collapseTwo">Routes Of Kathmandu
+                </a>
                 </div>
                 <div id="collapseTwo" class="accordion-body collapse">
                     <div class="accordion-inner">
-                        <b>
-                            Routes of Kathmandu
-                        </b>
-                        <div id="routename">
+                        <div id="routename" >
                         </div>
                     </div>
                 </div>
