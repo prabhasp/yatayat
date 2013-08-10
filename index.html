@@ -2,6 +2,7 @@
 <head>
     <title> Kathmandu Public Transport </title>
 <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+<link rel="stylesheet" href="lib/leaflet/Control.OSMGeocoder.css"/>
 <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
 <!--[if lte IE 8]>
     <link rel="stylesheet" href="lib/leaflet/leaflet.ie.css" />
@@ -34,6 +35,16 @@ text-align: center;
 font-size: 25;
 border-radius: 20;
 }
+.leaflet-control-geocoder {
+    box-shadow: 0 1px 7px #999;
+    background: #f8f8f9;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    left: 35;
+    height: 50;
+    position: absolute;
+}
 
 </style>
 <script src="lib/jquery-1.7.2.min.js"></script>
@@ -41,6 +52,7 @@ border-radius: 20;
 <script src="lib/leaflet/leaflet.js"></script>
 <script src="lib/leaflet/spin.min.js"></script>
 <script src="lib/leaflet/leaflet.spin.js"></script>
+<script src="lib/leaflet/Control.OSMGeocoder.js"></script>
 <script src="lib/wax.leaf.min.js"></script>
 <script src="lib/kdtree/src/web/kdTree.js"></script>
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
@@ -72,14 +84,13 @@ border-radius: 20;
         <div class="alert" id="routedisplay" style="background:white;position:absolute;top:40;left:60;z-index:999">
         </div>
         <div id="publicTransportMap" style="width:80%; height: 100%">Loading ...</div>
-        <div class="modal hide" id="myModal"> 
+        <!-- <div class="modal hide" id="myModal"> 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">X</button>
             </div>
             <br/>
             <iframe src="https://docs.google.com/spreadsheet/embeddedform?formkey=dFdZeG9PYnVpY1FBMk4zVjBDaFNua1E6MQ" width="700" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
-        // suresh work
-        </div> 
+        </div>  -->
 
 
 
@@ -89,7 +100,9 @@ border-radius: 20;
     $('#routedisplay').hide()
     // initialize the map
     var map = new L.Map('publicTransportMap');
-    var LC = new L.Control.Layers().addTo(map);
+    // var LC = new L.Control.Layers().addTo(map);
+    var osmGeocoder = new L.Control.OSMGeocoder({position:'topleft'});
+    map.addControl(osmGeocoder);
 
     //var ktmBB = "85.2885,27.6839,85.3368,27.7299";
     var system;
@@ -100,7 +113,7 @@ border-radius: 20;
 
 YY.fromConfig("config.stable.json", 
     function(sys) {
-        debugger;
+        // debugger;
         system = sys;
         // // console.log(system);
     	YY.render_(system, 
@@ -187,19 +200,7 @@ YY.fromConfig("config.stable.json",
                             // }
                             
                         });
-                    
-                        function distanc(lat1,lon1,lat2,lon2){
-                            var R = 6371000; // m
-                            // // console.log('lat',lat1);
-                            // var lttt=lat1*(Math.PI/180);
-                            var d = Math.acos(Math.sin(lat1*Math.PI/180)*Math.sin(lat2*Math.PI/180) + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180) * Math.cos(lon2*Math.PI/180-lon1*Math.PI/180)) * R;
-                            // // console.log('distance',d);
-                            return d;
-                        }
-
-                        //for disatnce
                         //index found and saved as 1st element in startseg and endseg
-                        // alert();
                         //actually drawing the route
                         var defaultOptions = 
                         {"route" : function() { return {color: get_random_color(), opacity: 1, weight: 10}; },
@@ -207,10 +208,10 @@ YY.fromConfig("config.stable.json",
                          // icon: L.divIcon({html:stop.name})
                         };
 
-                         var eachroutestyleoption = defaultOptions.route();
+                        var eachroutestyleoption = defaultOptions.route();
 
                         dist=0;
-                        for(segid = Math.min(startseg[0],endseg[0]);segid <= Math.max(startseg[0],endseg[0]);segid++)
+                        for(segid = Math.min(startseg[0],endseg[0]);segid<= Math.max(startseg[0],endseg[0]);segid++)
                         {
                             seg = r.segments[segid];
                             // console.log("segid",segid);
@@ -234,17 +235,13 @@ YY.fromConfig("config.stable.json",
                             // // console.log('counter',++counter);
                         }
                     //sures
-
                         outputHTML += "Get on " + toTitleCase(r.transport) + " " + 
                             r.ref + " (" + r.name + ") at " + r.stops[0].name + 
                             " and ride till " + _.last(r.stops).name + "with distance of "+ Math.round(dist)+" meters"+ "<br/>";
-                    }
-                    
+                    }                    
                 );
                 map.fitBounds(bounds);
-                //sures
-                
-                    
+                //sures                  
 
                 YY.render_(system, map, inclusionDict,
                             {route: {color: '#378AAD', opacity: 1, weight: 1}
@@ -279,7 +276,6 @@ YY.fromConfig("config.stable.json",
                 map.addLayer(tiles);
             }            
         }
-
         map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 
         //auto init routing at start
@@ -299,116 +295,12 @@ YY.fromConfig("config.stable.json",
     return color;
     }
 
-    YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOverrideOptions) {
-        //TODO: Handle overrideOptions
-
-        if (!YY._layerGroup) { YY._layerGroup = new L.LayerGroup(); }
-        YY._layerGroup.clearLayers();
-        if (!YY._routeGroup) { YY._routeGroup = new L.LayerGroup(); }
-        // YY._routeGroup.clearLayers();
-        
-        var filteredSystem = system.prune(includeIDDict);
-        var defaultOptions = 
-            {"route" : function() { return {color: 'yellow', opacity: 1, weight: 6}; },
-             "stop"  : {color: '#378AAD', fillOpacity: 0.5, radius: 5}};
-        // render the route as a multi-polyline
-        _(filteredSystem.routes).each(function(route) {
-            route.segments.forEach(function(seg) {
-                var segMPL = new L.Polyline(
-                        _.map(seg.listOfLatLng, function(LL) {
-                            return new L.LatLng(LL[0], LL[1]);
-                        }),
-                    (leafletBaseOptions && leafletBaseOptions.route) || 
-                        defaultOptions.route());
-                // segMPL.bindPopup(route.ref + " : " + route.name);
-                YY._layerGroup.addLayer(segMPL);
-            });
-        });
-        // render the stops as circle markers 
-        _(filteredSystem.routes).each(function(route) { 
-            route.stops.forEach(function(stop) {
-                if (includeIDDict && !(stop.id in includeIDDict)) return;
-                var Lll = new L.LatLng(stop.lat, stop.lng);
-                var marker;
-                if (leafletOverrideOptions && (stop.id in leafletOverrideOptions)) {
-                    marker = new L.marker(Lll, {icon:L.divIcon({html:stop.name})});
-                    // marker = new L.CircleMarker(Lll,
-                    //    leafletOverrideOptions[stop.id] || leafletBaseOptions.stop);
-                    // marker = new L.marker(Lll,
-                       // {icon: L.icon({iconUrl:'bus.jpg',iconSize: [20, 20],iconAnchor: [0, 0]})}).addTo(map);
-                } 
-                else {
-                    // marker = new L.marker(Lll, {icon:L.divIcon({html:stop.name})}).addTo(map);
-                     // marker = new L.CircleMarker(Lll,
-                     //     (leafletBaseOptions && leafletBaseOptions.stop) ||
-                     //         defaultOptions.stop);
-                    marker = new L.marker(Lll,
-                       {icon: L.icon({iconUrl:'bus.jpg',iconSize: [15, 15],iconAnchor: [0, 0]}),title: stop.name, riseOnHover:true}).addTo(map);
-                }
-            // marker.bindPopup(stop.name+"</br><a href='#'onclick='alert(\""+stop.name+"\")'>From Here</a>");
-            marker.bindPopup(stop.name+"</br><a href='#' onclick='document.getElementById(\"startstop\").value=\""+stop.name+"\";$(\"#startstop\").change()'>From Here</a>"+"</br><a href='#' onclick='document.getElementById(\"endstop\").value=\""+stop.name+"\";$(\"#endstop\").change()'>To Here</a>");
-            YY._layerGroup.addLayer(marker);
-            });
-        });
-		map.removeLayer(YY._layerGroup);
-        map.addLayer(YY._layerGroup);
-    };
+    
                                 
     function toTitleCase(str)
     {
         return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
     }
-// suresh works
-// route information sidebar
-    function routeinfopanel(routes){
-        // // // console.log("routeinfo",routes);
-        panel = document.getElementById("routename");
-        c=0;
-        _(routes).each(function(r){
-            rdiv = document.createElement('div');
-            rdiv.id = c++;
-            rdiv.innerHTML = r.name;
-            // console.log('system.routes[rdiv.id]',system.routes[rdiv.id]);
-            // rdiv.onclick= map.addLayer(YY.render_(r, routes[r.id], document.getElementById(rdiv)));
-            rdiv.setAttribute("onclick","YY.single_route_render(system,system.routes[this.id]),this.style.background='blue'");
-            panel.appendChild(rdiv);
-        })
-    }
-    YY.single_route_render = function(system, route) {      
-        if(YY._routeGroup){
-            YY._routeGroup.clearLayers();
-        }
-        // this.style.background-color.Clear();
-
-        if(YY._singlelayer){
-            YY._singlelayer.clearLayers();
-            // map.removeLayer(YY._singlelayer);
-        }
-           
-        else
-            {YY._singlelayer = new L.LayerGroup();}
-        _.each(route.segments,function(seg, idx) {
-            var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
-            var poly = new L.Polyline(latlngs, {color: 'green',weight:7});
-            YY._singlelayer.addLayer(poly);
-            // goodPop("seg: "+seg.id, latlngs[Math.floor(latlngs.length / 2)], poly);
-        });
-        route.stops.forEach(function(stop) {
-            var marker;
-            var ll = new L.LatLng(stop.lat, stop.lng);
-            marker = new L.marker(ll, {icon:L.divIcon({html:stop.name})});
-            // goodPop(stop.name + " (id:"+stop.id+")", ll, marker);
-            YY._singlelayer.addLayer(marker);
-        });
-        map.addLayer(YY._singlelayer);
-        var rt_bd=new L.LatLngBounds();
-        rt_bd.extend(new L.LatLng(route.stops[0].lat,route.stops[0].lng));                      
-        rt_bd.extend(new L.LatLng(_.last(route.stops).lat,_.last(route.stops).lng));
-        map.fitBounds(rt_bd);
-        // // console.log('Eroor render successful');
-        return YY._singlelayer;
-    };     
-// suresh works end
 </script>
 
 <div class="accordion" id="accordion2">
@@ -452,6 +344,28 @@ YY.fromConfig("config.stable.json",
       <div class="accordion-inner">
         Designed By:
         SUresh Shrestha
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse4">
+        HELP
+      </a>
+    </div>
+    <div id="collapse4" class="accordion-body collapse" >
+      <div class="accordion-inner">
+        <h2>For ROUTING</h2>
+        <h4>One Option :</h4>
+        <p> You can generally write the start stop name and then end stop name.This gives you the route from the start point to end point through the public transport route available. It can be clearly viewed on the map along with the different stops and its name in going through the route.</p>
+        <h4>Next Option :</h4>
+        <p> You can directly click at the stop and choose it as start stop and the required end stop in the map which can also show the route on map. You can also set the another start or end stop directly on the map.</p>
+        <h2>For Specific Route Viewing</h2>
+        <p> You can first click on the link ROutes Of Kathmandu. Then click on the respective route which you want to see. You can view it on the map with the selected route zoomed in.</p>
+        <p> You can again click on the next route to see the next route.</p>
+        <h2> For Finding Location</h2>
+        <p> You can search the place by clicking the search bar on the top right corner next to the zoom bar.</p>
+        <p> There you can write the place of the name to search.</p>
       </div>
     </div>
   </div>
