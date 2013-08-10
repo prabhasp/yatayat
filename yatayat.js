@@ -510,6 +510,9 @@ YY.single_route_render = function(system, route) {
         if(YY._routeGroup){
             YY._routeGroup.clearLayers();
         }
+        if(YY._layerGroup){
+            YY._layerGroup.clearLayers();
+        }
         // this.style.background-color.Clear();
 
         if(YY._singlelayer){
@@ -517,8 +520,9 @@ YY.single_route_render = function(system, route) {
             // map.removeLayer(YY._singlelayer);
         }
            
-        else
-            {YY._singlelayer = new L.LayerGroup();}
+        else{
+            YY._singlelayer = new L.LayerGroup();
+        }
         _.each(route.segments,function(seg, idx) {
             var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
             var poly = new L.Polyline(latlngs, {color: 'green',weight:7});

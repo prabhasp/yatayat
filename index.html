@@ -15,7 +15,7 @@
             auto; font-size: 15; } #Title { position: absolute; top: 20 px; left: 25%;
             height: 30; background-color: rgb(53, 240, 240); color: black; width: 465;
             z-index: 1000; text-align: center; font-size: 25; border-radius: 20; }
-            button[type="radio"]{ width: 100%; color:#050; font: bold 84% 'trebuchet
+            label{ width: 100%; color:#050; font: bold 84% 'trebuchet
             ms',helvetica,sans-serif; background-color:#fed; border:1px solid; border-color:
             #696 #363 #363 #696; }
         </style>
@@ -37,6 +37,7 @@
         </script>
         <script src="yatayat.js">
         </script>
+        <script src="lib/routeinfopanel.js"></script>
     </head>
     
     <body>
@@ -271,7 +272,7 @@
 
         // suresh work
         routeinfopanel(system.routes);
-        $('.nav-tabs').button();
+        // $('.nav-tabs').button();
         // suresh work end
         if (YY.TILE_SOURCE) {
             if (YY.WAX) {
@@ -289,9 +290,9 @@
         map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 
         //auto init routing at start
-        document.getElementById("startstop").value="Ratna Park";
-        document.getElementById("endstop").value="Balaju";
-        $('#endstop').change();
+        // document.getElementById("startstop").value="Ratna Park";
+        // document.getElementById("endstop").value="Balaju";
+        // $('#endstop').change();
         console.log("script end", system);
 
     });
@@ -389,24 +390,7 @@
         });
     }
     // suresh works
-    // route information sidebar
 
-    function routeinfopanel(routes) {
-        // // // console.log("routeinfo",routes);
-        panel = document.getElementById("routename");
-        rdiv = document.createElement('div');
-        panel.appendChild(rdiv);
-        c = 0;
-        _(routes).each(function(r) {
-            button = document.createElement('button');
-            button.type = 'radio';
-            button.name = 'options';
-            button.id = c++;
-            button.innerHTML = r.name;
-            button.setAttribute("onclick", "YY.single_route_render(system,system.routes[this.id])");
-            rdiv.appendChild(button);
-        })
-    }
     // suresh works end
         </script>
         <div class="accordion" id="accordion2">
@@ -448,7 +432,7 @@
                         <b>
                             Routes of Kathmandu
                         </b>
-                        <div id="routename">
+                        <div id="routename" >
                         </div>
                     </div>
                 </div>
