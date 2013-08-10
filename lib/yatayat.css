@@ -43,5 +43,14 @@ input[type="radio"]{
 	left:0px;
 	top:0px;
 }
+.leaflet-control-geocoder {
+	box-shadow: 0 1px 7px #999;
+	background: #f8f8f9;
+	-moz-border-radius: 8px;
+	-webkit-radius: 8px;
+	left: 35;
+	height: 50;
+	position: absolute;
+}
 </style>
 
