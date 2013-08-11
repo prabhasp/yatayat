@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-08-09T23:59:02Z"/>
+<meta osm_base="2013-08-10T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -3132,6 +3132,21 @@
   <node id="1496652924" lat="27.6904897" lon="85.3176659"/>
   <node id="1496686322" lat="27.7282352" lon="85.3053259"/>
   <node id="1496686403" lat="27.7285437" lon="85.3053449"/>
+  <node id="1497194461" lat="27.7159837" lon="85.2835820">
+    <tag k="highway" v="bus_stop"/>
+    <tag k="name" v="Swayambu stop"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
+  <node id="1497194463" lat="27.7074445" lon="85.2825593">
+    <tag k="highway" v="bus_stop"/>
+    <tag k="name" v="Sitapaila stop;Sitapaila Stop"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
+  <node id="1497194467" lat="27.7248783" lon="85.2978089">
+    <tag k="highway" v="bus_stop"/>
+    <tag k="name" v="Banasthali Stop"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <node id="1497531299" lat="27.6689723" lon="85.3062932">
     <tag k="name" v="nakhu Stop"/>
     <tag k="public_transport" v="stop_position"/>
@@ -5637,10 +5652,6 @@
   </node>
   <node id="2396022576" lat="27.7192107" lon="85.3310820">
     <tag k="name" v="bhatbhatini stop"/>
-    <tag k="public_transport" v="stop_position"/>
-  </node>
-  <node id="2396102539" lat="27.7074445" lon="85.2825593">
-    <tag k="name" v="Sitapaila Stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="2396102540" lat="27.7275221" lon="85.3456220">
@@ -10135,7 +10146,7 @@
     <nd ref="1954481889"/>
     <nd ref="1960744505"/>
     <nd ref="1989319135"/>
-    <nd ref="2396102539"/>
+    <nd ref="1497194463"/>
     <tag k="bicycle" v="yes"/>
     <tag k="cycleway" v="no"/>
     <tag k="foot" v="designated"/>
@@ -13146,13 +13157,14 @@
     <tag k="watch:80n" v="Katmandu"/>
   </way>
   <way id="231202418">
-    <nd ref="2396102539"/>
+    <nd ref="1497194463"/>
     <nd ref="2218658284"/>
     <nd ref="2218658286"/>
     <nd ref="1968470510"/>
     <nd ref="1968470450"/>
     <nd ref="1968470516"/>
     <nd ref="1968470515"/>
+    <nd ref="1497194461"/>
     <nd ref="296344440"/>
     <tag k="bicycle" v="yes"/>
     <tag k="cycleway" v="no"/>
@@ -14322,6 +14334,7 @@
   </way>
   <way id="232096439">
     <nd ref="728167845"/>
+    <nd ref="1497194467"/>
     <nd ref="31303848"/>
     <nd ref="31303847"/>
     <nd ref="31303845"/>
@@ -16473,7 +16486,6 @@
     <member type="node" ref="1278025470" role=""/>
     <member type="node" ref="1497194467" role=""/>
     <member type="node" ref="1659430258" role=""/>
-    <member type="node" ref="1497194462" role=""/>
     <member type="node" ref="313544725" role=""/>
     <member type="node" ref="360464983" role=""/>
     <member type="node" ref="764927442" role=""/>
@@ -19146,7 +19158,7 @@
     <member type="way" ref="172485293" role=""/>
     <member type="way" ref="184872593" role=""/>
     <member type="way" ref="184872594" role=""/>
-    <member type="node" ref="2396102539" role="start"/>
+    <member type="node" ref="1497194463" role="start"/>
     <member type="node" ref="2396102543" role=""/>
     <member type="node" ref="2396102541" role=""/>
     <member type="node" ref="1659430258" role=""/>
@@ -19176,7 +19188,7 @@
     <member type="node" ref="2376160425" role=""/>
     <member type="node" ref="360464983" role=""/>
     <member type="node" ref="313544725" role=""/>
-    <member type="node" ref="2396102539" role="end"/>
+    <member type="node" ref="1497194463" role="end"/>
     <tag k="direction" v="cyclical"/>
     <tag k="name" v="Swyambhu-Chakrapath parikrama"/>
     <tag k="route" v="swyambhu yatayt"/>
