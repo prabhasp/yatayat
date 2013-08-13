@@ -39,7 +39,6 @@
                 
         </script>
         <script type="text/javascript" src="lib/leaflet/Control.OSMGeocoder.js">
-                
         </script>
         <script src="lib/routeinfopanel.js">
                 
@@ -47,38 +46,43 @@
     </head>
     
     <body>
-        <div id="Title">
-            Kathmandu Valley Public Transport App
-        </div>
         <div class="alert" id="routedisplay" style="background:white;position:absolute;top:40;left:60;z-index:999">
         </div>
-        <div id="publicTransportMap" style="width:80%; height: 100%">
+        <div id="textboxes" style="position:absolute">
+            <b>
+                Start
+            </b>
+            <input type="text" id="startstop" class="typeahead" data-provide="typeahead"
+            />
+            <b>
+                End
+            </b>
+            <input type="text" id="endstop" class="typeahead" data-provide="typeahead"
+            style="color:red" />
+            <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY._routeGroup.clearLayers();YY.render_(system,map);"> Clear </a>
+        </div>
+        <div id="publicTransportMap" style="width:80%; height: 100%; position:absolute; top:0">
             Loading ...
         </div>
-        <div class="modal hide" id="myModal">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    X
-                </button>
-            </div>
-            <br/>
-            <iframe src="https://docs.google.com/spreadsheet/embeddedform?formkey=dFdZeG9PYnVpY1FBMk4zVjBDaFNua1E6MQ"
-            width="700" height="500" frameborder="0" marginheight="0" marginwidth="0">
-                Loading...
-            </iframe>
-            // suresh work
+        <div id="routing_log" style="width:20%; height: 100%; position:absolute; left:80%; overflow:auto; top:0">
+            <h3>Routing Log</h3>
         </div>
         <script type="text/javascript" language="javascript">
-                    // UI HACK
+            
+            ln=0;
+            z = function(message){
+                div = document.getElementById('routing_log');
+                div.innerHTML += '<br>'+message;
+            }
             $('#textboxes').hide();
             $('#routedisplay').hide()
             // initialize the map
             var map = new L.Map('publicTransportMap');
             // var LC = new L.Control.Layers().addTo(map);
-            var osmGeocoder = new L.Control.OSMGeocoder({
-                position: 'topleft'
-            });
-            map.addControl(osmGeocoder);
+            // var osmGeocoder = new L.Control.OSMGeocoder({
+            //     position: 'topleft'
+            // });
+            // map.addControl(osmGeocoder);
 
             //var ktmBB = "85.2885,27.6839,85.3368,27.7299";
             var system;
@@ -170,7 +174,7 @@
                                         if (ll[0] == r.stops[0].lat && ll[1] == r.stops[0].lng) {
                                             startseg.push(r.segments.indexOf(seg));
                                             // segorder[r.segments.indexOf(seg)]="start";
-                                            console.log('start', startseg);
+                                            // console.log('start', startseg);
                                         }
                                     })
                                     // }
@@ -179,7 +183,7 @@
                                         if (ll[0] == _.last(r.stops).lat && ll[1] == _.last(r.stops).lng) {
                                             endseg.push(r.segments.indexOf(seg));
                                             // segorder[r.segments.indexOf(seg)]="end";
-                                            console.log('end', endseg);
+                                            // console.log('end', endseg);
                                         }
                                     })
                                     // console.log('segorder',segorder);
@@ -229,7 +233,7 @@
                                     map.removeLayer(YY._routeGroup);
                                     map.addLayer(YY._routeGroup);
                                 }
-                                console.log('counter', ++counter);
+                                // console.log('counter', ++counter);
                                 //sures
 
                                 outputHTML += "Get on " + toTitleCase(r.transport) + " " + r.ref + " (" + r.name + ") at " + r.stops[0].name + " and ride till " + _.last(r.stops).name + "with distance of " + Math.round(dist) + " meters" + "<br/>";
@@ -260,7 +264,7 @@
                 });
 
                 // suresh work
-                routeinfopanel(system.routes);
+                // routeinfopanel(system.routes);
                 // $('.nav-tabs').button();
                 // suresh work end
                 if (YY.TILE_SOURCE) {
@@ -278,9 +282,9 @@
                 map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 
                 //auto init routing at start
-                // document.getElementById("startstop").value="Ratna Park";
-                // document.getElementById("endstop").value="Balaju";
-                // $('#endstop').change();
+                document.getElementById("startstop").value="Byasi Stop";
+                document.getElementById("endstop").value="Mahakali Stop";
+                $('#endstop').change();
                 console.log("script end", system);
 
             });
@@ -300,6 +304,7 @@
                 });
             }
         </script>
+        <!-- 
         <div class="accordion" id="accordion2">
             <div class="accordion-group">
                 <div class="accordion-heading">
@@ -308,19 +313,7 @@
                 </div>
                 <div id="collapseOne" class="accordion-body collapse in">
                     <div class="accordion-inner">
-                        <div id="textboxes">
-                            <b>
-                                Start
-                            </b>
-                            <input type="text" id="startstop" class="typeahead" data-provide="typeahead"
-                            />
-                            <b>
-                                End
-                            </b>
-                            <input type="text" id="endstop" class="typeahead" data-provide="typeahead"
-                            style="color:red" />
-                            <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY._routeGroup.clearLayers();YY.render_(system,map);"> Clear </a>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -412,7 +405,7 @@
             </div>
         </div>
         </div>
-        </div>
+        </div> -->
     </body>
 
 </html>
