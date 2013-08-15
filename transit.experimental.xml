@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-08-13T23:59:01Z"/>
+<meta osm_base="2013-08-14T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -17516,6 +17516,31 @@
     <member type="way" ref="171609948" role=""/>
     <member type="node" ref="558555620" role="start"/>
     <member type="node" ref="1274184084" role="end"/>
+    <member type="node" ref="1805062970" role=""/>
+    <member type="node" ref="1805062851" role=""/>
+    <member type="node" ref="1805074834" role=""/>
+    <member type="node" ref="1805087604" role=""/>
+    <member type="node" ref="1805087571" role=""/>
+    <member type="node" ref="1872733915" role=""/>
+    <member type="node" ref="1817037493" role=""/>
+    <member type="node" ref="31228768" role=""/>
+    <member type="node" ref="2377002167" role=""/>
+    <member type="node" ref="2051114289" role=""/>
+    <member type="node" ref="2051114288" role=""/>
+    <member type="node" ref="2051114297" role=""/>
+    <member type="node" ref="2051114287" role=""/>
+    <member type="node" ref="2051114286" role=""/>
+    <member type="node" ref="2336968997" role=""/>
+    <member type="node" ref="2080972360" role=""/>
+    <member type="node" ref="2080972348" role=""/>
+    <member type="node" ref="2336968995" role=""/>
+    <member type="node" ref="2080972328" role=""/>
+    <member type="node" ref="457278653" role=""/>
+    <member type="node" ref="1990735122" role=""/>
+    <member type="node" ref="2054092036" role=""/>
+    <member type="node" ref="1974321638" role=""/>
+    <member type="node" ref="1446092259" role=""/>
+    <member type="node" ref="1767431974" role=""/>
     <tag k="name" v="Panauti - Ratnapark"/>
     <tag k="ref" v="11"/>
     <tag k="route" v="bus"/>
@@ -17784,6 +17809,34 @@
     <member type="way" ref="224837485" role=""/>
     <member type="node" ref="296340520" role="start"/>
     <member type="node" ref="1274184084" role="end"/>
+    <member type="node" ref="1830372866" role=""/>
+    <member type="node" ref="1767431974" role=""/>
+    <member type="node" ref="1446092259" role=""/>
+    <member type="node" ref="1974321638" role=""/>
+    <member type="node" ref="2054092036" role=""/>
+    <member type="node" ref="1990735122" role=""/>
+    <member type="node" ref="457278653" role=""/>
+    <member type="node" ref="2080972328" role=""/>
+    <member type="node" ref="2336968995" role=""/>
+    <member type="node" ref="2080972348" role=""/>
+    <member type="node" ref="2080972360" role=""/>
+    <member type="node" ref="2336968997" role=""/>
+    <member type="node" ref="2051114286" role=""/>
+    <member type="node" ref="2051114287" role=""/>
+    <member type="node" ref="2051114297" role=""/>
+    <member type="node" ref="2051114288" role=""/>
+    <member type="node" ref="2051114289" role=""/>
+    <member type="node" ref="2051114285" role=""/>
+    <member type="node" ref="2377002167" role=""/>
+    <member type="node" ref="31228768" role=""/>
+    <member type="node" ref="1817037493" role=""/>
+    <member type="node" ref="1817037501" role=""/>
+    <member type="node" ref="1872733915" role=""/>
+    <member type="node" ref="1805087571" role=""/>
+    <member type="node" ref="1805087604" role=""/>
+    <member type="node" ref="1805074834" role=""/>
+    <member type="node" ref="1805062851" role=""/>
+    <member type="node" ref="1805062970" role=""/>
     <tag k="name" v="Ratnapark - Dhulikhel"/>
     <tag k="ref" v="12"/>
     <tag k="route" v="bus"/>
