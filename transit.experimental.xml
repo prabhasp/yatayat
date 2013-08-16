@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-08-14T23:59:02Z"/>
+<meta osm_base="2013-08-15T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -606,12 +606,12 @@
     <tag k="name" v="Gairidhara"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="268307745" lat="27.7176370" lon="85.3285333"/>
+  <node id="268307745" lat="27.7176309" lon="85.3285316"/>
   <node id="268307757" lat="27.7172017" lon="85.3304487">
     <tag k="name" v="Tangal"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="268307761" lat="27.7166335" lon="85.3302144">
+  <node id="268307761" lat="27.7165819" lon="85.3302003">
     <tag k="name" v="Police Headquarter Stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
@@ -4361,7 +4361,7 @@
   <node id="1950483594" lat="27.6910004" lon="85.3273334"/>
   <node id="1950483609" lat="27.6925898" lon="85.3288222"/>
   <node id="1950483614" lat="27.6929391" lon="85.3280988"/>
-  <node id="1950516719" lat="27.7173607" lon="85.3296003"/>
+  <node id="1950516719" lat="27.7173898" lon="85.3296086"/>
   <node id="1952134574" lat="27.7232923" lon="85.3069560"/>
   <node id="1952134595" lat="27.7254319" lon="85.3054661"/>
   <node id="1952134601" lat="27.7269088" lon="85.3046680"/>
@@ -5204,7 +5204,7 @@
   <node id="2195301296" lat="27.6997278" lon="85.3275941"/>
   <node id="2195301298" lat="27.6998001" lon="85.3272895"/>
   <node id="2195301299" lat="27.6998298" lon="85.3271641"/>
-  <node id="2195395579" lat="27.7166451" lon="85.3302175"/>
+  <node id="2195395579" lat="27.7166446" lon="85.3302190"/>
   <node id="2195406408" lat="27.6247643" lon="85.5487025"/>
   <node id="2195546612" lat="27.6277006" lon="85.5342420"/>
   <node id="2201067765" lat="27.7618182" lon="85.3523731"/>
