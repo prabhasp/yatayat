@@ -463,6 +463,7 @@ YY.fromOSM = function (overpassXML) {
         // At this point, myNodes = ordered list of nodes in this segment, myStops = ordered list of stops
         segments[$w.attr('id')] = new YY.Segment($w.attr('id'), myNodes, tagToObj($w.find('tag')), myStops);
     });
+    /*step 3*/
     var routes = _.map($overpassXML.find('relation'), function(r) {
         var $r = $(r);
         var mySegments = [];
