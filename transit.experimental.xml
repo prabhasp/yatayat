@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-08-15T23:59:02Z"/>
+<meta osm_base="2013-08-16T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -409,7 +409,10 @@
   <node id="36673497" lat="27.6476775" lon="85.4654521"/>
   <node id="36673500" lat="27.6470721" lon="85.4654708"/>
   <node id="36673501" lat="27.6468856" lon="85.4655583"/>
-  <node id="36673505" lat="27.6463985" lon="85.4658898"/>
+  <node id="36673505" lat="27.6463985" lon="85.4658898">
+    <tag k="name" v="Kathmandu Fun Valley"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <node id="36673506" lat="27.6461946" lon="85.4659257"/>
   <node id="36673513" lat="27.6443170" lon="85.4653340"/>
   <node id="36673514" lat="27.6441269" lon="85.4653340"/>
@@ -2113,10 +2116,7 @@
   <node id="558555685" lat="27.6280581" lon="85.5232722"/>
   <node id="558555686" lat="27.6286504" lon="85.5234963"/>
   <node id="558555687" lat="27.6292746" lon="85.5237130"/>
-  <node id="558555688" lat="27.6300471" lon="85.5239850">
-    <tag k="name" v="Banepa"/>
-    <tag k="public_transport" v="stop_position"/>
-  </node>
+  <node id="558555688" lat="27.6300471" lon="85.5239850"/>
   <node id="558561818" lat="27.6892092" lon="85.3603535">
     <tag k="name" v="Pepsi Cola Chowk"/>
     <tag k="public_transport" v="stop_position"/>
@@ -4665,7 +4665,10 @@
   <node id="2035864980" lat="27.6638640" lon="85.4420419"/>
   <node id="2035864981" lat="27.6641915" lon="85.4415987"/>
   <node id="2036049421" lat="27.7220472" lon="85.3313748"/>
-  <node id="2036622121" lat="27.6137839" lon="85.5302032"/>
+  <node id="2036622121" lat="27.6137839" lon="85.5302032">
+    <tag k="name" v="Khadpu"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <node id="2038006737" lat="27.6836995" lon="85.3491044"/>
   <node id="2038006738" lat="27.6841618" lon="85.3494121"/>
   <node id="2041709793" lat="27.7051114" lon="85.3286566"/>
@@ -10555,10 +10558,6 @@
     <nd ref="36673500"/>
     <nd ref="36673501"/>
     <nd ref="36673505"/>
-    <nd ref="36673506"/>
-    <nd ref="36673513"/>
-    <nd ref="36673514"/>
-    <nd ref="36673516"/>
     <tag k="highway" v="primary"/>
     <tag k="name" v="Arniko Raj Marga"/>
     <tag k="oneway" v="no"/>
@@ -15484,6 +15483,17 @@
     <nd ref="2414301764"/>
     <nd ref="2414301765"/>
   </way>
+  <way id="233704514">
+    <nd ref="36673505"/>
+    <nd ref="36673506"/>
+    <nd ref="36673513"/>
+    <nd ref="36673514"/>
+    <nd ref="36673516"/>
+    <tag k="highway" v="primary"/>
+    <tag k="name" v="Arniko Raj Marga"/>
+    <tag k="oneway" v="no"/>
+    <tag k="ref" v="H03"/>
+  </way>
   <relation id="2276770">
     <member type="node" ref="360889656" role="end"/>
     <member type="node" ref="1274184084" role="start"/>
@@ -17501,6 +17511,7 @@
     <member type="way" ref="224835842" role=""/>
     <member type="way" ref="193053264" role=""/>
     <member type="way" ref="193053265" role=""/>
+    <member type="way" ref="233704514" role=""/>
     <member type="way" ref="232567681" role=""/>
     <member type="way" ref="232567680" role=""/>
     <member type="way" ref="25512380" role=""/>
@@ -17541,6 +17552,7 @@
     <member type="node" ref="1974321638" role=""/>
     <member type="node" ref="1446092259" role=""/>
     <member type="node" ref="1767431974" role=""/>
+    <member type="node" ref="2036622121" role=""/>
     <tag k="name" v="Panauti - Ratnapark"/>
     <tag k="ref" v="11"/>
     <tag k="route" v="bus"/>
@@ -17796,6 +17808,7 @@
     <member type="way" ref="224835842" role=""/>
     <member type="way" ref="193053264" role=""/>
     <member type="way" ref="193053265" role=""/>
+    <member type="way" ref="233704514" role=""/>
     <member type="way" ref="232567681" role=""/>
     <member type="way" ref="232567680" role=""/>
     <member type="way" ref="25512380" role=""/>
