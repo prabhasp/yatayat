@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-08-16T23:59:02Z"/>
+<meta osm_base="2013-08-17T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -3605,7 +3605,7 @@
   <node id="1805087600" lat="27.6900272" lon="85.3294069"/>
   <node id="1805087601" lat="27.6901429" lon="85.3291620"/>
   <node id="1805087604" lat="27.6903197" lon="85.3287620">
-    <tag k="name" v="Babarmahal Stop"/>
+    <tag k="name" v="Buddhanagar Stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="1805087609" lat="27.6906384" lon="85.3280686"/>
@@ -5681,6 +5681,7 @@
   <node id="2410791784" lat="27.7005403" lon="85.3396049"/>
   <node id="2414301764" lat="27.7161154" lon="85.2835977"/>
   <node id="2414301765" lat="27.7161217" lon="85.2836765"/>
+  <node id="2421549188" lat="27.7243916" lon="85.3310554"/>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -15323,6 +15324,7 @@
   </way>
   <way id="232570877">
     <nd ref="2115210422"/>
+    <nd ref="2421549188"/>
     <nd ref="1776693108"/>
     <nd ref="1794150231"/>
     <nd ref="2085592110"/>
@@ -17526,7 +17528,6 @@
     <member type="way" ref="230309607" role=""/>
     <member type="way" ref="171609948" role=""/>
     <member type="node" ref="558555620" role="start"/>
-    <member type="node" ref="1274184084" role="end"/>
     <member type="node" ref="1805062970" role=""/>
     <member type="node" ref="1805062851" role=""/>
     <member type="node" ref="1805074834" role=""/>
@@ -17553,6 +17554,7 @@
     <member type="node" ref="1446092259" role=""/>
     <member type="node" ref="1767431974" role=""/>
     <member type="node" ref="2036622121" role=""/>
+    <member type="node" ref="1274184084" role="end"/>
     <tag k="name" v="Panauti - Ratnapark"/>
     <tag k="ref" v="11"/>
     <tag k="route" v="bus"/>
@@ -17821,7 +17823,6 @@
     <member type="way" ref="137859907" role=""/>
     <member type="way" ref="224837485" role=""/>
     <member type="node" ref="296340520" role="start"/>
-    <member type="node" ref="1274184084" role="end"/>
     <member type="node" ref="1830372866" role=""/>
     <member type="node" ref="1767431974" role=""/>
     <member type="node" ref="1446092259" role=""/>
@@ -17850,6 +17851,7 @@
     <member type="node" ref="1805074834" role=""/>
     <member type="node" ref="1805062851" role=""/>
     <member type="node" ref="1805062970" role=""/>
+    <member type="node" ref="1274184084" role="end"/>
     <tag k="name" v="Ratnapark - Dhulikhel"/>
     <tag k="ref" v="12"/>
     <tag k="route" v="bus"/>
