@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-08-24T23:59:02Z"/>
+<meta osm_base="2013-08-25T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -1920,7 +1920,7 @@
   <node id="360831200" lat="27.6986078" lon="85.3002367"/>
   <node id="360831201" lat="27.6984089" lon="85.3008964"/>
   <node id="360874010" lat="27.6770247" lon="85.3529014"/>
-  <node id="360889656" lat="27.6732320" lon="85.3854248">
+  <node id="360889656" lat="27.6732532" lon="85.3853735">
     <tag k="highway" v="bus_stop"/>
     <tag k="name" v="Thimi"/>
     <tag k="public_transport" v="stop_position"/>
@@ -3048,7 +3048,7 @@
     <tag k="name" v="Gathaghar"/>
     <tag k="place" v="suburb"/>
   </node>
-  <node id="1487748832" lat="27.6822761" lon="85.3770717"/>
+  <node id="1487748832" lat="27.6822180" lon="85.3771791"/>
   <node id="1487748837" lat="27.7587653" lon="85.3505758"/>
   <node id="1487748838" lat="27.7647445" lon="85.3537304"/>
   <node id="1487748843" lat="27.7649182" lon="85.3537601"/>
@@ -3680,6 +3680,10 @@
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="1824104048" lat="27.6820418" lon="85.3796172"/>
+  <node id="1824107470" lat="27.6733242" lon="85.3853375">
+    <tag k="name" v="Thimi"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <node id="1824136236" lat="27.6828794" lon="85.3858308">
     <tag k="name" v="Baakha Bazaar"/>
     <tag k="public_transport" v="stop_position"/>
@@ -3940,15 +3944,15 @@
   <node id="1835677433" lat="27.6796483" lon="85.4353270"/>
   <node id="1835695030" lat="27.6732904" lon="85.4029768"/>
   <node id="1835695032" lat="27.6733872" lon="85.3823392"/>
-  <node id="1835695033" lat="27.6735069" lon="85.3824499"/>
-  <node id="1835695039" lat="27.6735217" lon="85.3800057"/>
+  <node id="1835695033" lat="27.6734384" lon="85.3823487"/>
+  <node id="1835695039" lat="27.6735495" lon="85.3799525"/>
   <node id="1835695683" lat="27.6800543" lon="85.3984502">
     <tag k="name" v="Nikosera"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="1835695747" lat="27.6812395" lon="85.3930441"/>
   <node id="1835695791" lat="27.6820427" lon="85.3795145"/>
-  <node id="1835695798" lat="27.6824866" lon="85.3833149"/>
+  <node id="1835695798" lat="27.6824770" lon="85.3832496"/>
   <node id="1835695802" lat="27.6827953" lon="85.3894058"/>
   <node id="1835695804" lat="27.6829684" lon="85.3882163"/>
   <node id="1835699547" lat="27.6864357" lon="85.4376853"/>
@@ -4708,10 +4712,6 @@
     <tag k="name" v="Srijana nagar"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="2051114287" lat="27.6733207" lon="85.3854065">
-    <tag k="name" v="Thimi"/>
-    <tag k="public_transport" v="stop_position"/>
-  </node>
   <node id="2051114288" lat="27.6740598" lon="85.3733041">
     <tag k="name" v="gathaghar"/>
     <tag k="public_transport" v="stop_position"/>
@@ -4723,14 +4723,8 @@
   </node>
   <node id="2051114291" lat="27.6727348" lon="85.4054649"/>
   <node id="2051114292" lat="27.6727238" lon="85.4054888"/>
-  <node id="2051114293" lat="27.6733336" lon="85.3852015"/>
-  <node id="2051114295" lat="27.6734874" lon="85.3827592"/>
   <node id="2051114296" lat="27.6736031" lon="85.3876455"/>
-  <node id="2051114297" lat="27.6735530" lon="85.3817169">
-    <tag k="name" v="Chardobato"/>
-    <tag k="public_transport" v="stop_position"/>
-  </node>
-  <node id="2051114298" lat="27.6736566" lon="85.3799975"/>
+  <node id="2051114298" lat="27.6736202" lon="85.3799701"/>
   <node id="2051114299" lat="27.6737649" lon="85.3889288"/>
   <node id="2051114300" lat="27.6738711" lon="85.3897714"/>
   <node id="2051114301" lat="27.6740163" lon="85.3740267"/>
@@ -5562,7 +5556,7 @@
   </node>
   <node id="2379741612" lat="27.6868402" lon="85.2522058"/>
   <node id="2379741613" lat="27.6870111" lon="85.2502993"/>
-  <node id="2382181282" lat="27.6734483" lon="85.3811255">
+  <node id="2382181282" lat="27.6734761" lon="85.3811328">
     <tag k="name" v="Chardobato"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
@@ -5682,6 +5676,7 @@
   <node id="2414301764" lat="27.7161154" lon="85.2835977"/>
   <node id="2414301765" lat="27.7161217" lon="85.2836765"/>
   <node id="2421549188" lat="27.7243916" lon="85.3310554"/>
+  <node id="2430895749" lat="27.6827182" lon="85.3847967"/>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -11575,7 +11570,7 @@
     <tag k="source" v="GPS"/>
   </way>
   <way id="224823944">
-    <nd ref="2051114287"/>
+    <nd ref="1824107470"/>
     <nd ref="2051114296"/>
     <nd ref="2051114299"/>
     <nd ref="2051114300"/>
@@ -13685,7 +13680,7 @@
     <nd ref="2051114288"/>
     <nd ref="2051114301"/>
     <nd ref="2051114298"/>
-    <nd ref="2051114297"/>
+    <nd ref="1835695033"/>
     <tag k="access" v="yes"/>
     <tag k="bicycle" v="yes"/>
     <tag k="cycleway" v="lane"/>
@@ -13717,11 +13712,8 @@
     <tag k="surface" v="asphalt"/>
   </way>
   <way id="231882048">
-    <nd ref="2051114297"/>
     <nd ref="1835695033"/>
-    <nd ref="2051114295"/>
-    <nd ref="2051114293"/>
-    <nd ref="2051114287"/>
+    <nd ref="1824107470"/>
     <tag k="access" v="yes"/>
     <tag k="bicycle" v="yes"/>
     <tag k="cycleway" v="lane"/>
@@ -14094,6 +14086,7 @@
   </way>
   <way id="232095627">
     <nd ref="1824136236"/>
+    <nd ref="2430895749"/>
     <nd ref="1835695798"/>
     <nd ref="2168884087"/>
     <nd ref="2168884076"/>
@@ -17436,7 +17429,7 @@
     <member type="node" ref="1990803559" role=""/>
     <member type="node" ref="2336968997" role=""/>
     <member type="node" ref="2051114286" role=""/>
-    <member type="node" ref="2051114287" role=""/>
+    <member type="node" ref="1824107470" role=""/>
     <member type="node" ref="2051114285" role=""/>
     <member type="node" ref="2377002167" role=""/>
     <member type="node" ref="31228768" role=""/>
@@ -17539,8 +17532,7 @@
     <member type="node" ref="2377002167" role=""/>
     <member type="node" ref="2051114289" role=""/>
     <member type="node" ref="2051114288" role=""/>
-    <member type="node" ref="2051114297" role=""/>
-    <member type="node" ref="2051114287" role=""/>
+    <member type="node" ref="1824107470" role=""/>
     <member type="node" ref="2051114286" role=""/>
     <member type="node" ref="2336968997" role=""/>
     <member type="node" ref="2080972360" role=""/>
@@ -17836,8 +17828,7 @@
     <member type="node" ref="2080972360" role=""/>
     <member type="node" ref="2336968997" role=""/>
     <member type="node" ref="2051114286" role=""/>
-    <member type="node" ref="2051114287" role=""/>
-    <member type="node" ref="2051114297" role=""/>
+    <member type="node" ref="1824107470" role=""/>
     <member type="node" ref="2051114288" role=""/>
     <member type="node" ref="2051114289" role=""/>
     <member type="node" ref="2051114285" role=""/>
