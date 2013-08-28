@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-08-26T23:59:02Z"/>
+<meta osm_base="2013-08-27T23:59:01Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -1920,11 +1920,6 @@
   <node id="360831200" lat="27.6986078" lon="85.3002367"/>
   <node id="360831201" lat="27.6984089" lon="85.3008964"/>
   <node id="360874010" lat="27.6770247" lon="85.3529014"/>
-  <node id="360889656" lat="27.6732532" lon="85.3853735">
-    <tag k="highway" v="bus_stop"/>
-    <tag k="name" v="Thimi"/>
-    <tag k="public_transport" v="stop_position"/>
-  </node>
   <node id="391201715" lat="27.6770319" lon="85.3165973"/>
   <node id="415553223" lat="27.6966083" lon="85.3281501">
     <tag k="name" v="Singha Durbar East Stop"/>
@@ -3680,7 +3675,7 @@
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="1824104048" lat="27.6820418" lon="85.3796172"/>
-  <node id="1824107470" lat="27.6733242" lon="85.3853375">
+  <node id="1824107470" lat="27.6733098" lon="85.3853522">
     <tag k="name" v="Thimi"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
@@ -5677,6 +5672,11 @@
   <node id="2414301765" lat="27.7161217" lon="85.2836765"/>
   <node id="2421549188" lat="27.7243916" lon="85.3310554"/>
   <node id="2430895749" lat="27.6827182" lon="85.3847967"/>
+  <node id="2433619344" lat="27.6732519" lon="85.3853684">
+    <tag k="highway" v="bus_stop"/>
+    <tag k="name" v="Thimi"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -8444,7 +8444,7 @@
     <tag k="route" v="junction"/>
   </way>
   <way id="171203193">
-    <nd ref="360889656"/>
+    <nd ref="2433619344"/>
     <nd ref="268308354"/>
     <nd ref="1835695032"/>
     <nd ref="2382181282"/>
@@ -14407,7 +14407,7 @@
   </way>
   <way id="232096886">
     <nd ref="2291478693"/>
-    <nd ref="360889656"/>
+    <nd ref="2433619344"/>
     <tag k="access" v="yes"/>
     <tag k="bicycle" v="yes"/>
     <tag k="cycleway" v="lane"/>
@@ -15490,7 +15490,6 @@
     <tag k="ref" v="H03"/>
   </way>
   <relation id="2276770">
-    <member type="node" ref="360889656" role="end"/>
     <member type="node" ref="1274184084" role="start"/>
     <member type="way" ref="171203194" role=""/>
     <member type="way" ref="171603744" role=""/>
@@ -15531,6 +15530,7 @@
     <member type="way" ref="194607852" role=""/>
     <member type="way" ref="232096887" role=""/>
     <member type="way" ref="171203193" role=""/>
+    <member type="node" ref="2433619344" role="end"/>
     <tag k="name" v="Purano Bus Park-Thimi"/>
     <tag k="ref" v="10"/>
     <tag k="route" v="microbus"/>
@@ -17098,7 +17098,6 @@
     <tag k="type" v="route"/>
   </relation>
   <relation id="2988806">
-    <member type="node" ref="360889656" role="end"/>
     <member type="node" ref="1274184084" role="start"/>
     <member type="way" ref="171203194" role=""/>
     <member type="way" ref="171603744" role=""/>
@@ -17139,6 +17138,7 @@
     <member type="way" ref="194607852" role=""/>
     <member type="way" ref="232096887" role=""/>
     <member type="way" ref="171203193" role=""/>
+    <member type="node" ref="2433619344" role="end"/>
     <tag k="name" v="Ratnapark-Dadhikot"/>
     <tag k="ref" v="9"/>
     <tag k="route" v="bus"/>
@@ -17639,7 +17639,6 @@
     <member type="node" ref="2291478692" role=""/>
     <member type="node" ref="2291478690" role=""/>
     <member type="node" ref="2291478693" role=""/>
-    <member type="node" ref="360889656" role=""/>
     <member type="node" ref="2382181282" role=""/>
     <member type="node" ref="2291478683" role=""/>
     <member type="node" ref="1960042856" role=""/>
@@ -17740,6 +17739,7 @@
     <member type="way" ref="4840104" role=""/>
     <member type="way" ref="171603746" role=""/>
     <member type="way" ref="24683731" role=""/>
+    <member type="node" ref="2433619344" role=""/>
     <tag k="from" v="Chyamasingh"/>
     <tag k="name" v="Chyamasingh to Ratnapark"/>
     <tag k="operator" v="Madhya Upatyaka Bus Samii"/>
@@ -17901,7 +17901,6 @@
     <member type="node" ref="2291478692" role=""/>
     <member type="node" ref="2291478690" role=""/>
     <member type="node" ref="2291478693" role=""/>
-    <member type="node" ref="360889656" role=""/>
     <member type="node" ref="2382181282" role=""/>
     <member type="node" ref="2291478683" role=""/>
     <member type="node" ref="1960042856" role=""/>
@@ -17987,6 +17986,7 @@
     <member type="way" ref="231414548" role=""/>
     <member type="way" ref="220025933" role=""/>
     <member type="node" ref="2291478678" role="end"/>
+    <member type="node" ref="2433619344" role=""/>
     <tag k="from" v="Changu"/>
     <tag k="loc_ref" v="Changu"/>
     <tag k="name" v="Changu-Ratnapark"/>
