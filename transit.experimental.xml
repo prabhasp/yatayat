@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-09-11T23:59:02Z"/>
+<meta osm_base="2013-09-12T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -2069,7 +2069,7 @@
   <node id="480425941" lat="27.7272413" lon="85.3382036"/>
   <node id="480425951" lat="27.7268694" lon="85.3379067"/>
   <node id="480425955" lat="27.7267414" lon="85.3378102"/>
-  <node id="480425982" lat="27.7249276" lon="85.3372305"/>
+  <node id="480425982" lat="27.7249003" lon="85.3372574"/>
   <node id="480426838" lat="27.7238598" lon="85.3310727"/>
   <node id="480427050" lat="27.7185332" lon="85.3335510">
     <tag k="name" v="Dhalku Chwok"/>
@@ -2078,7 +2078,7 @@
   <node id="480428386" lat="27.7218315" lon="85.3355691"/>
   <node id="480428392" lat="27.7237702" lon="85.3369708"/>
   <node id="480428397" lat="27.7243890" lon="85.3370959"/>
-  <node id="480428398" lat="27.7246040" lon="85.3373177"/>
+  <node id="480428398" lat="27.7245972" lon="85.3373620"/>
   <node id="480429211" lat="27.7317871" lon="85.3443651">
     <tag k="name" v="Dhumbarahi"/>
     <tag k="public_transport" v="stop_position"/>
@@ -4443,7 +4443,7 @@
   <node id="1950329179" lat="27.6943433" lon="85.3201274"/>
   <node id="1950329689" lat="27.7179414" lon="85.3209930"/>
   <node id="1950329690" lat="27.7179559" lon="85.3204521"/>
-  <node id="1950336156" lat="27.7187166" lon="85.3328946"/>
+  <node id="1950336156" lat="27.7187041" lon="85.3329241"/>
   <node id="1950338918" lat="27.6940300" lon="85.3408344"/>
   <node id="1950338919" lat="27.6940695" lon="85.3408385"/>
   <node id="1950338921" lat="27.6942595" lon="85.3408614"/>
