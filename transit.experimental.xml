@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-09-23T23:59:02Z"/>
+<meta osm_base="2013-09-24T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -3376,7 +3376,7 @@
   <node id="1731658959" lat="27.6884878" lon="85.3160263"/>
   <node id="1741695802" lat="27.7131704" lon="85.2907105"/>
   <node id="1741701815" lat="27.7134662" lon="85.2914899"/>
-  <node id="1741813726" lat="27.7065952" lon="85.3106049"/>
+  <node id="1741813726" lat="27.7066016" lon="85.3106049"/>
   <node id="1749994636" lat="27.6752500" lon="85.4247766"/>
   <node id="1751049603" lat="27.6763210" lon="85.3020647"/>
   <node id="1751049606" lat="27.6784348" lon="85.3021609"/>
@@ -4149,7 +4149,7 @@
   <node id="1887840172" lat="27.7345881" lon="85.3462855"/>
   <node id="1887840177" lat="27.7346542" lon="85.3463558"/>
   <node id="1887863013" lat="27.7067357" lon="85.3228367"/>
-  <node id="1887863869" lat="27.7096498" lon="85.3278249"/>
+  <node id="1887863869" lat="27.7096315" lon="85.3278822"/>
   <node id="1887863878" lat="27.7102829" lon="85.3231418"/>
   <node id="1887865381" lat="27.7084792" lon="85.3327084"/>
   <node id="1891344213" lat="27.7343892" lon="85.3461260"/>
@@ -6087,7 +6087,7 @@
     <nd ref="38925431"/>
     <nd ref="2216091017"/>
     <nd ref="442150824"/>
-    <tag k="highway" v="residential"/>
+    <tag k="highway" v="secondary"/>
     <tag k="name" v="Guheshwari marg"/>
     <tag k="oneway" v="no"/>
   </way>
@@ -6095,7 +6095,7 @@
     <nd ref="1275596977"/>
     <nd ref="38926246"/>
     <nd ref="38926248"/>
-    <tag k="highway" v="residential"/>
+    <tag k="highway" v="secondary_link"/>
     <tag k="name" v="Dharma Bhakta Marg"/>
   </way>
   <way id="23384859">
@@ -7435,7 +7435,7 @@
     <nd ref="1835420561"/>
     <nd ref="1914424352"/>
     <nd ref="316974286"/>
-    <tag k="highway" v="residential"/>
+    <tag k="highway" v="secondary_link"/>
     <tag k="name" v="Dharma Bhakta Marg"/>
   </way>
   <way id="58423999">
