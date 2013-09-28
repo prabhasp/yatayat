@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-09-26T23:59:01Z"/>
+<meta osm_base="2013-09-27T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -774,7 +774,7 @@
   </node>
   <node id="296344440" lat="27.7161303" lon="85.2835995"/>
   <node id="304249952" lat="27.7138546" lon="85.2930009"/>
-  <node id="313131693" lat="27.7100450" lon="85.3148074">
+  <node id="313131693" lat="27.7100354" lon="85.3148074">
     <tag k="source" v="Yahoo"/>
   </node>
   <node id="313140513" lat="27.7140882" lon="85.3292898"/>
@@ -2293,7 +2293,7 @@
   <node id="764954196" lat="27.6856089" lon="85.2933066"/>
   <node id="766981808" lat="27.6880622" lon="85.2982783"/>
   <node id="789051259" lat="27.7210645" lon="85.3198149"/>
-  <node id="789059622" lat="27.7178180" lon="85.3232362"/>
+  <node id="789059622" lat="27.7178008" lon="85.3232804"/>
   <node id="849950756" lat="27.7132740" lon="85.3443877"/>
   <node id="849950758" lat="27.7148727" lon="85.3457959"/>
   <node id="849950824" lat="27.7114407" lon="85.3176216"/>
@@ -2418,6 +2418,7 @@
   <node id="945666480" lat="27.6737587" lon="85.3232440">
     <tag k="designation" v="Dhobal"/>
   </node>
+  <node id="947955732" lat="27.7081561" lon="85.3134956"/>
   <node id="977632802" lat="27.6746678" lon="85.2801066"/>
   <node id="977632825" lat="27.6883708" lon="85.2868454"/>
   <node id="977632829" lat="27.6805620" lon="85.2764393">
@@ -2766,7 +2767,6 @@
   </node>
   <node id="1278025474" lat="27.7362696" lon="85.3221824"/>
   <node id="1278025493" lat="27.7381365" lon="85.3252628"/>
-  <node id="1278029460" lat="27.7115707" lon="85.3150269"/>
   <node id="1278029518" lat="27.7103118" lon="85.3148393"/>
   <node id="1278032893" lat="27.7079870" lon="85.3205974"/>
   <node id="1278032895" lat="27.7098876" lon="85.3208198"/>
@@ -4178,7 +4178,7 @@
   <node id="1896040461" lat="27.7218067" lon="85.3456495"/>
   <node id="1897175428" lat="27.7089375" lon="85.3306770"/>
   <node id="1897175436" lat="27.7087738" lon="85.3314414"/>
-  <node id="1897347799" lat="27.7135513" lon="85.3191331"/>
+  <node id="1897347799" lat="27.7135593" lon="85.3191858"/>
   <node id="1897352456" lat="27.7103889" lon="85.3174728"/>
   <node id="1897352457" lat="27.7106178" lon="85.3174302"/>
   <node id="1897352458" lat="27.7114762" lon="85.3175426"/>
@@ -4313,6 +4313,7 @@
   <node id="1917103296" lat="27.7386085" lon="85.3357035"/>
   <node id="1918191110" lat="27.7192262" lon="85.3311296"/>
   <node id="1918195951" lat="27.7044566" lon="85.3163736"/>
+  <node id="1918245512" lat="27.7080073" lon="85.3132339"/>
   <node id="1918245516" lat="27.7082310" lon="85.3136945"/>
   <node id="1918270902" lat="27.7106227" lon="85.3148842"/>
   <node id="1918270907" lat="27.7109215" lon="85.3149271"/>
@@ -5141,7 +5142,6 @@
   <node id="2126598712" lat="27.7076787" lon="85.3073797"/>
   <node id="2126598717" lat="27.7078543" lon="85.3129620"/>
   <node id="2126598718" lat="27.7079228" lon="85.3130910"/>
-  <node id="2126598721" lat="27.7081583" lon="85.3134939"/>
   <node id="2126598724" lat="27.7082954" lon="85.3138671"/>
   <node id="2126598726" lat="27.7083815" lon="85.3140438"/>
   <node id="2126598729" lat="27.7085106" lon="85.3143827"/>
@@ -9442,24 +9442,8 @@
     <tag k="foot" v="yes"/>
     <tag k="highway" v="primary"/>
     <tag k="lanes" v="2"/>
-    <tag k="name" v="Kantipath"/>
-    <tag k="surface" v="paved"/>
-  </way>
-  <way id="172387568">
-    <nd ref="1806071816"/>
-    <nd ref="1278029460"/>
-    <nd ref="2053868507"/>
-    <nd ref="313286659"/>
-    <tag k="bicycle" v="yes"/>
-    <tag k="cycleway" v="lane"/>
-    <tag k="foot" v="yes"/>
-    <tag k="highway" v="primary"/>
-    <tag k="lanes" v="2"/>
     <tag k="name" v="Kanti Path"/>
-    <tag k="ref" v="RatnaPark-Phutung"/>
-    <tag k="route" v="Micro"/>
     <tag k="surface" v="paved"/>
-    <tag k="type" v="route"/>
   </way>
   <way id="172387571">
     <nd ref="1348908784"/>
@@ -9520,11 +9504,19 @@
     <tag k="source" v="Yahoo"/>
   </way>
   <way id="172387589">
-    <nd ref="313286659"/>
-    <nd ref="2053868507"/>
-    <nd ref="1278029460"/>
     <nd ref="1806071816"/>
+    <nd ref="2053868507"/>
+    <nd ref="313286659"/>
+    <tag k="bicycle" v="yes"/>
+    <tag k="cycleway" v="lane"/>
+    <tag k="foot" v="yes"/>
     <tag k="highway" v="primary"/>
+    <tag k="lanes" v="2"/>
+    <tag k="name" v="Kanti Path"/>
+    <tag k="ref" v="RatnaPark-Phutung"/>
+    <tag k="route" v="Micro"/>
+    <tag k="surface" v="paved"/>
+    <tag k="type" v="route"/>
   </way>
   <way id="172387590">
     <nd ref="1803547436"/>
@@ -11693,7 +11685,8 @@
     <nd ref="2126598711"/>
     <nd ref="2126598717"/>
     <nd ref="2126598718"/>
-    <nd ref="2126598721"/>
+    <nd ref="1918245512"/>
+    <nd ref="947955732"/>
     <nd ref="1918245516"/>
     <nd ref="2126598724"/>
     <nd ref="2126598726"/>
@@ -15930,7 +15923,7 @@
     <member type="way" ref="171215516" role=""/>
     <member type="way" ref="172138201" role=""/>
     <member type="way" ref="224839048" role=""/>
-    <member type="way" ref="172387568" role=""/>
+    <member type="way" ref="172387589" role=""/>
     <member type="way" ref="172387565" role=""/>
     <member type="way" ref="28543722" role=""/>
     <member type="way" ref="231885504" role=""/>
@@ -16254,7 +16247,7 @@
     <member type="way" ref="231885504" role=""/>
     <member type="way" ref="28543722" role=""/>
     <member type="way" ref="172387565" role=""/>
-    <member type="way" ref="172387568" role=""/>
+    <member type="way" ref="172387589" role=""/>
     <member type="way" ref="224839048" role=""/>
     <member type="way" ref="216300984" role=""/>
     <member type="way" ref="232096101" role=""/>
@@ -16794,7 +16787,7 @@
     <member type="way" ref="231885504" role=""/>
     <member type="way" ref="28543722" role=""/>
     <member type="way" ref="172387565" role=""/>
-    <member type="way" ref="172387568" role=""/>
+    <member type="way" ref="172387589" role=""/>
     <member type="way" ref="224839048" role=""/>
     <member type="way" ref="216300984" role=""/>
     <member type="way" ref="232096101" role=""/>
@@ -16842,7 +16835,7 @@
     <member type="way" ref="231885504" role=""/>
     <member type="way" ref="28543722" role=""/>
     <member type="way" ref="172387565" role=""/>
-    <member type="way" ref="172387568" role=""/>
+    <member type="way" ref="172387589" role=""/>
     <member type="way" ref="224839048" role=""/>
     <member type="way" ref="216300984" role=""/>
     <member type="way" ref="232096101" role=""/>
@@ -17100,7 +17093,7 @@
     <member type="way" ref="231885504" role=""/>
     <member type="way" ref="28543722" role=""/>
     <member type="way" ref="172387565" role=""/>
-    <member type="way" ref="172387568" role=""/>
+    <member type="way" ref="172387589" role=""/>
     <member type="way" ref="224839048" role=""/>
     <member type="way" ref="216300984" role=""/>
     <member type="way" ref="24684291" role=""/>
@@ -17293,7 +17286,7 @@
     <member type="way" ref="232096101" role=""/>
     <member type="way" ref="216300984" role=""/>
     <member type="way" ref="224839048" role=""/>
-    <member type="way" ref="172387568" role=""/>
+    <member type="way" ref="172387589" role=""/>
     <member type="way" ref="172387565" role=""/>
     <member type="way" ref="28543722" role=""/>
     <member type="way" ref="231885504" role=""/>
@@ -17603,7 +17596,7 @@
     <member type="way" ref="231885504" role=""/>
     <member type="way" ref="28543722" role=""/>
     <member type="way" ref="172387565" role=""/>
-    <member type="way" ref="172387568" role=""/>
+    <member type="way" ref="172387589" role=""/>
     <member type="way" ref="224839048" role=""/>
     <member type="way" ref="216300984" role=""/>
     <member type="way" ref="232096101" role=""/>
@@ -19688,7 +19681,7 @@
     <member type="way" ref="231885504" role=""/>
     <member type="way" ref="28543722" role=""/>
     <member type="way" ref="172387565" role=""/>
-    <member type="way" ref="172387568" role=""/>
+    <member type="way" ref="172387589" role=""/>
     <member type="way" ref="224839048" role=""/>
     <member type="way" ref="216300984" role=""/>
     <member type="way" ref="24684291" role=""/>
@@ -19869,7 +19862,7 @@
     <member type="way" ref="231885504" role=""/>
     <member type="way" ref="28543722" role=""/>
     <member type="way" ref="172387565" role=""/>
-    <member type="way" ref="172387568" role=""/>
+    <member type="way" ref="172387589" role=""/>
     <member type="way" ref="224839048" role=""/>
     <member type="way" ref="216300984" role=""/>
     <member type="way" ref="232096101" role=""/>
