@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-09-27T23:59:02Z"/>
+<meta osm_base="2013-09-28T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -1824,8 +1824,7 @@
   <node id="360722534" lat="27.7068848" lon="85.4399178"/>
   <node id="360722535" lat="27.7072419" lon="85.4395917"/>
   <node id="360722536" lat="27.7076979" lon="85.4393685"/>
-  <node id="360722538" lat="27.7078802" lon="85.4393170"/>
-  <node id="360722539" lat="27.7080322" lon="85.4394543"/>
+  <node id="360722538" lat="27.7079516" lon="85.4393708"/>
   <node id="360722540" lat="27.7081842" lon="85.4397118"/>
   <node id="360722541" lat="27.7083286" lon="85.4397462"/>
   <node id="360722543" lat="27.7085793" lon="85.4395144"/>
@@ -5643,18 +5642,12 @@
   <node id="2342376713" lat="27.6729468" lon="85.2797193"/>
   <node id="2343574167" lat="27.7475674" lon="85.4114635"/>
   <node id="2343968531" lat="27.6719882" lon="85.4224082">
-    <tag k="bus" v="yes"/>
     <tag k="name" v="Bhaktapur Hospital Stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="2343968543" lat="27.6715476" lon="85.4215455"/>
   <node id="2343968544" lat="27.6718898" lon="85.4222910"/>
   <node id="2352563577" lat="27.6969293" lon="85.2944426"/>
-  <node id="2355688659" lat="27.6714204" lon="85.4224132"/>
-  <node id="2356769263" lat="27.6713069" lon="85.4224157">
-    <tag k="name" v="Bhaktapur Bus Park"/>
-    <tag k="public_transport" v="stop_position"/>
-  </node>
   <node id="2360183669" lat="27.7345232" lon="85.3307108">
     <tag k="name" v="Teaching Hospital stop"/>
     <tag k="public_transport" v="stop_position"/>
@@ -5821,6 +5814,8 @@
   <node id="2462717081" lat="27.7394282" lon="85.3365673"/>
   <node id="2471888911" lat="27.6827617" lon="85.3850756"/>
   <node id="2471888912" lat="27.6827473" lon="85.3849837"/>
+  <node id="2475635401" lat="27.6955472" lon="85.3638618"/>
+  <node id="2475635407" lat="27.7078473" lon="85.4393176"/>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -7146,6 +7141,7 @@
   <way id="32133404">
     <nd ref="360711708"/>
     <nd ref="1273503575"/>
+    <nd ref="2475635401"/>
     <nd ref="2168945091"/>
     <nd ref="2168945126"/>
     <nd ref="360712009"/>
@@ -9910,8 +9906,8 @@
     <nd ref="360722534"/>
     <nd ref="360722535"/>
     <nd ref="360722536"/>
+    <nd ref="2475635407"/>
     <nd ref="360722538"/>
-    <nd ref="360722539"/>
     <nd ref="360722540"/>
     <nd ref="360722541"/>
     <nd ref="360722543"/>
@@ -12487,12 +12483,6 @@
     <nd ref="558561818"/>
     <nd ref="360712059"/>
     <tag k="highway" v="primary"/>
-  </way>
-  <way id="226834868">
-    <nd ref="2356769263"/>
-    <nd ref="2355688659"/>
-    <nd ref="457278027"/>
-    <tag k="name" v="toBhaktapurBusPark"/>
   </way>
   <way id="226937170">
     <nd ref="360309100"/>
@@ -18575,7 +18565,6 @@
     <tag k="type" v="route"/>
   </relation>
   <relation id="3014451">
-    <member type="way" ref="226834868" role=""/>
     <member type="way" ref="226834865" role=""/>
     <member type="way" ref="226834866" role=""/>
     <member type="way" ref="137569858" role=""/>
@@ -18625,7 +18614,6 @@
     <member type="way" ref="231414548" role=""/>
     <member type="way" ref="220025933" role=""/>
     <member type="node" ref="2291478678" role="end"/>
-    <member type="node" ref="2356769263" role="start"/>
     <member type="node" ref="1835695683" role=""/>
     <member type="node" ref="1824136236" role=""/>
     <member type="node" ref="558561818" role=""/>
