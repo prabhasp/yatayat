@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-10-03T23:59:02Z"/>
+<meta osm_base="2013-10-04T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -3046,7 +3046,7 @@
   <node id="1382903012" lat="27.6932396" lon="85.3398872"/>
   <node id="1382903014" lat="27.6932886" lon="85.3390603"/>
   <node id="1382903026" lat="27.6959830" lon="85.3376004"/>
-  <node id="1393448805" lat="27.7054919" lon="85.3256380"/>
+  <node id="1393448805" lat="27.7054928" lon="85.3256224"/>
   <node id="1394568901" lat="27.7000438" lon="85.3441411"/>
   <node id="1394568906" lat="27.7003775" lon="85.3432561">
     <tag k="name" v="Bhimsengola stop"/>
@@ -5071,7 +5071,7 @@
   <node id="2106899595" lat="27.7676099" lon="85.3556178"/>
   <node id="2113423688" lat="27.7129222" lon="85.3479517"/>
   <node id="2113423691" lat="27.7130883" lon="85.3485629"/>
-  <node id="2113491195" lat="27.7055271" lon="85.3252939"/>
+  <node id="2113491195" lat="27.7055283" lon="85.3252960"/>
   <node id="2115210422" lat="27.7244270" lon="85.3310340">
     <tag k="name" v="Baluwatar"/>
     <tag k="public_transport" v="stop_position"/>
