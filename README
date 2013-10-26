@@ -1,0 +1,58 @@
+== HACKING / DEPLOYING
+
+==== submodules
+yatayat uses a kdtree implementation from @ubilabs on github; to
+use it you will need to run
+
+% git submodule init
+% git submodule update
+
+inside your cloned repository
+
+==== config
+config.js pulls from a overpass-api directly; to develop locally, 
+you can symlink config.local.js to config.js, but please be
+careful not to commit your symlinked file
+
+% ln -s config.local.js config.js
+
+
+== Data Model
+OSM Data is transformed into Routes, Stops, and Segments:
+
+Route:
+  -  id
+  -  name
+  -  ref           // route number
+  -  transport     // type of transport; pulled from tag.type
+  -  stops: []     // are ordered
+  -  stopDict: {}  // indexed by id
+  -  segments: []
+  -  tag: {}
+
+Stop:
+  - id
+  - name
+  - lat
+  - lng
+  - tag: {}
+
+Segment:            // mostly useful to rendering and internal fns.
+  - listOfLatLng: [(lat,lng), ...]
+  - tag: {}
+
+== API
+
+We define a node.js-based API for external applications to make
+high-level queries of public transit data.
+
+% node api.node.js
+
++ http://localhost:8020/route
+
+  Returns all routes and stops as a JSON object.
+
+The API requires that jquery and underscore be installed for node:
+
+% npm install underscore
+% npm install jquery
