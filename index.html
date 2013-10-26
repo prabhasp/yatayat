@@ -1,83 +1,455 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    
+    <head>
+	
+        <title>
+            Kathmandu Public Transport
+        </title>
+        <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="lib/leaflet/Control.OSMGeocoder.css">
+        <link rel="stylesheet" href="lib/yatayat.css" />
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="lib/leaflet/leaflet.ie.css" />
+        <![endif] -->
+        <script src="lib/jquery-1.7.2.min.js">
+                
+        </script>
+        <script src="lib/underscore-min.js">
+                
+        </script>
+        <script src="lib/leaflet/leaflet.js">
+                
+        </script>
+        <script src="lib/leaflet/spin.min.js">
+                
+        </script>
+        <script src="lib/leaflet/leaflet.spin.js">
+                
+        </script>
+        <script src="lib/wax.leaf.min.js">
+                
+        </script>
+        <script src="lib/kdtree/src/web/kdTree.js">
+                
+        </script>
+        <script src="lib/bootstrap/js/bootstrap.min.js">
+                
+        </script>
+        <script src="yatayat.js">
+                
+        </script>
+        <script type="text/javascript" src="lib/leaflet/Control.OSMGeocoder.js">
+                
+        </script>
+        <script src="lib/routeinfopanel.js">
+                
+        </script>
+    </head>
+    
+    <body>
+        <div id="Title">
+            Kathmandu Public Transport
+        </div>
+        <div class="alert" id="routedisplay" style="background:white;position:absolute;top:40;left:60;z-index:999">
+        </div>
+        <div id="publicTransportMap" style="width:80%; height: 100%">
+            Loading ...
+        </div>
+        <div class="modal hide" id="myModal">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    X
+                </button>
+            </div>
+            <br/>
+            <iframe src="https://docs.google.com/spreadsheet/embeddedform?formkey=dFdZeG9PYnVpY1FBMk4zVjBDaFNua1E6MQ"
+            width="700" height="500" frameborder="0" marginheight="0" marginwidth="0">
+                Loading...
+            </iframe>
+            // suresh work
+        </div>
+		<div id="Attribution" style="width:37%; height:3%; position:absolute; bottom:0px; right:20%">
+            "Powered By" <a href="http://leaflet.cloudmade.com">Leaflet</a>
+            "  Data &copy; <a href="http://www.openstreetmap.org/copyright/en">OpenStreetMap</a>
+            " contributors (ODbL), Imagery &copy; <a href="http://mapbox.com/">MapBox</a>
+        </div>
+        <script type="text/javascript" language="javascript">
+                    // UI HACK
+            $('#textboxes').hide();
+            $('#routedisplay').hide()
+            // initialize the map
+            var map = new L.Map('publicTransportMap');
+            // var LC = new L.Control.Layers().addTo(map);
+            var osmGeocoder = new L.Control.OSMGeocoder({
+                position: 'topleft'
+            });
+            map.addControl(osmGeocoder);
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+            //var ktmBB = "85.2885,27.6839,85.3368,27.7299";
+            var system;
+            var osmdata;
+            var routed;
+            var routed_route;
 
-    <title>Yatayat by suress</title>
-  </head>
+            YY.fromConfig("config.overpass.json", function(sys) {
+                // debugger;
+                system = sys;
+                // // console.log(system);
+                YY.render_(system, map, undefined, //includeIDObject; try {"2269045": true} for an example
+                undefined // leafletBaseOptions
+                );
 
-  <body>
-    <header>
-      <div class="inner">
-        <h1>Yatayat</h1>
-        <h2>Kathmandu Public Transport App</h2>
-        <a href="https://github.com/suress/yatayat" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
+                //ROUTING
+                var stopNames = _.compact(_.pluck(system.allStops(), 'name'));
+                $('.typeahead').typeahead({
+                    source: stopNames
+                });
+                $('#textboxes').show();
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+                $('input.typeahead').change(function(f) {
+                    map.spin(true);
+                    var start = $('#startstop')[0].value;
+                    var end = $('#endstop')[0].value;
+                    var dist = 0;
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+                    if (start && end) {
+                        // // // console.log('routing from', start,' to ',end);
+                        if (!YY._routeGroup) {
+                            YY._routeGroup = new L.LayerGroup();
+                        }
+                        YY._routeGroup.clearLayers();
+                        var gettingThereRoutes = system.takeMeThereByName(start, end);
+                        routed = gettingThereRoutes;
+                        var bounds = new L.LatLngBounds();
+                        if (gettingThereRoutes === 'FAIL') alert('cannot find a route from ', start, ' to ', end);
+                        else {
+                            // // console.log('gettingThereRoutes',gettingThereRoutes);
+                            var inclusionDict = {};
+                            var overrideDict = {};
+                            var outputHTML = "";
+                            _(system.routes).each(function(r) {
+                                inclusionDict[r.id] = true;
+                            }); // render everything
+                            counter = 0;
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+                            _(gettingThereRoutes).each(function(r, idx) {
+                                //inclusionDict[r.id] = true;
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+                                bounds.extend(new L.LatLng(r.stops[0].lat, r.stops[0].lng));
+                                bounds.extend(new L.LatLng(_.last(r.stops).lat, _.last(r.stops).lng));
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+                                _(r.stops).each(function(s) {
+                                    inclusionDict[s.id] = true;
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+                                });
+                                if (idx === 0) {
+                                    overrideDict[r.stops[0].id] = {
+                                        color: 'orange',
+                                        opacity: 1,
+                                        radius: 8
+                                    };
+                                } else {
+                                    overrideDict[r.stops[0].id] = {
+                                        color: 'orange',
+                                        opacity: 1,
+                                        radius: 8
+                                    };
+                                }
+                                if (idx === gettingThereRoutes.length - 1) {
+                                    overrideDict[_.last(r.stops).id] = {
+                                        color: 'orange',
+                                        opacity: 1,
+                                        radius: 8
+                                    };
+                                }
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+                                //show routed route
+                                var startseg = [];
+                                var endseg = [];
+                                var startsegid, endsegid;
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+                                //finding index of first and last segment in list of segment
+                                _(r.segments).each(function(seg) {
+                                    // if(startseg.length==0){
+                                    _(seg.listOfLatLng).each(function(ll) {
+                                        if (ll[0] == r.stops[0].lat && ll[1] == r.stops[0].lng) {
+                                            startseg.push(r.segments.indexOf(seg));
+                                            // segorder[r.segments.indexOf(seg)]="start";
+                                            console.log('start', startseg);
+                                        }
+                                    })
+                                    // }
+                                    // if(endseg.length==0){
+                                    _(seg.listOfLatLng).each(function(ll) {
+                                        if (ll[0] == _.last(r.stops).lat && ll[1] == _.last(r.stops).lng) {
+                                            endseg.push(r.segments.indexOf(seg));
+                                            // segorder[r.segments.indexOf(seg)]="end";
+                                            console.log('end', endseg);
+                                        }
+                                    })
+                                    // console.log('segorder',segorder);
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+                                });
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+                                if (startseg[0] < endseg[0]) {
+                                    startsegid = startseg[startseg.length - 1];
+                                    endsegid = endseg[0];
+                                } else {
+                                    startsegid = startseg[0];
+                                    endsegid = endseg[endseg.length - 1];
+                                }
+                                //index found and saved as 1st element in startseg and endseg
+                                //actually drawing the route
+                                var defaultOptions = {
+                                    "route": function() {
+                                        return {
+                                            color: get_random_color(),
+                                            opacity: 1,
+                                            weight: 10
+                                        };
+                                    },
+                                    "stop": {
+                                        color: '#378AAD',
+                                        fillOpacity: 0.5,
+                                        radius: 5
+                                    }
+                                    // icon: L.divIcon({html:stop.name})
+                                };
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+                                var eachroutestyleoption = defaultOptions.route();
+                                dist = 0;
+                                for (segid = Math.min(startsegid, endsegid); segid <= Math.max(startsegid, endsegid); segid++) {
+                                    seg = r.segments[segid];
+                                    // console.log("segid",segid);
+                                    var segMPL = new L.Polyline(seg.listOfLatLng, eachroutestyleoption);
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-        </section>
+                                    segMPL.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + seg.id + "' target='_blank'>" + seg.id + "</a>," + segid + "");
 
-        <aside id="sidebar">
-          <a href="https://github.com/suress/yatayat/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/suress/yatayat/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+                                    YY._routeGroup.addLayer(segMPL);
+                                    for (i = 0; i < (seg.listOfLatLng.length) - 1; i++) {
+                                        dist += distanc(seg.listOfLatLng[i][0], seg.listOfLatLng[i][1], seg.listOfLatLng[i + 1][0], seg.listOfLatLng[i + 1][1]);
+                                    }
+                                    // // console.log('routed_route',routed_route);
+                                    // console.log("dist",dist);
+                                    map.removeLayer(YY._routeGroup);
+                                    map.addLayer(YY._routeGroup);
+                                }
+                                console.log('counter', ++counter);
+                                //sures
 
-          <p class="repo-owner"><a href="https://github.com/suress/yatayat"></a> is maintained by <a href="https://github.com/suress">suress</a>.</p>
+                                outputHTML += "Get on " + toTitleCase(r.transport) + " " + r.ref + " (" + r.name + ") at " + r.stops[0].name + " and ride till " + _.last(r.stops).name + "with distance of " + Math.round(dist) + " meters" + "<br/>";
+                            }
 
-          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div>
+                            );
+                            map.fitBounds(bounds);
+                            //sures
 
-  
-  </body>
+                            YY.render_(system, map, inclusionDict, {
+                                route: {
+                                    color: '#378AAD',
+                                    opacity: 1,
+                                    weight: 1
+                                }
+                                // stop: {color: '#378AAD', fillOpacity: 0.5, radius: 5}
+                            }, overrideDict);
+                            $('#routedisplay').show();
+                            $('#routedisplay').html(outputHTML);
+                            map.spin(false);
+
+                        }
+                    } else {
+                        YY.render_(system, map);
+                        $('#routedisplay').hide()
+                        map.spin(false);
+                    }
+                });
+
+                // suresh work
+                routeinfopanel(system.routes);
+                // $('.nav-tabs').button();
+                // suresh work end
+                if (YY.TILE_SOURCE) {
+                    if (YY.WAX) {
+                        wax.tilejson(YY.TILE_SOURCE, function(tilejson) {
+                            map.addLayer(new wax.leaf.connector(tilejson));
+                        });
+                    } else {
+                        var tiles = new L.TileLayer(YY.TILE_SOURCE, {
+                            attribution: YY.ATTRIBUTION
+                        });
+                        map.addLayer(tiles);
+                    }
+                }
+                map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
+
+                //auto init routing at start
+                // document.getElementById("startstop").value="Ratna Park";
+                // document.getElementById("endstop").value="Balaju";
+                // $('#endstop').change();
+                console.log("script end", system);
+
+            });
+
+            function get_random_color() {
+                var letters = '0123456789ABCDEF'.split('');
+                var color = '#';
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.round(Math.random() * 15)];
+                }
+                return color;
+            }
+
+            function toTitleCase(str) {
+                return str.replace(/\w\S*/g, function(txt) {
+                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                });
+            }
+        </script>
+        <div class="accordion" id="accordion2" position="absolute" style="width:20%; height: 75%" >
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"><b>Get Direction</b>
+                    </a>
+                </div>
+                <div id="collapseOne" class="accordion-body collapse in">
+                    <div class="accordion-inner">
+                        <div id="textboxes">
+                            <b>
+                                Start
+                            </b>
+                            <input type="text" id="startstop" class="typeahead" data-provide="typeahead"
+                            />
+                            <b>
+                                End
+                            </b>
+                            <input type="text" id="endstop" class="typeahead" data-provide="typeahead"
+                            style="color:red" />
+                            <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY._routeGroup.clearLayers();YY.render_(system,map);"> Clear </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                        Routes
+                    </a>
+                </div>
+                <div id="collapseTwo" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        <div id="routename">
+                        </div>
+                    </div>
+                </div>
+            </div>
+			 <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a  class="accordion-toggle" data-parent="#accordion2" href="bhadadar.html" target="_blank">
+                        Bus Fare
+                    </a>
+                </div>
+            </div>
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
+                    href="#collapse3">
+                        About Us
+                    </a>
+                </div>
+                <div id="collapse3" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        Designed By: </br></br>Suresh Shrestha</br>Prabesh Shrestha</br>Prakash Ghimire</br>Amrit Gautam</br><b></br>Kathmandu University</b>
+						
+                    </div>
+                </div>
+            </div>
+			
+			
+			
+			
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse4">
+                        How to use
+                    </a>
+                </div>
+                <div id="collapse4" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        <h2>
+                            For ROUTING
+                        </h2>
+                        <h4>
+                            One Option :
+                        </h4>
+                        <p>
+                            You can generally write the start stop name and then end stop name.This
+                            gives you the route from the start point to end point through the public
+                            transport route available. It can be clearly viewed on the map along with
+                            the different stops and its name in going through the route.
+                        </p>
+                        <h4>
+                            Next Option :
+                        </h4>
+                        <p>
+                            You can directly click at the stop and choose it as start stop and the
+                            required end stop in the map which can also show the route on map. You
+                            can also set the another start or end stop directly on the map.
+                        </p>
+                        <h2>
+                            For Specific Route Viewing
+                        </h2>
+                        <p>
+                            You can first click on the link ROutes Of Kathmandu. Then click on the
+                            respective route which you want to see. You can view it on the map with
+                            the selected route zoomed in.
+                        </p>
+                        <p>
+                            You can again click on the next route to see the next route.
+                        </p>
+                        <h2>
+                            For Finding Location
+                        </h2>
+                        <p>
+                            You can search the place by clicking the search bar on the top right corner
+                            next to the zoom bar.
+                        </p>
+                        <p>
+                            There you can write the place of the name to search.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        
+			<div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
+                    href="#collapse5">
+                        Help us Improve
+                    </a>
+                </div>
+                <div id="collapse5" class="accordion-body collapse">
+                    <div class="accordion-inner">
+					<iframe src="https://docs.google.com/forms/d/1bl_ZcdcgtXzm7wLqXyMddtWrfOWxkMarOg8KidjueSY/viewform?embedded=true" width="250" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>		
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="mydiv">
+			<div id="myCarousel" class="carousel slide" >
+              		      <!-- Carousel items -->
+                              <div class="carousel-inner">
+                                <div class="active item"><img src="s-bus.jpg" width="262 px" height="182"></div>
+                                <div class="item"><img src="tempo.jpg"width="262 px" height="182"></div>
+                                <div class="item"><img src="micro.jpg"width="262 px" height="182"></div>
+								<div class="item"><img src="yatayat office.gif"width="262 px" height="182"></div>
+                              </div>
+                              <!-- Carousel nav -->
+                              <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                              <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+			</div>
+		</div>
+		
+    </body>
+
 </html>

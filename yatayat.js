@@ -29,7 +29,7 @@ YY.System = function(routes) {
 
     })(this);
 };
-//takes routes and retun stopIds for stops in route
+//takes routes and return stopIds for stops in route
 YY.System.prototype.allStops = function() {
     var idToStop = {};
     this.routes.forEach(function(r) {
@@ -242,7 +242,7 @@ YY.Route = function(id, stops, segments, tag, startSegID) {
     }
     this.deriveStopDict(); // note: this must happen after the order call
 };
-//derive the Stop Dictionay with all stops in the route
+//derive the Stop Dictionay with all stops of the route
 YY.Route.prototype.deriveStopDict = function () {
     var stopDict = {};
     _(this.stops).each(function(s) {
@@ -259,12 +259,13 @@ function distanc(lat1,lon1,lat2,lon2){
     // // console.log('distance',d);
     return d;
     }
-
+//distance for Object with two points
 var distanceForObjLL = function(ll1, ll2) { //return Math.pow(ll1.lat - ll2.lat, 2) + Math.pow(ll1.lng - ll2.lng, 2); 
     return distanc(ll1.lat,ll1.lng,ll2.lat,ll2.lng);};
+//distance for Array of Two points
 var distanceForArrLL = function(ll1, ll2) { //return Math.pow(ll1[0] - ll2[1], 2) + Math.pow(ll1[0] - ll2[1], 2); 
     return distanc(ll1[0],ll1[1],ll2[0],ll2[1]);};
-
+//take to order_
 YY.Route.prototype.order = function(startSegID) {
     return this.order_(startSegID);
 }
@@ -371,7 +372,7 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
     //// console.log(_.chain(this._unconnectedSegments).pluck('orderedListofStops').flatten().pluck('tag').value());
     //DEBUG: _.each(stops, function(s) {// console.log(s.tag.name)});
 };
-
+//create Stop obj with following propries id,lat,long and tag
 YY.Stop = function(id, lat, lng, tag) {
     this.id = id;
     this.lat = lat;
@@ -418,7 +419,7 @@ YY.Segment.prototype.flip = function() {
     this.listOfLatLng = _(this.listOfLatLng).reverse();
     this.orderedListofStops = _(this.orderedListofStops).reverse();
 }
-
+//takes overpassXML from xml and creates nodes, segments and 
 YY.fromOSM = function (overpassXML) {
     var nodes = {};
     var segments = {};
@@ -501,10 +502,14 @@ YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOve
         YY._layerGroup.clearLayers();
         if (!YY._routeGroup) { YY._routeGroup = new L.LayerGroup(); }
         // YY._routeGroup.clearLayers();
+        if(YY._singlelayer){
+            YY._singlelayer.clearLayers();
+            // map.removeLayer(YY._singlelayer);
+        }
         
         var filteredSystem = system.prune(includeIDDict);
         var defaultOptions = 
-            {"route" : function() { return {color: 'yellow', opacity: 1, weight: 6}; },
+            {"route" : function() { return {color: '#FCCC1E', opacity: 1, weight: 4}; },
              "stop"  : {color: '#378AAD', fillOpacity: 0.5, radius: 5}};
         // render the route as a multi-polyline
         _(filteredSystem.routes).each(function(route) {
@@ -549,60 +554,7 @@ YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOve
         map.addLayer(YY._layerGroup);
     };
 
-
-// route information sidebar
-    function routeinfopanel(routes){
-        // // // console.log("routeinfo",routes);
-        panel = document.getElementById("routename");
-        c=0;
-        _(routes).each(function(r){
-            rdiv = document.createElement('div');
-            rdiv.id = c++;
-            rdiv.innerHTML = r.name;
-            // console.log('system.routes[rdiv.id]',system.routes[rdiv.id]);
-            // rdiv.onclick= map.addLayer(YY.render_(r, routes[r.id], document.getElementById(rdiv)));
-            rdiv.setAttribute("onclick","YY.single_route_render(system,system.routes[this.id]),this.style.background='blue'");
-            panel.appendChild(rdiv);
-        })
-    }
-    YY.single_route_render = function(system, route) {      
-        if(YY._routeGroup){
-            YY._routeGroup.clearLayers();
-        }
-        // this.style.background-color.Clear();
-
-        if(YY._singlelayer){
-            YY._singlelayer.clearLayers();
-            // map.removeLayer(YY._singlelayer);
-        }
-           
-        else
-            {YY._singlelayer = new L.LayerGroup();}
-        _.each(route.segments,function(seg, idx) {
-            var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
-            var poly = new L.Polyline(latlngs, {color: 'green',weight:7});
-            YY._singlelayer.addLayer(poly);
-            // goodPop("seg: "+seg.id, latlngs[Math.floor(latlngs.length / 2)], poly);
-        });
-        route.stops.forEach(function(stop) {
-            var marker;
-            var ll = new L.LatLng(stop.lat, stop.lng);
-            marker = new L.marker(ll, {icon:L.divIcon({html:stop.name})});
-            // goodPop(stop.name + " (id:"+stop.id+")", ll, marker);
-            YY._singlelayer.addLayer(marker);
-        });
-        map.addLayer(YY._singlelayer);
-        var rt_bd=new L.LatLngBounds();
-        rt_bd.extend(new L.LatLng(route.stops[0].lat,route.stops[0].lng));                      
-        rt_bd.extend(new L.LatLng(_.last(route.stops).lat,_.last(route.stops).lng));
-        map.fitBounds(rt_bd);
-        // // console.log('Eroor render successful');
-        return YY._singlelayer;
-    };
-
-
-
-
+ 
 // COLORS MODULE
 var colors = (function() {
     var colors = {};
@@ -630,6 +582,45 @@ var colors = (function() {
    
     return colors;
 }());
+
+YY.single_route_render = function(system, route) {      
+        if(YY._routeGroup){
+            YY._routeGroup.clearLayers();
+        }
+        if(YY._layerGroup){
+            YY._layerGroup.clearLayers();
+        }
+        $('#routedisplay').hide();
+        
+        if(YY._singlelayer){
+            YY._singlelayer.clearLayers();
+            // map.removeLayer(YY._singlelayer);
+        }
+           
+        else{
+            YY._singlelayer = new L.LayerGroup();
+        }
+        _.each(route.segments,function(seg, idx) {
+            var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
+            var poly = new L.Polyline(latlngs, {color: 'green',weight:7});
+            YY._singlelayer.addLayer(poly);
+            // goodPop("seg: "+seg.id, latlngs[Math.floor(latlngs.length / 2)], poly);
+        });
+        route.stops.forEach(function(stop) {
+            var marker;
+            var ll = new L.LatLng(stop.lat, stop.lng);
+            marker = new L.marker(ll, {icon:L.divIcon({html:stop.name})});
+            // goodPop(stop.name + " (id:"+stop.id+")", ll, marker);
+            YY._singlelayer.addLayer(marker);
+        });
+        map.addLayer(YY._singlelayer);
+        var rt_bd=new L.LatLngBounds();
+        rt_bd.extend(new L.LatLng(route.stops[0].lat,route.stops[0].lng));                      
+        rt_bd.extend(new L.LatLng(_.last(route.stops).lat,_.last(route.stops).lng));
+        map.fitBounds(rt_bd);
+        // // console.log('Eroor render successful');
+        return YY._singlelayer;
+    }; 
 
 // selectively export as a node module
 var module = module || {};
