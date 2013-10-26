@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-10-24T23:59:01Z"/>
+<meta osm_base="2013-10-25T23:59:01Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7205087" lon="85.3633310"/>
@@ -2072,7 +2072,7 @@
     <tag k="name" v="Dhalku Chwok"/>
     <tag k="place" v="neighbourhood"/>
   </node>
-  <node id="480428386" lat="27.7218315" lon="85.3355691"/>
+  <node id="480428386" lat="27.7217694" lon="85.3355368"/>
   <node id="480428392" lat="27.7237702" lon="85.3369708"/>
   <node id="480428397" lat="27.7243890" lon="85.3370959"/>
   <node id="480428398" lat="27.7245972" lon="85.3373620"/>
@@ -5807,6 +5807,7 @@
   <node id="2489300451" lat="27.7307327" lon="85.3298857"/>
   <node id="2490559026" lat="27.7188863" lon="85.3322562"/>
   <node id="2503898726" lat="27.7261199" lon="85.3376857"/>
+  <node id="2508263728" lat="27.7258504" lon="85.3375803"/>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -7342,6 +7343,7 @@
     <nd ref="480425955"/>
     <nd ref="2102383802"/>
     <nd ref="2503898726"/>
+    <nd ref="2508263728"/>
     <nd ref="480429319"/>
     <nd ref="2088215482"/>
     <nd ref="480425982"/>
