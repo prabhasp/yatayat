@@ -332,9 +332,9 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
             thisSegment.listOfLatLng.reverse();
             thisSegment.orderedListofStops.reverse();
         }
-        if (_.last(stops) === thisSegment.orderedListofStops[0]) {
-            thisSegment.orderedListofStops = _.rest(thisSegment.orderedListofStops);
-        }
+		//if (_.last(stops) === thisSegment.orderedListofStops[0]) {
+          //  thisSegment.orderedListofStops = _.rest(thisSegment.orderedListofStops);
+        //}
         stops = stops.concat(thisSegment.orderedListofStops);
 
         var next = closestSegment(thisSegment);
@@ -354,7 +354,8 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
 
     this.stops = _.map(stops, function(s) { return new YY.Stop(s.id, s.lat, s.lng, s.tag); });
     //// console.log(_.pluck(route.stops, 'name'));
-   
+   // TODO: refactor to remove this line, a stopgap measure which removes duplicates
+     this.stops = _(this.stops).uniq(false, function(o) { return o.id; }) 
     if (_.keys(segmentOrderDict).length === 0) {
         // console.log('ordering not quite successful for route ', route.name);
         this._unconnectedSegments = this.segments;
