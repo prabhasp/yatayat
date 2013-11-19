@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-11-17T23:59:02Z"/>
+<meta osm_base="2013-11-18T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7204438" lon="85.3637665"/>
@@ -177,7 +177,6 @@
   <node id="31152796" lat="27.7060196" lon="85.3095675"/>
   <node id="31152988" lat="27.7075599" lon="85.3121635"/>
   <node id="31152989" lat="27.7076970" lon="85.3116231"/>
-  <node id="31152994" lat="27.7081366" lon="85.3101337"/>
   <node id="31228768" lat="27.6789154" lon="85.3495276">
     <tag k="name" v="Koteshwor Stop"/>
     <tag k="public_transport" v="stop_position"/>
@@ -3527,6 +3526,10 @@
   <node id="1802350563" lat="27.7425428" lon="85.3394602"/>
   <node id="1802354339" lat="27.7431870" lon="85.3400447"/>
   <node id="1802839412" lat="27.6996678" lon="85.3134436"/>
+  <node id="1803523643" lat="27.7081366" lon="85.3101337">
+    <tag k="name" v="Bangemudha"/>
+    <tag k="place" v="neighbourhood"/>
+  </node>
   <node id="1803523680" lat="27.7036665" lon="85.3058967"/>
   <node id="1803523686" lat="27.7038614" lon="85.3059387"/>
   <node id="1803523696" lat="27.7041311" lon="85.3062627"/>
@@ -6050,7 +6053,7 @@
     <nd ref="2088657276"/>
     <nd ref="31152989"/>
     <nd ref="2126480291"/>
-    <nd ref="31152994"/>
+    <nd ref="1803523643"/>
     <nd ref="2127116483"/>
     <nd ref="1945833428"/>
     <nd ref="670169117"/>
