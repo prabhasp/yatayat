@@ -428,11 +428,25 @@ YY.Segment.prototype.flip = function() {
     this.orderedListofStops = _(this.orderedListofStops).reverse();
 }
 
+/**
+ * Converts a file containing routes in osm xml format to a yatayat based system
+ * 1) process all the returned nodes; put them in local nodes obj
+ * 2) put all ways from overpass into local segments obj + stopToSegDict
+ * 
+ * @param  xml_data_type overpassXML
+ * @return system
+ */
 YY.fromOSM = function (overpassXML) {
-    var nodes = {};
-    var segments = {};
-    var routeStops = {};
-    var stopToSegDict = {};
+    var nodes = {};         // nodes object referenced by id
+    var segments = {};      // ways object referenced by id
+    var routeStops = {};    
+    var stopToSegDict = {}; // stopid references which seg it lies on
+
+    /**
+     * Converts tags to dict
+     * @param  {xml element} tag list with k v pair
+     * @return {tag object}
+     */
     var tagToObj = function(tag) {
         tags = {};
         _.each(tag, function (t) { 
@@ -443,18 +457,20 @@ YY.fromOSM = function (overpassXML) {
 
     var $overpassXML = $(overpassXML);
 
-    /* Step 1: process all the returned nodes; put them in local nodes obj */
+/* Step 1: process all the returned nodes; put them in local nodes obj referenced by nodeid */
     _.each($overpassXML.find('node'), function(n) {
         var $n = $(n);
         var tagObj = tagToObj($n.find('tag'));
-        nodes[$n.attr('id')] = {id: $n.attr('id'),
-                                lat: $n.attr('lat'),
-                                lng: $n.attr('lon'), 
-                                tag: tagObj,
-                                is_stop: tagObj.public_transport === 'stop_position'};
+        nodes[$n.attr('id')] = {
+            id: $n.attr('id'),
+            lat: $n.attr('lat'),
+            lng: $n.attr('lon'), 
+            tag: tagObj,
+            is_stop: tagObj.public_transport === 'stop_position'
+        };
     });
 
-    /* Step 2: put all ways from overpass into local segments obj + stopToSegDict */ 
+/* Step 2: put all ways from overpass into local segments obj + stopToSegDict */ 
     _.each($overpassXML.find('way'), function(w) {
         var $w = $(w);
         var myNodes = [];
@@ -472,7 +488,8 @@ YY.fromOSM = function (overpassXML) {
         // At this point, myNodes = ordered list of nodes in this segment, myStops = ordered list of stops
         segments[$w.attr('id')] = new YY.Segment($w.attr('id'), myNodes, tagToObj($w.find('tag')), myStops);
     });
-    /*step 3*/
+
+/* Step 3: */
     var routes = _.map($overpassXML.find('relation'), function(r) {
         var $r = $(r);
         var mySegments = [];
