@@ -387,30 +387,39 @@ YY.Segment = function(id, listOfLatLng, tag, orderedStops) {
     this.orderedListofStops = orderedStops; // intermediarily needed
 };
 
-YY.fromConfig = function(config_path, cb) {
-    // sequentially loads config file, and the system it calls for
-    // cb is called on the resulting system.
-    // // console.log('$ in fromConfig',$);
-    //   
+/**
+ * 1) Load the config file 
+ * 2) Load the data as stated in config file
+ * 3) If loading data is successful, envoke the callback which means starting he system.
+
+ * @param  file_url   config_path
+ * @param  callback function cb
+ * @return none
+ */
+YY.fromConfig = function(config_path, cb) {   
+// step 1
     $.getJSON(config_path, {}, function(conf) {
         // blend in the conf to the YY namespace
         for(var key in conf) {
             YY[key] = conf[key];
         }
         // load in & parse XML
-        // // console.log('cb',cb);
-        //map.spin(true);
-
-        $.ajax(
-            {   type: YY.GET_OR_POST, 
-                url: YY.API_URL,
-                data: YY.QUERY_STRING,
-                dataType: "text",
-                success: function(res) {
-                    cb(YY.fromOSM(res));
-                    map.spin(false);
-                }
-            });
+        // console.log('cb',cb);
+        // map.spin(true);
+// step 2
+        $.ajax({
+            type: YY.GET_OR_POST, 
+            url: YY.API_URL,
+            data: YY.QUERY_STRING,
+            dataType: "text",
+// step 3
+            success: function(overpassXML) {
+                // convert xml to system object
+                system = YY.fromOSM(overpassXML); 
+                map.spin(false);
+                cb(system);
+            }
+        });
     });
 };
 
