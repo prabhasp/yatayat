@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-12-02T23:59:01Z"/>
+<meta osm_base="2013-12-03T23:59:01Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7204438" lon="85.3637665"/>
@@ -5860,6 +5860,7 @@
   <node id="2559497470" lat="27.6876149" lon="85.2434517"/>
   <node id="2559497506" lat="27.6272400" lon="85.3184851"/>
   <node id="2559497546" lat="27.6745473" lon="85.3977952"/>
+  <node id="2562573854" lat="27.7303925" lon="85.3301971"/>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -8449,6 +8450,7 @@
     <nd ref="2071315826"/>
     <nd ref="2071332692"/>
     <nd ref="2489300451"/>
+    <nd ref="2562573854"/>
     <nd ref="2489300445"/>
     <nd ref="480423682"/>
     <nd ref="1835462368"/>
@@ -9437,7 +9439,6 @@
     <tag k="highway" v="secondary"/>
     <tag k="lanes" v="4"/>
     <tag k="name" v="Gairidhara Road"/>
-    <tag k="oneway" v="yes"/>
   </way>
   <way id="172385216">
     <nd ref="31151329"/>
