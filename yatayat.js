@@ -207,7 +207,7 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
  * For all stops in system, If they are in same route, give them smeroutedistance, else if they are same stops in different routes give them transferDistance
  * @param  {[int]} stopID  [osmid of stop node]
  * @param  {[int]} routeID [osmid of route relation]
- * @return {[neighborNodes]}         [List of stop which have either same routeid or same stopid as the current stop. attributes routeID, stopID and distance to current stop]
+ * @return {[neighborNodes]}         [List of neighborNodes which have attributes routeID, stopID and distance to current stop]
  */
 YY.System.prototype.neighborNodes = function(stopID, routeID) {
     var thisRoute = _.find(this.routes, function(r) { return r.id === routeID; });
