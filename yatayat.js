@@ -167,8 +167,6 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
             set(closedset, current, current);
             
             var neighbors = system.neighborNodes(current.stopID, current.routeID);
-            console.log(neighbors);
-            debugger;
             _(neighbors).each( function(neighbor) {
                 if (get(closedset, neighbor)) {
                     return; // equivalent to a loop continue
@@ -214,7 +212,7 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
 YY.System.prototype.neighborNodes = function(stopID, routeID) {
     var thisRoute = _.find(this.routes, function(r) { return r.id === routeID; });
     var sameRouteDistance = 1;
-    var transferDistance = 5;
+    var transferDistance = 1;
     var neighbors = []; 
     _.each(thisRoute.stops, function(s, idx) {
         if (s.id === stopID) {
@@ -301,7 +299,9 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
         // console.log('Ordering not possible for route: ', route.name, '; start segment likely not in route ... ?');
         return;
     }
+
     var llToObj = function(ll, seg) { return {lat: ll[0], lng: ll[1], seg: seg}; } 
+
     // kd-tree consisting of the 'start-endpoints' of a segment
     var startKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(seg.listOfLatLng[0], seg); }), 
                         distanceForObjLL, ["lat","lng"]);
@@ -332,7 +332,10 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
         var nextFwdTreeCnxn = _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
         ret = endKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
         var nextBwdTreeCnxn =  _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
+
         var cnxnChanger = (end === 'first') ? {'fwd': 'bwd', 'bwd': 'fwd'} : {'fwd': 'fwd', 'bwd': 'bwd'};
+
+        // Check distance between the closest point from the list of start points and end points
         if (nextFwdTreeCnxn[1] < nextBwdTreeCnxn[1]) {
             segmentOrderDict[thisSegment.id] = nextFwdTreeCnxn[0].seg;
             return { nextSeg: nextFwdTreeCnxn[0].seg, sqDist: nextFwdTreeCnxn[1], cnxn: cnxnChanger['fwd'] };
@@ -365,6 +368,7 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
     }
     var fwdFacing = closestSegment(startSegment);
     var bwdFacing = closestSegment(startSegment, 'first'); // nearest to first node = bwd facing
+    // console.log("fwdFacing",fwdFacing.sqDist,"bwdFacing",bwdFacing.sqDist);
     if (fwdFacing.sqDist < bwdFacing.sqDist) {
         recurse(startSegment, false);
     } else {
