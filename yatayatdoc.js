@@ -167,8 +167,7 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
             set(closedset, current, current);
             
             var neighbors = system.neighborNodes(current.stopID, current.routeID);
-            console.log(neighbors);
-            debugger;
+            
             _(neighbors).each( function(neighbor) {
                 if (get(closedset, neighbor)) {
                     return; // equivalent to a loop continue
