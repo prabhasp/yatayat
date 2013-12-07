@@ -105,6 +105,7 @@ YY.System.prototype.takeMeThere = function(startStopID, goalStopID) {
 // Else return undefined
 //sures--in form of routes
 YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
+    z('test');
     var system = this;
     var openset = {};
     var closedset = {}; 
@@ -155,6 +156,7 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
         // continue checking until goalnode is expanded
         while(_.keys(openset).length) {
             var current = openset[_.min(_(openset).keys(), f)];
+            z("current "+system.routeDict[current.routeID].stopDict[current.stopID].name+"/"+system.routeDict[current.routeID].name);
             //// console.log('open-begin', _.map(_(openset).values(), stopNameFromObj));
             //// console.log('closed-begin', _.map(_(closedset).values(), stopNameFromObj));
 
@@ -167,12 +169,16 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
             set(closedset, current, current);
             
             var neighbors = system.neighborNodes(current.stopID, current.routeID);
+            z("<ol>");
             _(neighbors).each( function(neighbor) {
+                z("<li>neighbor "+system.routeDict[neighbor.routeID].stopDict[neighbor.stopID].name+"/"+system.routeDict[neighbor.routeID].name+"</li>");
                 if (get(closedset, neighbor)) {
+                    z("<li>closed "+system.routeDict[neighbor.routeID].stopDict[neighbor.stopID].name+"/"+system.routeDict[neighbor.routeID].name);
                     return; // equivalent to a loop continue
                 } 
                 else {
                     var tentativeGScore = get(gScores, current) + neighbor.distToNeighbor; // latter = dist(current, neighbor)
+                    z("<li>gScores="+tentativeGScore);
                     if(! get(openset, neighbor) || tentativeGScore < get(gScores, neighbor)) {
                         set(openset, neighbor, neighbor);
                         set(cameFrom, neighbor, current);
@@ -181,6 +187,7 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
                     }
                 }
             });
+            z("</ol>");
         }
     }
     var res = aStar(); 
@@ -626,8 +633,9 @@ YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOve
             // map.removeLayer(YY._singlelayer);
         }
            
-        else
-            {YY._singlelayer = new L.LayerGroup();}
+        else{
+            YY._singlelayer = new L.LayerGroup();
+        }
         _.each(route.segments,function(seg, idx) {
             var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
             var poly = new L.Polyline(latlngs, {color: 'green',weight:7});
