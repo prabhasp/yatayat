@@ -58,11 +58,6 @@
             $('#routedisplay').hide()
             // initialize the map
             var map = new L.Map('publicTransportMap');
-            // var LC = new L.Control.Layers().addTo(map);
-            var osmGeocoder = new L.Control.OSMGeocoder({
-                position: 'topleft'
-            });
-            map.addControl(osmGeocoder);
 
             //var ktmBB = "85.2885,27.6839,85.3368,27.7299";
             var system;
