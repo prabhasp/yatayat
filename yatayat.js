@@ -589,18 +589,10 @@ YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOve
                 var marker;
                 if (leafletOverrideOptions && (stop.id in leafletOverrideOptions)) {
                     marker = new L.marker(Lll, {icon:L.divIcon({html:stop.name})});
-                    // marker = new L.CircleMarker(Lll,
-                    //    leafletOverrideOptions[stop.id] || leafletBaseOptions.stop);
-                    // marker = new L.marker(Lll,
-                       // {icon: L.icon({iconUrl:'bus.jpg',iconSize: [20, 20],iconAnchor: [0, 0]})}).addTo(map);
                 } 
                 else {
-                    // marker = new L.marker(Lll, {icon:L.divIcon({html:stop.name})}).addTo(map);
-                     // marker = new L.CircleMarker(Lll,
-                     //     (leafletBaseOptions && leafletBaseOptions.stop) ||
-                     //         defaultOptions.stop);
                     marker = new L.marker(Lll,
-                       {icon: L.icon({iconUrl:'bus.jpg',iconSize: [15, 15],iconAnchor: [0, 0]}),title: stop.name, riseOnHover:true}).addTo(map);
+                       {icon: L.icon({iconUrl:'bus.png',iconSize: [18, 18],iconAnchor: [9, 9]}),title: stop.name, riseOnHover:true}).addTo(map);
                 }
             // marker.bindPopup(stop.name+"</br><a href='#'onclick='alert(\""+stop.name+"\")'>From Here</a>");
             marker.bindPopup(stop.name+"</br><a href='#' onclick='document.getElementById(\"startstop\").value=\""+stop.name+"\";$(\"#startstop\").change()'>From Here</a>"+"</br><a href='#' onclick='document.getElementById(\"endstop\").value=\""+stop.name+"\";$(\"#endstop\").change()'>To Here</a>");

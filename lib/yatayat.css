@@ -15,9 +15,8 @@ body {
     right: 0;
     height: 100%;
 	border: 1px solid #ccc;
-    background-color:#EFEEEC ; color: #A52A2A;
+    background-color:#EFEEEC ; color: #333;
 	/*box-shadow: 10px 10px 15px #888888;*/
-    text-shadow: 0 0 0.2em #8F7;
 	
 	width: 20%;
     overflow: auto;
@@ -41,8 +40,8 @@ body {
     top:10px;
     left: 25%;
     height: 35;
-    background-color: ;
-    text-shadow: 0 0 0.2em #F87, 0 0 0.2em #F87;
+    text-shadow: 0 0 0.2em #ccc, 0 0 0.2em #ccc;
+    font-weight: bold;
     width: 465;
     z-index: 1000;
     text-align: center;
@@ -52,7 +51,7 @@ body {
 
 label {
     width: 100%;
-    color: #050;
+    color: #333;
     font: bold 84% 'trebuchet
             ms',helvetica,sans-serif;
     background-color: #fed;
