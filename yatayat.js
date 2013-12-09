@@ -105,7 +105,6 @@ YY.System.prototype.takeMeThere = function(startStopID, goalStopID) {
 // Else return undefined
 //sures--in form of routes
 YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
-    z('test');
     var system = this;
     var openset = {};
     var closedset = {}; 
