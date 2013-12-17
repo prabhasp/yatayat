@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-12-15T23:59:02Z"/>
+<meta osm_base="2013-12-16T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7204438" lon="85.3637665"/>
@@ -12343,7 +12343,6 @@
     <tag k="Micro Bus No." v="18"/>
     <tag k="Time" v="4 am to 8 pm"/>
     <tag k="bicycle" v="yes"/>
-    <tag k="bridge" v="yes"/>
     <tag k="cycleway" v="no"/>
     <tag k="foot" v="designated"/>
     <tag k="highway" v="trunk"/>
