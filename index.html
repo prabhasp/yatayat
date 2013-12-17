@@ -1,88 +1,61 @@
 <html>
     
     <head>
+	
         <title>
             Kathmandu Public Transport
         </title>
         <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
         <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="lib/leaflet/Control.OSMGeocoder.css">
         <link rel="stylesheet" href="lib/yatayat.css" />
         <!--[if lte IE 8]>
             <link rel="stylesheet" href="lib/leaflet/leaflet.ie.css" />
         <![endif] -->
-        <script src="lib/jquery-1.7.2.min.js">
-                
-        </script>
-        <script src="lib/underscore-min.js">
-                
-        </script>
-        <script src="lib/leaflet/leaflet.js">
-                
-        </script>
-        <script src="lib/leaflet/spin.min.js">
-                
-        </script>
-        <script src="lib/leaflet/leaflet.spin.js">
-                
-        </script>
-        <script src="lib/wax.leaf.min.js">
-                
-        </script>
-        <script src="lib/kdtree/src/web/kdTree.js">
-                
-        </script>
-        <script src="lib/bootstrap/js/bootstrap.min.js">
-                
-        </script>
-        <script src="yatayat.js">
-                
-        </script>
-        <script type="text/javascript" src="lib/leaflet/Control.OSMGeocoder.js">
-        </script>
-        <script src="lib/routeinfopanel.js">
-                
-        </script>
+        <script src="lib/jquery-1.7.2.min.js"> </script>
+        <script src="lib/underscore-min.js"> </script>
+        <script src="lib/leaflet/leaflet.js"> </script>
+        <script src="lib/leaflet/spin.min.js"> </script>
+        <script src="lib/leaflet/leaflet.spin.js"> </script>
+        <script src="lib/wax.leaf.min.js"> </script>
+        <script src="lib/kdtree/src/web/kdTree.js"> </script>
+        <script src="lib/bootstrap/js/bootstrap.min.js"> </script>
+        <script src="yatayat.js"> </script>
+        <script src="lib/routeinfopanel.js"> </script>
     </head>
     
     <body>
+        <div id="Title">
+            Kathmandu Public Transport
+        </div>
         <div class="alert" id="routedisplay" style="background:white;position:absolute;top:40;left:60;z-index:999">
         </div>
-        <div id="textboxes" style="position:absolute">
-            <b>
-                Start
-            </b>
-            <input type="text" id="startstop" class="typeahead" data-provide="typeahead"
-            />
-            <b>
-                End
-            </b>
-            <input type="text" id="endstop" class="typeahead" data-provide="typeahead"
-            style="color:red" />
-            <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY._routeGroup.clearLayers();YY.render_(system,map);"> Clear </a>
-        </div>
-        <div id="publicTransportMap" style="width:80%; height: 100%; position:absolute; top:0">
+        <div id="publicTransportMap" style="width:80%; height: 100%">
             Loading ...
         </div>
-        <div id="routing_log" style="width:20%; height: 100%; position:absolute; left:80%; overflow:auto; top:0">
-            <h3>Routing Log</h3>
+        <div class="modal hide" id="myModal">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    X
+                </button>
             </div>
+            <br/>
+            <iframe src="https://docs.google.com/spreadsheet/embeddedform?formkey=dFdZeG9PYnVpY1FBMk4zVjBDaFNua1E6MQ"
+            width="700" height="500" frameborder="0" marginheight="0" marginwidth="0">
+                Loading...
+            </iframe>
+            // suresh work
+        </div>
+		<div id="Attribution" style="width:37%; height:3%; position:absolute; bottom:0px; right:20%">
+            Powered By <a href="http://leaflet.cloudmade.com">Leaflet</a>,
+            Data &copy; <a href="http://www.openstreetmap.org/copyright/en">OpenStreetMap</a> contributors,
+            Imagery and bus icon from <a href="http://mapbox.com/">MapBox</a>
+        </div>
         <script type="text/javascript" language="javascript">
-            
-            ln=0;
-            z = function(message){
-                div = document.getElementById('routing_log');
-                div.innerHTML += '<br>'+message;
-            }
+                    // UI HACK
             $('#textboxes').hide();
             $('#routedisplay').hide()
             // initialize the map
             var map = new L.Map('publicTransportMap');
-            // var LC = new L.Control.Layers().addTo(map);
-            // var osmGeocoder = new L.Control.OSMGeocoder({
-            //     position: 'topleft'
-            // });
-            // map.addControl(osmGeocoder);
 
             //var ktmBB = "85.2885,27.6839,85.3368,27.7299";
             var system;
@@ -174,7 +147,7 @@
                                         if (ll[0] == r.stops[0].lat && ll[1] == r.stops[0].lng) {
                                             startseg.push(r.segments.indexOf(seg));
                                             // segorder[r.segments.indexOf(seg)]="start";
-                                            // console.log('start', startseg);
+                                            console.log('start', startseg);
                                         }
                                     })
                                     // }
@@ -183,7 +156,7 @@
                                         if (ll[0] == _.last(r.stops).lat && ll[1] == _.last(r.stops).lng) {
                                             endseg.push(r.segments.indexOf(seg));
                                             // segorder[r.segments.indexOf(seg)]="end";
-                                            // console.log('end', endseg);
+                                            console.log('end', endseg);
                                         }
                                     })
                                     // console.log('segorder',segorder);
@@ -233,7 +206,7 @@
                                     map.removeLayer(YY._routeGroup);
                                     map.addLayer(YY._routeGroup);
                                 }
-                                // console.log('counter', ++counter);
+                                console.log('counter', ++counter);
                                 //sures
 
                                 outputHTML += "Get on " + toTitleCase(r.transport) + " " + r.ref + " (" + r.name + ") at " + r.stops[0].name + " and ride till " + _.last(r.stops).name + "with distance of " + Math.round(dist) + " meters" + "<br/>";
@@ -264,7 +237,7 @@
                 });
 
                 // suresh work
-                // routeinfopanel(system.routes);
+                routeinfopanel(system.routes);
                 // $('.nav-tabs').button();
                 // suresh work end
                 if (YY.TILE_SOURCE) {
@@ -282,8 +255,8 @@
                 map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 
                 //auto init routing at start
-                // document.getElementById("startstop").value="Thimi Stop";
-                // document.getElementById("endstop").value="Chardobato";
+                // document.getElementById("startstop").value="Ratna Park";
+                // document.getElementById("endstop").value="Balaju";
                 // $('#endstop').change();
                 console.log("script end", system);
 
@@ -304,23 +277,34 @@
                 });
             }
         </script>
-        <!-- 
-        <div class="accordion" id="accordion2">
+        <div class="accordion" id="accordion2" position="absolute" style="width:20%; height: 75%" >
             <div class="accordion-group">
                 <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">ROUTING
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"><b>Get Direction</b>
                     </a>
                 </div>
                 <div id="collapseOne" class="accordion-body collapse in">
                     <div class="accordion-inner">
-                        
+                        <div id="textboxes">
+                            <b>
+                                Start
+                            </b>
+                            <input type="text" id="startstop" class="typeahead" data-provide="typeahead"
+                            />
+                            <b>
+                                End
+                            </b>
+                            <input type="text" id="endstop" class="typeahead" data-provide="typeahead"
+                            style="color:red" />
+                            <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY._routeGroup.clearLayers();YY.render_(system,map);"> Clear </a>
                         </div>
                     </div>
                 </div>
+            </div>
             <div class="accordion-group">
                 <div class="accordion-heading">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                        Routes Of Kathmandu
+                        Routes
                     </a>
                 </div>
                 <div id="collapseTwo" class="accordion-body collapse">
@@ -328,6 +312,13 @@
                         <div id="routename">
                         </div>
                     </div>
+                </div>
+            </div>
+			 <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a  class="accordion-toggle" data-parent="#accordion2" href="bhadadar.html" target="_blank">
+                        Bus Fare
+                    </a>
                 </div>
             </div>
             <div class="accordion-group">
@@ -339,14 +330,23 @@
                 </div>
                 <div id="collapse3" class="accordion-body collapse">
                     <div class="accordion-inner">
-                        Designed By: </br>Amrit Karmacharya</br>Suresh Shrestha
+                        <b>Designed By:</b> <br/>
+                        <a href="http://ku.edu.np/dcge/mission.htm">Kathmandu University Geomatics</a> and <a href="http://Monsooncollective.org"> Monsoon Collective </a> <br/>
+                        <b>KU contributors:</b> Sur Suresh Shrestha, Prabesh Shrestha, Prakash Ghimire, Amrit Gautam, Shashish Maharjan, Subash Ghimire. <br/>
+                        <b>Monsoon Collective contributors:</b> Prabhas Pokharel, Robert Ochshorn, Sakar Pudasaini, Suveg Pandey, Shirish Pokharel, Anshu Khadka. <br/>
+						<b>Coordinated By:</b> Amrit Karmacharya and Prabhas Pokharel<br/><br/>
+						The project was started by the Monsoon Collective; KU students have taken that and are currently maintaining it, under the supervision of Shashish Maharjan and Subash Ghimire.
                     </div>
                 </div>
             </div>
+			
+			
+			
+			
             <div class="accordion-group">
                 <div class="accordion-heading">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse4">
-                        Help
+                        How to use
                     </a>
                 </div>
                 <div id="collapse4" class="accordion-body collapse">
@@ -395,17 +395,35 @@
                     </div>
                 </div>
             </div>
-        </div>
-        About Us
-        </a>
-        </div>
-        <div id="collapse3" class="accordion-body collapse">
-            <div class="accordion-inner">
-                Designed By: Amrit Karmacharya Suresh Shrestha
-            </div>
-        </div>
-        </div>
-        </div> -->
+        
+			<div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
+                    href="#collapse5">
+                        Help us Improve
+                    </a>
+                </div>
+                <div id="collapse5" class="accordion-body collapse">
+                    <div class="accordion-inner">
+						<iframe src="https://docs.google.com/forms/d/1HKyiRd_6WbKv8xOW243-0J9HRzOT7muQsC8nG30llJw/viewform?embedded=true" width="250" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="mydiv">
+			<div id="myCarousel" class="carousel slide" >
+              		      <!-- Carousel items -->
+                              <div class="carousel-inner">
+                                <div class="active item"><img src="s-bus.jpg" width="262 px" height="182"></div>
+                                <div class="item"><img src="tempo.jpg"width="262 px" height="182"></div>
+                                <div class="item"><img src="micro.jpg"width="262 px" height="182"></div>
+                              </div>
+                              <!-- Carousel nav -->
+                              <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                              <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+			</div>
+		</div>
+		
     </body>
 
 </html>

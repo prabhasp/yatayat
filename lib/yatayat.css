@@ -2,35 +2,56 @@
 body {
     margin: 0;
 }
+#Attribution{
+	cursor: auto;
+	font: 11px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+	padding: 0 5px;
+	background-color: #fed;
+}
 
 #accordion2 {
     position: absolute;
     top: 0;
     right: 0;
     height: 100%;
-    background-color: ; color: #00ff00;
-    width: 20%;
+	border: 1px solid #ccc;
+    background-color:#EFEEEC ; color: #333;
+	/*box-shadow: 10px 10px 15px #888888;*/
+	
+	width: 20%;
     overflow: auto;
     font-size: 15;
 }
 
+#mydiv {
+    position:absolute;
+    top: 75%;
+    left: 80%;
+    height:25%;
+	width : 20%;
+   
+   /*border: 1px solid #ccc;*/
+	/*overflow: auto;*/
+    background-color: #f3f3f3;
+}
+
 #Title {
     position: absolute;
-    top: 20 px;
+    top:10px;
     left: 25%;
-    height: 30;
-    background-color: rgb(53, 240, 240);
-    color: black;
+    height: 35;
+    text-shadow: 0 0 0.2em #ccc, 0 0 0.2em #ccc;
+    font-weight: bold;
     width: 465;
     z-index: 1000;
     text-align: center;
-    font-size: 25;
-    border-radius: 20;
+    font-size: 30;
+    border-radius: 0;
 }
 
 label {
     width: 100%;
-    color: #050;
+    color: #333;
     font: bold 84% 'trebuchet
             ms',helvetica,sans-serif;
     background-color: #fed;
@@ -43,6 +64,9 @@ input[type="radio"]{
 	left:0px;
 	top:0px;
 }
+.leaflet-control-attribution{
+    display: none;
+}
 .leaflet-control-geocoder {
 	box-shadow: 0 1px 7px #999;
 	background: #f8f8f9;
@@ -52,5 +76,6 @@ input[type="radio"]{
 	height: 50;
 	position: absolute;
 }
+
 </style>
 
