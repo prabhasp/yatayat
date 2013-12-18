@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-12-16T23:59:02Z"/>
+<meta osm_base="2013-12-17T23:59:01Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7204438" lon="85.3637665"/>
@@ -7841,8 +7841,11 @@
   <way id="111965837">
     <nd ref="1274038168"/>
     <nd ref="1274038028"/>
+    <tag k="bicycle" v="yes"/>
     <tag k="bridge" v="yes"/>
+    <tag k="foot" v="yes"/>
     <tag k="highway" v="secondary"/>
+    <tag k="layer" v="1"/>
     <tag k="name" v="Setopul"/>
   </way>
   <way id="111965846">
