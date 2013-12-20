@@ -86,6 +86,7 @@
             var routed;
             var routed_route;
 
+            console.log("the YY.config is called");
             YY.fromConfig("config.stable.json", function(sys) {
                 // debugger;
                 system = sys;
@@ -118,7 +119,7 @@
                         var bounds = new L.LatLngBounds();
                         if (gettingThereRoutes === 'FAIL') alert('cannot find a route from ', start, ' to ', end);
                         else {
-                            // // console.log('gettingThereRoutes',gettingThereRoutes);
+                            // console.log('gettingThereRoutes',gettingThereRoutes);
                             var inclusionDict = {};
                             var overrideDict = {};
                             var outputHTML = "";
@@ -229,7 +230,7 @@
                                     map.removeLayer(YY._routeGroup);
                                     map.addLayer(YY._routeGroup);
                                 }
-                                console.log('counter', ++counter);
+                                // console.log('counter', ++counter);
                                 //sures
 
                                 outputHTML += "Get on " + toTitleCase(r.transport) + " " + r.ref + " (" + r.name + ") at " + r.stops[0].name + " and ride till " + _.last(r.stops).name + "with distance of " + Math.round(dist) + " meters" + "<br/>";
@@ -252,7 +253,8 @@
                             map.spin(false);
 
                         }
-                    } else {
+                    } 
+                    else {
                         YY.render_(system, map);
                         $('#routedisplay').hide()
                         map.spin(false);
@@ -346,7 +348,7 @@
                 </div>
                 <div id="collapse3" class="accordion-body collapse">
                     <div class="accordion-inner">
-                        Designed By: </br>Amrit Karmacharya</br>Suresh Shrestha
+                        Designed By: </br>Amrit Karmacharya</br>Suresh Shrestha</br>Poshan Niraula
                     </div>
                 </div>
             </div>
@@ -408,7 +410,7 @@
         </div>
         <div id="collapse3" class="accordion-body collapse">
             <div class="accordion-inner">
-                Designed By: Amrit Karmacharya Suresh Shrestha
+                Designed By: Amrit Karmacharya Suresh Shrestha Poshan Niraula(working)
             </div>
         </div>
         </div>

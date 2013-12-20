@@ -162,6 +162,10 @@ YY.error_render = function(system, route, log) {
     // 5. Stops with the same name one after another
     // XXX: TODO
 
+    var samename = DQ.sameName(route);
+    var samenamecol = 'green';
+
+
 
     var addLog = function(msg, latlng, marker) {
         var $msg = document.createElement('li');
@@ -234,6 +238,17 @@ YY.error_render = function(system, route, log) {
             var msg = stop.name + " (id:"+stop.id+") has a similar name to far-off stop " + simnames[stop.id].name + ' in route ' + routename;
             addLog(msg, ll, marker);
         }
+        else if(stop.id in samename) {
+            marker = new L.CircleMarker(ll,
+                                        {color: samenamecol});
+            var routename = "";
+            for(var rid in samename[stop.id].routeDict) {
+                routename = samename[stop.id].routeDict[rid].name;
+            }
+            var msg = stop.name + " (id:"+stop.id+") has a similar name to far-off stop " + samename[stop.id].name + ' in route ' + routename;
+            addLog(msg, ll, marker);
+        }
+        
         else {
             marker = new L.CircleMarker(ll,
                                         {color: 'red', opacity:1});
