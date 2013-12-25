@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-12-23T23:59:02Z"/>
+<meta osm_base="2013-12-24T23:58:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7204438" lon="85.3637665"/>
@@ -2289,7 +2289,7 @@
   <node id="789059622" lat="27.7178008" lon="85.3232804"/>
   <node id="849950758" lat="27.7148741" lon="85.3458006"/>
   <node id="849950824" lat="27.7114407" lon="85.3176216"/>
-  <node id="849954109" lat="27.7073348" lon="85.3441793"/>
+  <node id="849954109" lat="27.7072272" lon="85.3443385"/>
   <node id="913398284" lat="27.6788796" lon="85.2972123">
     <tag k="highway" v="bus_stop"/>
     <tag k="name" v="TU Gate"/>
