@@ -1,5 +1,5 @@
 {
-    "API_URL": "aug_16.osm",
+    "API_URL": "transit.stable.xml",
     "GET_OR_POST": "GET",
     "WAX": true,
     "TILE_SOURCE": "http://a.tiles.mapbox.com/v3/amritkarma.map-6c5zckhu.jsonp",
