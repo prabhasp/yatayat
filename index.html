@@ -210,7 +210,7 @@
                                 //sures
                                 // debugger;
 
-                                outputHTML += "<pre style=\"color:"+eachroutestyleoption.color+"\">Get on " + toTitleCase(r.transport) + " " + r.ref + " (" + r.name + ") at " + r.stops[0].name + " and ride till " + _.last(r.stops).name + "with distance of " + Math.round(dist) + " meters" + "</pre><br/>";
+                                outputHTML += "<div style=\"color:"+eachroutestyleoption.color+"\">Get on " + toTitleCase(r.transport) + " " + r.ref + " (" + r.name + ") at " + r.stops[0].name + " and ride till " + _.last(r.stops).name + "with distance of " + Math.round(dist)/1000 + " km" + "</div>";
                             }
 
                             );
@@ -339,11 +339,7 @@
 						The project was started by the Monsoon Collective; KU students have taken that and are currently maintaining it, under the supervision of Shashish Maharjan and Subash Ghimire.
                     </div>
                 </div>
-            </div>
-			
-			
-			
-			
+            </div>		
             <div class="accordion-group">
                 <div class="accordion-heading">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse4">
