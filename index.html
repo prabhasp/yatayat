@@ -185,7 +185,6 @@
                                         fillOpacity: 0.5,
                                         radius: 5
                                     }
-                                    // icon: L.divIcon({html:stop.name})
                                 };
 
                                 var eachroutestyleoption = defaultOptions.route();
@@ -194,6 +193,7 @@
                                     seg = r.segments[segid];
                                     // console.log("segid",segid);
                                     var segMPL = new L.Polyline(seg.listOfLatLng, eachroutestyleoption);
+                                    debugger;
 
                                     segMPL.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + seg.id + "' target='_blank'>" + seg.id + "</a>," + segid + "");
 
@@ -201,7 +201,7 @@
                                     for (i = 0; i < (seg.listOfLatLng.length) - 1; i++) {
                                         dist += distanc(seg.listOfLatLng[i][0], seg.listOfLatLng[i][1], seg.listOfLatLng[i + 1][0], seg.listOfLatLng[i + 1][1]);
                                     }
-                                    // // console.log('routed_route',routed_route);
+                                    // console.log('routed_route',routed_route);
                                     // console.log("dist",dist);
                                     map.removeLayer(YY._routeGroup);
                                     map.addLayer(YY._routeGroup);

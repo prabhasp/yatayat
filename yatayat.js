@@ -429,7 +429,7 @@ YY.fromConfig = function(config_path, cb) {
         }
         // load in & parse XML
         // console.log('cb',cb);
-        // map.spin(true);
+        map.spin(true);
 // step 2
         $.ajax({
             type: YY.GET_OR_POST, 
