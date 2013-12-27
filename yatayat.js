@@ -6,13 +6,14 @@ var kdTree = kdTree || require('./lib/kdtree/src/node/kdTree.js').kdTree;
 var YY = YY || {};
 
 //takes routes and create array of routes as routes and routes in object form as routeDict
-YY.System = function(routes) {
+YY.System = function(routes,stopToSegDict) {
     this.routes = routes;
     var routeDict = {};
     _.each(this.routes, function(r) {
         routeDict[r.id] = r;
     });
     this.routeDict = routeDict;
+    this.stopToSegDict = stopToSegDict;
 
     // insert a routeDict within each stop
 
@@ -187,7 +188,7 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
     // NOW CONVERT A-STAR OUTPUT FORMAT TO ROUTE / STOPS OUTPUT FORMAT
     //// console.log(res);
     if (!res || res.length === 0) return 'FAIL';
-    // console.log('res',res);
+    console.log('res',res);
     var ret = [];
     var curRoute;
     _(res).each( function(sro) {
@@ -513,6 +514,7 @@ YY.fromOSM = function (overpassXML) {
         segments[$w.attr('id')] = new YY.Segment($w.attr('id'), myNodes, tagToObj($w.find('tag')), myStops);
     });
 
+
 /* Step 3: */
     var routes = _.map($overpassXML.find('relation'), function(r) {
         var $r = $(r);
@@ -542,7 +544,7 @@ YY.fromOSM = function (overpassXML) {
     // Filter out hiking routes
     routes = routes.filter(function(x) { return x.transport !== "hiking"; });
 
-    return new YY.System(routes);
+    return new YY.System(routes,stopToSegDict);
 }
 
 YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOverrideOptions) {
