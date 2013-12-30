@@ -6,7 +6,7 @@ var kdTree = kdTree || require('./lib/kdtree/src/node/kdTree.js').kdTree;
 var YY = YY || {};
 
 //takes routes and create array of routes as routes and routes in object form as routeDict
-YY.System = function(routes) {
+YY.System = function(routes,stopToSegDict) {
     // console.log("A new route is created");
     this.routes = routes;
     var routeDict = {};
@@ -14,6 +14,7 @@ YY.System = function(routes) {
         routeDict[r.id] = r;
     });
     this.routeDict = routeDict;
+    this.stopToSegDict = stopToSegDict;
 
     // insert a routeDict within each stop
 
@@ -30,7 +31,7 @@ YY.System = function(routes) {
 
     })(this);
 };
-//takes routes and retun stopIds for stops in route
+//takes routes and return stopIds for stops in route
 YY.System.prototype.allStops = function() {
     // console.log("allstops is called");
     var idToStop = {};
@@ -139,6 +140,12 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
         // console.log("get called");
         return dict[stopRouteObj.stopID + "," + stopRouteObj.routeID];
     };
+
+    /**
+     * After expanding the goal node, i.e. After geting to the goal, Now join each nodes in route in reverse order to form the route 
+     * @param  {stopRouteObj} currentNode [a stop in route object with stop id and route id]
+     * @return {list of stopRouteObj}             [The calculated path]
+     */
     var reconstructPath = function(currentNode) {
         var cameFromNode = get(cameFrom, currentNode);
         if(cameFromNode) {
@@ -159,9 +166,8 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
             set(fScores, n, heuristic(n));
         });
         var f = function (k) { return fScores[k]; };
-        console.log("the astar algorithm is called");
-        // console.log("the length is"+_.keys(openset).length);
-        // i = 0;
+
+        // continue checking until goalnode is expanded
         while(_.keys(openset).length) {
             // console.log(_.keys(openset).length);
             // i++;
@@ -175,13 +181,16 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
                 console.log("route finding completed");
                 return reconstructPath(current);
             }
+            
             delete(openset[current.stopID + "," + current.routeID]);
             set(closedset, current, current);
+            
             var neighbors = system.neighborNodes(current.stopID, current.routeID);
             _(neighbors).each( function(neighbor) {
                 if (get(closedset, neighbor)) {
                     return; // equivalent to a loop continue
-                } else {
+                } 
+                else {
                     var tentativeGScore = get(gScores, current) + neighbor.distToNeighbor; // latter = dist(current, neighbor)
                     if(! get(openset, neighbor) || tentativeGScore < get(gScores, neighbor)) {
                         set(openset, neighbor, neighbor);
@@ -198,7 +207,7 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
     // NOW CONVERT A-STAR OUTPUT FORMAT TO ROUTE / STOPS OUTPUT FORMAT
     //// console.log(res);
     if (!res || res.length === 0) return 'FAIL';
-    // console.log('res',res);
+    console.log('res',res);
     var ret = [];
     var curRoute;
     _(res).each( function(sro) {
@@ -214,11 +223,17 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
 };
 // BIG TODO: Change everything to be dicts indexed by ids rather than lists
 //sures-
+/**
+ * For all stops in system, If they are in same route, give them smeroutedistance, else if they are same stops in different routes give them transferDistance
+ * @param  {[int]} stopID  [osmid of stop node]
+ * @param  {[int]} routeID [osmid of route relation]
+ * @return {[neighborNodes]}         [List of neighborNodes which have attributes routeID, stopID and distance to current stop]
+ */
 YY.System.prototype.neighborNodes = function(stopID, routeID) {
     // console.log("the neighobouring node function is called");
     var thisRoute = _.find(this.routes, function(r) { return r.id === routeID; });
     var sameRouteDistance = 1;
-    var transferDistance = 5;
+    var transferDistance = 1;
     var neighbors = []; 
     _.each(thisRoute.stops, function(s, idx) {
         if (s.id === stopID) {
@@ -270,7 +285,7 @@ YY.Route = function(id, stops, segments, tag, startSegID) {
     }
     this.deriveStopDict(); // note: this must happen after the order call
 };
-//derive the Stop Dictionay with all stops in the route
+//derive the Stop Dictionay with all stops of the route
 YY.Route.prototype.deriveStopDict = function () {
     var stopDict = {};
     _(this.stops).each(function(s) {
@@ -288,12 +303,13 @@ function distanc(lat1,lon1,lat2,lon2){
     // // console.log('distance',d);
     return d;
     }
-
+//distance for Object with two points
 var distanceForObjLL = function(ll1, ll2) { //return Math.pow(ll1.lat - ll2.lat, 2) + Math.pow(ll1.lng - ll2.lng, 2); 
     return distanc(ll1.lat,ll1.lng,ll2.lat,ll2.lng);};
+//distance for Array of Two points
 var distanceForArrLL = function(ll1, ll2) { //return Math.pow(ll1[0] - ll2[1], 2) + Math.pow(ll1[0] - ll2[1], 2); 
     return distanc(ll1[0],ll1[1],ll2[0],ll2[1]);};
-
+//take to order_
 YY.Route.prototype.order = function(startSegID) {
     return this.order_(startSegID);
 }
@@ -311,7 +327,9 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
         // console.log('Ordering not possible for route: ', route.name, '; start segment likely not in route ... ?');
         return;
     }
+
     var llToObj = function(ll, seg) { return {lat: ll[0], lng: ll[1], seg: seg}; } 
+
     // kd-tree consisting of the 'start-endpoints' of a segment
     var startKDTree = new kdTree(_.map(route.segments, function(seg) { return llToObj(seg.listOfLatLng[0], seg); }), 
                         distanceForObjLL, ["lat","lng"]);
@@ -343,7 +361,10 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
         var nextFwdTreeCnxn = _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
         ret = endKDTree.nearest(llToObj(segmentEnd, thisSegment), 2);
         var nextBwdTreeCnxn =  _.min(ret, function(r) { if(r[0].seg.id == thisSegment.id) return 999999; else return r[1]; });
+
         var cnxnChanger = (end === 'first') ? {'fwd': 'bwd', 'bwd': 'fwd'} : {'fwd': 'fwd', 'bwd': 'bwd'};
+
+        // Check distance between the closest point from the list of start points and end points
         if (nextFwdTreeCnxn[1] < nextBwdTreeCnxn[1]) {
             segmentOrderDict[thisSegment.id] = nextFwdTreeCnxn[0].seg;
             return { nextSeg: nextFwdTreeCnxn[0].seg, sqDist: nextFwdTreeCnxn[1], cnxn: cnxnChanger['fwd'] };
@@ -362,9 +383,6 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
             thisSegment.listOfLatLng.reverse();
             thisSegment.orderedListofStops.reverse();
         }
-        if (_.last(stops) === thisSegment.orderedListofStops[0]) {
-            thisSegment.orderedListofStops = _.rest(thisSegment.orderedListofStops);
-        }
         stops = stops.concat(thisSegment.orderedListofStops);
 
         var next = closestSegment(thisSegment);
@@ -376,6 +394,7 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
     }
     var fwdFacing = closestSegment(startSegment);
     var bwdFacing = closestSegment(startSegment, 'first'); // nearest to first node = bwd facing
+    // console.log("fwdFacing",fwdFacing.sqDist,"bwdFacing",bwdFacing.sqDist);
     if (fwdFacing.sqDist < bwdFacing.sqDist) {
         recurse(startSegment, false);
     } else {
@@ -383,7 +402,9 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
     }
 
     this.stops = _.map(stops, function(s) { return new YY.Stop(s.id, s.lat, s.lng, s.tag); });
-    //// console.log(_.pluck(route.stops, 'name'));
+    // TODO: refactor to remove this line, a stopgap measure which removes duplicates
+    this.stops = _(this.stops).uniq(false, function(o) { return o.id; }) 
+    //console.log(_.pluck(route.stops, 'name'));
    
     if (_.keys(segmentOrderDict).length === 0) {
         // console.log('ordering not quite successful for route ', route.name);
@@ -402,7 +423,7 @@ YY.Route.prototype.order_ = function(orientingSegmentID) {
     //// console.log(_.chain(this._unconnectedSegments).pluck('orderedListofStops').flatten().pluck('tag').value());
     //DEBUG: _.each(stops, function(s) {// console.log(s.tag.name)});
 };
-
+//create Stop obj with following propries id,lat,long and tag
 YY.Stop = function(id, lat, lng, tag) {
     this.id = id;
     this.lat = lat;
@@ -418,28 +439,37 @@ YY.Segment = function(id, listOfLatLng, tag, orderedStops) {
     this.orderedListofStops = orderedStops; // intermediarily needed
 };
 
+/**
+ * 1) Load the config file 
+ * 2) Load the data as stated in config file
+ * 3) If loading data is successful, envoke the callback which means starting he system.
+
+ * @param  file_url   config_path
+ * @param  callback function cb
+ * @return none
+ */
 YY.fromConfig = function(config_path, cb) {
-    // sequentially loads config file, and the system it calls for
-    // cb is called on the resulting system.
-    // // console.log('$ in fromConfig',$);
-    console.log('$ in fromConfig',config_path);
-    $.getJSON(config_path, {}, function(conf) {//reads the json file
+// step 1
+    $.getJSON(config_path, {}, function(conf) {
         // blend in the conf to the YY namespace
         for(var key in conf) {
             YY[key] = conf[key];
         }
         // load in & parse XML
-        // // console.log('cb',cb);
-        //map.spin(true);
-
-        $.ajax(
-            {   type: YY.GET_OR_POST, 
+        // console.log('cb',cb);
+        map.spin(true);
+// step 2
+        $.ajax({
+            type: YY.GET_OR_POST, 
                 url: YY.API_URL,
                 data: YY.QUERY_STRING,
                 dataType: "text",
-                success: function(res) {//res is the xml file transit.stable.xml
-                    cb(YY.fromOSM(res));
+// step 3
+            success: function(overpassXML) {
+                // convert xml to system object
+                system = YY.fromOSM(overpassXML); 
                     map.spin(false);
+                cb(system);
                 }
             });
     });
@@ -450,12 +480,25 @@ YY.Segment.prototype.flip = function() {
     this.orderedListofStops = _(this.orderedListofStops).reverse();
 }
 
-YY.fromOSM = function (overpassXML) {//transit.stable.xml isoverpassxml now
-    console.log("funciton fromOSM is called");
-    var nodes = {};
-    var segments = {};
+/**
+ * Converts a file containing routes in osm xml format to a yatayat based system
+ * 1) process all the returned nodes; put them in local nodes obj
+ * 2) put all ways from overpass into local segments obj + stopToSegDict
+ * 
+ * @param  xml_data_type overpassXML
+ * @return system
+ */
+YY.fromOSM = function (overpassXML) {
+    var nodes = {};         // nodes object referenced by id
+    var segments = {};      // ways object referenced by id
     var routeStops = {};
-    var stopToSegDict = {};
+    var stopToSegDict = {}; // stopid references which seg it lies on
+
+    /**
+     * Converts tags to dict
+     * @param  {xml element} tag list with k v pair
+     * @return {tag object}
+     */
     var tagToObj = function(tag) {
         tags = {};
         _.each(tag, function (t) { 
@@ -467,15 +510,17 @@ YY.fromOSM = function (overpassXML) {//transit.stable.xml isoverpassxml now
 
     var $overpassXML = $(overpassXML);//dont know what it does
 
-    /* Step 1: process all the returned nodes; put them in local nodes obj */
+/* Step 1: process all the returned nodes; put them in local nodes obj referenced by nodeid */
     _.each($overpassXML.find('node'), function(n) {
         var $n = $(n);
         var tagObj = tagToObj($n.find('tag'));
-        nodes[$n.attr('id')] = {id: $n.attr('id'),
+        nodes[$n.attr('id')] = {
+            id: $n.attr('id'),
                                 lat: $n.attr('lat'),
                                 lng: $n.attr('lon'), 
                                 tag: tagObj,
-                                is_stop: tagObj.public_transport === 'stop_position'};
+            is_stop: tagObj.public_transport === 'stop_position'
+        };
     });
 
     /* Step 2: put all ways from overpass into local segments obj + stopToSegDict */ 
@@ -497,7 +542,9 @@ YY.fromOSM = function (overpassXML) {//transit.stable.xml isoverpassxml now
         // At this point, myNodes = ordered list of nodes in this segment, myStops = ordered list of stops
         segments[$w.attr('id')] = new YY.Segment($w.attr('id'), myNodes, tagToObj($w.find('tag')), myStops);
     });
-    /*step 3*/
+
+
+/* Step 3: */
     var routes = _.map($overpassXML.find('relation'), function(r) {
         var $r = $(r);
         var mySegments = [];
@@ -530,7 +577,7 @@ YY.fromOSM = function (overpassXML) {//transit.stable.xml isoverpassxml now
     // Filter out hiking routes
     routes = routes.filter(function(x) { return x.transport !== "hiking"; });
 
-    return new YY.System(routes);
+    return new YY.System(routes,stopToSegDict);
 }
 
 YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOverrideOptions) {
@@ -541,10 +588,14 @@ YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOve
         YY._layerGroup.clearLayers();
         if (!YY._routeGroup) { YY._routeGroup = new L.LayerGroup(); }
         // YY._routeGroup.clearLayers();
+        if(YY._singlelayer){
+            YY._singlelayer.clearLayers();
+            // map.removeLayer(YY._singlelayer);
+        }
         
         var filteredSystem = system.prune(includeIDDict);
         var defaultOptions = 
-            {"route" : function() { return {color: 'yellow', opacity: 1, weight: 6}; },
+            {"route" : function() { return {color: '#FCCC1E', opacity: 1, weight: 4}; },
              "stop"  : {color: '#378AAD', fillOpacity: 0.5, radius: 5}};
         // render the route as a multi-polyline
         _(filteredSystem.routes).each(function(route) {
@@ -569,18 +620,10 @@ YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOve
                 var marker;
                 if (leafletOverrideOptions && (stop.id in leafletOverrideOptions)) {
                     marker = new L.marker(Lll, {icon:L.divIcon({html:stop.name})});
-                    // marker = new L.CircleMarker(Lll,
-                    //    leafletOverrideOptions[stop.id] || leafletBaseOptions.stop);
-                    // marker = new L.marker(Lll,
-                       // {icon: L.icon({iconUrl:'bus.jpg',iconSize: [20, 20],iconAnchor: [0, 0]})}).addTo(map);
                 } 
                 else {
-                    // marker = new L.marker(Lll, {icon:L.divIcon({html:stop.name})}).addTo(map);
-                     // marker = new L.CircleMarker(Lll,
-                     //     (leafletBaseOptions && leafletBaseOptions.stop) ||
-                     //         defaultOptions.stop);
                     marker = new L.marker(Lll,
-                       {icon: L.icon({iconUrl:'bus.jpg',iconSize: [15, 15],iconAnchor: [0, 0]}),title: stop.name, riseOnHover:true}).addTo(map);
+                       {icon: L.icon({iconUrl:'bus.png',iconSize: [18, 18],iconAnchor: [9, 9]}),title: stop.name, riseOnHover:true}).addTo(map);
                 }
             // marker.bindPopup(stop.name+"</br><a href='#'onclick='alert(\""+stop.name+"\")'>From Here</a>");
             marker.bindPopup(stop.name+"</br><a href='#' onclick='document.getElementById(\"startstop\").value=\""+stop.name+"\";$(\"#startstop\").change()'>From Here</a>"+"</br><a href='#' onclick='document.getElementById(\"endstop\").value=\""+stop.name+"\";$(\"#endstop\").change()'>To Here</a>");
@@ -592,37 +635,53 @@ YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOve
     };
 
 
-// route information sidebar
-    // function routeinfopanel(routes){
-    //     console.log("routeinfopanel is called");
-    //     // // // console.log("routeinfo",routes);
-    //     panel = document.getElementById("routename");
-    //     c=0;
-    //     _(routes).each(function(r){
-    //         rdiv = document.createElement('div');
-    //         rdiv.id = c++;
-    //         rdiv.innerHTML = r.name;
-    //         // console.log('system.routes[rdiv.id]',system.routes[rdiv.id]);
-    //         // rdiv.onclick= map.addLayer(YY.render_(r, routes[r.id], document.getElementById(rdiv)));
-    //         rdiv.setAttribute("onclick","YY.single_route_render(system,system.routes[this.id]),this.style.background='red'");
-    //         panel.appendChild(rdiv);
-    //     })
-    // }
-    YY.single_route_render = function(system, route) {  
+// COLORS MODULE
+var colors = (function() {
+    var colors = {};
+    var colorschemes = {proportional: {
+    // http://colorbrewer2.org/index.php?type=sequential
+        "Set1": ["#EFEDF5", "#DADAEB", "#BCBDDC", "#9E9AC8", "#807DBA", "#6A51A3", "#54278F", "#3F007D"],
+        "Set2": ["#DEEBF7", "#C6DBEF", "#9ECAE1", "#6BAED6", "#4292C6", "#2171B5", "#08519C", "#08306B"]
+    }};
+    var defaultColorScheme = "Set1";
+    function select_from_colors(type, colorscheme, zero_to_one_inclusive) {
+        var epsilon = 0.00001;
+        colorscheme = colorscheme || defaultColorScheme;
+        var colorsArr = colorschemes[type][colorscheme];
+        return colorsArr[Math.floor(zero_to_one_inclusive * (colorsArr.length - epsilon))];
+    }
+  
+    // METHODS FOR EXPORT
+    colors.getNumProportional = function(colorscheme) {
+        colorscheme = colorscheme || defaultColorScheme;
+        return colorschemes.proportional[colorscheme].length;
+    };
+    colors.getProportional = function(zero_to_one, colorscheme) {
+        return select_from_colors('proportional', colorscheme, zero_to_one);
+    };
+   
+    return colors;
+}());
+
+YY.single_route_render = function(system, route) {      
         //only for displaying the individual routes
         console.log("single_route_render is called");    
         if(YY._routeGroup){
             YY._routeGroup.clearLayers();
         }
-        // this.style.background-color.Clear();
+        if(YY._layerGroup){
+            YY._layerGroup.clearLayers();
+        }
+        $('#routedisplay').hide();
 
         if(YY._singlelayer){
             YY._singlelayer.clearLayers();
             // map.removeLayer(YY._singlelayer);
         }
            
-        else
-            {YY._singlelayer = new L.LayerGroup();}
+        else{
+            YY._singlelayer = new L.LayerGroup();
+        }
         _.each(route.segments,function(seg, idx) {
             var latlngs = seg.listOfLatLng.map(function(LL) { return new L.LatLng(LL[0], LL[1]); });
             var poly = new L.Polyline(latlngs, {color: 'green',weight:7});
