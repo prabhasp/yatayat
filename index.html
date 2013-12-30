@@ -8,11 +8,11 @@
         <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="lib/leaflet/Control.OSMGeocoder.css">
         <link rel="stylesheet" href="lib/yatayat.css" />
+        <link rel="stylesheet" href="lib/styles.css">
         <!--[if lte IE 8]>
             <link rel="stylesheet" href="lib/leaflet/leaflet.ie.css" />
         <![endif] -->
 
-        <link rel="stylesheet" type="text/css" href="lib/autocomplete_style.css"/>
         <script src="http://code.jquery.com/jquery-1.9.1.js">
 
         </script>
@@ -130,7 +130,7 @@
                     // console.dir(stopNames.name);
                     // console.dir("i love you ");
                     // console.dir(dict);
-                    console.dir(stopnamesdict);
+                    // console.dir(stopnamesdict);
                     i=i+1;
                 });
                 // console.log(i);
@@ -186,7 +186,7 @@
                 $('#startstop').autocomplete({
                     lookup: stopnamesdict,
                     delay: 200,
-                    minLength: 2,
+                    minChars: 2,
                     onSelect:function (suggestion){
                         start = suggestion.value;  
                         console.log("start stop is " + start);      
@@ -197,7 +197,7 @@
                 $('#endstop').autocomplete({
                     lookup: stopnamesdict,
                     delay: 200,
-                    minLength: 2,
+                    minChars: 2,
                     onSelect:function (suggestion){
                         end = suggestion.value;
                         console.log("end stop  is " + end); 
@@ -375,7 +375,9 @@
 
 
                 // suresh work
-                routeinfopanel(system.routes);
+                console.log("ordering route start");
+                routeinfopanel(system.routeDict);
+                console.log("ordering route complete");
                 // $('.nav-tabs').button();
                 // suresh work end
                 if (YY.TILE_SOURCE) {

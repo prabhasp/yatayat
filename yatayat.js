@@ -520,10 +520,10 @@ YY.fromOSM = function (overpassXML) {//transit.stable.xml isoverpassxml now
         });
         var startSegID = startStop && _.find(stopToSegDict[startStop.id], function(segID) { return _.contains(_.pluck(mySegments, 'id'), segID); })
         // console.dir(_.find(stopToSegDict[startStop.id], function(segID) { return _.contains(_.pluck(mySegments, 'id'), segID); }));
-        console.dir(startStop);
-        console.log("startsegmentid is ::::::"+startSegID);
+        // console.dir(startStop);
+        // console.log("startsegmentid is ::::::"+startSegID);
         return new YY.Route($r.attr('id'), [], mySegments, tagToObj($r.find('tag')), startSegID);
-        console.log(":returned from the fromOsm function"+new YY.Route($r.attr('id'), [], mySegments, tagToObj($r.find('tag')), startSegID));
+        // console.log(":returned from the fromOsm function"+new YY.Route($r.attr('id'), [], mySegments, tagToObj($r.find('tag')), startSegID));
         /* TODO: now adding stops through the order() step; refactor accordingly */
     });
 
