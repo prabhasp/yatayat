@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
         <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="lib/yatayat.css" />
+        <link rel="stylesheet" href="lib/styles.css">
         <!--[if lte IE 8]>
             <link rel="stylesheet" href="lib/leaflet/leaflet.ie.css" />
         <![endif] -->
@@ -28,7 +29,7 @@
     
     <body>
         <div id="Title">
-            Kathmandu Public Transport
+            Kathmandu Valley Public Transport App
         </div>
         <div class="alert" id="routedisplay" style="background:white;position:absolute;top:40;left:60;z-index:999">
         </div>
@@ -94,7 +95,7 @@
                     // console.dir(stopNames.name);
                     // console.dir("i love you ");
                     // console.dir(dict);
-                    console.dir(stopnamesdict);
+                    // console.dir(stopnamesdict);
                     i=i+1;
                 });
                 // console.log(i);
@@ -305,7 +306,7 @@
                                 }
                                 // console.log('counter', ++counter);
                                 //sures
-                                // debugger;
+
 
                                 outputHTML += "<div style=\"color:"+eachroutestyleoption.color+"\">Get on " + toTitleCase(r.transport) + " " + r.ref + " (" + r.name + ") at " + r.stops[0].name + " and ride till " + _.last(r.stops).name + "with distance of " + Math.round(dist)/1000 + " km" + "</div>";
                             }
@@ -334,7 +335,7 @@
                     }
                 });
                 // suresh work
-                routeinfopanel(system.routes);
+                routeinfopanel(system.routeDict);
                 // $('.nav-tabs').button();
                 // suresh work end
                 if (YY.TILE_SOURCE) {
@@ -374,9 +375,11 @@
                 });
             }
         </script>
+
         <div class="accordion" id="accordion2" position="absolute" style="width:20%; height: 75%" >
             <div class="accordion-group">
                 <div class="accordion-heading">
+
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"><b>Get Direction</b>
                     </a>
                 </div>
