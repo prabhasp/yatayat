@@ -593,21 +593,21 @@ YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOve
 
 
 // route information sidebar
-    function routeinfopanel(routes){
-        console.log("routeinfopanel is called");
-        // // // console.log("routeinfo",routes);
-        panel = document.getElementById("routename");
-        c=0;
-        _(routes).each(function(r){
-            rdiv = document.createElement('div');
-            rdiv.id = c++;
-            rdiv.innerHTML = r.name;
-            // console.log('system.routes[rdiv.id]',system.routes[rdiv.id]);
-            // rdiv.onclick= map.addLayer(YY.render_(r, routes[r.id], document.getElementById(rdiv)));
-            rdiv.setAttribute("onclick","YY.single_route_render(system,system.routes[this.id]),this.style.background='red'");
-            panel.appendChild(rdiv);
-        })
-    }
+    // function routeinfopanel(routes){
+    //     console.log("routeinfopanel is called");
+    //     // // // console.log("routeinfo",routes);
+    //     panel = document.getElementById("routename");
+    //     c=0;
+    //     _(routes).each(function(r){
+    //         rdiv = document.createElement('div');
+    //         rdiv.id = c++;
+    //         rdiv.innerHTML = r.name;
+    //         // console.log('system.routes[rdiv.id]',system.routes[rdiv.id]);
+    //         // rdiv.onclick= map.addLayer(YY.render_(r, routes[r.id], document.getElementById(rdiv)));
+    //         rdiv.setAttribute("onclick","YY.single_route_render(system,system.routes[this.id]),this.style.background='red'");
+    //         panel.appendChild(rdiv);
+    //     })
+    // }
     YY.single_route_render = function(system, route) {  
         //only for displaying the individual routes
         console.log("single_route_render is called");    

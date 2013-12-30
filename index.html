@@ -13,7 +13,6 @@
         <![endif] -->
 
         <link rel="stylesheet" type="text/css" href="lib/autocomplete_style.css"/>
-
         <script src="http://code.jquery.com/jquery-1.9.1.js">
 
         </script>
@@ -169,6 +168,19 @@
                 //     // }
 
                 // });
+                
+
+
+                // $('#startstop').autocomplete({
+                //     source: stopnamesdict,
+                //     delay: 200,
+                //     minLength: 2,
+                //     select:function (event,ui){
+                //         start = this.value;  
+                //         console.log("start stop is " + start);      
+                //     }
+ 
+                // });
 
 
                 $('#startstop').autocomplete({
@@ -180,7 +192,7 @@
                         console.log("start stop is " + start);      
                     }
  
-                })
+                });
                 
                 $('#endstop').autocomplete({
                     lookup: stopnamesdict,
