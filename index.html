@@ -11,7 +11,7 @@
         <!--[if lte IE 8]>
             <link rel="stylesheet" href="lib/leaflet/leaflet.ie.css" />
         <![endif] -->
-        <script src="lib/jquery-1.7.2.min.js"> </script>
+        <!--<script src="lib/jquery-1.7.2.min.js"> </script>-->
         <script src="lib/underscore-min.js"> </script>
         <script src="lib/leaflet/leaflet.js"> </script>
         <script src="lib/leaflet/spin.min.js"> </script>
@@ -148,7 +148,7 @@
                 $('#startstop').autocomplete({
                     lookup: stopnamesdict,
                     delay: 200,
-                    minLength: 2,
+                    minChars: 2,
                     onSelect:function (suggestion){
                         start = suggestion.value;  
                         console.log("start stop is " + start);      
@@ -159,7 +159,7 @@
                 $('#endstop').autocomplete({
                     lookup: stopnamesdict,
                     delay: 200,
-                    minLength: 2,
+                    minChars: 2,
                     onSelect:function (suggestion){
                         end = suggestion.value;
                         console.log("end stop  is " + end); 
@@ -323,7 +323,6 @@
                             $('#routedisplay').show();
                             $('#routedisplay').html(outputHTML);
                             map.spin(false);
-
                         }
                     } 
                     else {
@@ -332,10 +331,6 @@
                         map.spin(false);
                     }
                 });
-            
-            
-
-
                 // suresh work
                 routeinfopanel(system.routes);
                 // $('.nav-tabs').button();

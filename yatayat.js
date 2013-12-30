@@ -567,10 +567,10 @@ YY.fromOSM = function (overpassXML) {
         });
         var startSegID = startStop && _.find(stopToSegDict[startStop.id], function(segID) { return _.contains(_.pluck(mySegments, 'id'), segID); })
         // console.dir(_.find(stopToSegDict[startStop.id], function(segID) { return _.contains(_.pluck(mySegments, 'id'), segID); }));
-        console.dir(startStop);
-        console.log("startsegmentid is ::::::"+startSegID);
+        // console.dir(startStop);
+        // console.log("startsegmentid is ::::::"+startSegID);
         return new YY.Route($r.attr('id'), [], mySegments, tagToObj($r.find('tag')), startSegID);
-        console.log(":returned from the fromOsm function"+new YY.Route($r.attr('id'), [], mySegments, tagToObj($r.find('tag')), startSegID));
+        // console.log(":returned from the fromOsm function"+new YY.Route($r.attr('id'), [], mySegments, tagToObj($r.find('tag')), startSegID));
         /* TODO: now adding stops through the order() step; refactor accordingly */
     });
 
@@ -612,8 +612,8 @@ YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOve
         });
         // render the stops as circle markers 
         _(filteredSystem.routes).each(function(route) { 
-            console.log("trial going on");
-            console.dir(filteredSystem);
+            // console.log("trial going on");
+            // console.dir(filteredSystem);
             route.stops.forEach(function(stop) {
                 if (includeIDDict && !(stop.id in includeIDDict)) return;
                 var Lll = new L.LatLng(stop.lat, stop.lng);
