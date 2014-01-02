@@ -54,6 +54,149 @@
             Data &copy; <a href="http://www.openstreetmap.org/copyright/en">OpenStreetMap</a> contributors,
             Imagery and bus icon from <a href="http://mapbox.com/">MapBox</a>
         </div>
+        <div class="accordion" id="accordion2" position="absolute" style="width:20%; height: 75%" >
+            <div class="accordion-group">
+                <div class="accordion-heading">
+
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"><b>Get Direction</b>
+                    </a>
+                </div>
+                <div id="collapseOne" class="accordion-body collapse in">
+                    <div class="accordion-inner">
+                        <div id="textboxes">
+                            <b>
+                                Start
+                            </b>
+                            <input type="text" id="startstop" class="typeahead" data-provide="typeahead"
+                            />
+                            <b>
+                                End
+                            </b>
+                            <input type="text" id="endstop" class="typeahead" data-provide="typeahead"
+                            style="color:red" />
+                            <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY._routeGroup.clearLayers();YY.render_(system,map);"> Clear </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                        Routes
+                    </a>
+                </div>
+                <div id="collapseTwo" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        <div id="routename">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a  class="accordion-toggle" data-parent="#accordion2" href="bhadadar.html" target="_blank">
+                        Bus Fare
+                    </a>
+                </div>
+            </div>
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
+                    href="#collapse3">
+                        About Us
+                    </a>
+                </div>
+                <div id="collapse3" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        <b>Designed By:</b> <br/>
+                        <a href="http://ku.edu.np/dcge/mission.htm">Kathmandu University Geomatics</a> and <a href="http://Monsooncollective.org"> Monsoon Collective </a> <br/>
+                        <b>KU contributors:</b> Sur Suresh Shrestha, Prabesh Shrestha, Prakash Ghimire, Amrit Gautam, Shashish Maharjan, Subash Ghimire. <br/>
+                        <b>Monsoon Collective contributors:</b> Prabhas Pokharel, Robert Ochshorn, Sakar Pudasaini, Suveg Pandey, Shirish Pokharel, Anshu Khadka. <br/>
+                        <b>Coordinated By:</b> Amrit Karmacharya and Prabhas Pokharel<br/><br/>
+                        The project was started by the Monsoon Collective; KU students have taken that and are currently maintaining it, under the supervision of Shashish Maharjan and Subash Ghimire.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse4">
+                        How to use
+                    </a>
+                </div>
+                <div id="collapse4" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        <h2>
+                            For ROUTING
+                        </h2>
+                        <h4>
+                            One Option :
+                        </h4>
+                        <p>
+                            You can generally write the start stop name and then end stop name.This
+                            gives you the route from the start point to end point through the public
+                            transport route available. It can be clearly viewed on the map along with
+                            the different stops and its name in going through the route.
+                        </p>
+                        <h4>
+                            Next Option :
+                        </h4>
+                        <p>
+                            You can directly click at the stop and choose it as start stop and the
+                            required end stop in the map which can also show the route on map. You
+                            can also set the another start or end stop directly on the map.
+                        </p>
+                        <h2>
+                            For Specific Route Viewing
+                        </h2>
+                        <p>
+                            You can first click on the link ROutes Of Kathmandu. Then click on the
+                            respective route which you want to see. You can view it on the map with
+                            the selected route zoomed in.
+                        </p>
+                        <p>
+                            You can again click on the next route to see the next route.
+                        </p>
+                        <h2>
+                            For Finding Location
+                        </h2>
+                        <p>
+                            You can search the place by clicking the search bar on the top right corner
+                            next to the zoom bar.
+                        </p>
+                        <p>
+                            There you can write the place of the name to search.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
+                    href="#collapse5">
+                        Help us Improve
+        </a>
+        </div>
+                <div id="collapse5" class="accordion-body collapse">
+            <div class="accordion-inner">
+                        <iframe src="https://docs.google.com/forms/d/1HKyiRd_6WbKv8xOW243-0J9HRzOT7muQsC8nG30llJw/viewform?embedded=true" width="250" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+            </div>
+        </div>
+        </div>
+        </div>
+        <div id="mydiv">
+            <div id="myCarousel" class="carousel slide" >
+                          <!-- Carousel items -->
+                              <div class="carousel-inner">
+                                <div class="active item"><img src="s-bus.jpg" width="262 px" height="182"></div>
+                                <div class="item"><img src="tempo.jpg"width="262 px" height="182"></div>
+                                <div class="item"><img src="micro.jpg"width="262 px" height="182"></div>
+                              </div>
+                              <!-- Carousel nav -->
+                              <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                              <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+            </div>
+        </div>
         <script type="text/javascript" language="javascript">
                     // UI HACK
             $('#textboxes').hide();
@@ -72,10 +215,11 @@
             YY.fromConfig("config.stable.json", function(sys) {
                 // debugger;
                 system = sys;
-                // // console.log(system);
+                console.time("Initial display of route");
                 YY.render_(system, map, undefined, //includeIDObject; try {"2269045": true} for an example
                 undefined // leafletBaseOptions
                 );
+                console.timeEnd("Initial display of route");
 
                 //ROUTING
                 var stopNames = _.compact(_.pluck(system.allStops(), 'name'));
@@ -84,70 +228,11 @@
                 var stopnamesdict = [];
                 var i = 0;
                _.each(stopNames, function(stopNames) {
-                    // console.log("i love you");
-                    // var $stopNames = $(stopNames);
-                    // dict[i] = {
-                    //     value: $stopNames.attr('name'),
-                    //     data: $stopNames.attr('name')
-                    //     // value: stopNames.name;
-                    //     // data: stopNames.name;
-                    // };
                     stopnamesdict.push({label:stopNames,value:stopNames})
-                    // console.dir(stopNames.name);
-                    // console.dir("i love you ");
-                    // console.dir(dict);
-                    // console.dir(stopnamesdict);
                     i=i+1;
                 });
-                // console.log(i);
-               
-                // console.dir(dict);
                 var start;
                 var end;
-                // $('.typeahead').autocomplete({
-                //    jquery.autocomplete.min.js source: stopNames,
-                //     delay: 200,
-                //     minLength: 2,
-                //     onSelect:function (suggestion){
-                //         start = suggestion.value;        
-                // }
-                
-
-               //@$%^&^%$#@#$%^&*&^%$#@!@#$%^&*&^%$#@!@#$%^&*&^%$#true one the working one
-                // $('.typeahead').autocomplete({
-                //     // source: stopNames,
-                //     lookup: stopnamesdict,
-                //     delay: 200,
-                //     minLength: 2,
-                //     onSelect:function (suggestion){
-                //         // start = suggestion.value; 
-                //         console.log("i Love you");
-                //         // console.log(start);       
-                //     }
-
-
-                //     // onSelect: function(suggestion){
-
-                //     //     // $('#endstop').change();
-                //     //     console.log(suggestion.data);
-                //     //     console.log("i hate you");
-                //     // }
-
-                // });
-                
-
-
-                // $('#startstop').autocomplete({
-                //     source: stopnamesdict,
-                //     delay: 200,
-                //     minLength: 2,
-                //     select:function (event,ui){
-                //         start = this.value;  
-                //         console.log("start stop is " + start);      
-                //     }
- 
-                // });
-
 
                 $('#startstop').autocomplete({
                     lookup: stopnamesdict,
@@ -175,17 +260,11 @@
 
                 $('input.typeahead').change(function(f) {
                     map.spin(true);
-                    // console.log("yaha samma thik 6");
-                    // console.log("inside the damn function"+start);
-                    // console.log("inside the damn function"+end);
-                    // var start = $('#startstop')[0].value;
-                    // var end = $('#endstop')[0].value;
                     console.log(start);
                     console.log(end);
                     var dist = 0;
 
                     if (start && end) {
-                        // // // console.log('routing from', start,' to ',end);
                         if (!YY._routeGroup) {
                             YY._routeGroup = new L.LayerGroup();
                         }
@@ -195,7 +274,6 @@
                         var bounds = new L.LatLngBounds();
                         if (gettingThereRoutes === 'FAIL') alert('cannot find a route from ', start, ' to ', end);
                         else {
-                            // console.log('gettingThereRoutes',gettingThereRoutes);
                             var inclusionDict = {};
                             var overrideDict = {};
                             var outputHTML = "";
@@ -376,151 +454,6 @@
                 });
             }
         </script>
-
-        <div class="accordion" id="accordion2" position="absolute" style="width:20%; height: 75%" >
-            <div class="accordion-group">
-                <div class="accordion-heading">
-
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"><b>Get Direction</b>
-                    </a>
-                </div>
-                <div id="collapseOne" class="accordion-body collapse in">
-                    <div class="accordion-inner">
-                        <div id="textboxes">
-                            <b>
-                                Start
-                            </b>
-                            <input type="text" id="startstop" class="typeahead" data-provide="typeahead"
-                            />
-                            <b>
-                                End
-                            </b>
-                            <input type="text" id="endstop" class="typeahead" data-provide="typeahead"
-                            style="color:red" />
-                            <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY._routeGroup.clearLayers();YY.render_(system,map);"> Clear </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-group">
-                <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                        Routes
-                    </a>
-                </div>
-                <div id="collapseTwo" class="accordion-body collapse">
-                    <div class="accordion-inner">
-                        <div id="routename">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-group">
-                <div class="accordion-heading">
-                    <a  class="accordion-toggle" data-parent="#accordion2" href="bhadadar.html" target="_blank">
-                        Bus Fare
-                    </a>
-                </div>
-            </div>
-            <div class="accordion-group">
-                <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
-                    href="#collapse3">
-                        About Us
-                    </a>
-                </div>
-                <div id="collapse3" class="accordion-body collapse">
-                    <div class="accordion-inner">
-                        <b>Designed By:</b> <br/>
-                        <a href="http://ku.edu.np/dcge/mission.htm">Kathmandu University Geomatics</a> and <a href="http://Monsooncollective.org"> Monsoon Collective </a> <br/>
-                        <b>KU contributors:</b> Sur Suresh Shrestha, Prabesh Shrestha, Prakash Ghimire, Amrit Gautam, Shashish Maharjan, Subash Ghimire. <br/>
-                        <b>Monsoon Collective contributors:</b> Prabhas Pokharel, Robert Ochshorn, Sakar Pudasaini, Suveg Pandey, Shirish Pokharel, Anshu Khadka. <br/>
-						<b>Coordinated By:</b> Amrit Karmacharya and Prabhas Pokharel<br/><br/>
-						The project was started by the Monsoon Collective; KU students have taken that and are currently maintaining it, under the supervision of Shashish Maharjan and Subash Ghimire.
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-group">
-                <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse4">
-                        How to use
-                    </a>
-                </div>
-                <div id="collapse4" class="accordion-body collapse">
-                    <div class="accordion-inner">
-                        <h2>
-                            For ROUTING
-                        </h2>
-                        <h4>
-                            One Option :
-                        </h4>
-                        <p>
-                            You can generally write the start stop name and then end stop name.This
-                            gives you the route from the start point to end point through the public
-                            transport route available. It can be clearly viewed on the map along with
-                            the different stops and its name in going through the route.
-                        </p>
-                        <h4>
-                            Next Option :
-                        </h4>
-                        <p>
-                            You can directly click at the stop and choose it as start stop and the
-                            required end stop in the map which can also show the route on map. You
-                            can also set the another start or end stop directly on the map.
-                        </p>
-                        <h2>
-                            For Specific Route Viewing
-                        </h2>
-                        <p>
-                            You can first click on the link ROutes Of Kathmandu. Then click on the
-                            respective route which you want to see. You can view it on the map with
-                            the selected route zoomed in.
-                        </p>
-                        <p>
-                            You can again click on the next route to see the next route.
-                        </p>
-                        <h2>
-                            For Finding Location
-                        </h2>
-                        <p>
-                            You can search the place by clicking the search bar on the top right corner
-                            next to the zoom bar.
-                        </p>
-                        <p>
-                            There you can write the place of the name to search.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        
-			<div class="accordion-group">
-                <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
-                    href="#collapse5">
-                        Help us Improve
-        </a>
-        </div>
-                <div id="collapse5" class="accordion-body collapse">
-            <div class="accordion-inner">
-						<iframe src="https://docs.google.com/forms/d/1HKyiRd_6WbKv8xOW243-0J9HRzOT7muQsC8nG30llJw/viewform?embedded=true" width="250" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
-            </div>
-        </div>
-        </div>
-        </div>
-		<div id="mydiv">
-			<div id="myCarousel" class="carousel slide" >
-              		      <!-- Carousel items -->
-                              <div class="carousel-inner">
-                                <div class="active item"><img src="s-bus.jpg" width="262 px" height="182"></div>
-                                <div class="item"><img src="tempo.jpg"width="262 px" height="182"></div>
-                                <div class="item"><img src="micro.jpg"width="262 px" height="182"></div>
-                              </div>
-                              <!-- Carousel nav -->
-                              <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-                              <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-			</div>
-		</div>
-		
     </body>
 
 </html>
