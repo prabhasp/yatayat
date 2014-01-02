@@ -68,6 +68,7 @@
             var routed_route;
 
             console.log("the YY.config is called");
+            console.time("system creation");
             YY.fromConfig("config.stable.json", function(sys) {
                 // debugger;
                 system = sys;
@@ -359,7 +360,7 @@
                 console.log("script end", system);
 
             });
-
+            console.timeEnd("system creation");
             function get_random_color() {
                 var letters = '0123456789ABCDEF'.split('');
                 var color = '#';
