@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
+<meta osm_base="2014-01-02T23:59:01Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
+  <node id="31019057" lat="27.7204438" lon="85.3637665"/>
   <node id="31019058" lat="27.7205410" lon="85.3628830"/>
   <node id="31019059" lat="27.7206305" lon="85.3623364"/>
   <node id="31019063" lat="27.7206118" lon="85.3607054"/>
@@ -17678,7 +17680,7 @@
     <member type="node" ref="1523358463" role="end"/>
     <tag k="name" v="Purano Bus Park- Budhanilkantha"/>
     <tag k="ref" v="5"/>
-    <tag k="route" v="Bus"/>
+    <tag k="route" v="bus"/>
     <tag k="type" v="route"/>
   </relation>
   <relation id="2988835">
