@@ -336,17 +336,20 @@
                                 
                                 var endsegmentrender = function (segmenttype,segmentobject,station) {
                                     var insert;
-                                    listOfLatLng = _.map(segmentobject.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}});
+                                    // listOfLatLng = _.map(segmentobject.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}});
                                     if(segmenttype=="first"){insert=false;}else{insert=true;}
 
                                     partofsegment = [];
                                     console.log(segmenttype,segmentobject,station);
-                                    debugger;
-                                    for(i=0;i<listOfLatLng.length-1;i++){
+                                    // debugger;
+                                    for(i=0;i<segmentobject.listofnodeids.length-1;i++){
+                                        // console.log(i);
+                                        // console.log(segmentobject.listofnodeids[i]);
+                                        // console.log(station.id);
                                         if(insert){
-                                            partofsegment.push(listOfLatLng[i]);
+                                            partofsegment.push(segmentobject.dictofnodes[segmentobject.listofnodeids[i]]);
                                             // for(j=0;j<station.length;j++){
-                                                if (listOfLatLng[i].lat == station.lat && listOfLatLng[i].lon == parseFloat(station.lon)){
+                                                if (segmentobject.listofnodeids[i] == station.id){
                                                     insert = !insert;
                                                     console.log("end found")   
                                                 }
@@ -354,16 +357,16 @@
                                         }
                                         else{ 
                                             // for(j=0;j<station.length;j++){
-                                                new L.circle(listOfLatLng[i],3).addTo(map);
-                                                if (listOfLatLng[i].lat == station.lat && listOfLatLng[i].lon == parseFloat(station.lon)){
+                                                // new L.circle(listOfLatLng[i],3).addTo(map);
+                                                if (segmentobject.listofnodeids[i] == station.id){
                                                     insert = !insert;
                                                     console.log("start found")
-                                                    partofsegment.push(listOfLatLng[i]);
+                                                    partofsegment.push(segmentobject.dictofnodes[segmentobject.listofnodeids[i]]);
                                                 }
                                             // }
                                         }
                                     }
-                                    return listOfLatLng;
+                                    return partofsegment;
 
                                 };
 
@@ -401,7 +404,7 @@
                                     seg = eachroute.segments[segid];
                                     var segMPL = new L.Polyline(_.map(seg.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}}), eachroutestyleoption);
 
-                                    // segMPL.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + seg.id + "' target='_blank'>" + seg.id + "</a>," + segid + "");
+                                    segMPL.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + seg.id + "' target='_blank'>" + seg.id + "</a>," + segid + "");
 
                                     YY._routeGroup.addLayer(segMPL);
                                     // debugger;
@@ -457,9 +460,9 @@
                 map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 
                 //auto init routing at start
-                start="Chardobato";
-                end="Kamal Binayak";
-                $('#endstop').change();
+                // start="Chardobato";
+                // end="Kamal Binayak";
+                // $('#endstop').change();
             });
             function get_random_color() {
                 var letters = '0123456789ABCDEF'.split('');
