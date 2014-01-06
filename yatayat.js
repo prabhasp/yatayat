@@ -432,9 +432,11 @@ YY.Stop = function(id, lat, lng, tag) {
     this.name = tag.name;
 };
 
-YY.Segment = function(id, listOfLatLng, tag, orderedStops) {
+YY.Segment = function(id, listOfLatLng, listofnodeids, dictofnodes, tag, orderedStops) {
     this.id = id;
     this.listOfLatLng = listOfLatLng;
+    this.listofnodeids = listofnodeids;
+    this.dictofnodes = dictofnodes
     this.tag = tag;
     this.orderedListofStops = orderedStops; // intermediarily needed
 };
@@ -527,7 +529,9 @@ YY.fromOSM = function (overpassXML) {
     _.each($overpassXML.find('way'), function(w) {
         var $w = $(w);
         var myNodes = [];
+        var myNodesids = [];
         var myStops = [];
+        var mydictofnodes = {};
         _.each($w.find('nd'), function(n) {
             var node = nodes[$(n).attr('ref')];
             if(node.is_stop) {
@@ -538,9 +542,11 @@ YY.fromOSM = function (overpassXML) {
                 stopToSegDict[node.id].push($w.attr('id'));
             }
             myNodes.push([node.lat, node.lng]);
+            myNodesids.push(node.id);
+            mydictofnodes[node.id] = node;
         });
         // At this point, myNodes = ordered list of nodes in this segment, myStops = ordered list of stops
-        segments[$w.attr('id')] = new YY.Segment($w.attr('id'), myNodes, tagToObj($w.find('tag')), myStops);
+        segments[$w.attr('id')] = new YY.Segment($w.attr('id'), myNodes,myNodesids, mydictofnodes, tagToObj($w.find('tag')), myStops);
     });
 
 
