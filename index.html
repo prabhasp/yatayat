@@ -13,7 +13,8 @@
             <link rel="stylesheet" href="lib/leaflet/leaflet.ie.css" />
         <![endif] -->
         <!--script src="lib/jquery-1.7.2.min.js"> </script-->
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+        <!-- // <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
         <script type="text/javascript" src="lib/jquery.autocomplete.min.js"></script>
         <script src="lib/underscore-min.js"> </script>
         <script src="lib/leaflet/leaflet-src.js"> </script>
@@ -218,7 +219,7 @@
                 var stopnamesdict = [];
                 var i = 0;
                _.each(stopNames, function(stopNames) {
-                    stopnamesdict.push({label:stopNames,value:stopNames})
+                    stopnamesdict.push({data:stopNames,value:stopNames})
                     i=i+1;
                 });
                 var start;
@@ -229,7 +230,8 @@
                     delay: 200,
                     minChars: 2,
                     onSelect:function (suggestion){
-                        start = suggestion.value;  
+                        start = suggestion.value; 
+                        //console.log("start",start) ;
                     }
                 });
                 
@@ -239,6 +241,8 @@
                     minChars: 2,
                     onSelect:function (suggestion){
                         end = suggestion.value;
+                        //console.log("end",end) ;
+                        $('#endstop').change();
                     }
                 });
 
@@ -340,7 +344,7 @@
                                     if(segmenttype=="first"){insert=false;}else{insert=true;}
 
                                     partofsegment = [];
-                                    console.log(segmenttype,segmentobject,station);
+                                    // console.log(segmenttype,segmentobject,station);
                                     // debugger;
                                     for(i=0;i<segmentobject.listofnodeids.length-1;i++){
                                         // console.log(i);
@@ -351,7 +355,7 @@
                                             // for(j=0;j<station.length;j++){
                                                 if (segmentobject.listofnodeids[i] == station.id){
                                                     insert = !insert;
-                                                    console.log("end found")   
+                                                    // console.log("end found")   
                                                 }
                                             // }
                                         }
@@ -360,7 +364,7 @@
                                                 // new L.circle(listOfLatLng[i],3).addTo(map);
                                                 if (segmentobject.listofnodeids[i] == station.id){
                                                     insert = !insert;
-                                                    console.log("start found")
+                                                    // console.log("start found")
                                                     partofsegment.push(segmentobject.dictofnodes[segmentobject.listofnodeids[i]]);
                                                 }
                                             // }
@@ -460,9 +464,9 @@
                 map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 
                 //auto init routing at start
-                // start="Chardobato";
-                // end="Kamal Binayak";
-                // $('#endstop').change();
+                //start="Chardobato";
+                //end="Gothatar";
+                //$('#endstop').change();
             });
             function get_random_color() {
                 var letters = '0123456789ABCDEF'.split('');
