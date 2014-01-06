@@ -337,67 +337,66 @@
                                 var endsegmentrender = function (segmenttype,segmentobject,station) {
                                     var insert;
                                     listOfLatLng = _.map(segmentobject.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}});
-                                    segmenttype=="first"?insert=false:insert=true;
+                                    if(segmenttype=="first"){insert=false;}else{insert=true;}
 
-                                    partofsegment = []
-                                    for(i=0;i<listOfLatLng.length;i++){
+                                    partofsegment = [];
+                                    console.log(segmenttype,segmentobject,station);
+                                    debugger;
+                                    for(i=0;i<listOfLatLng.length-1;i++){
                                         if(insert){
-                                            for(j=0;j<station.length;j++){
-                                                if (listOfLatLng[i].lat == station[j].lat && listOfLatLng[i].lon == station[j].lon){
+                                            partofsegment.push(listOfLatLng[i]);
+                                            // for(j=0;j<station.length;j++){
+                                                if (listOfLatLng[i].lat == station.lat && listOfLatLng[i].lon == parseFloat(station.lon)){
                                                     insert = !insert;
-                                                    partofsegment.push(listOfLatLng[i]);
+                                                    console.log("end found")   
                                                 }
-                                            }
-                                            // console.log(i,insert,"http://www.openstreetmap.org/#map=19/"+listOfLatLng[i].lat+"/"+listOfLatLng[i].lon+"&layers=N");
-                                            // console.log(listOfLatLng[i]);
-                                            // console.log(partofsegment);
-                                            // debugger;
+                                            // }
                                         }
                                         else{ 
-                                            for(j=0;j<station.length;j++){
-                                                if (listOfLatLng[i].lat == station[j].lat && listOfLatLng[i].lon == station[j].lon){
+                                            // for(j=0;j<station.length;j++){
+                                                new L.circle(listOfLatLng[i],3).addTo(map);
+                                                if (listOfLatLng[i].lat == station.lat && listOfLatLng[i].lon == parseFloat(station.lon)){
                                                     insert = !insert;
+                                                    console.log("start found")
                                                     partofsegment.push(listOfLatLng[i]);
                                                 }
-                                            }
-                                            // console.log(i,insert,"http://www.openstreetmap.org/#map=19/"+listOfLatLng[i].lat+"/"+listOfLatLng[i].lon+"&layers=N");
-                                            // console.log(listOfLatLng[i]);
-                                            // console.log(partofsegment);
-                                            // debugger;
+                                            // }
                                         }
                                     }
                                     return listOfLatLng;
+
                                 };
 
-                                firstsegmentpart = endsegmentrender("first",eachroute.segments[startsegindex],eachroute.stops);
-                                // console.log("firstsegmentpart",firstsegmentpart);
-                                if(firstsegmentpart.length){
-                                    var segMPLfirst = new L.Polyline(firstsegmentpart, eachroutestyleoption);
-                                    // segMPL.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegidnew + "' target='_blank'>");
-                                    YY._routeGroup.addLayer(segMPLfirst);
-                                }
-                                else{
-                                    firstsegmentpart = endsegmentrender("first",eachroute.segments[endsegindex],eachroute.stops);
-                                }
-                                
-                                lastsegmentpart = endsegmentrender("last",eachroute.segments[endsegindex],eachroute.stops);
-
-                                if(lastsegmentpart.length){
-                                    var segMPLlast = new L.Polyline(lastsegmentpart, eachroutestyleoption);
-                                    // segMPL.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegidnew + "' target='_blank'>");
-                                    YY._routeGroup.addLayer(segMPLlast);
-                                }
-                                else{
-                                    lastsegmentpart = endsegmentrender("last",eachroute.segments[startsegindex],eachroute.stops);
-                                }
-                                console.log("lastsegmentpart",lastsegmentpart);
-                                console.log(YY._routeGroup);
-                                debugger;
-                                
                                 // swap if startsegindex is greater
                                 if(startsegindex>endsegindex){
                                     startsegindex = [endsegindex, endsegindex = startsegindex][0];
                                 }
+
+                                firstsegmentpart = endsegmentrender("first",eachroute.segments[startsegindex],eachroute.stops[0]);
+                                // console.log("firstsegmentpart",firstsegmentpart);
+                                if(firstsegmentpart.length){
+                                    var segMPLfirst = new L.Polyline(firstsegmentpart, eachroutestyleoption);
+                                    segMPLfirst.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegidnew + "' target='_blank'>");
+                                    YY._routeGroup.addLayer(segMPLfirst);
+                                }
+                                else{
+                                    firstsegmentpart = endsegmentrender("first",eachroute.segments[endsegindex],eachroute.stops[0]);
+                                }
+                                
+                                lastsegmentpart = endsegmentrender("last",eachroute.segments[endsegindex],_.last(eachroute.stops));
+
+                                if(lastsegmentpart.length){
+                                    var segMPLlast = new L.Polyline(lastsegmentpart, eachroutestyleoption);
+                                    segMPLlast.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegidnew + "' target='_blank'>");
+                                    YY._routeGroup.addLayer(segMPLlast);
+                                }
+                                else{
+                                    lastsegmentpart = endsegmentrender("last",eachroute.segments[startsegindex],_.last(eachroute.stops));
+                                }
+                                // console.log("lastsegmentpart",lastsegmentpart);
+                                // console.log(YY._routeGroup);
+                                // debugger;
+                                
                                 for (segid = startsegindex+1; segid <= endsegindex-1; segid++) {
                                     seg = eachroute.segments[segid];
                                     var segMPL = new L.Polyline(_.map(seg.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}}), eachroutestyleoption);

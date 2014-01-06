@@ -118,11 +118,9 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
         return retval;
     };
     var set = function(dict, stopRouteObj, val) {
-        // console.log("set called");
         dict[stopRouteObj.stopID + "," + stopRouteObj.routeID] = val;
     };
     var get = function(dict, stopRouteObj) {
-        // console.log("get called");
         return dict[stopRouteObj.stopID + "," + stopRouteObj.routeID];
     };
 
@@ -145,7 +143,6 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
     };
     function aStar() {
         _(startNodes).each(function(n) { 
-            console.dir(n);
             set(openset, n, n);
             set(gScores, n, 0);
             set(fScores, n, heuristic(n));
@@ -154,16 +151,8 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
 
         // continue checking until goalnode is expanded
         while(_.keys(openset).length) {
-            // console.log(_.keys(openset).length);
-            // i++;
             var current = openset[_.min(_(openset).keys(), f)];
-            console.log('open-begin', _.map(_(openset).values(), stopNameFromObj));
-            console.log('closed-begin', _.map(_(closedset).values(), stopNameFromObj));
-            console.log("the current stop is");
-            console.dir(current);
-
             if (current.stopID === goalNode.stopID) {
-                console.log("route finding completed");
                 return reconstructPath(current);
             }
             
