@@ -242,13 +242,14 @@
                     onSelect:function (suggestion){
                         end = suggestion.value;
                         //console.log("end",end) ;
-                        $('#endstop').change();
+                        // $('#endstop').change();
                     }
                 });
 
                 $('#textboxes').show();
 
                 $('input.typeahead').change(function(f) {
+                    console.log("routing from",start,"to",end);
                     map.spin(true);
                     var dist = 0;
                     if (start && end) {
@@ -346,7 +347,7 @@
                                     partofsegment = [];
                                     // console.log(segmenttype,segmentobject,station);
                                     // debugger;
-                                    for(i=0;i<segmentobject.listofnodeids.length-1;i++){
+                                    for(i=0;i<segmentobject.listofnodeids.length;i++){
                                         // console.log(i);
                                         // console.log(segmentobject.listofnodeids[i]);
                                         // console.log(station.id);
