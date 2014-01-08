@@ -222,35 +222,18 @@
                     stopnamesdict.push({data:stopNames,value:stopNames})
                     i=i+1;
                 });
-                var start;
-                var end;
-
-                $('#startstop').autocomplete({
-                    lookup: stopnamesdict,
-                    delay: 200,
-                    minChars: 2,
-                    onSelect:function (suggestion){
-                        start = suggestion.value; 
-                        //console.log("start",start) ;
-                    }
-                });
-                
-                $('#endstop').autocomplete({
-                    lookup: stopnamesdict,
-                    delay: 200,
-                    minChars: 2,
-                    onSelect:function (suggestion){
-                        end = suggestion.value;
-                        //console.log("end",end) ;
-                        $('#endstop').change();
-                    }
-                });
+                var stopNames = _.compact(_.pluck(system.allStops(), 'name'));
+                $('.typeahead').typeahead({source: stopNames});
 
                 $('#textboxes').show();
 
                 $('input.typeahead').change(function(f) {
+                    
                     map.spin(true);
+                    var start = $('#startstop')[0].value;
+                    var end = $('#endstop')[0].value;
                     var dist = 0;
+                    console.log("routing from",start,"to",end);
                     if (start && end) {
                         if (!YY._routeGroup) {
                             YY._routeGroup = new L.LayerGroup().addTo(map);
@@ -346,7 +329,7 @@
                                     partofsegment = [];
                                     // console.log(segmenttype,segmentobject,station);
                                     // debugger;
-                                    for(i=0;i<segmentobject.listofnodeids.length-1;i++){
+                                    for(i=0;i<segmentobject.listofnodeids.length;i++){
                                         // console.log(i);
                                         // console.log(segmentobject.listofnodeids[i]);
                                         // console.log(station.id);
