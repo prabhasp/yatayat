@@ -409,14 +409,25 @@
                             }
 
                             );
-                            i = 0 ;
+                            
+
+
+                            // Extend of the displayed route
                             YY._routeGroup.eachLayer(function(el){
                                 
-                                console.log("killing in the name of");
-                                console.dir(el.latlngs);
-                                bounds.extend(el.latlngs[i]);
-                                i++
+                                // console.log("Here from the kings mountain view");
+                                //determine the length of the array of each of the el.latlng
+                                // console.log(el._latlngs.length);
+                                for (var i = 0; i <= el._latlngs.length; i++) {
+                                    
+                                    // console.log("extend added for " +i+ "segments");
+                                    bounds.extend(el._latlngs[i]);
+                                };
                             });
+
+
+
+
                             map.fitBounds(bounds);
                             //sures
 
@@ -455,9 +466,9 @@
                 map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 
                 //auto init routing at start
-                //start="Chardobato";
-                //end="Gothatar";
-                //$('#endstop').change();
+                // start="Kapan Stop";
+                // end="Gothatar";
+                // $('#endstop').change();
             });
             function get_random_color() {
                 var letters = '0123456789ABCDEF'.split('');
