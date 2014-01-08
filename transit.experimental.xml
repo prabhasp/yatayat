@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2014-01-06T23:59:02Z"/>
+<meta osm_base="2014-01-07T23:58:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7204438" lon="85.3637665"/>
@@ -15913,7 +15913,7 @@
     <tag k="oneway" v="-1"/>
   </way>
   <relation id="2276770">
-    <member type="node" ref="1274184084" role="end"/>
+    <member type="node" ref="1274184084" role="start"/>
     <member type="way" ref="171203194" role=""/>
     <member type="way" ref="171603744" role=""/>
     <member type="way" ref="58423999" role=""/>
@@ -15953,7 +15953,7 @@
     <member type="way" ref="194607852" role=""/>
     <member type="way" ref="232096887" role=""/>
     <member type="way" ref="171203193" role=""/>
-    <member type="node" ref="2433619344" role="start"/>
+    <member type="node" ref="2433619344" role="end"/>
     <tag k="name" v="Purano Bus Park-Thimi"/>
     <tag k="ref" v="10"/>
     <tag k="route" v="microbus"/>
