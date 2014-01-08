@@ -292,12 +292,17 @@
                                 segmentorderindex = _.map(eachroute.segments,function(r){return r.id});
 
                                 startsegidnew = system.stopToSegDict[eachroute.stops[0].id][0];  //osmid
-                                startsegindex = segmentorderindex.indexOf(startsegidnew);
+                                startsegindex = segmentorderindex.indexOf(startsegidnew);        //position of above segement in ordered list of segment in route
 
                                 endsegidnew = system.stopToSegDict[_.last(eachroute.stops).id][0]; //smid
                                 endsegindex = segmentorderindex.indexOf(endsegidnew);
+                                
+                                // swap if startsegindex is greater
+                                if(startsegindex>endsegindex){
+                                    startsegindex = [endsegindex, endsegindex = startsegindex][0];
+                                }
+
                                 // debugger;
-                                //index found and saved as 1st element in startseg and endseg
                                 //actually drawing the route
                                 var defaultOptions = {
                                     "route": function() {
@@ -327,12 +332,14 @@
                                     if(segmenttype=="first"){insert=false;}else{insert=true;}
 
                                     partofsegment = [];
-                                    // console.log(segmenttype,segmentobject,station);
+                                    console.log(segmenttype,segmentobject,station);
                                     // debugger;
                                     for(i=0;i<segmentobject.listofnodeids.length;i++){
-                                        // console.log(i);
-                                        // console.log(segmentobject.listofnodeids[i]);
-                                        // console.log(station.id);
+                                        console.log(insert);
+                                        console.log(i);
+                                        console.log(segmentobject.listofnodeids[i]);
+                                        console.log(station.id);
+
                                         if(insert){
                                             partofsegment.push(segmentobject.dictofnodes[segmentobject.listofnodeids[i]]);
                                             // for(j=0;j<station.length;j++){
@@ -357,10 +364,7 @@
 
                                 };
 
-                                // swap if startsegindex is greater
-                                if(startsegindex>endsegindex){
-                                    startsegindex = [endsegindex, endsegindex = startsegindex][0];
-                                }
+                                
 
                                 firstsegmentpart = endsegmentrender("first",eachroute.segments[startsegindex],eachroute.stops[0]);
                                 // console.log("firstsegmentpart",firstsegmentpart);
@@ -387,7 +391,10 @@
                                 // console.log(YY._routeGroup);
                                 // debugger;
                                 
-                                for (segid = startsegindex+1; segid <= endsegindex-1; segid++) {
+                                
+                                direction = startsegindex>endsegindex?-1:1;
+                                for (segid = startsegindex+direction; segid != endsegindex-direction; segid+=direction) {
+                                    // console.log("segid",segid);
                                     seg = eachroute.segments[segid];
                                     var segMPL = new L.Polyline(_.map(seg.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}}), eachroutestyleoption);
 
@@ -447,9 +454,9 @@
                 map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 
                 //auto init routing at start
-                //start="Chardobato";
-                //end="Gothatar";
-                //$('#endstop').change();
+                document.getElementById("startstop").value ="Pingalasthan";
+                document.getElementById("endstop").value ="Chardobato";
+                $('#endstop').change();
             });
             function get_random_color() {
                 var letters = '0123456789ABCDEF'.split('');
