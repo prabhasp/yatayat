@@ -426,6 +426,14 @@
                             }
 
                             );
+                            i = 0 ;
+                            YY._routeGroup.eachLayer(function(el){
+                                
+                                console.log("killing in the name of");
+                                console.dir(el.latlngs);
+                                bounds.extend(el.latlngs[i]);
+                                i++
+                            });
                             map.fitBounds(bounds);
                             //sures
 
