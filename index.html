@@ -241,6 +241,7 @@
                         YY._routeGroup.clearLayers();
                         var gettingThereRoutes = system.takeMeThereByName(start, end);
                         routed = gettingThereRoutes;
+                        console.log(gettingThereRoutes);
                         var bounds = new L.LatLngBounds();
                         if (gettingThereRoutes === 'FAIL') alert('cannot find a route from ', start, ' to ', end);
                         else {
@@ -254,7 +255,7 @@
 
                             _(gettingThereRoutes).each(function(eachroute, idx) {
                                 //inclusionDict[r.id] = true;
-
+                                console.log("eachroute",eachroute);
                                 bounds.extend(new L.LatLng(eachroute.stops[0].lat, eachroute.stops[0].lng));
                                 bounds.extend(new L.LatLng(_.last(eachroute.stops).lat, _.last(eachroute.stops).lng));
 
@@ -291,11 +292,20 @@
                                 // finding index of first and last segment in list of segment                                
                                 segmentorderindex = _.map(eachroute.segments,function(r){return r.id});
 
-                                startsegidnew = system.stopToSegDict[eachroute.stops[0].id][0];  //osmid
-                                startsegindex = segmentorderindex.indexOf(startsegidnew);        //position of above segement in ordered list of segment in route
+                                startsegidnew = system.stopToSegDict[eachroute.stops[0].id];  //osmid
+                                for(startsegindex = segmentorderindex.indexOf(startsegidnew[0]),i=0;startsegindex==-1;i++){
+                                    startsegindex = segmentorderindex.indexOf(startsegidnew[i]);
+                                }
+                                
+                                // if(segmentorderindex.indexOf(startsegid) !=-1){
+                                //     startsegindex =         //position of above segement in ordered list of segment in route
+                                // }
 
-                                endsegidnew = system.stopToSegDict[_.last(eachroute.stops).id][0]; //smid
-                                endsegindex = segmentorderindex.indexOf(endsegidnew);
+                                endsegidnew = system.stopToSegDict[_.last(eachroute.stops).id]; //smid
+                                for(endsegindex = segmentorderindex.indexOf(endsegidnew[0]),i=0;endsegindex==-1;i++){
+                                    endsegindex = segmentorderindex.indexOf(endsegidnew[i]);
+                                }
+                                
                                 
                                 // swap if startsegindex is greater
                                 if(startsegindex>endsegindex){
@@ -325,7 +335,7 @@
                                 // for 1st segment
                                 
                                 // firstsegment = r.segments[0];
-                                
+                                // debugger;
                                 var endsegmentrender = function (segmenttype,segmentobject,station) {
                                     var insert;
                                     // listOfLatLng = _.map(segmentobject.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}});
@@ -335,10 +345,10 @@
                                     console.log(segmenttype,segmentobject,station);
                                     // debugger;
                                     for(i=0;i<segmentobject.listofnodeids.length;i++){
-                                        console.log(insert);
-                                        console.log(i);
-                                        console.log(segmentobject.listofnodeids[i]);
-                                        console.log(station.id);
+                                        // console.log(insert);
+                                        // console.log(i);
+                                        // console.log(segmentobject.listofnodeids[i]);
+                                        // console.log(station.id);
 
                                         if(insert){
                                             partofsegment.push(segmentobject.dictofnodes[segmentobject.listofnodeids[i]]);
@@ -370,7 +380,7 @@
                                 // console.log("firstsegmentpart",firstsegmentpart);
                                 if(firstsegmentpart.length){
                                     var segMPLfirst = new L.Polyline(firstsegmentpart, eachroutestyleoption);
-                                    segMPLfirst.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegidnew + "' target='_blank'>");
+                                    segMPLfirst.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegid + "' target='_blank'>");
                                     YY._routeGroup.addLayer(segMPLfirst);
                                 }
                                 else{
@@ -381,7 +391,7 @@
 
                                 if(lastsegmentpart.length){
                                     var segMPLlast = new L.Polyline(lastsegmentpart, eachroutestyleoption);
-                                    segMPLlast.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegidnew + "' target='_blank'>");
+                                    segMPLlast.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegid + "' target='_blank'>");
                                     YY._routeGroup.addLayer(segMPLlast);
                                 }
                                 else{
@@ -454,9 +464,9 @@
                 map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
 
                 //auto init routing at start
-                document.getElementById("startstop").value ="Pingalasthan";
-                document.getElementById("endstop").value ="Chardobato";
-                $('#endstop').change();
+                // document.getElementById("startstop").value ="Pingalasthan";
+                // document.getElementById("endstop").value ="Chardobato";
+                // $('#endstop').change();
             });
             function get_random_color() {
                 var letters = '0123456789ABCDEF'.split('');
