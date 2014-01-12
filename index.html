@@ -106,10 +106,11 @@
                     <div class="accordion-inner">
                         <b>Designed By:</b> <br/>
                         <a href="http://ku.edu.np/dcge/mission.htm">Kathmandu University Geomatics</a> and <a href="http://Monsooncollective.org"> Monsoon Collective </a> <br/>
-                        <b>KU contributors:</b> Sur Suresh Shrestha, Prabesh Shrestha, Prakash Ghimire, Amrit Gautam, Shashish Maharjan, Subash Ghimire. <br/>
-                        <b>Monsoon Collective contributors:</b> Prabhas Pokharel, Robert Ochshorn, Sakar Pudasaini, Suveg Pandey, Shirish Pokharel, Anshu Khadka. <br/>
-                        <b>Coordinated By:</b> Amrit Karmacharya and Prabhas Pokharel<br/><br/>
-                        The project was started by the Monsoon Collective; KU students have taken that and are currently maintaining it, under the supervision of Shashish Maharjan and Subash Ghimire.
+                        <b>KU contributors:</b> <a href="https://twitter.com/SureshSuress" target="_blank">Suresh Shrestha</a>, Prabesh Shrestha, <a href="https://twitter.com/Ghimire07" target="_blank">Prakash Ghimire</a>, Amrit Gautam, <a href="https://twitter.com/_shashish_" target="_blank">Shashish Maharjan</a>, Subash Ghimire. <br/>
+                        <b>Monsoon Collective contributors:</b> <a href="https://twitter.com/prabhasp" target="_blank">Prabhas Pokharel</a>, Robert Ochshorn, Sakar Pudasaini, Suveg Pandey, Shirish Pokharel, Anshu Khadka. <br/>
+                        <b>Coordinated By:</b> <a href="https://twitter.com/neogeomat" target="_blank">Amrit Karmacharya</a> and <a href="https://twitter.com/prabhasp" target="_blank">Prabhas Pokharel</a><br/><br/>
+                        The project was started by the Monsoon Collective; KU students have futher developed it. Currently KathmanduLivingLabs is maintaining it.<br>
+                        Refer to this <a href="http://wiki.openstreetmap.org/wiki/Nepal/Yatayat" target="_blank">wiki</a> for more information
                     </div>
                 </div>
             </div>
@@ -403,7 +404,7 @@
                                 
                                 
                                 direction = startsegindex>endsegindex?-1:1;
-                                for (segid = startsegindex+direction; segid != endsegindex-direction; segid+=direction) {
+                                for (segid = startsegindex; segid != endsegindex; segid+=direction) {
                                     // console.log("segid",segid);
                                     seg = eachroute.segments[segid];
                                     var segMPL = new L.Polyline(_.map(seg.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}}), eachroutestyleoption);
