@@ -12,9 +12,9 @@
         <!--[if lte IE 8]>
             <link rel="stylesheet" href="lib/leaflet/leaflet.ie.css" />
         <![endif] -->
-        <!--script src="lib/jquery-1.7.2.min.js"> </script-->
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
-        <!-- // <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
+        <script src="lib/jquery-1.7.2.min.js"> </script>
+        <!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+        // <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
         <script type="text/javascript" src="lib/jquery.autocomplete.min.js"></script>
         <script src="lib/underscore-min.js"> </script>
         <script src="lib/leaflet/leaflet-src.js"> </script>
@@ -106,7 +106,7 @@
                     <div class="accordion-inner">
                         <b>Designed By:</b> <br/>
                         <a href="http://ku.edu.np/dcge/mission.htm">Kathmandu University Geomatics</a> and <a href="http://Monsooncollective.org"> Monsoon Collective </a> <br/>
-                        <b>KU contributors:</b> Sur Suresh Shrestha, Prabesh Shrestha, Prakash Ghimire, Amrit Gautam, Shashish Maharjan, Subash Ghimire. <br/>
+                        <b>KU contributors:</b> Suresh Shrestha, Prabesh Shrestha, Prakash Ghimire, Amrit Gautam, Shashish Maharjan, Subash Ghimire. <br/>
                         <b>Monsoon Collective contributors:</b> Prabhas Pokharel, Robert Ochshorn, Sakar Pudasaini, Suveg Pandey, Shirish Pokharel, Anshu Khadka. <br/>
                         <b>Coordinated By:</b> Amrit Karmacharya and Prabhas Pokharel<br/><br/>
                         The project was started by the Monsoon Collective; KU students have taken that and are currently maintaining it, under the supervision of Shashish Maharjan and Subash Ghimire.
@@ -208,6 +208,19 @@
 
             YY.fromConfig("config.stable.json", function(sys) {
                 system = sys;
+                // console.log("I love you");
+                // console.dir(system.routes);
+                //write json of system
+                // _.each(system.routes, function(r){
+                // var object123={'routes:
+                //     ['
+                //     id: r.id,
+                //     name: r.name,
+                //     ref: r.ref
+                // })]
+                // }
+                // JSON.stringify(myobj);
+                
                 YY.render_(system, map, undefined, //includeIDObject; try {"2269045": true} for an example
                 undefined // leafletBaseOptions
                 );
@@ -223,7 +236,12 @@
                     i=i+1;
                 });
                 var stopNames = _.compact(_.pluck(system.allStops(), 'name'));
-                $('.typeahead').typeahead({source: stopNames});
+                $('.typeahead').typeahead({
+                    source: stopNames,
+                    minLength: 3,
+                    items: 5
+
+                });
 
                 $('#textboxes').show();
 
@@ -233,15 +251,16 @@
                     var start = $('#startstop')[0].value;
                     var end = $('#endstop')[0].value;
                     var dist = 0;
-                    console.log("routing from",start,"to",end);
+                    // console.log("routing from",start,"to",end);
                     if (start && end) {
                         if (!YY._routeGroup) {
                             YY._routeGroup = new L.LayerGroup().addTo(map);
                         }
                         YY._routeGroup.clearLayers();
-                        var gettingThereRoutes = system.takeMeThereByName(start, end);
+                        var gettingThereRoutes = system.takeMeThereByName(start, end);//1
                         routed = gettingThereRoutes;
-                        console.log(gettingThereRoutes);
+                        // console.log("good morning");
+                        // console.dir(gettingThereRoutes);
                         var bounds = new L.LatLngBounds();
                         if (gettingThereRoutes === 'FAIL') alert('cannot find a route from ', start, ' to ', end);
                         else {
@@ -255,7 +274,7 @@
 
                             _(gettingThereRoutes).each(function(eachroute, idx) {
                                 //inclusionDict[r.id] = true;
-                                console.log("eachroute",eachroute);
+                                // console.log("eachroute",eachroute);
                                 bounds.extend(new L.LatLng(eachroute.stops[0].lat, eachroute.stops[0].lng));
                                 bounds.extend(new L.LatLng(_.last(eachroute.stops).lat, _.last(eachroute.stops).lng));
 
@@ -342,7 +361,7 @@
                                     if(segmenttype=="first"){insert=false;}else{insert=true;}
 
                                     partofsegment = [];
-                                    console.log(segmenttype,segmentobject,station);
+                                    // console.log(segmenttype,segmentobject,station);
                                     // debugger;
                                     for(i=0;i<segmentobject.listofnodeids.length;i++){
                                         // console.log(insert);
@@ -422,7 +441,7 @@
                                 map.addLayer(YY._routeGroup);
                                 // lastsegment = _.find([route.segments[0],_.last(route.segments)],function(r){return r.id==endsegidnew});
 
-                                outputHTML += "<div style=\"color:"+eachroutestyleoption.color+"\">Get on " + toTitleCase(eachroute.transport) + " " + eachroute.ref + " (" + eachroute.name + ") at " + eachroute.stops[0].name + " and ride till " + _.last(eachroute.stops).name + "with distance of " + Math.round(dist)/1000 + " km" + "</div>";
+                                outputHTML += "<div style=\"color:"+eachroutestyleoption.color+"\">Get on " + toTitleCase(eachroute.transport) + " " + eachroute.ref + " (" + eachroute.name + ") at " + eachroute.stops[0].name + " and ride till " + _.last(eachroute.stops).name + " with distance of " + Math.round(dist)/1000 + " km" + "</div>";
                             }
 
                             );
@@ -481,6 +500,7 @@
                     }
                 }
                 map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
+                // L.control.scale().addTo(map);
 
                 //auto init routing at start
 

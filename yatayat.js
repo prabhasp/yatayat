@@ -44,16 +44,21 @@ YY.System.prototype.stopRoutesFromStopID = function(stopID) {
             .value();
 };
 //take stopName and return array of stopID and routeID which contains the passed stopName
+//2
 YY.System.prototype.stopRoutesFromStopName = function(stopName) {
     var aggregator = [];
+    // console.log(" qptibo ojsbvmb mpwft up dpef stopRoutesFromStopName");
     _(this.routes).each(function (r) {
+        // console.log(r);
         _(r.stops).each(function (s) {
             if (s.name === stopName) {
                 aggregator.push({stopID: s.id, routeID: r.id });
             }
         });
     });
+    console.log("stopRoutesFromStopNameq"+aggregator);
     return aggregator;
+
 };
 
 // returns a new system with only passed in items included; if includeIDList is falsy, return a copy
@@ -84,23 +89,30 @@ YY.System.prototype.nearestStops = function(llArr, N, maxDist) {
     return _.map(answer, function(a) { return a[0]; });
 };
 //take startStopName and endStopName , then get array of stopID and routeID for the route and pass to takeMeThereByStop
+//1
 YY.System.prototype.takeMeThereByName = function(startStopName, goalStopName) {
-    var startNodes = this.stopRoutesFromStopName(startStopName);
+    // console.log("For"+startStopName+"stop");
+    var startNodes = this.stopRoutesFromStopName(startStopName);//2
+    // console.log("For"+startStopName+"stop");
     var goalNodes = this.stopRoutesFromStopName(goalStopName);
     if (_.isEmpty(startNodes) || _.isEmpty(goalNodes)) return 'FAIL: Start / Goal not found';
     // TODO: throw error if goal nodes are far away from each other
-    return this.takeMeThereByStop(startNodes, goalNodes[0]);
+    return this.takeMeThereByStop(startNodes, goalNodes[0]);//3
 }
 //take startStopID and endStopID
 YY.System.prototype.takeMeThere = function(startStopID, goalStopID) {
+    
     var startNodes = this.stopRoutesFromStopID(startStopID);
+    console.log("startnodes");
     var goalNodes = this.stopRoutesFromStopID(goalStopID);
     return this.takeMeThereByStop(startNodes, goalNodes[0]);
 }
+// debugger;
 
 // Return [route] where route contains [stops], and just the stops we use
 // Else return undefined
 //sures--in form of routes
+//3
 YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
     var system = this;
     var openset = {};
@@ -118,7 +130,7 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
         return retval;
     };
     var set = function(dict, stopRouteObj, val) {
-        dict[stopRouteObj.stopID + "," + stopRouteObj.routeID] = val;
+        dict[stopRouteObj.stopID + "," + stopRouteObj.routeID] = val;//using routeid and stopid as composite key
     };
     var get = function(dict, stopRouteObj) {
         return dict[stopRouteObj.stopID + "," + stopRouteObj.routeID];
@@ -159,7 +171,7 @@ YY.System.prototype.takeMeThereByStop = function(startNodes, goalNode) {
             delete(openset[current.stopID + "," + current.routeID]);
             set(closedset, current, current);
             
-            var neighbors = system.neighborNodes(current.stopID, current.routeID);
+            var neighbors = system.neighborNodes(current.stopID, current.routeID);//4
             _(neighbors).each( function(neighbor) {
                 if (get(closedset, neighbor)) {
                     return; // equivalent to a loop continue
@@ -244,13 +256,40 @@ YY.Route = function(id, stops, segments, tag, startSegID) {
     this.name = tag.name;
     this.ref = tag.ref;
     this.transport = tag.route;
+    // if (!tag.ref){
+    //     debugger;
+    // }
     //this.orientingSegmentID = orientingSegmentID;
     if (startSegID) {this.order(startSegID);}
     else {
         this._unconnectedSegments = this.segments;
         this._noTerminus = true;
     }
-    this.deriveStopDict(); // note: this must happen after the order call
+    this.deriveStopDict();// note: this must happen after the order call
+     console.log("wiritng json");
+     var brakts='{';
+     var brakte='}';
+     var bbrakts='[';
+     var bbrakte='}';
+     var enter = '\n';
+     var comma = ',';
+     console.log(tag.ref);
+    if (tag.ref!=undefined){
+         var jesonobj= brakts.concat('route'.
+            concat(enter.concat('bbrakts'.concat('id:'.concat(id.concat(comma.concat(enter.concat(
+                'name:'.concat(tag.name.concat(comma.concat(enter.concat('ref:'.concat(
+                    tag.ref.concat(bbrakte.concat(bbrakte)))))))))))))));
+         console.log(jesonobj);
+         JSON.stringify(jesonobj);
+    }
+    else{
+        var jesonobj= brakts.concat('route'.
+            concat(enter.concat('bbrakts'.concat('id:'.concat(id.concat(comma.concat(enter.concat(
+                'name:'.concat(tag.name.concat(comma.concat(enter.concat('ref:'.concat(
+                    'tag.ref'.concat(bbrakte.concat(bbrakte)))))))))))))));
+        console.log(jesonobj);
+        JSON.stringify(jesonobj);
+    }
 };
 //derive the Stop Dictionay with all stops of the route
 YY.Route.prototype.deriveStopDict = function () {
@@ -581,6 +620,7 @@ YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOve
         });
         map.removeLayer(YY._layerGroup);
         map.addLayer(YY._layerGroup);
+        L.control.scale().addTo(map);
     };
 
 
