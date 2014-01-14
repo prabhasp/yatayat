@@ -68,8 +68,7 @@
                             <b>
                                 End
                             </b>
-                            <input type="text" id="endstop" class="typeahead" data-provide="typeahead"
-                            style="color:red" />
+                            <input type="text" id="endstop" class="typeahead" data-provide="typeahead"/>
                             <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY._routeGroup.clearLayers();YY.render_(system,map);"> Clear </a>
                         </div>
                     </div>
@@ -500,7 +499,7 @@
                     }
                 }
                 map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
-                // L.control.scale().addTo(map);
+                L.control.scale().addTo(map);
 
                 //auto init routing at start
 
