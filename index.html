@@ -5,19 +5,21 @@
         <title>
             Kathmandu Public Transport
         </title>
-        <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+        <!--link rel="stylesheet" href="lib/leaflet/leaflet.css" /-->
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
         <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="lib/yatayat.css" />
         <link rel="stylesheet" href="lib/autocomplete_styles.css">
         <!--[if lte IE 8]>
             <link rel="stylesheet" href="lib/leaflet/leaflet.ie.css" />
         <![endif] -->
-        <script src="lib/jquery-1.7.2.min.js"> </script>
-        <!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
-        // <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
+        <!--script src="lib/jquery-1.7.2.min.js"> </script-->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+        <!--<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
         <script type="text/javascript" src="lib/jquery.autocomplete.min.js"></script>
         <script src="lib/underscore-min.js"> </script>
-        <script src="lib/leaflet/leaflet-src.js"> </script>
+        <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
+        <!--script src="lib/leaflet/leaflet-src.js"> </script-->
         <script src="lib/leaflet/spin.min.js"> </script>
         <script src="lib/leaflet/leaflet.spin.js"> </script>
         <script src="lib/wax.leaf.min.js"> </script>
@@ -32,7 +34,7 @@
         <div id="Title">
             Kathmandu Valley Public Transport App
         </div>
-        <div class="alert" id="routedisplay" style="background:white;position:absolute;top:40;left:60;z-index:999">
+        <div class="alert" id="routedisplay" style="position:absolute;top:60;left:60;z-index:999;width:60%;background-color:rgb(156, 15, 37)">
         </div>
         <div id="publicTransportMap" style="width:80%; height: 100%">
             Loading ...
@@ -106,8 +108,9 @@
                     <div class="accordion-inner">
                         <b>Designed By:</b> <br/>
                         <a href="http://ku.edu.np/dcge/mission.htm">Kathmandu University Geomatics</a> and <a href="http://Monsooncollective.org"> Monsoon Collective </a> <br/>
-                        <b>KU contributors:</b> <a href="https://twitter.com/SureshSuress" target="_blank">Suresh Shrestha</a>, Prabesh Shrestha, <a href="https://twitter.com/Ghimire07" target="_blank">Prakash Ghimire</a>, Amrit Gautam, <a href="https://twitter.com/_shashish_" target="_blank">Shashish Maharjan</a>, Subash Ghimire. <br/>
+                        <b>KU contributors:</b> <a href="https://twitter.com/neogeomat" target="_blank">Amrit Karmacharya</a>,<a href="https://twitter.com/SureshSuress" target="_blank">Suresh Shrestha</a>, Prabesh Shrestha, <a href="https://twitter.com/Ghimire07" target="_blank">Prakash Ghimire</a>, Amrit Gautam, <a href="https://twitter.com/_shashish_" target="_blank">Shashish Maharjan</a>, Subash Ghimire. <br/>
                         <b>Monsoon Collective contributors:</b> <a href="https://twitter.com/prabhasp" target="_blank">Prabhas Pokharel</a>, Robert Ochshorn, Sakar Pudasaini, Suveg Pandey, Shirish Pokharel, Anshu Khadka. <br/>
+                        <b>KathmanduLivingLabs contributors:</b> <a href="https://twitter.com/neogeomat" target="_blank">Amrit Karmacharya</a>,<a href="https:twitter.com/https://twitter.com/PoshanNiraula1">Poshan Niraula</a>
                         <b>Coordinated By:</b> <a href="https://twitter.com/neogeomat" target="_blank">Amrit Karmacharya</a> and <a href="https://twitter.com/prabhasp" target="_blank">Prabhas Pokharel</a><br/><br/>
                         The project was started by the Monsoon Collective; KU students have futher developed it. Currently KathmanduLivingLabs is maintaining it.<br>
                         Refer to this <a href="http://wiki.openstreetmap.org/wiki/Nepal/Yatayat" target="_blank">wiki</a> for more information
@@ -318,9 +321,18 @@
                                 // debugger;
                                 //actually drawing the route
                                 var defaultOptions = {
-                                    "route": function() {
+                                    "route": function(idx) {
+                                        if(idx == 0){
+                                            color = "lightgreen";
+                                        }else if(idx == 1){
+                                            color = "orange";
+                                        }else if(idx == 2){
+                                            color = "cyan";
+                                        }else{
+                                            color = get_random_color();
+                                        }
                                         return {
-                                            color: get_random_color(),
+                                            color:color,
                                             opacity: 1,
                                             weight: 10
                                         };
@@ -332,7 +344,7 @@
                                     }
                                 };
 
-                                var eachroutestyleoption = defaultOptions.route();
+                                var eachroutestyleoption = function(idx){return defaultOptions.route(idx)};
                                 dist = 0;
 
                                 // for 1st segment
@@ -379,9 +391,9 @@
                                 firstsegmentpart = endsegmentrender("first",eachroute.segments[startsegindex],eachroute.stops[0]);
                                 // console.log("firstsegmentpart",firstsegmentpart);
                                 if(firstsegmentpart.length){
-                                    var segMPLfirst = new L.Polyline(firstsegmentpart, eachroutestyleoption);
+                                    var segMPLfirst = new L.Polyline(firstsegmentpart, eachroutestyleoption(idx));
                                     segMPLfirst.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegid + "' target='_blank'>");
-                                    YY._routeGroup.addLayer(segMPLfirst);
+                                    // YY._routeGroup.addLayer(segMPLfirst);
                                 }
                                 else{
                                     firstsegmentpart = endsegmentrender("first",eachroute.segments[endsegindex],eachroute.stops[0]);
@@ -390,23 +402,19 @@
                                 lastsegmentpart = endsegmentrender("last",eachroute.segments[endsegindex],_.last(eachroute.stops));
 
                                 if(lastsegmentpart.length){
-                                    var segMPLlast = new L.Polyline(lastsegmentpart, eachroutestyleoption);
+                                    var segMPLlast = new L.Polyline(lastsegmentpart, eachroutestyleoption(idx));
                                     segMPLlast.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegid + "' target='_blank'>");
-                                    YY._routeGroup.addLayer(segMPLlast);
+                                    // YY._routeGroup.addLayer(segMPLlast);
                                 }
                                 else{
                                     lastsegmentpart = endsegmentrender("last",eachroute.segments[startsegindex],_.last(eachroute.stops));
-                                }
-                                // console.log("lastsegmentpart",lastsegmentpart);
-                                // console.log(YY._routeGroup);
-                                // debugger;
-                                
+                                }           
                                 
                                 direction = startsegindex>endsegindex?-1:1;
                                 for (segid = startsegindex; segid != endsegindex; segid+=direction) {
                                     // console.log("segid",segid);
                                     seg = eachroute.segments[segid];
-                                    var segMPL = new L.Polyline(_.map(seg.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}}), eachroutestyleoption);
+                                    var segMPL = new L.Polyline(_.map(seg.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}}), eachroutestyleoption(idx));
 
                                     segMPL.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + seg.id + "' target='_blank'>" + seg.id + "</a>," + segid + "");
 
@@ -422,7 +430,7 @@
                                 map.addLayer(YY._routeGroup);
                                 // lastsegment = _.find([route.segments[0],_.last(route.segments)],function(r){return r.id==endsegidnew});
 
-                                outputHTML += "<div style=\"color:"+eachroutestyleoption.color+"\">Get on " + toTitleCase(eachroute.transport) + " " + eachroute.ref + " (" + eachroute.name + ") at " + eachroute.stops[0].name + " and ride till " + _.last(eachroute.stops).name + "with distance of " + Math.round(dist)/1000 + " km" + "</div>";
+                                outputHTML += "<div style=\"color:"+eachroutestyleoption(idx).color+"; width=65%; top:60;\">Get on " + toTitleCase(eachroute.transport) + " " + removeundefinedstrings(eachroute.ref) + " (" + eachroute.name + ") at " + eachroute.stops[0].name + " and ride till " + _.last(eachroute.stops).name + "with distance of " + Math.round(dist)/1000 + " km" + "</div>";
                             }
                             );
 
@@ -469,8 +477,8 @@
                 map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
                 L.control.scale().addTo(map);
                 //auto init routing at start
-                // document.getElementById("startstop").value ="Pingalasthan";
-                // document.getElementById("endstop").value ="Chardobato";
+                // document.getElementById("startstop").value ="Matatirtha Stop";
+                // document.getElementById("endstop").value ="Changu Narayan";
                 // $('#endstop').change();
             });
             function get_random_color() {
@@ -486,6 +494,10 @@
                 return str.replace(/\w\S*/g, function(txt) {
                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                 });
+            }
+
+            function removeundefinedstrings(str){
+                return str?str:"";
             }
         </script>
     </body>
