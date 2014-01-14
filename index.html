@@ -12,9 +12,9 @@
         <!--[if lte IE 8]>
             <link rel="stylesheet" href="lib/leaflet/leaflet.ie.css" />
         <![endif] -->
-        <!--script src="lib/jquery-1.7.2.min.js"> </script-->
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
-        <!-- // <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
+        <script src="lib/jquery-1.7.2.min.js"> </script>
+        <!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
+        // <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
         <script type="text/javascript" src="lib/jquery.autocomplete.min.js"></script>
         <script src="lib/underscore-min.js"> </script>
         <script src="lib/leaflet/leaflet-src.js"> </script>
@@ -224,7 +224,12 @@
                     i=i+1;
                 });
                 var stopNames = _.compact(_.pluck(system.allStops(), 'name'));
-                $('.typeahead').typeahead({source: stopNames});
+                $('.typeahead').typeahead({
+                    source: stopNames,
+                    minLength: 3,
+                    items: 5
+
+                });
 
                 $('#textboxes').show();
 
@@ -234,7 +239,6 @@
                     var start = $('#startstop')[0].value;
                     var end = $('#endstop')[0].value;
                     var dist = 0;
-                    console.log("routing from",start,"to",end);
                     if (start && end) {
                         if (!YY._routeGroup) {
                             YY._routeGroup = new L.LayerGroup().addTo(map);
@@ -242,7 +246,6 @@
                         YY._routeGroup.clearLayers();
                         var gettingThereRoutes = system.takeMeThereByName(start, end);
                         routed = gettingThereRoutes;
-                        console.log(gettingThereRoutes);
                         var bounds = new L.LatLngBounds();
                         if (gettingThereRoutes === 'FAIL') alert('cannot find a route from ', start, ' to ', end);
                         else {
@@ -256,7 +259,6 @@
 
                             _(gettingThereRoutes).each(function(eachroute, idx) {
                                 //inclusionDict[r.id] = true;
-                                console.log("eachroute",eachroute);
                                 bounds.extend(new L.LatLng(eachroute.stops[0].lat, eachroute.stops[0].lng));
                                 bounds.extend(new L.LatLng(_.last(eachroute.stops).lat, _.last(eachroute.stops).lng));
 
@@ -343,7 +345,6 @@
                                     if(segmenttype=="first"){insert=false;}else{insert=true;}
 
                                     partofsegment = [];
-                                    console.log(segmenttype,segmentobject,station);
                                     // debugger;
                                     for(i=0;i<segmentobject.listofnodeids.length;i++){
                                         // console.log(insert);
@@ -374,8 +375,6 @@
                                     return partofsegment;
 
                                 };
-
-                                
 
                                 firstsegmentpart = endsegmentrender("first",eachroute.segments[startsegindex],eachroute.stops[0]);
                                 // console.log("firstsegmentpart",firstsegmentpart);
@@ -425,8 +424,13 @@
 
                                 outputHTML += "<div style=\"color:"+eachroutestyleoption.color+"\">Get on " + toTitleCase(eachroute.transport) + " " + eachroute.ref + " (" + eachroute.name + ") at " + eachroute.stops[0].name + " and ride till " + _.last(eachroute.stops).name + "with distance of " + Math.round(dist)/1000 + " km" + "</div>";
                             }
-
                             );
+
+                            YY._routeGroup.eachLayer(function(el){
+                                for (var i = 0; i <= el._latlngs.length; i++) {
+                                    bounds.extend(el._latlngs[i]);
+                                };
+                            });
                             map.fitBounds(bounds);
                             //sures
 
@@ -463,7 +467,7 @@
                     }
                 }
                 map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
-
+                L.control.scale().addTo(map);
                 //auto init routing at start
                 // document.getElementById("startstop").value ="Pingalasthan";
                 // document.getElementById("endstop").value ="Chardobato";
