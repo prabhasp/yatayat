@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2014-01-12T23:58:01Z"/>
+<meta osm_base="2014-01-13T23:59:01Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7204438" lon="85.3637665"/>
@@ -6125,7 +6125,7 @@
     <nd ref="442150824"/>
     <tag k="highway" v="secondary"/>
     <tag k="name" v="Guheshwari marg"/>
-    <tag k="oneway" v="no"/>
+    <tag k="oneway" v="yes"/>
   </way>
   <way id="5407550">
     <nd ref="1275596977"/>
