@@ -34,7 +34,7 @@
         <div id="Title">
             Kathmandu Valley Public Transport App
         </div>
-        <div class="alert" id="routedisplay" style="position:absolute;top:60;left:60;z-index:999;width:60%;background-color:rgb(156, 15, 37)">
+        <div class="alert" id="routedisplay" style="position:absolute;top:60;left:60;z-index:999;width:60%;background-color:rgb(228, 237, 249)">
         </div>
         <div id="publicTransportMap" style="width:80%; height: 100%">
             Loading ...
@@ -62,16 +62,15 @@
                 <div id="collapseOne" class="accordion-body collapse in">
                     <div class="accordion-inner">
                         <div id="textboxes">
-                            <b>
+                            <b style="color: green;">
                                 Start
                             </b>
-                            <input type="text" id="startstop" class="typeahead" data-provide="typeahead"
-                            />
-                            <b>
+                            <input type="text" id="startstop" class="typeahead" data-provide="typeahead" style="color: green;">
+                            <b style="color: rgb(0,57,166);">
                                 End
                             </b>
                             <input type="text" id="endstop" class="typeahead" data-provide="typeahead"
-                            style="color:red" />
+                            style="color:rgb(0,57,166)" />
                             <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY._routeGroup.clearLayers();YY.render_(system,map);"> Clear </a>
                         </div>
                     </div>
@@ -302,10 +301,6 @@
                                 for(startsegindex = segmentorderindex.indexOf(startsegidnew[0]),i=0;startsegindex==-1;i++){
                                     startsegindex = segmentorderindex.indexOf(startsegidnew[i]);
                                 }
-                                
-                                // if(segmentorderindex.indexOf(startsegid) !=-1){
-                                //     startsegindex =         //position of above segement in ordered list of segment in route
-                                // }
 
                                 endsegidnew = system.stopToSegDict[_.last(eachroute.stops).id]; //smid
                                 for(endsegindex = segmentorderindex.indexOf(endsegidnew[0]),i=0;endsegindex==-1;i++){
@@ -323,11 +318,11 @@
                                 var defaultOptions = {
                                     "route": function(idx) {
                                         if(idx == 0){
-                                            color = "lightgreen";
+                                            color = "rgb(0,155,58)";
                                         }else if(idx == 1){
-                                            color = "orange";
+                                            color = "rgb(255,99,25)";
                                         }else if(idx == 2){
-                                            color = "cyan";
+                                            color = "rgb(0,57,166)";
                                         }else{
                                             color = get_random_color();
                                         }
@@ -359,11 +354,6 @@
                                     partofsegment = [];
                                     // debugger;
                                     for(i=0;i<segmentobject.listofnodeids.length;i++){
-                                        // console.log(insert);
-                                        // console.log(i);
-                                        // console.log(segmentobject.listofnodeids[i]);
-                                        // console.log(station.id);
-
                                         if(insert){
                                             partofsegment.push(segmentobject.dictofnodes[segmentobject.listofnodeids[i]]);
                                             // for(j=0;j<station.length;j++){
@@ -430,7 +420,7 @@
                                 map.addLayer(YY._routeGroup);
                                 // lastsegment = _.find([route.segments[0],_.last(route.segments)],function(r){return r.id==endsegidnew});
 
-                                outputHTML += "<div style=\"color:"+eachroutestyleoption(idx).color+"; width=65%; top:60;\">Get on " + toTitleCase(eachroute.transport) + " " + removeundefinedstrings(eachroute.ref) + " (" + eachroute.name + ") at " + eachroute.stops[0].name + " and ride till " + _.last(eachroute.stops).name + "with distance of " + Math.round(dist)/1000 + " km" + "</div>";
+                                outputHTML += "<div style=\"color:"+eachroutestyleoption(idx).color+"; width=65%; top:60; font-family:cursive;\">Get on " + toTitleCase(eachroute.transport) + " " + removeundefinedstrings(eachroute.ref) + " (" + eachroute.name + ") at " + eachroute.stops[0].name + " and ride till " + _.last(eachroute.stops).name + " with distance of " + Math.round(dist)/1000 + " km" + "</div>";
                             }
                             );
 
@@ -477,8 +467,8 @@
                 map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
                 L.control.scale().addTo(map);
                 //auto init routing at start
-                // document.getElementById("startstop").value ="Matatirtha Stop";
-                // document.getElementById("endstop").value ="Changu Narayan";
+                //document.getElementById("startstop").value ="Matatirtha Stop";
+                // document.getElementById("endstop").value ="Thimi";
                 // $('#endstop').change();
             });
             function get_random_color() {
