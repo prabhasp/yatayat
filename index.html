@@ -22,6 +22,7 @@
         <!--script src="lib/leaflet/leaflet-src.js"> </script-->
         <script src="lib/leaflet/spin.min.js"> </script>
         <script src="lib/leaflet/leaflet.spin.js"> </script>
+        <script src="lib\leaflet\Leaflet.PolylineDecorator\leaflet.polylineDecorator.min.js"></script> 
         <script src="lib/wax.leaf.min.js"> </script>
         <script src="lib/kdtree/src/web/kdTree.js"> </script>
         <script src="lib/bootstrap/js/bootstrap.min.js"> </script>
@@ -249,7 +250,7 @@
                         var gettingThereRoutes = system.takeMeThereByName(start, end);
                         routed = gettingThereRoutes;
                         var bounds = new L.LatLngBounds();
-                        if (gettingThereRoutes === 'FAIL'){ alert('cannot find a route from ', start, ' to ', end);map.spin(false);}
+                        if (gettingThereRoutes === 'FAIL') alert('cannot find a route from ', start, ' to ', end);
                         else {
                             var inclusionDict = {};
                             var overrideDict = {};
@@ -405,7 +406,6 @@
                                     // console.log("segid",segid);
                                     seg = eachroute.segments[segid];
                                     var segMPL = new L.Polyline(_.map(seg.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}}), eachroutestyleoption(idx));
-
                                     segMPL.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + seg.id + "' target='_blank'>" + seg.id + "</a>," + segid + "");
 
                                     YY._routeGroup.addLayer(segMPL);
@@ -467,9 +467,9 @@
                 map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
                 L.control.scale().addTo(map);
                 //auto init routing at start
-                document.getElementById("startstop").value ="Bhadrakali";
-                document.getElementById("endstop").value ="Bagbazar Stop";
-                $('#endstop').change();
+                //document.getElementById("startstop").value ="Matatirtha Stop";
+                // document.getElementById("endstop").value ="Thimi";
+                // $('#endstop').change();
             });
             function get_random_color() {
                 var letters = '0123456789ABCDEF'.split('');
