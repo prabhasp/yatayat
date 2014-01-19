@@ -242,7 +242,7 @@ YY.System.prototype.neighborNodes = function(stopID, routeID) {
         return r.id === routeID;
     });
     var sameRouteDistance = 1;
-    var transferDistance = 1;
+    var transferDistance = 5;
     var neighbors = [];
     _.each(thisRoute.stops, function(s, idx) {
         if (s.id === stopID) {
@@ -258,12 +258,13 @@ YY.System.prototype.neighborNodes = function(stopID, routeID) {
             */
 
             //if (!thisRoute.isDirectional) {
-            if (idx > 0)
+            /*if (idx > 0)
                 neighbors.push({
                     routeID: thisRoute.id,
                     distToNeighbor: sameRouteDistance,
                     stopID: thisRoute.stops[idx - 1].id
                 });
+    */
             /*else if (thisRoute.isCyclical)
                     neighbors.push(_.extend(templateObj,
                         {stopID: _.last(thisRoute.stops).id}));
