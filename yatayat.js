@@ -70,7 +70,7 @@ YY.System.prototype.stopRoutesFromStopName = function(stopName) {
             }
         });
     });
-    console.log("stopRoutesFromStopNameq" + aggregator);
+    // console.log("stopRoutesFromStopNameq" + aggregator);
     return aggregator;
 
 };
@@ -242,7 +242,7 @@ YY.System.prototype.neighborNodes = function(stopID, routeID) {
         return r.id === routeID;
     });
     var sameRouteDistance = 1;
-    var transferDistance = 1;
+    var transferDistance = 5;
     var neighbors = [];
     _.each(thisRoute.stops, function(s, idx) {
         if (s.id === stopID) {
@@ -258,12 +258,14 @@ YY.System.prototype.neighborNodes = function(stopID, routeID) {
             */
 
             //if (!thisRoute.isDirectional) {
-            if (idx > 0)
+            /*if (idx > 0)
                 neighbors.push({
                     routeID: thisRoute.id,
                     distToNeighbor: sameRouteDistance,
                     stopID: thisRoute.stops[idx - 1].id
                 });
+    */
+
             /*else if (thisRoute.isCyclical)
                     neighbors.push(_.extend(templateObj,
                         {stopID: _.last(thisRoute.stops).id}));
@@ -612,7 +614,9 @@ YY.fromOSM = function(overpassXML) {
         _.each($r.find('member'), function(m) {
             var $m = $(m);
             if ($m.attr('type') === 'way') {
-                mySegments.push(segments[$m.attr('ref')]);
+                var segment = segments[$m.attr('ref')];
+                segment.role = $m.attr('role');
+                mySegments.push(segment);
             } else if ($m.attr('type') === 'node') {
                 var n = nodes[$m.attr('ref')];
                 if (n && n.lat && n.lng) {
@@ -762,6 +766,21 @@ YY.single_route_render = function(system, route) {
             color: 'green',
             weight: 7
         });
+        var arrow = new L.polylineDecorator(poly, {
+            patterns: [{
+                offset: 25,
+                repeat: 50,
+                symbol: L.Symbol.arrowHead({
+                    pixelSize: 15,
+                    pathOptions: {
+                        fillOpacity: 1,
+                        weight: 0
+                    }
+                })
+            }]
+        });
+
+        YY._singlelayer.addLayer(arrow);
         YY._singlelayer.addLayer(poly);
     });
     route.stops.forEach(function(stop) {

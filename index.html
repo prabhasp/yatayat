@@ -22,6 +22,7 @@
         <!--script src="lib/leaflet/leaflet-src.js"> </script-->
         <script src="lib/leaflet/spin.min.js"> </script>
         <script src="lib/leaflet/leaflet.spin.js"> </script>
+        <script src="lib\leaflet\Leaflet.PolylineDecorator\leaflet.polylineDecorator.min.js"></script> 
         <script src="lib/wax.leaf.min.js"> </script>
         <script src="lib/kdtree/src/web/kdTree.js"> </script>
         <script src="lib/bootstrap/js/bootstrap.min.js"> </script>
@@ -404,8 +405,7 @@
                                 for (segid = startsegindex; segid != endsegindex; segid+=direction) {
                                     // console.log("segid",segid);
                                     seg = eachroute.segments[segid];
-                                    var segMPL = new L.Polyline(_.map(seg.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}}), eachroutestyleoption(idx));
-
+                                    var segMPL = new L.Polyline(_.map(seg.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}}), eachroutestyleoption);
                                     segMPL.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + seg.id + "' target='_blank'>" + seg.id + "</a>," + segid + "");
 
                                     YY._routeGroup.addLayer(segMPL);
