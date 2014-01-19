@@ -613,7 +613,9 @@ YY.fromOSM = function(overpassXML) {
         _.each($r.find('member'), function(m) {
             var $m = $(m);
             if ($m.attr('type') === 'way') {
-                mySegments.push(segments[$m.attr('ref')]);
+                var segment = segments[$m.attr('ref')];
+                segment.role = $m.attr('role');
+                mySegments.push(segment);
             } else if ($m.attr('type') === 'node') {
                 var n = nodes[$m.attr('ref')];
                 if (n && n.lat && n.lng) {
