@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2014-01-18T23:59:02Z"/>
+<meta osm_base="2014-01-19T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7204438" lon="85.3637665"/>
@@ -4755,7 +4755,10 @@
   <node id="2021174029" lat="27.7293207" lon="85.3249007"/>
   <node id="2021174030" lat="27.7334921" lon="85.3293670"/>
   <node id="2021190880" lat="27.7400143" lon="85.3370554"/>
-  <node id="2021250829" lat="27.7218713" lon="85.3313761"/>
+  <node id="2021250829" lat="27.7218713" lon="85.3313761">
+    <tag k="name" v="Chinese Embassy Stop"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <node id="2021254014" lat="27.7405622" lon="85.3361813"/>
   <node id="2021285801" lat="27.7009388" lon="85.3535242"/>
   <node id="2022576553" lat="27.7284262" lon="85.3249245"/>
@@ -5736,7 +5739,7 @@
     <tag k="name" v="Mandikhatar Stop"/>
   </node>
   <node id="2396022575" lat="27.7022101" lon="85.3136379">
-    <tag k="name" v="RNAC stop"/>
+    <tag k="name" v="NAC stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="2396022576" lat="27.7191723" lon="85.3311046">
@@ -5858,6 +5861,10 @@
   <node id="2622021458" lat="27.7129289" lon="85.2898228"/>
   <node id="2622021489" lat="27.7144527" lon="85.2933084"/>
   <node id="2622021509" lat="27.7155713" lon="85.2929685"/>
+  <node id="2628176031" lat="27.7152553" lon="85.3258028">
+    <tag k="name" v="Naxal"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -9469,6 +9476,7 @@
     <nd ref="2004031745"/>
     <nd ref="2004031748"/>
     <nd ref="2004031749"/>
+    <nd ref="2628176031"/>
     <nd ref="2004031747"/>
     <nd ref="2004031746"/>
     <tag k="highway" v="secondary"/>
@@ -17959,7 +17967,7 @@
     <member type="way" ref="230309606" role=""/>
     <member type="way" ref="230309607" role=""/>
     <member type="way" ref="171609948" role=""/>
-    <member type="node" ref="558555620" role="start"/>
+    <member type="node" ref="558555620" role="end"/>
     <member type="node" ref="1805062970" role=""/>
     <member type="node" ref="1805062851" role=""/>
     <member type="node" ref="1805074834" role=""/>
@@ -17985,8 +17993,8 @@
     <member type="node" ref="1446092259" role=""/>
     <member type="node" ref="1767431974" role=""/>
     <member type="node" ref="2036622121" role=""/>
-    <member type="node" ref="1274184084" role="end"/>
-    <tag k="name" v="Panauti - Ratnapark"/>
+    <member type="node" ref="1274184084" role="start"/>
+    <tag k="name" v="Ratnapark - Panauti"/>
     <tag k="ref" v="11"/>
     <tag k="route" v="bus"/>
     <tag k="type" v="route"/>
