@@ -6,6 +6,7 @@ var kdTree = kdTree || require('./lib/kdtree/src/node/kdTree.js').kdTree;
 var YY = YY || {};
 
 //takes routes and create array of routes as routes and routes in object form as routeDict
+
 YY.System = function(routes, stopToSegDict) {
     this.routes = routes;
     var routeDict = {};
@@ -70,7 +71,7 @@ YY.System.prototype.stopRoutesFromStopName = function(stopName) {
             }
         });
     });
-    console.log("stopRoutesFromStopNameq" + aggregator);
+    // console.log("stopRoutesFromStopNameq" + aggregator);
     return aggregator;
 
 };
@@ -307,7 +308,7 @@ YY.Route = function(id, stops, segments, tag, startSegID) {
         this._noTerminus = true;
     }
     this.deriveStopDict(); // note: this must happen after the order call
-    console.log("wiritng json");
+    // console.log("wiritng json");
     var brakts = '{';
     var brakte = '}';
     var bbrakts = '[';
@@ -550,6 +551,7 @@ YY.fromConfig = function(config_path, cb) {
         });
     });
 };
+// YY.changes = function()
 
 YY.Segment.prototype.flip = function() {
     this.listOfLatLng = _(this.listOfLatLng).reverse();
@@ -727,7 +729,7 @@ YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOve
     });
     map.removeLayer(YY._layerGroup);
     map.addLayer(YY._layerGroup);
-    L.control.scale().addTo(map);
+    // L.control.scale().addTo(map);
 };
 
 

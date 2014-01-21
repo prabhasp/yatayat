@@ -70,9 +70,13 @@
                             </b>
                             <input type="text" id="endstop" class="typeahead" data-provide="typeahead"
                             style="color:red" /><br>
-                            <a class="btn" id="findroute" onclick="poshan123();">Find ROute</a>
+
+                            <a class="btn" id="go"> GO </a><br>
                             <a class="btn" id="swap">Swap</a>
+
+                            
                             <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY._routeGroup.clearLayers();YY.render_(system,map);"> Clear </a>
+
                         </div>
                     </div>
                 </div>
@@ -207,30 +211,19 @@
             var osmdata;
             var routed;
             var routed_route;
-            function poshan123(){
-                var start = $('#startstop')[0].value;
-                var end = $('#endstop')[0].value;
-                YY.fromConfig.changes();
-            }
+            
             
             YY.fromConfig("config.stable.json", function(sys) {
                 system = sys;
-                // console.log("I love you");
-                // console.dir(system.routes);
-                //write json of system
-                // _.each(system.routes, function(r){
-                // var object123={'routes:
-                //     ['
-                //     id: r.id,
-                //     name: r.name,
-                //     ref: r.ref
-                // })]
-                // }
-                // JSON.stringify(myobj);
-                
+
                 YY.render_(system, map, undefined, //includeIDObject; try {"2269045": true} for an example
                 undefined // leafletBaseOptions
                 );
+                // $('#go').click(function(){
+                //     // var start = $('#startstop')[0].value;
+                //     // var end = $('#endstop')[0].value;
+                //     console.log("asdfghjkl");
+                // });
 
                 //ROUTING
                 var stopNames = _.compact(_.pluck(system.allStops(), 'name'));
@@ -251,10 +244,17 @@
                 });
 
                 $('#textboxes').show();
-
-
                 // $('input.typeahead').change(function(f) {
-                YY.changes(){
+                $('#swap').click(function(){
+                    console.log("last ramailo");
+                    temp = $('#startstop')[0].value;
+                    $('#startstop')[0].value =  $('#endstop')[0].value;
+                    $('#endstop')[0].value =  temp;
+                    $('#go').click();
+                })
+                $('#go').click(function(){
+                    // YY.changes(system);
+                    // YY.changes(function(system){
                     map.spin(true);
                     var start = $('#startstop')[0].value;
                     var end = $('#endstop')[0].value;
@@ -494,7 +494,8 @@
                         map.spin(false);
                     }
                 // });
-                }
+                });
+
                 routeinfopanel(system.routeDict);
                 if (YY.TILE_SOURCE) {
                     if (YY.WAX) {
@@ -509,7 +510,7 @@
                     }
                 }
                 map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
-                // L.control.scale().addTo(map);
+                L.control.scale().addTo(map);
 
                 //auto init routing at start
 
@@ -518,15 +519,17 @@
 
                 // $('#endstop').change();
             });
-            function poshan123(){
-                var start = $('#startstop')[0].value;
-                var end = $('#endstop')[0].value;
-                console.log(start);
-                console.log(end);
-                YY.changes();
-                // console.log("poshan123");
+            
+            // function poshan123(){
+            //     var start = $('#startstop')[0].value;
+            //     var end = $('#endstop')[0].value;
+            //     console.log(start);
+            //     console.log(end);
+            //     YY.changes();
+            //     // console.log("poshan123");
 
-            }
+            // }
+            
             function get_random_color() {
                 var letters = '0123456789ABCDEF'.split('');
                 var color = '#';
