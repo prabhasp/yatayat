@@ -69,8 +69,9 @@
                             <b style="color: rgb(0,57,166);">
                                 End
                             </b>
-                            <input type="text" id="endstop" class="typeahead" data-provide="typeahead"
-                            style="color:rgb(0,57,166)" />
+                            <input type="text" id="endstop" class="typeahead" data-provide="typeahead" style="color:rgb(0,57,166)" /><br>
+                            <a class="btn" id="go"> GO </a>
+                            <a class="btn" id="swap">Swap</a>
                             <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY._routeGroup.clearLayers();YY.render_(system,map);"> Clear </a>
                         </div>
                     </div>
@@ -199,7 +200,7 @@
         <script type="text/javascript" language="javascript">
                     // UI HACK
             $('#textboxes').hide();
-            $('#routedisplay').hide()
+            $('#routedisplay').hide();
             // initialize the map
             var map = new L.Map('publicTransportMap');
 
@@ -208,13 +209,11 @@
             var osmdata;
             var routed;
             var routed_route;
-
-            YY.fromConfig("config.stable.json", function(sys) {
+YY.fromConfig("config.stable.json", function(sys) {
                 system = sys;
                 YY.render_(system, map, undefined, //includeIDObject; try {"2269045": true} for an example
                 undefined // leafletBaseOptions
                 );
-
                 //ROUTING
                 var stopNames = _.compact(_.pluck(system.allStops(), 'name'));
                    
@@ -234,9 +233,15 @@
                 });
 
                 $('#textboxes').show();
-
-                $('input.typeahead').change(function(f) {
-                    
+                // $('input.typeahead').change(function(f) {
+                $('#swap').click(function(){
+                    // console.log("last ramailo");
+                    temp = $('#startstop')[0].value;
+                    $('#startstop')[0].value =  $('#endstop')[0].value;
+                    $('#endstop')[0].value =  temp;
+                    $('#go').click();
+                })
+                $('#go').click(function(){
                     map.spin(true);
                     var start = $('#startstop')[0].value;
                     var end = $('#endstop')[0].value;
@@ -311,10 +316,7 @@
                                 // swap if startsegindex is greater
                                 if(startsegindex>endsegindex){
                                     startsegindex = [endsegindex, endsegindex = startsegindex][0];
-                                }
-
-                                // debugger;
-                                //actually drawing the route
+                                }                                //actually drawing the route
                                 var defaultOptions = {
                                     "route": function(idx) {
                                         if(idx == 0){
@@ -383,7 +385,7 @@
                                 if(firstsegmentpart.length){
                                     var segMPLfirst = new L.Polyline(firstsegmentpart, eachroutestyleoption(idx));
                                     segMPLfirst.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegid + "' target='_blank'>");
-                                    // YY._routeGroup.addLayer(segMPLfirst);
+                                    YY._routeGroup.addLayer(segMPLfirst);
                                 }
                                 else{
                                     firstsegmentpart = endsegmentrender("first",eachroute.segments[endsegindex],eachroute.stops[0]);
@@ -394,14 +396,14 @@
                                 if(lastsegmentpart.length){
                                     var segMPLlast = new L.Polyline(lastsegmentpart, eachroutestyleoption(idx));
                                     segMPLlast.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegid + "' target='_blank'>");
-                                    // YY._routeGroup.addLayer(segMPLlast);
+                                    YY._routeGroup.addLayer(segMPLlast);
                                 }
                                 else{
                                     lastsegmentpart = endsegmentrender("last",eachroute.segments[startsegindex],_.last(eachroute.stops));
                                 }           
                                 
                                 direction = startsegindex>endsegindex?-1:1;
-                                for (segid = startsegindex; segid != endsegindex; segid+=direction) {
+                                for (segid = startsegindex + direction; segid != endsegindex - direction; segid+=direction) {
                                     // console.log("segid",segid);
                                     seg = eachroute.segments[segid];
                                     var segMPL = new L.Polyline(_.map(seg.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}}), eachroutestyleoption(idx));
@@ -415,12 +417,13 @@
                                         dist += distanc(seg.listOfLatLng[i][0], seg.listOfLatLng[i][1], seg.listOfLatLng[i + 1][0], seg.listOfLatLng[i + 1][1]);
                                     }
                                 }
-                                // debugger;
                                 map.removeLayer(YY._routeGroup);
                                 map.addLayer(YY._routeGroup);
-                                // lastsegment = _.find([route.segments[0],_.last(route.segments)],function(r){return r.id==endsegidnew});
-
-                                outputHTML += "<div style=\"color:"+eachroutestyleoption(idx).color+"; width=65%; top:60; font-family:cursive;\">Get on " + toTitleCase(eachroute.transport) + " " + removeundefinedstrings(eachroute.ref) + " (" + eachroute.name + ") at " + eachroute.stops[0].name + " and ride till " + _.last(eachroute.stops).name + " with distance of " + Math.round(dist)/1000 + " km" + "</div>";
+                                if(dist>200){
+                                    outputHTML += "<div style=\"color:"+eachroutestyleoption(idx).color+"; width=65%; top:60; font-family:cursive;\">Get on " + toTitleCase(eachroute.transport) + " " + removeundefinedstrings(eachroute.ref) + " (" + eachroute.name + ") at " + eachroute.stops[0].name + " and ride till " + _.last(eachroute.stops).name + " with distance of " + Math.round(dist)/1000 + " km" + "</div>";}
+                                else{
+                                    outputHTML += "<div style=\"color:"+eachroutestyleoption(idx).color+"; width=65%; top:60; font-family:cursive;\">Walk from " + eachroute.stops[0].name + " to " + _.last(eachroute.stops).name + " with distance of " + Math.round(dist)/1000 + " km" + "</div>";
+                                }
                             }
                             );
 
