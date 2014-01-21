@@ -69,7 +69,9 @@
                                 End
                             </b>
                             <input type="text" id="endstop" class="typeahead" data-provide="typeahead"
-                            style="color:red" />
+                            style="color:red" /><br>
+                            <a class="btn" id="findroute" onclick="poshan123();">Find ROute</a>
+                            <a class="btn" id="swap">Swap</a>
                             <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY._routeGroup.clearLayers();YY.render_(system,map);"> Clear </a>
                         </div>
                     </div>
@@ -196,7 +198,7 @@
         <script type="text/javascript" language="javascript">
                     // UI HACK
             $('#textboxes').hide();
-            $('#routedisplay').hide()
+            $('#routedisplay').hide();
             // initialize the map
             var map = new L.Map('publicTransportMap');
 
@@ -205,7 +207,12 @@
             var osmdata;
             var routed;
             var routed_route;
-
+            function poshan123(){
+                var start = $('#startstop')[0].value;
+                var end = $('#endstop')[0].value;
+                YY.fromConfig.changes();
+            }
+            
             YY.fromConfig("config.stable.json", function(sys) {
                 system = sys;
                 // console.log("I love you");
@@ -245,8 +252,9 @@
 
                 $('#textboxes').show();
 
-                $('input.typeahead').change(function(f) {
-                    
+
+                // $('input.typeahead').change(function(f) {
+                YY.changes(){
                     map.spin(true);
                     var start = $('#startstop')[0].value;
                     var end = $('#endstop')[0].value;
@@ -485,7 +493,8 @@
                         $('#routedisplay').hide()
                         map.spin(false);
                     }
-                });
+                // });
+                }
                 routeinfopanel(system.routeDict);
                 if (YY.TILE_SOURCE) {
                     if (YY.WAX) {
@@ -509,6 +518,15 @@
 
                 // $('#endstop').change();
             });
+            function poshan123(){
+                var start = $('#startstop')[0].value;
+                var end = $('#endstop')[0].value;
+                console.log(start);
+                console.log(end);
+                YY.changes();
+                // console.log("poshan123");
+
+            }
             function get_random_color() {
                 var letters = '0123456789ABCDEF'.split('');
                 var color = '#';
