@@ -6,7 +6,9 @@ var kdTree = kdTree || require('./lib/kdtree/src/node/kdTree.js').kdTree;
 var YY = YY || {};
 
 //takes routes and create array of routes as routes and routes in object form as routeDict
+<< << << < HEAD
 
+=== === = >>> >>> > 0131dc546dcfe3ea0e7ad8d0c9633bff690dac43
 YY.System = function(routes, stopToSegDict) {
     this.routes = routes;
     var routeDict = {};
@@ -70,8 +72,10 @@ YY.System.prototype.stopRoutesFromStopName = function(stopName) {
                 });
             }
         });
-    });
+    }); << << << < HEAD
 
+    === === =
+        console.log("stopRoutesFromStopNameq" + aggregator); >>> >>> > 0131dc546dcfe3ea0e7ad8d0c9633bff690dac43
     return aggregator;
 
 };
@@ -308,8 +312,10 @@ YY.Route = function(id, stops, segments, tag, startSegID) {
         this._noTerminus = true;
     }
     this.deriveStopDict(); // note: this must happen after the order call
-
 };
+
+
+
 //derive the Stop Dictionay with all stops of the route
 YY.Route.prototype.deriveStopDict = function() {
     var stopDict = {};
@@ -709,7 +715,6 @@ YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOve
     });
     map.removeLayer(YY._layerGroup);
     map.addLayer(YY._layerGroup);
-
 };
 
 
@@ -745,11 +750,14 @@ var colors = (function() {
 }());
 
 YY.single_route_render = function(system, route) {
+    var rt_bd = new L.LatLngBounds();
+    _(route.stops).each(function(s) {
+        var latlngg = new L.LatLng(s.lat, s.lng);
+        rt_bd.extend(latlngg);
+    });
+
     if (YY._routeGroup) {
         YY._routeGroup.clearLayers();
-    }
-    if (YY._layerGroup) {
-        YY._layerGroup.clearLayers();
     }
     $('#routedisplay').hide();
 
@@ -779,9 +787,9 @@ YY.single_route_render = function(system, route) {
         YY._singlelayer.addLayer(marker);
     });
     map.addLayer(YY._singlelayer);
-    var rt_bd = new L.LatLngBounds();
-    rt_bd.extend(new L.LatLng(route.stops[0].lat, route.stops[0].lng));
-    rt_bd.extend(new L.LatLng(_.last(route.stops).lat, _.last(route.stops).lng));
+    // var rt_bd = new L.LatLngBounds();
+    // rt_bd.extend(new L.LatLng(route.stops[0].lat, route.stops[0].lng));
+    // rt_bd.extend(new L.LatLng(_.last(route.stops).lat, _.last(route.stops).lng));
     map.fitBounds(rt_bd);
     return YY._singlelayer;
 };
