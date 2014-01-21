@@ -73,7 +73,7 @@
                             style="color:rgb(0,57,166)" /><br>
 
                             <a class="btn" id="go"> GO </a><br>
-                            <a class="btn" id="swap">Swap</a>
+                            <a class="btn" id="swap">Swap</a><br>
                             <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY._routeGroup.clearLayers();YY.render_(system,map);"> Clear </a>
 
                         </div>
@@ -246,15 +246,13 @@
                 $('#textboxes').show();
                 // $('input.typeahead').change(function(f) {
                 $('#swap').click(function(){
-                    console.log("last ramailo");
+                    // console.log("last ramailo");
                     temp = $('#startstop')[0].value;
                     $('#startstop')[0].value =  $('#endstop')[0].value;
                     $('#endstop')[0].value =  temp;
                     $('#go').click();
                 })
                 $('#go').click(function(){
-                    // YY.changes(system);
-                    // YY.changes(function(system){
                     map.spin(true);
                     var start = $('#startstop')[0].value;
                     var end = $('#endstop')[0].value;
@@ -331,7 +329,7 @@
                                     startsegindex = [endsegindex, endsegindex = startsegindex][0];
                                 }
 
-                                // debugger;
+                                
                                 //actually drawing the route
                                 var defaultOptions = {
                                     "route": function(idx) {
@@ -492,16 +490,6 @@
                 // document.getElementById("endstop").value ="Thimi";
                 // $('#endstop').change();
             });
-            
-            // function poshan123(){
-            //     var start = $('#startstop')[0].value;
-            //     var end = $('#endstop')[0].value;
-            //     console.log(start);
-            //     console.log(end);
-            //     YY.changes();
-            //     // console.log("poshan123");
-
-            // }
             
             function get_random_color() {
                 var letters = '0123456789ABCDEF'.split('');

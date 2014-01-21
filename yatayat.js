@@ -6,9 +6,6 @@ var kdTree = kdTree || require('./lib/kdtree/src/node/kdTree.js').kdTree;
 var YY = YY || {};
 
 //takes routes and create array of routes as routes and routes in object form as routeDict
-<< << << < HEAD
-
-=== === = >>> >>> > 0131dc546dcfe3ea0e7ad8d0c9633bff690dac43
 YY.System = function(routes, stopToSegDict) {
     this.routes = routes;
     var routeDict = {};
@@ -72,10 +69,7 @@ YY.System.prototype.stopRoutesFromStopName = function(stopName) {
                 });
             }
         });
-    }); << << << < HEAD
-
-    === === =
-        console.log("stopRoutesFromStopNameq" + aggregator); >>> >>> > 0131dc546dcfe3ea0e7ad8d0c9633bff690dac43
+    });
     return aggregator;
 
 };
