@@ -71,7 +71,7 @@ YY.System.prototype.stopRoutesFromStopName = function(stopName) {
             }
         });
     });
-    // console.log("stopRoutesFromStopNameq" + aggregator);
+
     return aggregator;
 
 };
@@ -308,27 +308,7 @@ YY.Route = function(id, stops, segments, tag, startSegID) {
         this._noTerminus = true;
     }
     this.deriveStopDict(); // note: this must happen after the order call
-    // console.log("wiritng json");
-    var brakts = '{';
-    var brakte = '}';
-    var bbrakts = '[';
-    var bbrakte = '}';
-    var enter = '\n';
-    var comma = ',';
-    // console.log(tag.ref);
-    if (tag.ref != undefined) {
-        var jesonobj = brakts.concat('route'.concat(enter.concat('bbrakts'.concat('id:'.concat(id.concat(comma.concat(enter.concat(
-            'name:'.concat(tag.name.concat(comma.concat(enter.concat('ref:'.concat(
-                tag.ref.concat(bbrakte.concat(bbrakte)))))))))))))));
-        // console.log(jesonobj);
-        JSON.stringify(jesonobj);
-    } else {
-        var jesonobj = brakts.concat('route'.concat(enter.concat('bbrakts'.concat('id:'.concat(id.concat(comma.concat(enter.concat(
-            'name:'.concat(tag.name.concat(comma.concat(enter.concat('ref:'.concat(
-                'tag.ref'.concat(bbrakte.concat(bbrakte)))))))))))))));
-        // console.log(jesonobj);
-        JSON.stringify(jesonobj);
-    }
+
 };
 //derive the Stop Dictionay with all stops of the route
 YY.Route.prototype.deriveStopDict = function() {
@@ -729,7 +709,7 @@ YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOve
     });
     map.removeLayer(YY._layerGroup);
     map.addLayer(YY._layerGroup);
-    // L.control.scale().addTo(map);
+
 };
 
 
