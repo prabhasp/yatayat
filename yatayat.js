@@ -69,8 +69,7 @@ YY.System.prototype.stopRoutesFromStopName = function(stopName) {
                 });
             }
         });
-    });
-    return aggregator;
+    });    return aggregator;
 
 };
 
@@ -126,7 +125,6 @@ YY.System.prototype.takeMeThereByName = function(startStopName, goalStopName) {
 YY.System.prototype.takeMeThere = function(startStopID, goalStopID) {
 
     var startNodes = this.stopRoutesFromStopID(startStopID);
-    // console.log("startnodes");
     var goalNodes = this.stopRoutesFromStopID(goalStopID);
     return this.takeMeThereByStop(startNodes, goalNodes[0]);
 }
@@ -307,9 +305,6 @@ YY.Route = function(id, stops, segments, tag, startSegID) {
     }
     this.deriveStopDict(); // note: this must happen after the order call
 };
-
-
-
 //derive the Stop Dictionay with all stops of the route
 YY.Route.prototype.deriveStopDict = function() {
     var stopDict = {};
@@ -531,8 +526,6 @@ YY.fromConfig = function(config_path, cb) {
         });
     });
 };
-// YY.changes = function()
-
 YY.Segment.prototype.flip = function() {
     this.listOfLatLng = _(this.listOfLatLng).reverse();
     this.orderedListofStops = _(this.orderedListofStops).reverse();
@@ -781,9 +774,6 @@ YY.single_route_render = function(system, route) {
         YY._singlelayer.addLayer(marker);
     });
     map.addLayer(YY._singlelayer);
-    // var rt_bd = new L.LatLngBounds();
-    // rt_bd.extend(new L.LatLng(route.stops[0].lat, route.stops[0].lng));
-    // rt_bd.extend(new L.LatLng(_.last(route.stops).lat, _.last(route.stops).lng));
     map.fitBounds(rt_bd);
     return YY._singlelayer;
 };
