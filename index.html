@@ -296,6 +296,15 @@ YY.fromConfig("config.stable.json", function(sys) {
                                 }
 
                                 //show routed route
+                                //
+                                // find the direction of eachroute compared to original route direction
+                                originalroute = system.routeDict[eachroute.id];
+                                if(originalroute.stops.indexOf(eachroute.stops[0])<originalroute.stops.indexOf(eachroute.stops[1])){
+                                    direction = 1;
+                                }else{
+                                    direction = -1;
+                                }
+                                
                                 var startseg = [];
                                 var endseg = [];
                                 var startsegid, endsegid;
