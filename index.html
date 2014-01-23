@@ -322,7 +322,6 @@ YY.fromConfig("config.stable.json", function(sys) {
                                     endsegindex = segmentorderindex.indexOf(endsegidnew[i]);
                                 }
                                 
-                                
                                 // swap if startsegindex is greater
                                 if(startsegindex>endsegindex){
                                     startsegindex = [endsegindex, endsegindex = startsegindex][0];
@@ -354,68 +353,59 @@ YY.fromConfig("config.stable.json", function(sys) {
                                 var eachroutestyleoption = function(idx){return defaultOptions.route(idx)};
                                 dist = 0;
 
-                                // for 1st segment
-                                
-                                // firstsegment = r.segments[0];
-                                // debugger;
-                                var endsegmentrender = function (segmenttype,segmentobject,station) {
-                                    var insert;
-                                    // listOfLatLng = _.map(segmentobject.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}});
-                                    if(segmenttype=="first"){insert=false;}else{insert=true;}
+                                var endsegmentrender = function (direction,segindex,station) {
+                                    var insert,shift;
+                                    var thisSeg = eachroute.segments[segindex], nextSeg = eachroute.segments[segindex-direction];
+                                    console.log("thisSeg",thisSeg,"nextSeg",nextSeg);
+                                    var thisSegFirst = thisSeg.listofnodeids[0];
+                                    var thisSegLast  = _.last(thisSeg.listofnodeids);
+                                    var nextSegFirst = nextSeg.listofnodeids[0];
+                                    var nextSegLast  = _.last(nextSeg.listofnodeids);
 
+                                    // finding the common node in joined segments
+                                    var commonNode;
+                                    if(thisSegFirst == nextSegFirst){
+                                        commonNode = thisSegFirst;
+                                    }else if (thisSegFirst == nextSegLast) {
+                                        commonNode = thisSegFirst;
+                                    }else if (thisSegLast == nextSegFirst) {
+                                        commonNode = thisSegLast;
+                                    }else if (thisSegLast == nextSegLast) {
+                                        commonNode = thisSegLast;
+                                    };
+                                    insert = thisSeg.listofnodeids.indexOf(station.id)<thisSeg.listofnodeids.indexOf(commonNode);
+                                    insert?shift=1:shift=-1;
                                     partofsegment = [];
-                                    // debugger;
-                                    for(i=0;i<segmentobject.listofnodeids.length;i++){
-                                        if(insert){
-                                            partofsegment.push(segmentobject.dictofnodes[segmentobject.listofnodeids[i]]);
-                                            // for(j=0;j<station.length;j++){
-                                                if (segmentobject.listofnodeids[i] == station.id){
-                                                    insert = !insert;
-                                                    // console.log("end found")   
-                                                }
-                                            // }
-                                        }
-                                        else{ 
-                                            // for(j=0;j<station.length;j++){
-                                                // new L.circle(listOfLatLng[i],3).addTo(map);
-                                                if (segmentobject.listofnodeids[i] == station.id){
-                                                    insert = !insert;
-                                                    // console.log("start found")
-                                                    partofsegment.push(segmentobject.dictofnodes[segmentobject.listofnodeids[i]]);
-                                                }
-                                            // }
-                                        }
+
+                                    for(i=thisSeg.listofnodeids.indexOf(station.id);i !== thisSeg.listofnodeids.indexOf(commonNode);i=i+shift){
+                                        partofsegment.push(thisSeg.dictofnodes[thisSeg.listofnodeids[i]]);
                                     }
                                     return partofsegment;
 
                                 };
 
-                                firstsegmentpart = endsegmentrender("first",eachroute.segments[startsegindex],eachroute.stops[0]);
-                                // console.log("firstsegmentpart",firstsegmentpart);
+                                firstsegmentpart = endsegmentrender(direction,startsegindex,eachroute.stops[0]);
                                 if(firstsegmentpart.length){
                                     var segMPLfirst = new L.Polyline(firstsegmentpart, eachroutestyleoption(idx));
                                     segMPLfirst.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegid + "' target='_blank'>");
                                     YY._routeGroup.addLayer(segMPLfirst);
                                 }
-                                else{
-                                    firstsegmentpart = endsegmentrender("first",eachroute.segments[endsegindex],eachroute.stops[0]);
-                                }
                                 
-                                lastsegmentpart = endsegmentrender("last",eachroute.segments[endsegindex],_.last(eachroute.stops));
+                                lastsegmentpart = endsegmentrender(direction,endsegindex,_.last(eachroute.stops));
 
                                 if(lastsegmentpart.length){
                                     var segMPLlast = new L.Polyline(lastsegmentpart, eachroutestyleoption(idx));
                                     segMPLlast.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegid + "' target='_blank'>");
                                     YY._routeGroup.addLayer(segMPLlast);
                                 }
-                                else{
-                                    lastsegmentpart = endsegmentrender("last",eachroute.segments[startsegindex],_.last(eachroute.stops));
-                                }           
+                                // else{
+                                //     lastsegmentpart = endsegmentrender("last",eachroute.segments[startsegindex],_.last(eachroute.stops));
+                                // }           
                                 
                                 for (segid = startsegindex + direction; segid != endsegindex - direction; segid+=direction) {
                                     // console.log("segid",segid);
                                     seg = eachroute.segments[segid];
-                                    var segMPL = new L.Polyline(_.map(seg.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}}), eachroutestyleoption);
+                                    var segMPL = new L.Polyline(_.map(seg.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}}), eachroutestyleoption(idx));
                                     segMPL.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + seg.id + "' target='_blank'>" + seg.id + "</a>," + segid + "");
 
                                     YY._routeGroup.addLayer(segMPL);
