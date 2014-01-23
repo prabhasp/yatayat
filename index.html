@@ -304,7 +304,7 @@ YY.fromConfig("config.stable.json", function(sys) {
                                 }else{
                                     direction = -1;
                                 }
-                                
+
                                 var startseg = [];
                                 var endseg = [];
                                 var startsegid, endsegid;
@@ -412,7 +412,6 @@ YY.fromConfig("config.stable.json", function(sys) {
                                     lastsegmentpart = endsegmentrender("last",eachroute.segments[startsegindex],_.last(eachroute.stops));
                                 }           
                                 
-                                direction = startsegindex>endsegindex?-1:1;
                                 for (segid = startsegindex + direction; segid != endsegindex - direction; segid+=direction) {
                                     // console.log("segid",segid);
                                     seg = eachroute.segments[segid];
