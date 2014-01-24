@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2014-01-22T23:59:02Z"/>
+<meta osm_base="2014-01-23T23:58:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7204438" lon="85.3637665"/>
@@ -19186,10 +19186,10 @@
     <member type="node" ref="1805074834" role=""/>
     <member type="node" ref="1805062851" role=""/>
     <member type="node" ref="1805062970" role=""/>
-    <tag k="from" v="Attrekhel"/>
-    <tag k="name" v="Attrekhle-Purano Buspark"/>
+    <tag k="from" v="Purano Buspark"/>
+    <tag k="name" v="Purano Buspark - Attrekhel"/>
     <tag k="route" v="bus"/>
-    <tag k="to" v="micro"/>
+    <tag k="to" v="Attrekhel"/>
     <tag k="type" v="route"/>
   </relation>
   <relation id="3028077">
@@ -20273,6 +20273,98 @@
     <member type="node" ref="1887593406" role="end"/>
     <tag k="name" v="NAC-Kharibot"/>
     <tag k="route" v="microbus"/>
+    <tag k="type" v="route"/>
+  </relation>
+  <relation id="3461693">
+    <member type="node" ref="1805062970" role=""/>
+    <member type="node" ref="1805062851" role=""/>
+    <member type="node" ref="1805074834" role=""/>
+    <member type="node" ref="1805087604" role=""/>
+    <member type="node" ref="1805087571" role=""/>
+    <member type="node" ref="1872733915" role=""/>
+    <member type="node" ref="1817037501" role=""/>
+    <member type="node" ref="1817037493" role=""/>
+    <member type="node" ref="31230922" role=""/>
+    <member type="node" ref="31150664" role=""/>
+    <member type="node" ref="31147572" role=""/>
+    <member type="node" ref="2336938449" role=""/>
+    <member type="node" ref="1832985899" role=""/>
+    <member type="node" ref="1395061503" role=""/>
+    <member type="node" ref="31151483" role=""/>
+    <member type="node" ref="31019074" role=""/>
+    <member type="node" ref="560500317" role=""/>
+    <member type="node" ref="360705527" role=""/>
+    <member type="node" ref="253198544" role="start"/>
+    <member type="node" ref="1274184084" role="end"/>
+    <member type="way" ref="227330622" role=""/>
+    <member type="way" ref="171603743" role=""/>
+    <member type="way" ref="231880676" role=""/>
+    <member type="way" ref="231880677" role=""/>
+    <member type="way" ref="4840318" role=""/>
+    <member type="way" ref="171603747" role=""/>
+    <member type="way" ref="231414552" role=""/>
+    <member type="way" ref="231414550" role=""/>
+    <member type="way" ref="170533892" role=""/>
+    <member type="way" ref="257752115" role=""/>
+    <member type="way" ref="231786214" role=""/>
+    <member type="way" ref="190532597" role=""/>
+    <member type="way" ref="190532598" role=""/>
+    <member type="way" ref="231103975" role=""/>
+    <member type="way" ref="215507256" role=""/>
+    <member type="way" ref="215507254" role=""/>
+    <member type="way" ref="257752687" role=""/>
+    <member type="way" ref="257752686" role=""/>
+    <member type="way" ref="257752685" role=""/>
+    <member type="way" ref="257756417" role=""/>
+    <member type="way" ref="257753842" role=""/>
+    <member type="way" ref="257758029" role=""/>
+    <member type="way" ref="170533897" role=""/>
+    <member type="way" ref="188434896" role=""/>
+    <member type="way" ref="170533898" role=""/>
+    <member type="way" ref="232095629" role=""/>
+    <member type="way" ref="229038204" role=""/>
+    <member type="way" ref="27034031" role=""/>
+    <member type="way" ref="225456435" role=""/>
+    <member type="way" ref="182984272" role=""/>
+    <member type="way" ref="232095630" role=""/>
+    <member type="way" ref="232095625" role=""/>
+    <member type="way" ref="232095628" role=""/>
+    <member type="way" ref="221323019" role=""/>
+    <member type="way" ref="183110577" role=""/>
+    <member type="way" ref="111846942" role=""/>
+    <member type="way" ref="111846941" role=""/>
+    <member type="way" ref="232095616" role=""/>
+    <member type="way" ref="232095614" role=""/>
+    <member type="way" ref="232095613" role=""/>
+    <member type="way" ref="232095615" role=""/>
+    <member type="way" ref="198993947" role=""/>
+    <member type="way" ref="172008702" role=""/>
+    <member type="way" ref="172140337" role=""/>
+    <member type="way" ref="170533896" role=""/>
+    <member type="way" ref="173044198" role=""/>
+    <member type="way" ref="232095617" role=""/>
+    <member type="way" ref="120264257" role=""/>
+    <member type="way" ref="225426574" role=""/>
+    <member type="way" ref="225426573" role=""/>
+    <member type="way" ref="232099518" role=""/>
+    <member type="way" ref="169336489" role=""/>
+    <member type="way" ref="171599263" role=""/>
+    <member type="way" ref="196269537" role=""/>
+    <member type="way" ref="111823088" role=""/>
+    <member type="way" ref="28559428" role=""/>
+    <member type="way" ref="172129845" role=""/>
+    <member type="way" ref="231194709" role=""/>
+    <member type="way" ref="172387593" role=""/>
+    <member type="way" ref="172387597" role=""/>
+    <member type="way" ref="172387590" role=""/>
+    <member type="way" ref="172387581" role=""/>
+    <member type="way" ref="4840104" role=""/>
+    <member type="way" ref="171603746" role=""/>
+    <member type="way" ref="24683731" role=""/>
+    <tag k="from" v="Attrekhel"/>
+    <tag k="name" v="Attrekhel - Purano Buspark"/>
+    <tag k="route" v="bus"/>
+    <tag k="to" v="Purano Buspark"/>
     <tag k="type" v="route"/>
   </relation>
 
