@@ -308,24 +308,39 @@ YY.fromConfig("config.stable.json", function(sys) {
                                 var startseg = [];
                                 var endseg = [];
                                 var startsegid, endsegid;
+                                var startsegindex,endsegindex;
 
                                 // finding index of first and last segment in list of segment                                
                                 segmentorderindex = _.map(eachroute.segments,function(r){return r.id});
 
-                                startsegidnew = system.stopToSegDict[eachroute.stops[0].id];  //osmid
-                                for(startsegindex = segmentorderindex.indexOf(startsegidnew[0]),i=0;startsegindex==-1;i++){
-                                    startsegindex = segmentorderindex.indexOf(startsegidnew[i]);
-                                }
-
-                                endsegidnew = system.stopToSegDict[_.last(eachroute.stops).id]; //smid
-                                for(endsegindex = segmentorderindex.indexOf(endsegidnew[0]),i=0;endsegindex==-1;i++){
-                                    endsegindex = segmentorderindex.indexOf(endsegidnew[i]);
-                                }
+                                startsegidnew = system.stopToSegDict[eachroute.stops[0].id];  //list of osmid
+                                if(direction == -1){
+                                for(startsegindex = segmentorderindex.indexOf(_.min(startsegidnew));startsegindex == -1;){
+                                    startsegidnew.splice(startsegidnew.indexOf(_.min(startsegidnew)),1);
+                                    startsegindex = segmentorderindex.indexOf(_.min(startsegidnew));
+                                }}else if (direction == 1) {for(startsegindex = segmentorderindex.indexOf(_.max(startsegidnew));startsegindex == -1;){
+                                    startsegidnew.splice(startsegidnew.indexOf(_.max(startsegidnew)),1);
+                                    startsegindex = segmentorderindex.indexOf(_.max(startsegidnew));
+                                }};
+                                
+                                endsegidnew = system.stopToSegDict[_.last(eachroute.stops).id];  //list of osmid
+                                if(direction == -1){
+                                for(endsegindex = segmentorderindex.indexOf(_.max(endsegidnew));endsegindex == -1;){
+                                    endsegidnew.splice(endsegidnew.indexOf(_.max(endsegidnew)),1);
+                                    endsegindex = segmentorderindex.indexOf(_.max(endsegidnew));
+                                }}
+                                else if(direction == 1){
+                                for(endsegindex = segmentorderindex.indexOf(_.min(endsegidnew));endsegindex == -1;){
+                                    endsegidnew.splice(endsegidnew.indexOf(_.min(endsegidnew)),1);
+                                    endsegindex = segmentorderindex.indexOf(_.min(endsegidnew));
+                                }}
+                                // console.log("startsegindex",startsegindex,"endsegindex",endsegindex);
+                                // debugger;
                                 
                                 // swap if startsegindex is greater
-                                if(startsegindex>endsegindex){
-                                    startsegindex = [endsegindex, endsegindex = startsegindex][0];
-                                }                                //actually drawing the route
+                                // if(startsegindex>endsegindex){
+                                //     startsegindex = [endsegindex, endsegindex = startsegindex][0];
+                                // }                                //actually drawing the route
                                 var defaultOptions = {
                                     "route": function(idx) {
                                         if(idx == 0){
