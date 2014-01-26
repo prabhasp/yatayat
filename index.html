@@ -22,6 +22,7 @@
         <!--script src="lib/leaflet/leaflet-src.js"> </script-->
         <script src="lib/leaflet/spin.min.js"> </script>
         <script src="lib/leaflet/leaflet.spin.js"> </script>
+        <script src="lib\leaflet\Leaflet.PolylineDecorator\leaflet.polylineDecorator.min.js"></script> 
         <script src="lib/wax.leaf.min.js"> </script>
         <script src="lib/kdtree/src/web/kdTree.js"> </script>
         <script src="lib/bootstrap/js/bootstrap.min.js"> </script>
@@ -69,8 +70,9 @@
                             <b style="color: rgb(0,57,166);">
                                 End
                             </b>
-                            <input type="text" id="endstop" class="typeahead" data-provide="typeahead"
-                            style="color:rgb(0,57,166)" />
+                            <input type="text" id="endstop" class="typeahead" data-provide="typeahead" style="color:rgb(0,57,166)" /><br>
+                            <a class="btn" id="go"> GO </a>
+                            <a class="btn" id="swap">Swap</a>
                             <a class="btn" onclick="$('.typeahead').val(''); $('#routedisplay').hide(); YY._routeGroup.clearLayers();YY.render_(system,map);"> Clear </a>
                         </div>
                     </div>
@@ -199,7 +201,7 @@
         <script type="text/javascript" language="javascript">
                     // UI HACK
             $('#textboxes').hide();
-            $('#routedisplay').hide()
+            $('#routedisplay').hide();
             // initialize the map
             var map = new L.Map('publicTransportMap');
 
@@ -208,13 +210,11 @@
             var osmdata;
             var routed;
             var routed_route;
-
             YY.fromConfig("config.stable.json", function(sys) {
                 system = sys;
                 YY.render_(system, map, undefined, //includeIDObject; try {"2269045": true} for an example
                 undefined // leafletBaseOptions
                 );
-
                 //ROUTING
                 var stopNames = _.compact(_.pluck(system.allStops(), 'name'));
                    
@@ -234,9 +234,15 @@
                 });
 
                 $('#textboxes').show();
-
-                $('input.typeahead').change(function(f) {
-                    
+                // $('input.typeahead').change(function(f) {
+                $('#swap').click(function(){
+                    // console.log("last ramailo");
+                    temp = $('#startstop')[0].value;
+                    $('#startstop')[0].value =  $('#endstop')[0].value;
+                    $('#endstop')[0].value =  temp;
+                    $('#go').click();
+                })
+                $('#go').click(function(){
                     map.spin(true);
                     var start = $('#startstop')[0].value;
                     var end = $('#endstop')[0].value;
@@ -290,30 +296,47 @@
                                 }
 
                                 //show routed route
-                                var startseg = [];
                                 var endseg = [];
+                                // find the direction of eachroute compared to original route direction
+                                originalroute = system.routeDict[eachroute.id];
+                                var direction;
+                                if(originalroute.stops.indexOf(eachroute.stops[0])<originalroute.stops.indexOf(eachroute.stops[1])){
+                                    direction = 1;
+                                }else{
+                                    direction = -1;
+                                }
+
                                 var startsegid, endsegid;
+                                var startsegindex,endsegindex;
 
                                 // finding index of first and last segment in list of segment                                
                                 segmentorderindex = _.map(eachroute.segments,function(r){return r.id});
 
-                                startsegidnew = system.stopToSegDict[eachroute.stops[0].id];  //osmid
-                                for(startsegindex = segmentorderindex.indexOf(startsegidnew[0]),i=0;startsegindex==-1;i++){
-                                    startsegindex = segmentorderindex.indexOf(startsegidnew[i]);
-                                }
+                                startsegidnew = system.stopToSegDict[eachroute.stops[0].id];  //list of osmid
+                                if(direction == -1){
+                                for(startsegindex = segmentorderindex.indexOf(_.min(startsegidnew));startsegindex == -1;){
+                                    startsegidnew.splice(startsegidnew.indexOf(_.min(startsegidnew)),1);
+                                    startsegindex = segmentorderindex.indexOf(_.min(startsegidnew));
+                                }}else if (direction == 1) {for(startsegindex = segmentorderindex.indexOf(_.max(startsegidnew));startsegindex == -1;){
+                                    startsegidnew.splice(startsegidnew.indexOf(_.max(startsegidnew)),1);
+                                    startsegindex = segmentorderindex.indexOf(_.max(startsegidnew));
+                                }};
 
-                                endsegidnew = system.stopToSegDict[_.last(eachroute.stops).id]; //smid
-                                for(endsegindex = segmentorderindex.indexOf(endsegidnew[0]),i=0;endsegindex==-1;i++){
-                                    endsegindex = segmentorderindex.indexOf(endsegidnew[i]);
-                                }
-                                
+                                endsegidnew = system.stopToSegDict[_.last(eachroute.stops).id];  //list of osmid
+                                if(direction == -1){
+                                for(endsegindex = segmentorderindex.indexOf(_.max(endsegidnew));endsegindex == -1;){
+                                    endsegidnew.splice(endsegidnew.indexOf(_.max(endsegidnew)),1);
+                                    endsegindex = segmentorderindex.indexOf(_.max(endsegidnew));
+                                }}
+                                else if(direction == 1){
+                                for(endsegindex = segmentorderindex.indexOf(_.min(endsegidnew));endsegindex == -1;){
+                                    endsegidnew.splice(endsegidnew.indexOf(_.min(endsegidnew)),1);
+                                    endsegindex = segmentorderindex.indexOf(_.min(endsegidnew));
+                                }}
+                                // console.log("startsegindex",startsegindex,"endsegindex",endsegindex);
+                                // debugger;
                                 
                                 // swap if startsegindex is greater
-                                if(startsegindex>endsegindex){
-                                    startsegindex = [endsegindex, endsegindex = startsegindex][0];
-                                }
-
-                                // debugger;
                                 //actually drawing the route
                                 var defaultOptions = {
                                     "route": function(idx) {
@@ -342,85 +365,80 @@
                                 var eachroutestyleoption = function(idx){return defaultOptions.route(idx)};
                                 dist = 0;
 
-                                // for 1st segment
+                                var endsegmentrender = function (enddirection , segindex , station) {
+                                    var insert, shift, thisSeg, nextSeg;
+                                    if(enddirection=="first"){
+                                        thisSeg = eachroute.segments[segindex], nextSeg = eachroute.segments[segindex + direction];
+                                    } else if (enddirection == "last") {
+                                        thisSeg = eachroute.segments[segindex], nextSeg = eachroute.segments[segindex - direction];
+                                    };
                                 
-                                // firstsegment = r.segments[0];
-                                // debugger;
-                                var endsegmentrender = function (segmenttype,segmentobject,station) {
-                                    var insert;
-                                    // listOfLatLng = _.map(segmentobject.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}});
-                                    if(segmenttype=="first"){insert=false;}else{insert=true;}
+                                    var thisSegFirst = thisSeg.listofnodeids[0];
+                                    var thisSegLast  = _.last(thisSeg.listofnodeids);
+                                    var nextSegFirst = nextSeg.listofnodeids[0];
+                                    var nextSegLast  = _.last(nextSeg.listofnodeids);
 
+                                    // finding the common node in joined segments
+                                    var commonNode;
+                                    if(thisSegFirst == nextSegFirst){
+                                        commonNode = thisSegFirst;
+                                    }else if (thisSegFirst == nextSegLast) {
+                                        commonNode = thisSegFirst;
+                                    }else if (thisSegLast == nextSegFirst) {
+                                        commonNode = thisSegLast;
+                                    }else if (thisSegLast == nextSegLast) {
+                                        commonNode = thisSegLast;
+                                    };
+                                    console.log("thisSeg",'http://www.openstreetmap.org/browse/way/'+thisSeg.id,"nextSeg",'http://www.openstreetmap.org/browse/way/'+nextSeg.id,"commonNode",'http://www.openstreetmap.org/browse/node/'+commonNode);
+                                    insert = thisSeg.listofnodeids.indexOf(station.id)<thisSeg.listofnodeids.indexOf(commonNode);
+                                    insert?shift=1:shift=-1;
                                     partofsegment = [];
-                                    // debugger;
-                                    for(i=0;i<segmentobject.listofnodeids.length;i++){
-                                        if(insert){
-                                            partofsegment.push(segmentobject.dictofnodes[segmentobject.listofnodeids[i]]);
-                                            // for(j=0;j<station.length;j++){
-                                                if (segmentobject.listofnodeids[i] == station.id){
-                                                    insert = !insert;
-                                                    // console.log("end found")   
+                                    for(i=thisSeg.listofnodeids.indexOf(station.id);i !== thisSeg.listofnodeids.indexOf(commonNode);i=i+shift){
+                                        partofsegment.push(thisSeg.dictofnodes[thisSeg.listofnodeids[i]]);
                                                 }
-                                            // }
-                                        }
-                                        else{ 
-                                            // for(j=0;j<station.length;j++){
-                                                // new L.circle(listOfLatLng[i],3).addTo(map);
-                                                if (segmentobject.listofnodeids[i] == station.id){
-                                                    insert = !insert;
-                                                    // console.log("start found")
-                                                    partofsegment.push(segmentobject.dictofnodes[segmentobject.listofnodeids[i]]);
-                                                }
-                                            // }
-                                        }
-                                    }
                                     return partofsegment;
+                                    return _.union(partofsegment,_.map(nextSeg.listofnodeids,function(n){return nextSeg.dictofnodes[n]}));
 
                                 };
 
-                                firstsegmentpart = endsegmentrender("first",eachroute.segments[startsegindex],eachroute.stops[0]);
-                                // console.log("firstsegmentpart",firstsegmentpart);
+                                firstsegmentpart = endsegmentrender("first",startsegindex,eachroute.stops[0]);
                                 if(firstsegmentpart.length){
                                     var segMPLfirst = new L.Polyline(firstsegmentpart, eachroutestyleoption(idx));
                                     segMPLfirst.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegid + "' target='_blank'>");
-                                    // YY._routeGroup.addLayer(segMPLfirst);
-                                }
-                                else{
-                                    firstsegmentpart = endsegmentrender("first",eachroute.segments[endsegindex],eachroute.stops[0]);
+                                    YY._routeGroup.addLayer(segMPLfirst);
                                 }
                                 
-                                lastsegmentpart = endsegmentrender("last",eachroute.segments[endsegindex],_.last(eachroute.stops));
+                                lastsegmentpart = endsegmentrender("last",endsegindex,_.last(eachroute.stops));
 
                                 if(lastsegmentpart.length){
                                     var segMPLlast = new L.Polyline(lastsegmentpart, eachroutestyleoption(idx));
                                     segMPLlast.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegid + "' target='_blank'>");
-                                    // YY._routeGroup.addLayer(segMPLlast);
+                                    YY._routeGroup.addLayer(segMPLlast);
                                 }
-                                else{
-                                    lastsegmentpart = endsegmentrender("last",eachroute.segments[startsegindex],_.last(eachroute.stops));
                                 }           
                                 
-                                direction = startsegindex>endsegindex?-1:1;
-                                for (segid = startsegindex; segid != endsegindex; segid+=direction) {
+                                for (segid = startsegindex + direction; segid != endsegindex - direction; segid+=direction) {
                                     // console.log("segid",segid);
                                     seg = eachroute.segments[segid];
+                                    if(seg.listOfLatLng.length){
                                     var segMPL = new L.Polyline(_.map(seg.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}}), eachroutestyleoption(idx));
-
                                     segMPL.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + seg.id + "' target='_blank'>" + seg.id + "</a>," + segid + "");
 
                                     YY._routeGroup.addLayer(segMPL);
+                                    }
                                     // debugger;
                                     // console.log(YY._routeGroup);
                                     for (i = 0; i < (seg.listOfLatLng.length) - 1; i++) {
                                         dist += distanc(seg.listOfLatLng[i][0], seg.listOfLatLng[i][1], seg.listOfLatLng[i + 1][0], seg.listOfLatLng[i + 1][1]);
                                     }
                                 }
-                                // debugger;
                                 map.removeLayer(YY._routeGroup);
                                 map.addLayer(YY._routeGroup);
-                                // lastsegment = _.find([route.segments[0],_.last(route.segments)],function(r){return r.id==endsegidnew});
-
-                                outputHTML += "<div style=\"color:"+eachroutestyleoption(idx).color+"; width=65%; top:60; font-family:cursive;\">Get on " + toTitleCase(eachroute.transport) + " " + removeundefinedstrings(eachroute.ref) + " (" + eachroute.name + ") at " + eachroute.stops[0].name + " and ride till " + _.last(eachroute.stops).name + " with distance of " + Math.round(dist)/1000 + " km" + "</div>";
+                                if(dist>200){
+                                    outputHTML += "<div style=\"color:"+eachroutestyleoption(idx).color+"; width=65%; top:60; font-family:cursive;\">Get on " + toTitleCase(eachroute.transport) + " " + removeundefinedstrings(eachroute.ref) + " (" + eachroute.name + ") at " + eachroute.stops[0].name + " and ride till " + _.last(eachroute.stops).name + " with distance of " + Math.round(dist)/1000 + " km" + "</div>";}
+                                else{
+                                    outputHTML += "<div style=\"color:"+eachroutestyleoption(idx).color+"; width=65%; top:60; font-family:cursive;\">Walk from " + eachroute.stops[0].name + " to " + _.last(eachroute.stops).name + " with distance of " + Math.round(dist)/1000 + " km" + "</div>";
+                            }
                             }
                             );
 
@@ -467,9 +485,10 @@
                 map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
                 L.control.scale().addTo(map);
                 //auto init routing at start
-                //document.getElementById("startstop").value ="Matatirtha Stop";
+                // document.getElementById("startstop").value ="Airport Bus Station";
                 // document.getElementById("endstop").value ="Thimi";
-                // $('#endstop').change();
+                
+// $('#go').click();
             });
             function get_random_color() {
                 var letters = '0123456789ABCDEF'.split('');

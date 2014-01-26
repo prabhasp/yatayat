@@ -70,7 +70,6 @@ YY.System.prototype.stopRoutesFromStopName = function(stopName) {
             }
         });
     });
-    console.log("stopRoutesFromStopNameq" + aggregator);
     return aggregator;
 
 };
@@ -127,7 +126,6 @@ YY.System.prototype.takeMeThereByName = function(startStopName, goalStopName) {
 YY.System.prototype.takeMeThere = function(startStopID, goalStopID) {
 
     var startNodes = this.stopRoutesFromStopID(startStopID);
-    console.log("startnodes");
     var goalNodes = this.stopRoutesFromStopID(goalStopID);
     return this.takeMeThereByStop(startNodes, goalNodes[0]);
 }
@@ -242,7 +240,7 @@ YY.System.prototype.neighborNodes = function(stopID, routeID) {
         return r.id === routeID;
     });
     var sameRouteDistance = 1;
-    var transferDistance = 1;
+    var transferDistance = 5;
     var neighbors = [];
     _.each(thisRoute.stops, function(s, idx) {
         if (s.id === stopID) {
@@ -258,12 +256,14 @@ YY.System.prototype.neighborNodes = function(stopID, routeID) {
             */
 
             //if (!thisRoute.isDirectional) {
-            if (idx > 0)
+            /*if (idx > 0)
                 neighbors.push({
                     routeID: thisRoute.id,
                     distToNeighbor: sameRouteDistance,
                     stopID: thisRoute.stops[idx - 1].id
                 });
+    */
+
             /*else if (thisRoute.isCyclical)
                     neighbors.push(_.extend(templateObj,
                         {stopID: _.last(thisRoute.stops).id}));
@@ -529,7 +529,6 @@ YY.fromConfig = function(config_path, cb) {
         });
     });
 };
-
 YY.Segment.prototype.flip = function() {
     this.listOfLatLng = _(this.listOfLatLng).reverse();
     this.orderedListofStops = _(this.orderedListofStops).reverse();
@@ -612,7 +611,9 @@ YY.fromOSM = function(overpassXML) {
         _.each($r.find('member'), function(m) {
             var $m = $(m);
             if ($m.attr('type') === 'way') {
-                mySegments.push(segments[$m.attr('ref')]);
+                var segment = segments[$m.attr('ref')];
+                segment.role = $m.attr('role');
+                mySegments.push(segment);
             } else if ($m.attr('type') === 'node') {
                 var n = nodes[$m.attr('ref')];
                 if (n && n.lat && n.lng) {
@@ -741,11 +742,14 @@ var colors = (function() {
 }());
 
 YY.single_route_render = function(system, route) {
+    var rt_bd = new L.LatLngBounds();
+    _(route.stops).each(function(s) {
+        var latlngg = new L.LatLng(s.lat, s.lng);
+        rt_bd.extend(latlngg);
+    });
+
     if (YY._routeGroup) {
         YY._routeGroup.clearLayers();
-    }
-    if (YY._layerGroup) {
-        YY._layerGroup.clearLayers();
     }
     $('#routedisplay').hide();
 
@@ -762,6 +766,23 @@ YY.single_route_render = function(system, route) {
             color: 'green',
             weight: 7
         });
+        poly.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + seg.id + "' target='_blank'>" + seg.id + "</a>");
+
+        var arrow = new L.polylineDecorator(poly, {
+            patterns: [{
+                offset: 25,
+                repeat: 50,
+                symbol: L.Symbol.arrowHead({
+                    pixelSize: 15,
+                    pathOptions: {
+                        fillOpacity: 1,
+                        weight: 0
+                    }
+                })
+            }]
+        });
+
+        YY._singlelayer.addLayer(arrow);
         YY._singlelayer.addLayer(poly);
     });
     route.stops.forEach(function(stop) {
@@ -775,9 +796,6 @@ YY.single_route_render = function(system, route) {
         YY._singlelayer.addLayer(marker);
     });
     map.addLayer(YY._singlelayer);
-    var rt_bd = new L.LatLngBounds();
-    rt_bd.extend(new L.LatLng(route.stops[0].lat, route.stops[0].lng));
-    rt_bd.extend(new L.LatLng(_.last(route.stops).lat, _.last(route.stops).lng));
     map.fitBounds(rt_bd);
     return YY._singlelayer;
 };
