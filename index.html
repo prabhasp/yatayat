@@ -410,7 +410,7 @@
 
                                     YY._routeGroupDirection.addLayer(arrow);
                                     YY._routeGroup.addLayer(segMPLfirst);
-//                                    map.addLayer(YY._routeGroup);
+                                   map.addLayer(YY._routeGroup);
                                 }
                                 
                                 lastsegmentpart = endsegmentrender("last",endsegindex,_.last(eachroute.stops));
@@ -434,12 +434,13 @@
 
                                     YY._routeGroupDirection.addLayer(arrow);
                                     YY._routeGroup.addLayer(segMPLlast);
-//                                    map.addLayer(YY._routeGroup);
+                                   map.addLayer(YY._routeGroup);
                                 }
                                            
                                 
                                 var segment_direction;
                                 startsegindex < endsegindex ? segment_direction = 1 : segment_direction = -1;
+                                if (startsegindex - endsegindex == 1 || startsegindex - endsegindex == -1) {}else{
                                 for (var segid = startsegindex + segment_direction; segid != endsegindex; segid+=segment_direction) {
                                     // console.log("segid",segid);
                                     seg = eachroute.segments[segid];
@@ -464,7 +465,7 @@
                                     YY._routeGroupDirection.addLayer(arrow);
 
                                     YY._routeGroup.addLayer(segMPL);
-//                                        map.addLayer(YY._routeGroup);
+                                       map.addLayer(YY._routeGroup);
                                     }
                                     // debugger;
                                     // console.log(YY._routeGroup);
@@ -472,7 +473,7 @@
                                         dist += distanc(seg.listOfLatLng[i][0], seg.listOfLatLng[i][1], seg.listOfLatLng[i + 1][0], seg.listOfLatLng[i + 1][1]);
                                     }
                                 }
-                                }
+                                }}
                                 
                                 map.removeLayer(YY._routeGroup);
                                 map.addLayer(YY._routeGroup);
