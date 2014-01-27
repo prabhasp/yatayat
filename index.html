@@ -266,42 +266,13 @@ YY.fromConfig("config.stable.json", function(sys) {
                             counter = 0;
 
                             _(gettingThereRoutes).each(function(eachroute, idx) {
-                                //inclusionDict[r.id] = true;
-                                bounds.extend(new L.LatLng(eachroute.stops[0].lat, eachroute.stops[0].lng));
-                                bounds.extend(new L.LatLng(_.last(eachroute.stops).lat, _.last(eachroute.stops).lng));
-
-                                _(eachroute.stops).each(function(s) {
-                                    inclusionDict[s.id] = true;
-
-                                });
-                                if (idx === 0) {
-                                    overrideDict[r.stops[0].id] = {
-                                        color: 'orange',
-                                        opacity: 1,
-                                        radius: 8
-                                    };
-                                } else {
-                                    overrideDict[r.stops[0].id] = {
-                                        color: 'orange',
-                                        opacity: 1,
-                                        radius: 8
-                                    };
-                                }
-                                if (idx === gettingThereRoutes.length - 1) {
-                                    overrideDict[_.last(r.stops).id] = {
-                                        color: 'orange',
-                                        opacity: 1,
-                                        radius: 8
-                                    };
-                                }
-
                                 //show routed route
                                 //
                                 // find the direction of eachroute compared to original route direction
                                 // debugger;
                                 originalroute = system.routeDict[eachroute.id];
                                 var direction;
-                                if(originalroute.stops.indexOf(eachroute.stops[0])<originalroute.stops.indexOf(eachroute.stops[1])){
+                                if(originalroute.stops.indexOf(eachroute.stops[0])<originalroute.stops.indexOf(_.last(eachroute.stops))){
                                     direction = 1;
                                 }else{
                                     direction = -1;
@@ -372,9 +343,18 @@ YY.fromConfig("config.stable.json", function(sys) {
                                     var insert, shift, thisSeg, nextSeg;
                                     if(enddirection=="first"){
                                         thisSeg = eachroute.segments[segindex], nextSeg = eachroute.segments[segindex + direction];
+                                        if(typeof nextSeg === "undefined"){
+                                            // debugger;
+                                            nextSeg = eachroute.segments[segindex - direction];
+                                        }
                                     } else if (enddirection == "last") {
                                         thisSeg = eachroute.segments[segindex], nextSeg = eachroute.segments[segindex - direction];
+                                        if(typeof nextSeg === "undefined"){
+                                            // debugger;
+                                            nextSeg = eachroute.segments[segindex + direction];
+                                        }
                                     };
+                                    // debugger;
                                     
                                     var thisSegFirst = thisSeg.listofnodeids[0];
                                     var thisSegLast  = _.last(thisSeg.listofnodeids);
@@ -399,8 +379,13 @@ YY.fromConfig("config.stable.json", function(sys) {
                                     for(i=thisSeg.listofnodeids.indexOf(station.id);i !== thisSeg.listofnodeids.indexOf(commonNode);i=i+shift){
                                         partofsegment.push(thisSeg.dictofnodes[thisSeg.listofnodeids[i]]);
                                     }
-                                    debugger;
-                                    return _.union(partofsegment,_.map(nextSeg.listofnodeids,function(n){return nextSeg.dictofnodes[n]}));
+                                    // debugger;
+                                    // return _.union(partofsegment);
+                                    
+                                    if(insert){
+                                    return _.union(partofsegment,_.map(nextSeg.listofnodeids,function(n){return nextSeg.dictofnodes[n]}));}else{
+                                        return _.union(_.map(nextSeg.listofnodeids,function(n){return nextSeg.dictofnodes[n]}),partofsegment);
+                                    }
 
                                 };
 
@@ -409,6 +394,7 @@ YY.fromConfig("config.stable.json", function(sys) {
                                     var segMPLfirst = new L.Polyline(firstsegmentpart, eachroutestyleoption(idx));
                                     segMPLfirst.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegid + "' target='_blank'>");
                                     YY._routeGroup.addLayer(segMPLfirst);
+//                                    map.addLayer(YY._routeGroup);
                                 }
                                 
                                 lastsegmentpart = endsegmentrender("last",endsegindex,_.last(eachroute.stops));
@@ -417,33 +403,40 @@ YY.fromConfig("config.stable.json", function(sys) {
                                     var segMPLlast = new L.Polyline(lastsegmentpart, eachroutestyleoption(idx));
                                     segMPLlast.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegid + "' target='_blank'>");
                                     YY._routeGroup.addLayer(segMPLlast);
+//                                    map.addLayer(YY._routeGroup);
                                 }
                                 // else{
                                 //     lastsegmentpart = endsegmentrender("last",eachroute.segments[startsegindex],_.last(eachroute.stops));
-                                // }           
-                                
-                                for (segid = startsegindex + direction; segid != endsegindex - direction; segid+=direction) {
+                                // }     
+                                     
+                                var segment_direction;
+                                startsegindex < endsegindex ? segment_direction = 1 : segment_direction = -1;
+                                for (var segid = startsegindex + segment_direction; segid != endsegindex; segid+=segment_direction) {
                                     // console.log("segid",segid);
                                     seg = eachroute.segments[segid];
                                     // debugger;
+                                    if(typeof seg === "undefined"){}else{
                                     if(seg.listOfLatLng.length){
                                         var segMPL = new L.Polyline(_.map(seg.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}}), eachroutestyleoption(idx));
                                         segMPL.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + seg.id + "' target='_blank'>" + seg.id + "</a>," + segid + "");
                                         // segMPL.addTo(map);
                                         YY._routeGroup.addLayer(segMPL);
+//                                        map.addLayer(YY._routeGroup);
                                     }
                                     // debugger;
                                     // console.log(YY._routeGroup);
                                     for (i = 0; i < (seg.listOfLatLng.length) - 1; i++) {
                                         dist += distanc(seg.listOfLatLng[i][0], seg.listOfLatLng[i][1], seg.listOfLatLng[i + 1][0], seg.listOfLatLng[i + 1][1]);
                                     }
+                                    }
                                 }
+                                
                                 map.removeLayer(YY._routeGroup);
                                 map.addLayer(YY._routeGroup);
                                 if(dist>200){
                                     outputHTML += "<div style=\"color:"+eachroutestyleoption(idx).color+"; width=65%; top:60; font-family:cursive;\">Get on " + toTitleCase(eachroute.transport) + " " + removeundefinedstrings(eachroute.ref) + " (" + eachroute.name + ") at " + eachroute.stops[0].name + " and ride till " + _.last(eachroute.stops).name + " with distance of " + Math.round(dist)/1000 + " km" + "</div>";}
                                 else{
-                                    outputHTML += "<div style=\"color:"+eachroutestyleoption(idx).color+"; width=65%; top:60; font-family:cursive;\">Walk from " + eachroute.stops[0].name + " to " + _.last(eachroute.stops).name + " with distance of " + Math.round(dist)/1000 + " km" + "</div>";
+                                    outputHTML += "<div style=\"color:"+eachroutestyleoption(idx).color+"; width=65%; top:60; font-family:cursive;\">Walk from " + eachroute.stops[0].name + " to " + _.last(eachroute.stops).name + " with distance of " + Math.round(dist) + " m" + "</div>";
                                 }
                             }
                             );
@@ -490,9 +483,9 @@ YY.fromConfig("config.stable.json", function(sys) {
                 }
                 map.setView(new L.LatLng(YY.LAT, YY.LNG), 13);
                 L.control.scale().addTo(map);
-                //auto init routing at start
-                document.getElementById("startstop").value ="Airport Bus Station";
-                document.getElementById("endstop").value ="Thimi";
+                // auto init routing at start
+                // document.getElementById("startstop").value ="Thimi";
+                // document.getElementById("endstop").value ="Chardobato";
                 // $('#go').click();
             });
             function get_random_color() {
