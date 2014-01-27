@@ -252,6 +252,10 @@
                             YY._routeGroup = new L.LayerGroup().addTo(map);
                         }
                         YY._routeGroup.clearLayers();
+                        if (!YY._routeGroupDirection) {
+                            YY._routeGroupDirection = new L.LayerGroup().addTo(map);
+                        }
+                        YY._routeGroupDirection.clearLayers();
                         var gettingThereRoutes = system.takeMeThereByName(start, end);
                         routed = gettingThereRoutes;
                         var bounds = new L.LatLngBounds();
@@ -390,6 +394,21 @@
                                 if(firstsegmentpart.length){
                                     var segMPLfirst = new L.Polyline(firstsegmentpart, eachroutestyleoption(idx));
                                     segMPLfirst.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegid + "' target='_blank'>");
+                                    var arrow = new L.polylineDecorator(segMPLfirst, {
+                                        patterns: [{
+                                            offset: 25,
+                                            repeat: 50,
+                                            symbol: L.Symbol.arrowHead({
+                                                pixelSize: 15,
+                                                pathOptions: {
+                                                    fillOpacity: 1,
+                                                    weight: 0
+                                                }
+                                            })
+                                        }]
+                                    });
+
+                                    YY._routeGroupDirection.addLayer(arrow);
                                     YY._routeGroup.addLayer(segMPLfirst);
 //                                    map.addLayer(YY._routeGroup);
                                 }
@@ -399,6 +418,21 @@
                                 if(lastsegmentpart.length){
                                     var segMPLlast = new L.Polyline(lastsegmentpart, eachroutestyleoption(idx));
                                     segMPLlast.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + startsegid + "' target='_blank'>");
+                                    var arrow = new L.polylineDecorator(segMPLlast, {
+                                        patterns: [{
+                                            offset: 25,
+                                            repeat: 50,
+                                            symbol: L.Symbol.arrowHead({
+                                                pixelSize: 15,
+                                                pathOptions: {
+                                                    fillOpacity: 1,
+                                                    weight: 0
+                                                }
+                                            })
+                                        }]
+                                    });
+
+                                    YY._routeGroupDirection.addLayer(arrow);
                                     YY._routeGroup.addLayer(segMPLlast);
 //                                    map.addLayer(YY._routeGroup);
                                 }
@@ -413,6 +447,21 @@
                                     if(seg.listOfLatLng.length){
                                     var segMPL = new L.Polyline(_.map(seg.listOfLatLng,function(arr){return {lat:parseFloat(arr[0]),lon:parseFloat(arr[1])}}), eachroutestyleoption(idx));
                                     segMPL.bindPopup("<a href='http://www.openstreetmap.org/browse/way/" + seg.id + "' target='_blank'>" + seg.id + "</a>," + segid + "");
+                                    var arrow = new L.polylineDecorator(segMPL, {
+                                        patterns: [{
+                                            offset: 25,
+                                            repeat: 50,
+                                            symbol: L.Symbol.arrowHead({
+                                                pixelSize: 15,
+                                                pathOptions: {
+                                                    fillOpacity: 1,
+                                                    weight: 0
+                                                }
+                                            })
+                                        }]
+                                    });
+
+                                    YY._routeGroupDirection.addLayer(arrow);
 
                                     YY._routeGroup.addLayer(segMPL);
 //                                        map.addLayer(YY._routeGroup);
