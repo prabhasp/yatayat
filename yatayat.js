@@ -308,6 +308,9 @@ YY.Route = function(id, stops, segments, tag, startSegID) {
     }
     this.deriveStopDict(); // note: this must happen after the order call
 };
+
+
+
 //derive the Stop Dictionay with all stops of the route
 YY.Route.prototype.deriveStopDict = function() {
     var stopDict = {};
