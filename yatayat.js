@@ -256,13 +256,13 @@ YY.System.prototype.neighborNodes = function(stopID, routeID) {
             */
 
             //if (!thisRoute.isDirectional) {
-            /*if (idx > 0)
+            if (idx > 0)
                 neighbors.push({
                     routeID: thisRoute.id,
                     distToNeighbor: sameRouteDistance,
                     stopID: thisRoute.stops[idx - 1].id
                 });
-    */
+
 
             /*else if (thisRoute.isCyclical)
                     neighbors.push(_.extend(templateObj,

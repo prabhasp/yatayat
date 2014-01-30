@@ -408,9 +408,9 @@
                                         }]
                                     });
 
-                                    YY._routeGroupDirection.addLayer(arrow);
-                                    YY._routeGroup.addLayer(segMPLfirst);
-                                   map.addLayer(YY._routeGroup);
+                                    // YY._routeGroupDirection.addLayer(arrow);
+                                    // YY._routeGroup.addLayer(segMPLfirst);
+                                   // map.addLayer(YY._routeGroup);
                                 }
                                 
                                 lastsegmentpart = endsegmentrender("last",endsegindex,_.last(eachroute.stops));
@@ -432,16 +432,16 @@
                                         }]
                                     });
 
-                                    YY._routeGroupDirection.addLayer(arrow);
-                                    YY._routeGroup.addLayer(segMPLlast);
-                                   map.addLayer(YY._routeGroup);
+                                    // YY._routeGroupDirection.addLayer(arrow);
+                                    // YY._routeGroup.addLayer(segMPLlast);
+                                   // map.addLayer(YY._routeGroup);
                                 }
                                            
                                 
                                 var segment_direction;
                                 startsegindex < endsegindex ? segment_direction = 1 : segment_direction = -1;
                                 if (startsegindex - endsegindex == 1 || startsegindex - endsegindex == -1) {}else{
-                                for (var segid = startsegindex + segment_direction; segid != endsegindex; segid+=segment_direction) {
+                                for (var segid = startsegindex; segid != endsegindex; segid+=segment_direction) {
                                     // console.log("segid",segid);
                                     seg = eachroute.segments[segid];
                                     if(typeof seg === "undefined"){}else{
@@ -462,7 +462,7 @@
                                         }]
                                     });
 
-                                    YY._routeGroupDirection.addLayer(arrow);
+                                    // YY._routeGroupDirection.addLayer(arrow);
 
                                     YY._routeGroup.addLayer(segMPL);
                                        map.addLayer(YY._routeGroup);
