@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2014-01-29T23:58:02Z"/>
+<meta osm_base="2014-01-30T23:51:01Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7204438" lon="85.3637665"/>
@@ -5876,6 +5876,7 @@
     <tag k="name" v="Chardobato"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
+  <node id="2643485986" lat="27.7136865" lon="85.3507209"/>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -6123,6 +6124,7 @@
     <nd ref="2041750888"/>
     <nd ref="2041750890"/>
     <nd ref="2041750904"/>
+    <nd ref="2643485986"/>
     <nd ref="38922323"/>
     <nd ref="2085379272"/>
     <nd ref="2318064899"/>
@@ -6133,7 +6135,10 @@
     <nd ref="38922342"/>
     <nd ref="38922344"/>
     <nd ref="38922351"/>
+    <tag k="bicycle" v="yes"/>
+    <tag k="foot" v="yes"/>
     <tag k="highway" v="residential"/>
+    <tag k="name" v="Baudhadwar Marg"/>
   </way>
   <way id="5407519">
     <nd ref="38926248"/>
