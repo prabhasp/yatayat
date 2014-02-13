@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2014-02-11T23:58:02Z"/>
+<meta osm_base="2014-02-12T23:57:01Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7204438" lon="85.3637665"/>
@@ -4931,6 +4931,12 @@
   <node id="2062627955" lat="27.6873403" lon="85.2910156"/>
   <node id="2062654742" lat="27.6700787" lon="85.2809570"/>
   <node id="2062764347" lat="27.7401264" lon="85.3370314"/>
+  <node id="2064206683" lat="27.7287448" lon="85.3250293"/>
+  <node id="2064206686" lat="27.7288070" lon="85.3253379"/>
+  <node id="2064206690" lat="27.7288641" lon="85.3251791"/>
+  <node id="2064206692" lat="27.7288709" lon="85.3253344"/>
+  <node id="2064206696" lat="27.7288573" lon="85.3250230"/>
+  <node id="2064206698" lat="27.7288609" lon="85.3251047"/>
   <node id="2064586451" lat="27.7111358" lon="85.3174980"/>
   <node id="2064586561" lat="27.7171103" lon="85.3158242"/>
   <node id="2064586604" lat="27.7175701" lon="85.3165584"/>
@@ -4973,6 +4979,8 @@
   <node id="2071315826" lat="27.7309322" lon="85.3297022"/>
   <node id="2071315827" lat="27.7309404" lon="85.3262930"/>
   <node id="2071321931" lat="27.7314311" lon="85.3268856"/>
+  <node id="2071327112" lat="27.7287508" lon="85.3251662"/>
+  <node id="2071327113" lat="27.7287994" lon="85.3251635"/>
   <node id="2071327114" lat="27.7291225" lon="85.3249387"/>
   <node id="2071332692" lat="27.7309298" lon="85.3297048"/>
   <node id="2071631546" lat="27.7302070" lon="85.3254131"/>
@@ -11197,6 +11205,18 @@
     <tag k="source" v="Bing"/>
     <tag k="surface" v="paved"/>
     <tag k="watch:80n" v="Katmandu"/>
+  </way>
+  <way id="196060501">
+    <nd ref="2064206696"/>
+    <nd ref="2064206698"/>
+    <nd ref="2064206690"/>
+    <nd ref="2064206692"/>
+    <nd ref="2064206686"/>
+    <nd ref="2071327113"/>
+    <nd ref="2071327112"/>
+    <nd ref="2064206683"/>
+    <nd ref="2064206696"/>
+    <tag k="building" v="commercial"/>
   </way>
   <way id="196269536">
     <nd ref="1273136909"/>
@@ -20223,6 +20243,7 @@
     <member type="node" ref="2360183669" role=""/>
     <member type="node" ref="31152086" role=""/>
     <member type="node" ref="1278006365" role=""/>
+    <member type="way" ref="196060501" role=""/>
     <tag k="color" v=")"/>
     <tag k="colour" v=")"/>
     <tag k="from" v="Lagankhel"/>
