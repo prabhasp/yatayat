@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2014-02-17T23:59:02Z"/>
+<meta osm_base="2014-02-18T23:59:01Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7204438" lon="85.3637665"/>
@@ -637,7 +637,7 @@
   <node id="268307716" lat="27.7173070" lon="85.3249700"/>
   <node id="268307724" lat="27.7173101" lon="85.3254452"/>
   <node id="268307730" lat="27.7176486" lon="85.3271100"/>
-  <node id="268307740" lat="27.7177740" lon="85.3279207">
+  <node id="268307740" lat="27.7177475" lon="85.3279068">
     <tag k="name" v="Gairidhara"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
