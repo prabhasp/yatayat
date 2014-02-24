@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2014-02-22T23:59:02Z"/>
+<meta osm_base="2014-02-23T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7204438" lon="85.3637665"/>
@@ -5879,6 +5879,10 @@
   </node>
   <node id="2643485986" lat="27.7136865" lon="85.3507209"/>
   <node id="2684793056" lat="27.7780832" lon="85.3611883"/>
+  <node id="2686573011" lat="27.6826926" lon="85.3183378"/>
+  <node id="2687263918" lat="27.7176265" lon="85.3475466"/>
+  <node id="2687304761" lat="27.7180657" lon="85.3468102"/>
+  <node id="2687363990" lat="27.7023174" lon="85.3406522"/>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -5911,6 +5915,7 @@
     <nd ref="1274038121"/>
     <nd ref="1362317841"/>
     <nd ref="1350400553"/>
+    <nd ref="2687363990"/>
     <nd ref="31150643"/>
     <tag k="highway" v="secondary"/>
     <tag k="name:en" v="Battisputali Sadak"/>
@@ -10003,6 +10008,7 @@
     <nd ref="31151513"/>
     <nd ref="2010535715"/>
     <nd ref="2010535716"/>
+    <nd ref="2687304761"/>
     <nd ref="1835421180"/>
     <nd ref="2010535719"/>
     <nd ref="2476160028"/>
@@ -13963,6 +13969,7 @@
     <nd ref="1279096787"/>
     <nd ref="360704834"/>
     <nd ref="1835421151"/>
+    <nd ref="2687263918"/>
     <nd ref="2115566261"/>
     <nd ref="31019089"/>
     <nd ref="31151651"/>
@@ -15097,6 +15104,7 @@
     <nd ref="2308053006"/>
     <nd ref="1942462683"/>
     <nd ref="1880066227"/>
+    <nd ref="2686573011"/>
     <nd ref="1880066228"/>
     <nd ref="1880066230"/>
     <nd ref="103589478"/>
