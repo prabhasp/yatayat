@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2014-03-03T23:59:02Z"/>
+<meta osm_base="2014-03-04T23:59:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7204438" lon="85.3637665"/>
@@ -1747,7 +1747,11 @@
   <node id="360711708" lat="27.6950951" lon="85.3624920"/>
   <node id="360712009" lat="27.6960637" lon="85.3653352"/>
   <node id="360712011" lat="27.6962396" lon="85.3657691"/>
-  <node id="360712012" lat="27.6966585" lon="85.3663018"/>
+  <node id="360712012" lat="27.6966585" lon="85.3663018">
+    <tag k="direction" v="anticlockwise"/>
+    <tag k="highway" v="mini_roundabout"/>
+    <tag k="name" v="khaharey chowk"/>
+  </node>
   <node id="360712013" lat="27.6967090" lon="85.3664399"/>
   <node id="360712059" lat="27.6896509" lon="85.3606600"/>
   <node id="360715450" lat="27.6888119" lon="85.3610302"/>
