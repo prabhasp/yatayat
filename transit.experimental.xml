@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2014-03-09T23:45:02Z"/>
+<meta osm_base="2014-03-10T23:43:01Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7204438" lon="85.3637665"/>
@@ -142,7 +142,7 @@
   <node id="31151653" lat="27.7169539" lon="85.3466219"/>
   <node id="31151654" lat="27.7168597" lon="85.3465222"/>
   <node id="31152064" lat="27.7353719" lon="85.3062125"/>
-  <node id="31152065" lat="27.7354307" lon="85.3064701"/>
+  <node id="31152065" lat="27.7354353" lon="85.3064649"/>
   <node id="31152070" lat="27.7348735" lon="85.3101160"/>
   <node id="31152072" lat="27.7348008" lon="85.3112640"/>
   <node id="31152082" lat="27.7351830" lon="85.3190303"/>
@@ -2268,6 +2268,7 @@
     <tag k="name" v="Jwagal"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
+  <node id="725880041" lat="27.7252256" lon="85.2992916"/>
   <node id="725880071" lat="27.7351433" lon="85.3177257"/>
   <node id="725880233" lat="27.7349958" lon="85.3092594"/>
   <node id="725880854" lat="27.7362613" lon="85.3221707"/>
@@ -3198,6 +3199,7 @@
   <node id="1496652904" lat="27.6888063" lon="85.3163932"/>
   <node id="1496652923" lat="27.6906683" lon="85.3177102"/>
   <node id="1496652924" lat="27.6904897" lon="85.3176659"/>
+  <node id="1496663156" lat="27.7251178" lon="85.2988345"/>
   <node id="1496686322" lat="27.7282352" lon="85.3053259"/>
   <node id="1496686403" lat="27.7285437" lon="85.3053449"/>
   <node id="1496687899" lat="27.7020415" lon="85.3053892"/>
@@ -3211,7 +3213,7 @@
     <tag k="name" v="Sitapaila stop;Sitapaila Stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="1497194467" lat="27.7248783" lon="85.2978089">
+  <node id="1497194467" lat="27.7248892" lon="85.2978283">
     <tag k="highway" v="bus_stop"/>
   </node>
   <node id="1497531299" lat="27.6689723" lon="85.3062932">
@@ -3316,7 +3318,7 @@
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="1656558900" lat="27.7168182" lon="85.4316236"/>
-  <node id="1659430258" lat="27.7234101" lon="85.2946749">
+  <node id="1659430258" lat="27.7234067" lon="85.2946772">
     <tag k="name" v="Dhungedhara"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
@@ -3892,8 +3894,11 @@
   <node id="1832394961" lat="27.6930938" lon="85.2803979"/>
   <node id="1832396645" lat="27.7147399" lon="85.2865966"/>
   <node id="1832396840" lat="27.7196382" lon="85.2868314"/>
+  <node id="1832396878" lat="27.7209265" lon="85.2895050"/>
+  <node id="1832396899" lat="27.7215360" lon="85.2907910"/>
   <node id="1832429701" lat="27.7196646" lon="85.2868913"/>
-  <node id="1832429759" lat="27.7204937" lon="85.2885665"/>
+  <node id="1832429759" lat="27.7204903" lon="85.2885688"/>
+  <node id="1832429767" lat="27.7207729" lon="85.2891621"/>
   <node id="1832459884" lat="27.6941247" lon="85.3127227"/>
   <node id="1832459943" lat="27.6964151" lon="85.3065585"/>
   <node id="1832459990" lat="27.6982134" lon="85.3133634"/>
@@ -5760,7 +5765,7 @@
     <tag k="name" v="bhatbhatini stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="2396102541" lat="27.7197479" lon="85.2870512">
+  <node id="2396102541" lat="27.7197445" lon="85.2870535">
     <tag k="name" v="Thulo Bharang Stop"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
@@ -5889,6 +5894,8 @@
   <node id="2687304761" lat="27.7180657" lon="85.3468102"/>
   <node id="2687363990" lat="27.7023174" lon="85.3406522"/>
   <node id="2697573179" lat="27.6592602" lon="85.3209109"/>
+  <node id="2710595539" lat="27.7210138" lon="85.2896892"/>
+  <node id="2710595540" lat="27.7254787" lon="85.3003154"/>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -13827,6 +13834,10 @@
   <way id="231786211">
     <nd ref="2396102541"/>
     <nd ref="1832429759"/>
+    <nd ref="1832429767"/>
+    <nd ref="1832396878"/>
+    <nd ref="2710595539"/>
+    <nd ref="1832396899"/>
     <nd ref="1659430258"/>
     <tag k="bicycle" v="yes"/>
     <tag k="cycleway" v="no"/>
@@ -14627,6 +14638,9 @@
   <way id="232096439">
     <nd ref="728167845"/>
     <nd ref="1497194467"/>
+    <nd ref="1496663156"/>
+    <nd ref="725880041"/>
+    <nd ref="2710595540"/>
     <nd ref="31303848"/>
     <nd ref="31303847"/>
     <nd ref="31303845"/>
