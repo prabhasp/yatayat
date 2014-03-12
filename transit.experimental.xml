@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2014-03-10T23:43:01Z"/>
+<meta osm_base="2014-03-11T23:58:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7204438" lon="85.3637665"/>
@@ -617,7 +617,7 @@
     <tag k="name" v="Sorhakhutte"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="268116998" lat="27.7192972" lon="85.3095778"/>
+  <node id="268116998" lat="27.7193042" lon="85.3096016"/>
   <node id="268117052" lat="27.7265790" lon="85.3047868"/>
   <node id="268117053" lat="27.7261654" lon="85.3049748">
     <tag k="highway" v="bus_stop"/>
@@ -695,7 +695,7 @@
     <tag k="name" v="Shobhabhagwati"/>
     <tag k="public_transport" v="stop_position"/>
   </node>
-  <node id="268546208" lat="27.7180487" lon="85.2899032"/>
+  <node id="268546208" lat="27.7180518" lon="85.2898670"/>
   <node id="268546209" lat="27.7178173" lon="85.2902213"/>
   <node id="268546210" lat="27.7175446" lon="85.2904184"/>
   <node id="268546211" lat="27.7173394" lon="85.2905900"/>
@@ -770,7 +770,6 @@
     <tag k="public_transport" v="stop_position"/>
   </node>
   <node id="296344440" lat="27.7161303" lon="85.2835995"/>
-  <node id="304249952" lat="27.7138472" lon="85.2930530"/>
   <node id="313131693" lat="27.7100354" lon="85.3148074">
     <tag k="source" v="Yahoo"/>
   </node>
@@ -3690,7 +3689,7 @@
   <node id="1805087651" lat="27.6950668" lon="85.3209060"/>
   <node id="1805146154" lat="27.7129093" lon="85.2899034"/>
   <node id="1805146156" lat="27.7130383" lon="85.2896418"/>
-  <node id="1805146165" lat="27.7138606" lon="85.2930491"/>
+  <node id="1805146165" lat="27.7138319" lon="85.2930054"/>
   <node id="1806046374" lat="27.7094910" lon="85.3172012"/>
   <node id="1806046387" lat="27.7093039" lon="85.3169219"/>
   <node id="1806046396" lat="27.7091737" lon="85.3170795"/>
@@ -3894,11 +3893,13 @@
   <node id="1832394961" lat="27.6930938" lon="85.2803979"/>
   <node id="1832396645" lat="27.7147399" lon="85.2865966"/>
   <node id="1832396840" lat="27.7196382" lon="85.2868314"/>
-  <node id="1832396878" lat="27.7209265" lon="85.2895050"/>
-  <node id="1832396899" lat="27.7215360" lon="85.2907910"/>
+  <node id="1832396878" lat="27.7209225" lon="85.2895149"/>
+  <node id="1832396899" lat="27.7215386" lon="85.2907870"/>
+  <node id="1832396923" lat="27.7225046" lon="85.2928115"/>
   <node id="1832429701" lat="27.7196646" lon="85.2868913"/>
   <node id="1832429759" lat="27.7204903" lon="85.2885688"/>
   <node id="1832429767" lat="27.7207729" lon="85.2891621"/>
+  <node id="1832429817" lat="27.7211387" lon="85.2899418"/>
   <node id="1832459884" lat="27.6941247" lon="85.3127227"/>
   <node id="1832459943" lat="27.6964151" lon="85.3065585"/>
   <node id="1832459990" lat="27.6982134" lon="85.3133634"/>
@@ -4486,6 +4487,7 @@
   <node id="1952134574" lat="27.7232923" lon="85.3069560"/>
   <node id="1952134595" lat="27.7254319" lon="85.3054661"/>
   <node id="1952134601" lat="27.7269088" lon="85.3046680"/>
+  <node id="1952189457" lat="27.7229454" lon="85.2937253"/>
   <node id="1952389425" lat="27.6942550" lon="85.2850646"/>
   <node id="1954292588" lat="27.7205310" lon="85.3193082"/>
   <node id="1954398097" lat="27.6954168" lon="85.2893886"/>
@@ -4690,7 +4692,7 @@
   <node id="1977485303" lat="27.7187905" lon="85.3096836"/>
   <node id="1977514717" lat="27.7198460" lon="85.3092148"/>
   <node id="1979266949" lat="27.7256219" lon="85.3228470"/>
-  <node id="1980583709" lat="27.7192631" lon="85.3095804"/>
+  <node id="1980583709" lat="27.7192569" lon="85.3096175"/>
   <node id="1980583710" lat="27.7206921" lon="85.3086776"/>
   <node id="1980624552" lat="27.7350029" lon="85.3092154"/>
   <node id="1981952069" lat="27.6211978" lon="85.5533875"/>
@@ -5894,8 +5896,14 @@
   <node id="2687304761" lat="27.7180657" lon="85.3468102"/>
   <node id="2687363990" lat="27.7023174" lon="85.3406522"/>
   <node id="2697573179" lat="27.6592602" lon="85.3209109"/>
-  <node id="2710595539" lat="27.7210138" lon="85.2896892"/>
   <node id="2710595540" lat="27.7254787" lon="85.3003154"/>
+  <node id="2712116535" lat="27.7189672" lon="85.3096191">
+    <tag k="highway" v="bus_stop"/>
+    <tag k="name" v="Sorhakhutte"/>
+    <tag k="public_transport" v="stop_position"/>
+  </node>
+  <node id="2712116536" lat="27.7139228" lon="85.2931171"/>
+  <node id="2712116538" lat="27.7227240" lon="85.2932670"/>
   <way id="4825621">
     <nd ref="38921333"/>
     <nd ref="38921336"/>
@@ -7543,7 +7551,7 @@
     <tag k="oneway" v="yes"/>
   </way>
   <way id="61163649">
-    <nd ref="268116939"/>
+    <nd ref="2712116535"/>
     <nd ref="1977485303"/>
     <nd ref="1796592064"/>
     <nd ref="268301469"/>
@@ -10114,7 +10122,7 @@
     <nd ref="1741701815"/>
     <nd ref="2619537113"/>
     <nd ref="1805146165"/>
-    <nd ref="304249952"/>
+    <nd ref="2712116536"/>
     <nd ref="2396102543"/>
     <tag k="highway" v="secondary"/>
     <tag k="name" v="Swayambhu Parikarma"/>
@@ -13836,8 +13844,11 @@
     <nd ref="1832429759"/>
     <nd ref="1832429767"/>
     <nd ref="1832396878"/>
-    <nd ref="2710595539"/>
+    <nd ref="1832429817"/>
     <nd ref="1832396899"/>
+    <nd ref="1832396923"/>
+    <nd ref="2712116538"/>
+    <nd ref="1952189457"/>
     <nd ref="1659430258"/>
     <tag k="bicycle" v="yes"/>
     <tag k="cycleway" v="no"/>
@@ -19281,11 +19292,12 @@
     <member type="way" ref="171603746" role=""/>
     <member type="node" ref="31303568" role="start"/>
     <member type="node" ref="943246313" role="end"/>
-    <member type="node" ref="268116939" role=""/>
     <member type="node" ref="728153897" role=""/>
     <member type="node" ref="31019734" role=""/>
     <member type="node" ref="313917671" role=""/>
     <member type="node" ref="1806066068" role=""/>
+    <member type="node" ref="268116939" role=""/>
+    <member type="node" ref="2712116535" role=""/>
     <tag k="name" v="Balaju-Ratnapark"/>
     <tag k="operator" v="Balaju Microbus and tempo samitee"/>
     <tag k="route" v="microbus;tempo"/>
