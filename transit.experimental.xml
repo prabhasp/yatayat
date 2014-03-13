@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2014-03-11T23:58:02Z"/>
+<meta osm_base="2014-03-12T23:58:02Z"/>
 
   <node id="31019056" lat="27.7204468" lon="85.3639457"/>
   <node id="31019057" lat="27.7204438" lon="85.3637665"/>
@@ -2910,7 +2910,9 @@
   <node id="1281234011" lat="27.6825370" lon="85.3329604"/>
   <node id="1281234012" lat="27.6851906" lon="85.3348502"/>
   <node id="1281234025" lat="27.6854091" lon="85.3350273"/>
-  <node id="1281234041" lat="27.6835398" lon="85.3333442"/>
+  <node id="1281234041" lat="27.6835398" lon="85.3333442">
+    <tag k="name" v="Shankhamul Chowk"/>
+  </node>
   <node id="1281234042" lat="27.6820153" lon="85.3325567"/>
   <node id="1281234046" lat="27.6875039" lon="85.3353545"/>
   <node id="1281234053" lat="27.6847013" lon="85.3339919"/>
