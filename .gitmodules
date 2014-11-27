@@ -1,6 +1,3 @@
-[submodule "lib/kdtree"]
-	path = lib/kdtree
-	url = git://github.com/ubilabs/kd-tree-javascript.git
 [submodule "docopt.coffee"]
 	path = docopt.coffee
 	url = https://github.com/scarnie/docopt.coffee.git
