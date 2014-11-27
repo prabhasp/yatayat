@@ -1,7 +1,7 @@
 // For node API
 var _ = _ || require("underscore");
 var $ = $ || require("jquery");
-var kdTree = kdTree || require('./lib/kdtree/src/node/kdTree.js').kdTree;
+var kdTree = kdTree || require('./lib/kdtree/kdTree-min.js').kdTree;
 
 var YY = YY || {};
 
