@@ -677,7 +677,7 @@ YY.render_ = function(system, map, includeIDDict, leafletBaseOptions, leafletOve
                     return new L.LatLng(LL[0], LL[1]);
                 }), (leafletBaseOptions && leafletBaseOptions.route) ||
                 defaultOptions.route());
-            // segMPL.bindPopup(route.ref + " : " + route.name);
+            segMPL.bindPopup(route.name);
             YY._layerGroup.addLayer(segMPL);
         });
     });
